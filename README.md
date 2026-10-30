@@ -13,19 +13,15 @@
 ```sh
 npm ci
 npm --prefix upstream ci --omit=dev
+python3 personal/cache-visual-assets.py
+python3 personal/cache-audio-fonts.py
 npm run build
 python3 -m http.server 4173 --bind 127.0.0.1 --directory dist
 ```
 
 打开 http://127.0.0.1:4173/，填写博士代号，依次选择「开始 → 独立模拟 → 难度 → 开始模拟」。桌面宽屏或横屏体验最佳。
 
-代码仓库不打包运行所需的立绘、模型和音频素材（上游文档截图与规则数据保留其原声明）。如果从干净源码重建，请在构建前运行以下下载脚本（约 400 MB，来源记录在 personal/*source-map.json）：
-
-```sh
-python3 personal/cache-visual-assets.py
-python3 personal/cache-audio-fonts.py
-npm run build
-```
+代码仓库不打包运行所需的立绘、模型和音频素材（上游文档截图与规则数据保留其原声明）。首次素材下载约 400 MB，来源记录在 `personal/*source-map.json`。下载脚本支持已有文件续传；后续修改源码只需再次运行 `npm run build`。
 
 ## 本次修改
 
