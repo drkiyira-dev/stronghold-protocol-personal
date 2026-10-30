@@ -1,4 +1,4 @@
-# Stronghold Protocol: Alliance — Personal Edition
+# Stronghold Protocol: Alliance — Enhanced Edition
 
 **English** | [简体中文](README.zh-CN.md)
 
@@ -22,7 +22,7 @@ See [contribution attribution](CONTRIBUTING.md) for the verified Codex co-author
 
 ## Run
 
-Node.js **22.9+** is required. No bulk artwork download is needed for the current build.
+Use **Node.js 26.7.0**, the tested runtime for the SQLite recovery backend and regression suite. No bulk artwork download is needed for the current build.
 
 ```sh
 npm ci
@@ -37,24 +37,26 @@ npm run server
 
 For static hosting, publish `dist/`. The hosted Site remains private; public source does not change its access permissions. A static deployment does not itself run a room server.
 
-## Personal Tactical Lab — version 1.1
+## Enhanced development preview
 
 Open **「战术终端」** in the game:
 
-- **Save vault:** two checksummed journals, legacy PREP-save migration, fallback from a damaged copy, manual backups, import/export and explicit compatibility checks. Completed runs retain their backups.
-- **Battle replay:** sampled positions/health, scrubbing, playback speed, death/leak/skill events, per-operator damage, healing and received damage, and comparison between records.
-- **Tactical coach:** evidence-based local rules work without a key. An optional self-hosted, Chat Completions-compatible proxy can provide model analysis on explicit request. Provider keys stay on the server.
+- **Save vault v3:** atomic IndexedDB transactions, retained legacy originals, checksummed snapshots, migration rollback/undo and old-tab conflict archival. Imports remain candidates until the engine confirms restoration. Completed runs retain their backups.
+- **Replay v2:** stable event references, sampled positions/health, paginated events, explicit missing/truncated/interrupted data, operator statistics and conservative comparisons. Same-seed retries have separate recordings; v1 remains readable.
+- **Tactical coach 2.0:** local observations, hypotheses and proposed adjustments cite facts or recorded events. Click a citation to inspect its source. Optional model cards must reference evidence from the selected battle; provider keys stay on the server.
 - **Custom challenges:** fixed seeds, deployment limits, banned operators, no-refresh/no-equipment rules and JSON import/export. Challenge results are separated from standard achievements.
 - **Multiplayer foundation:** the original room protocol, shared match state, cooperative rooms and identity reconnect through the self-hosted backend. A data-only sample Mod adds a training operator and first-round income.
 - **External resources:** art, Spine models, music, sounds and voice paths resolve to recorded external addresses, with atlas adaptation and available mirrors. The build contains 17,098 resource mappings and 710 atlas metadata adapters. Mapping coverage is not proof that every upstream URL is reachable.
 
 **Saves are preparation-phase checkpoints, not arbitrary-time saves.** Leaving during combat returns to the last preparation checkpoint. An incompatible engine or rules fingerprint keeps the old save exportable but blocks restoration; this is not a promise that every future engine version can resume every old match. Export important progress before an upgrade or clearing browser data.
 
-**The hosted default is still local solo play.** Multiplayer requires a running self-hosted server. Its rooms live in process memory and do not survive a server restart. Original-site accounts and remote AI teammates are not integrated. The optional LLM coach analyzes results; it does not control teammates. Local PREP saves do not persist server rooms.
+**The hosted default is still local solo play.** Multiplayer requires a running self-hosted server. Rooms remain in memory by default. Opt into **committed PREP recovery** with `--state-dir .personal-state`: supported default cooperative rooms can resume after a restart, using existing reconnect credentials and consent from every human member. Operations, combat and uncommitted settlement after that checkpoint roll back. Original-site accounts and remote AI teammates are not integrated. The optional LLM coach analyzes results; it does not control teammates. Local PREP saves do not persist server rooms.
 
 Replays retain up to 30 records, with at most 600 sampled frames and 2,500 key events per battle. They are schematic playback, not full video or a resumable simulation. Earlier battle history imports as summaries only. External assets require network access and may be unavailable if their hosts change.
 
 ## Guides and development
+
+The [implementation report](docs/ENHANCED-IMPLEMENTATION.md) ([中文](docs/ENHANCED-IMPLEMENTATION.zh-CN.md)) describes this review branch, recovery boundaries and remaining work. It has **not been deployed to production**.
 
 The next-phase [design and audit](docs/ENHANCED-DESIGN.zh-CN.md) preserve the original game, engine, plugins, Studio and AI teammates. The first reliability patch fixes unknown replay metrics, visible recording truncation, stable save-run identity and activation only after a confirmed restore. See the [patch scope and verification](docs/RELIABILITY.md). These source changes do not authorize or perform a production deployment.
 
@@ -71,9 +73,13 @@ See **[setup, saves, coach, challenges and Mods](docs/PERSONAL.md)** ([中文](d
 npm run build
 npm test
 node upstream/tools/plugin.mjs check personal/examples/personal-lab --strict
+# Optional browser checks (installed Chrome):
+npm run test:browser
 ```
 
 Codex verification on **October 30, 2026**:
+
+- Enhanced preview: **52 automated tests** and **20 local browser checks** passed, including real process termination/restart, interrupted commits, settlement barriers, encrypted backup restoration, concurrent IndexedDB writes, migration rollback and evidence navigation. Browser assets were blocked and model calls mocked; this is not a new nine-round or production acceptance run. CI verifies builds/tests and contains no deployment step.
 
 - Reliability patch: **38 personal regression tests passed**, including the new missing-data, truncation, run-identity, legacy restore, failed-write and late-acknowledgement cases. Browser checks use an isolated localhost server and synthetic fixtures; see the patch report. The full nine-round browser run was not repeated for this patch.
 

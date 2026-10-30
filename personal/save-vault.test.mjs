@@ -11,7 +11,7 @@ test('pre-runId legacy files and v2 journals remain readable and exportable with
  const raw=JSON.stringify(legacy),s=storage();s.setItem(LEGACY_SAVE_KEY,raw);
  const v=createSaveVault(s),id=v.list()[0].runId;
  assert.deepEqual(v.active(),legacy);assert.equal(s.getItem(LEGACY_SAVE_KEY),raw);
- const imported=createSaveVault(storage());imported.import(v.export());assert.deepEqual(imported.active(),legacy);
+ const imported=createSaveVault(storage());imported.import(v.export());assert.equal(imported.active(),null);assert.deepEqual(imported.list()[0].snapshot,legacy);
  imported.save({...legacy,runId:id,options:{...legacy.options,roomCode:'restored-room'}});
  assert.equal(imported.list()[0].runId,id);assert.deepEqual(imported.active().state,legacy.state);
 });
@@ -23,7 +23,7 @@ test('restored room codes share retention but a same-seed different run cannot c
  v.complete(active);assert.equal(v.active(),null);
 });
 test('old PREP saves migrate without deleting the original, and export/import preserves every RNG/state field',()=>{
- const s=storage();s.setItem(LEGACY_SAVE_KEY,JSON.stringify(original));const a=createSaveVault(s);assert.deepEqual(a.active(),original);assert.equal(a.list().length,1);assert.ok(s.getItem(LEGACY_SAVE_KEY));const b=createSaveVault(storage());b.import(a.export());assert.deepEqual(b.active(),original);assert.equal(saveCompatibility(b.active(),compat).ok,true);
+ const s=storage();s.setItem(LEGACY_SAVE_KEY,JSON.stringify(original));const a=createSaveVault(s);assert.deepEqual(a.active(),original);assert.equal(a.list().length,1);assert.ok(s.getItem(LEGACY_SAVE_KEY));const b=createSaveVault(storage());b.import(a.export());assert.equal(b.active(),null);assert.equal(saveCompatibility(b.list()[0].snapshot,compat).ok,true);
 });
 test('corrupt newest journal falls back to previous snapshot; quota failure cannot destroy it',()=>{
  const s=storage(),v=createSaveVault(s);v.save(original);v.save(snapshot(2));const key=VAULT_KEYS[0];s.setItem(key,s.getItem(key).replace('"checksum":"','"checksum":"x'));const recovered=createSaveVault(s);assert.deepEqual(recovered.active(),original);assert.match(recovered.warning(),/损坏/);s.setItem=()=>{throw new Error('QuotaExceededError');};assert.throws(()=>recovered.save(snapshot(3)),/Quota/);assert.deepEqual(recovered.active(),original);
@@ -38,5 +38,5 @@ test('future envelope versions and tampered exports are rejected without changin
  const s=storage(),v=createSaveVault(s);v.save(original);const before=v.export();const body=JSON.stringify({version:99});assert.throws(()=>v.import(JSON.stringify({kind:'stronghold-save-vault',body,checksum:sha256Hex(body)})),/版本/);assert.throws(()=>v.import(before.replace('"checksum":"','"checksum":"bad')),/校验/);assert.equal(v.export(),before);
 });
 test('explicit repair import archives corrupt originals; pinning an old snapshot does not change active progress',()=>{
- const s=storage();s.setItem(VAULT_KEYS[0],'bad-a');s.setItem(VAULT_KEYS[1],'bad-b');const v=createSaveVault(s);v.import(JSON.stringify(original));assert.deepEqual(v.active(),original);assert.match(v.exportRaw(),/bad-a/);assert.match(v.exportRaw(),/bad-b/);v.save(snapshot(9));v.save(original,{manual:true,activate:false});assert.deepEqual(v.active(),snapshot(9));
+ const s=storage();s.setItem(VAULT_KEYS[0],'bad-a');s.setItem(VAULT_KEYS[1],'bad-b');const v=createSaveVault(s);v.import(JSON.stringify(original));assert.equal(v.active(),null);assert.deepEqual(v.list()[0].snapshot,original);assert.match(v.exportRaw(),/bad-a/);assert.match(v.exportRaw(),/bad-b/);v.save(snapshot(9));v.save(original,{manual:true,activate:false});assert.deepEqual(v.active(),snapshot(9));
 });

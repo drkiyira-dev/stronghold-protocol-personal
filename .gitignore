@@ -11,3 +11,8 @@ upstream/public/fonts/
 .env.*
 !.env.example
 plugins/
+.personal-state/
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+recovery.key

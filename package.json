@@ -7,14 +7,16 @@
   "scripts": {
     "build": "node personal/build.mjs",
     "test": "node --test personal/*.test.mjs",
-    "server": "node --env-file-if-exists=.env personal/host.mjs"
+    "server": "node --env-file-if-exists=.env personal/host.mjs",
+    "test:browser": "node personal/reliability.browser.mjs && node personal/enhanced.browser.mjs"
   },
   "devDependencies": {
-    "esbuild": "^0.25.0"
+    "esbuild": "^0.25.0",
+    "playwright": "1.62.1"
   },
   "dependencies": {
-    "ws": "^8.22.0",
+    "acorn": "8.18.0",
     "ses": "2.3.0",
-    "acorn": "8.18.0"
+    "ws": "^8.22.0"
   }
 }

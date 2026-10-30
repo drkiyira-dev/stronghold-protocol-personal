@@ -46,10 +46,13 @@ try{
   },[...storage]);
   page=await context.newPage();page.setDefaultTimeout(20000);
   const errors=[];page.on('pageerror',e=>errors.push(e.message));
-  const readVault=()=>page.evaluate(keys=>{
-    const states=keys.map(k=>localStorage.getItem(k)).filter(Boolean).map(raw=>JSON.parse(JSON.parse(raw).body)).sort((a,b)=>b.revision-a.revision);
-    const state=states[0];return {activeId:state.activeId,snapshot:state.saves.find(s=>s.id===state.activeId)?.snapshot};
+  const readVault=()=>page.evaluate(async keys=>{
+    const db=await new Promise((resolve,reject)=>{const r=indexedDB.open('stronghold.personal.vault',1);r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});
+    const entry=await new Promise((resolve,reject)=>{const r=db.transaction('vault').objectStore('vault').get('active');r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});db.close();
+    const states=keys.map(k=>entry.raw[k]).filter(Boolean).map(raw=>JSON.parse(JSON.parse(raw).body)).sort((a,b)=>b.revision-a.revision);
+    const state=states[0];return {activeId:state.activeId,snapshot:state.saves.find(s=>s.id===state.activeId)?.snapshot,revision:entry.revision};
   },VAULT_KEYS);
+  const waitVault=async predicate=>{const deadline=Date.now()+20000;while(Date.now()<deadline){const value=await readVault();if(predicate(value))return value;await new Promise(resolve=>setTimeout(resolve,50));}throw new Error('Vault did not reach expected state');};
   const login=async()=>{
     await page.waitForFunction(()=>document.querySelector('.title-login input') || document.querySelector('[data-mode="solo"]'));
     if(await page.getByPlaceholder(/输入你的代号/).isVisible()){
@@ -80,7 +83,7 @@ try{
   await page.screenshot({path:output+'replay-quality.png'});
   await page.locator('[data-record]').selectOption('legacy');
   assert.match(await quality.textContent(),/采样完整性未知/);
-  await page.getByRole('button',{name:'存档保险库',exact:true}).click();
+  await page.getByRole('tab',{name:'存档保险库',exact:true}).click();
   await page.locator(`[data-restore="${bad.id}"]`).click();
   await page.waitForLoadState('domcontentloaded');
   // Restoring a different identity reloads without committing that candidate.
@@ -88,7 +91,7 @@ try{
   await page.waitForFunction(()=>!sessionStorage.getItem('stronghold.personal.restore'));
   assert.equal((await readVault()).activeId,activeBefore,'failed restore must preserve old active progress');
   await page.getByRole('button',{name:'战术终端',exact:true}).click();
-  await page.getByRole('button',{name:'存档保险库',exact:true}).click();
+  await page.getByRole('tab',{name:'存档保险库',exact:true}).click();
   // A nonessential preference write must not turn a committed restore into a
   // misleading failure or roll active progress back.
   await page.evaluate(()=>{
@@ -96,20 +99,16 @@ try{
     Storage.prototype.setItem=function(k,v){if(k==='stronghold.personal.challenge')throw new DOMException('test quota','QuotaExceededError');return set.call(this,k,v);};
   });
   await page.locator(`[data-restore="${good.id}"]`).click();
-  await page.waitForFunction(({keys,runId})=>{
-    const s=keys.map(k=>localStorage.getItem(k)).filter(Boolean).map(v=>JSON.parse(JSON.parse(v).body)).sort((a,b)=>b.revision-a.revision)[0];
-    return s.saves.find(x=>x.id===s.activeId)?.snapshot.runId===runId;
-  },{keys:VAULT_KEYS,runId:second.runId});
+  await waitVault(value=>value.snapshot?.runId===second.runId);
   const once=await readVault();assert.equal(once.snapshot.runId,second.runId);
   assert.match(await page.locator('.personal-save-status').textContent(),/恢复已完成.*挑战偏好/);
   await page.reload({waitUntil:'domcontentloaded'});await login();
-  await page.locator('.personal-resume').click();
-  await page.waitForFunction(({keys,oldRoom})=>{
-    const s=keys.map(k=>localStorage.getItem(k)).filter(Boolean).map(v=>JSON.parse(JSON.parse(v).body)).sort((a,b)=>b.revision-a.revision)[0];
-    return s.saves.find(x=>x.id===s.activeId)?.snapshot.options.roomCode!==oldRoom;
-  },{keys:VAULT_KEYS,oldRoom:once.snapshot.options.roomCode});
+  await page.getByRole('button',{name:'战术终端',exact:true}).click();await page.getByRole('tab',{name:'终端概览',exact:true}).click();await page.locator('.personal-resume').click();await page.getByRole('button',{name:'关闭战术终端',exact:true}).click();
+  await waitVault(value=>value.snapshot?.options.roomCode!==once.snapshot.options.roomCode);
   const twice=await readVault();assert.equal(twice.snapshot.runId,second.runId);
-  assert.deepEqual(twice.snapshot.state,once.snapshot.state);
+  assert.notEqual(twice.snapshot.state.match.battlePrefix,once.snapshot.state.match.battlePrefix);
+  const gameplay=s=>{const v=structuredClone(s);delete v.match.battlePrefix;return v;};
+  assert.deepEqual(gameplay(twice.snapshot.state),gameplay(once.snapshot.state));
   await page.screenshot({path:output+'restored-preparation.png'});
   assert.deepEqual(errors,[],'unexpected browser exceptions');
   const report={checks:7,missingMetrics:'unknown',truncation:'visible',legacyQuality:'unknown',failedRestore:'old active retained',identityReload:'passed',preferenceWriteFailure:'restore committed, warning visible',repeatedRestore:'same runId and state',externalAssets:'intentionally blocked',productionModified:false};
