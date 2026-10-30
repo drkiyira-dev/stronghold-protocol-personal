@@ -110,3 +110,34 @@ test('original worker host supports solo briefing, original roster, shop, placem
     server.dispose();
   }
 });
+
+test('idle-title timeout can reconnect, and a later transport close preserves the room and identity', async t => {
+  let clock = 1000;
+  const frames = [];
+  t.mock.timers.enable({apis:['setInterval']});
+  const server = await createLocalServer({data, now:()=>clock, emit:frame=>frames.push(frame)});
+  const flush = () => new Promise(resolve=>setImmediate(resolve));
+  try {
+    clock += 150000;
+    t.mock.timers.tick(150000);
+    await flush();
+    assert.ok(frames.some(f=>f.t==='local.closed' && f.code===4002), 'original pre-hello timeout was exercised');
+    server.receive({t:'hello',name:'闲置后开始',version:1,rid:1});
+    await flush();
+    const welcome=frames.find(f=>f.t==='welcome' && f.rid===1);
+    assert.ok(welcome,'a timed-out title must still be able to start a session');
+    server.receive({t:'room.create',mode:'solo',difficulty:'FUNNY',rid:2});
+    await flush();
+    assert.ok(frames.some(f=>f.t==='ok'&&f.rid===2));
+    const session=server.registry.byPlayerId.get(welcome.playerId);
+    const room=server.lobby.roomOf(session);
+    assert.ok(room);
+    session.ws.close(1001,'test transport interruption');
+    server.receive({t:'hello',name:'恢复连接',token:welcome.token,version:1,rid:3});
+    await flush();
+    const restored=frames.find(f=>f.t==='welcome'&&f.rid===3);
+    assert.equal(restored?.playerId,welcome.playerId);
+    assert.equal(server.lobby.roomOf(session),room,'transport recovery keeps the current solo room');
+    assert.equal(server.registry.size,1);
+  } finally {server.dispose();t.mock.timers.reset();}
+});

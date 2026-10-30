@@ -99,26 +99,30 @@ export async function createLocalServer({ emit, fetchData, data: suppliedData, n
     },
   };
   const network = new Network({ registry, handler, now, log, options: { maxConnections: 1, maxOnline: 1, helloTimeoutMs: 120000 } });
-  const listeners = new Map();
-  const socket = {
-    readyState: 1, bufferedAmount: 0,
-    on(type, listener) { if (!listeners.has(type)) listeners.set(type, []); listeners.get(type).push(listener); },
-    send(raw) {
-      const message = JSON.parse(raw);
-      emit(message);
-      if (message.t === 'm.result') { lastSaved = ''; emit({ t: 'local.clear-checkpoint' }); }
-      saveSoon();
-    },
-    ping() { for (const fn of listeners.get('pong') || []) fn(); },
-    close(code = 1000, reason = '') {
-      if (this.readyState !== 1) return;
-      this.readyState = 3;
-      for (const fn of listeners.get('close') || []) fn();
-      emit({ t: 'local.closed', code, reason });
-    },
-    terminate() { this.close(1001, 'Local transport closed.'); },
-  };
-  network.handleConnection(socket, { socket: { remoteAddress: '127.0.0.1' }, headers: {} });
+  function connectTransport() {
+    const listeners = new Map();
+    const socket = {
+      readyState: 1, bufferedAmount: 0,
+      on(type, listener) { if (!listeners.has(type)) listeners.set(type, []); listeners.get(type).push(listener); },
+      send(raw) {
+        const message = JSON.parse(raw);
+        emit(message);
+        if (message.t === 'm.result') { lastSaved = ''; emit({ t: 'local.clear-checkpoint' }); }
+        saveSoon();
+      },
+      ping() { for (const fn of listeners.get('pong') || []) fn(); },
+      close(code = 1000, reason = '') {
+        if (this.readyState !== 1) return;
+        this.readyState = 3;
+        for (const fn of listeners.get('close') || []) fn();
+        emit({ t: 'local.closed', code, reason });
+      },
+      terminate() { this.close(1001, 'Local transport closed.'); },
+    };
+    network.handleConnection(socket, { socket: { remoteAddress: '127.0.0.1' }, headers: {} });
+    return { socket, listeners };
+  }
+  let transport = connectTransport();
   return {
     receive(message) {
       if (stopped) return;
@@ -128,7 +132,11 @@ export async function createLocalServer({ emit, fetchData, data: suppliedData, n
         return;
       }
       if (message.t === 'local.restore') { restore(message.snapshot); return; }
-      for (const fn of listeners.get('message') || []) fn(JSON.stringify(message), false);
+      // The original host closes idle pre-hello connections. A later browser
+      // reconnect needs a fresh Connection, while keeping this lobby and its
+      // sessions/match intact. Reusing the old listener silently drops hello.
+      if (message.t === 'hello' && transport.socket.readyState !== 1) transport = connectTransport();
+      for (const fn of transport.listeners.get('message') || []) fn(JSON.stringify(message), false);
       saveSoon();
     },
     dispose() {
