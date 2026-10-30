@@ -1,14 +1,22 @@
-# 卫戍协议：盟约 · 个人演习版
+# Stronghold Protocol: Alliance — Personal Edition
 
-**这是基于 [sganggs/Stronghold-Protocol](https://github.com/sganggs/Stronghold-Protocol) 0.3.3 的二次开发项目，非原创完整游戏，也不是鹰角官方项目。**
+**English** | [简体中文](README.zh-CN.md)
 
-本项目由 [drkiyira-dev](https://github.com/drkiyira-dev) 维护，将上游改为私人浏览器单人版，沿用其干员、技能、盟约、装备、策略、商店、难度和自动作战逻辑，新增浏览器内运行、休整存档及部署优化。感谢原项目作者与贡献者。
+**This is a derivative of [sganggs/Stronghold-Protocol](https://github.com/sganggs/Stronghold-Protocol) 0.3.3, not an original game built from scratch or an official Hypergryph project.**
 
-代码许可证为 **GPL-3.0-or-later（GNU GPL 第 3 版或更新版本）**，与上游保持一致。完整条款见 [LICENSE](LICENSE)；上游署名与素材权利声明见 [NOTICE.md](NOTICE.md)。角色、美术、音乐与游戏数据不因代码开源而改用 GPL。
+Maintained by [drkiyira-dev](https://github.com/drkiyira-dev), this project adapts the upstream game into a personal, single-player browser edition. It retains the upstream operators, skills, alliances, equipment, strategies, shop, difficulties, and automatic combat logic, while adding a browser-hosted engine, preparation-phase saves, and deployment optimizations. Thanks to the upstream author and contributors.
 
-## 运行
+The source code is licensed under **GPL-3.0-or-later (GNU GPL version 3 or any later version)**, consistent with upstream. See [LICENSE](LICENSE) for the terms and [NOTICE.md](NOTICE.md) for attribution and asset notices. Characters, artwork, music, and game data do not become GPL-licensed merely because the code is open source.
 
-需要 Node.js 22+、Python 3。上游安装步骤会生成浏览器所需的 Pixi、Preact 等依赖文件。
+## Codex development and testing disclosure
+
+**The code added or modified for this personal edition was written by OpenAI Codex under the maintainer's direction. Its added regression tests were also written and run by Codex.** Codex performed the automated checks, browser gameplay testing, debugging, and deployment verification documented below.
+
+This attribution covers this derivative's additions and changes. The upstream game engine, original implementation, and existing upstream tests remain the work of their respective authors and contributors.
+
+## Run locally
+
+Requirements: Node.js 22+ and Python 3. The upstream installation step prepares browser dependencies such as PixiJS and Preact.
 
 ```sh
 npm ci
@@ -19,39 +27,54 @@ npm run build
 python3 -m http.server 4173 --bind 127.0.0.1 --directory dist
 ```
 
-打开 http://127.0.0.1:4173/，填写博士代号，依次选择「开始 → 独立模拟 → 难度 → 开始模拟」。桌面宽屏或横屏体验最佳。
+Open [http://127.0.0.1:4173/](http://127.0.0.1:4173/), enter a Doctor name, and choose Start → Solo Simulation → Difficulty → Start Simulation. In the Chinese UI, these controls are 「开始 → 独立模拟 → 难度 → 开始模拟」. A wide desktop window or landscape display works best.
 
-代码仓库不打包运行所需的立绘、模型和音频素材（上游文档截图与规则数据保留其原声明）。首次素材下载约 400 MB，来源记录在 `personal/*source-map.json`。下载脚本支持已有文件续传；后续修改源码只需再次运行 `npm run build`。
+The repository does not bundle the portraits, models, or audio required at runtime; upstream documentation screenshots and rules data retain their original notices. The first asset download is approximately 400 MB. Sources are recorded in `personal/*source-map.json`. Download scripts reuse existing files; subsequent source changes only require another `npm run build`.
 
-## 本次修改
+## Changes in this edition
 
-- 把上游 Lobby / Network / Match 放入浏览器 Worker，单人演习不依赖原站服务器。
-- 标题页久置、连接超时后可自动建立新连接，并保留当前单人房间与身份。
-- 休整期自动保存到当前浏览器。重新打开进入大厅后可「继续上次休整」；战斗中退出回到最后一个休整存档，不保存战斗中的每一帧。
-- 保留棋盘、整备区、资金、商店、盟约、装备、库存、敌人预定波次和六路随机数状态。数据或引擎版本不兼容时拒绝恢复。
-- 切换到后台自动暂停单人战斗；保留原操作和二次确认。
-- 骨骼动画采用无损 gzip 传输，浏览器解压后交给原渲染器；原始数据逐字节保持一致。
-- Spine、头像、界面、背景音乐、界面音效与基础战斗音效由本站提供。为满足 Sites 的 256 MiB 上传限制，立绘和教程图片按需从记录的公开原素材源加载；本机原文件保留在 `.cache/art-originals/`。未打包全量干员语音和专属战斗音效。
+- Runs the upstream Lobby, Network, and Match components in a browser Worker, so solo simulation does not depend on the original site's game server.
+- Reconnects after an idle title screen or a connection timeout while preserving the current solo room and identity.
+- Automatically saves during preparation in the current browser. Reopening the lobby offers 「继续上次休整」 (resume the last preparation phase). Leaving during combat restores the latest preparation save rather than an individual combat frame.
+- Preserves the board, bench, funds, shop, alliances, equipment, stock, scheduled enemy waves, and six random-number streams. Incompatible data or engine versions are rejected on restore.
+- Automatically pauses solo combat when the page goes into the background, retaining the original controls and confirmation dialogs.
+- Transfers skeleton animations with lossless gzip compression; the browser restores the original bytes before handing them to the renderer.
+- Serves Spine models, avatars, UI assets, background music, UI sounds, and basic combat sounds from this site. To fit the Sites 256 MiB upload limit, portraits and tutorial images load on demand from recorded public asset sources. Local originals remain in `.cache/art-originals/`. Full operator voice packs and all dedicated combat sounds are not bundled.
+- Uses the recorded match's mode to recover missing round limits when reopening older battle reports, fixing standard solo results that incorrectly displayed `9/14` instead of `9/9`.
 
-本版只开放独立模拟，未实现联机同盟、远程 AI 或原站账号同步。战斗规则保持上游实现；它是非官方同人复刻，不能保证与官方每个细节完全相同。演习计算不依赖原站服务器；存档和设置在当前浏览器中，立绘与教程图片需要访问公开素材源。
+Only solo simulation is available. Multiplayer alliances, remote AI, and account synchronization with the original site are not implemented. Combat follows the upstream implementation, which is an unofficial fan recreation and may differ from the official mode. Simulation runs independently of the original game server; saves and settings stay in the current browser, while portraits and tutorial images require access to their public asset sources.
 
-## 二次开发入口
+## Development entry points
 
-- `upstream/data/`：干员、装备、盟约、敌人与波次等规则数据。
-- `upstream/server/sim/content/`：干员技能、盟约和相关战斗行为。
-- `upstream/public/js/`：上游界面与渲染逻辑。
-- `personal/`：本项目的浏览器主机、自动存档、素材适配和构建代码。
+- `upstream/data/`: rules data for operators, equipment, alliances, enemies, and waves. Follow the upstream data-generation workflow when changing it.
+- `upstream/server/sim/content/`: operator skills, alliances, and related combat behavior.
+- `upstream/public/js/`: upstream UI and rendering logic, including the battle-report fix.
+- `personal/`: this edition's browser host, autosave, asset adaptation, build scripts, and regression tests.
 
-上游源码单独保存在 `upstream/`，便于跟踪修改与后续同步；本项目的改动集中在 `personal/`。公开的是开发源码，私人站点的访问权限保持不变。
+The imported source is kept in `upstream/` to make changes and future upstream updates easier to track. Most personal-edition changes live in `personal/`. The development source is public; this does not change the private hosted site's access permissions.
 
-## 验证与源码
+## Verification
+
+After installing dependencies and preparing assets as above:
 
 ```sh
+npm run build
 npm test
 ```
 
-测试覆盖真实协议下招募、部署、完整战斗结算、下一回合，以及恢复后棋盘/库存/商店/随机状态/下一轮结果的一致性。
+The personal tests cover recruitment, deployment, real combat settlement, progression to the next round, and checkpoint restoration of the board, stock, shop, random state, and subsequent battle results. They also cover reconnect handling, lossless skeleton transport, browser module dependencies, and historical battle-report round limits.
 
-`upstream/` 保留本次移植所用源码；`personal/` 是移植、存档、构建与测试代码。`personal/迁移研究.md` 记录参考资料。`dist/` 为生成结果，不提交到 Git。
+**Verification performed by Codex on October 30, 2026:**
 
-代码遵循 GPL-3.0-or-later；角色和游戏素材的权利归原权利人，详见 [NOTICE.md](NOTICE.md)、[LICENSE](LICENSE) 与上游声明。本项目用于私人、非商业演习。
+- Completed the standard solo simulation through all nine rounds and defeated the final leader, finishing with **25/25 life**.
+- Checked final settlement, return to the lobby, saved history, refresh persistence, and removal of the completed run's preparation save.
+- Reproduced and fixed the historical report's `9/14` display, then verified the deployed version shows **`9/9`** for the existing saved victory.
+- Passed **140 relevant upstream/regression tests** and the **10-test personal-edition suite**. These suites overlap; the counts are reported separately.
+
+These checks document the tested flow, not exhaustive coverage of every operator, difficulty, or team composition.
+
+`personal/迁移研究.md` contains migration research and references. `dist/` is generated output and is not committed to Git.
+
+## License and credits
+
+Code: **GPL-3.0-or-later**. Game characters and assets remain the property of their respective rights holders. See [NOTICE.md](NOTICE.md), [LICENSE](LICENSE), and the upstream notices. This project is intended for personal, non-commercial simulation.
