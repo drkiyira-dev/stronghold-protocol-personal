@@ -14,3 +14,14 @@ test('coach proxy enforces origin/token, forwards only numeric tactical summary,
 test('unconfigured coach clearly reports unavailable without contacting a provider',async()=>{
  const handler=createCoachHandler({env:{},fetchFn:()=>{throw new Error('must not call');}}),server=createServer((req,res)=>handler(req,res));await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));try{const r=await fetch(`http://127.0.0.1:${server.address().port}/api/coach`,{method:'POST'});assert.equal(r.status,503);}finally{await new Promise(resolve=>server.close(resolve));}
 });
+test('v2 proxy validates evidence IDs and refuses hallucinated references, malformed JSON and provider timeouts',async()=>{
+ let mode='valid',forwarded;const handler=createCoachHandler({env:{COACH_API_URL:'https://provider.example/api',COACH_API_KEY:'key',COACH_MODEL:'model',COACH_ACCESS_TOKEN:'access'},fetchFn:async(_,opts)=>{
+  forwarded=opts.body;if(mode==='timeout')throw new DOMException('timeout','TimeoutError');
+  return new Response(JSON.stringify({choices:[{message:{content:mode==='malformed'?'not JSON':JSON.stringify({cards:[{observation:'Recorded zero',hypothesis:'Needs verification',action:'Inspect deployment',refs:[mode==='foreign'?'e999':'e1']}]})}}]}));
+ }});const server=createServer((req,res)=>handler(req,res));await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
+ try{const url=`http://127.0.0.1:${server.address().port}/api/coach`,body={...summary,version:2,references:[{id:'e1',kind:'fact',label:'Damage',value:0,privateRunId:'must-not-forward'}]};
+  const request=()=>fetch(url,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer access'},body:JSON.stringify(body)});
+  const good=await request();assert.equal(good.status,200);assert.equal((await good.json()).cards[0].refs[0],'e1');assert.ok(!forwarded.includes('must-not-forward'));
+  for(mode of ['foreign','malformed','timeout'])assert.equal((await request()).status,502);
+ }finally{await new Promise(resolve=>server.close(resolve));}
+});

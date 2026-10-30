@@ -2,6 +2,7 @@ import { build } from 'esbuild';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readFile } from 'node:fs/promises';
+import {replaceContract} from './build-identity.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const shims = path.join(here, 'shims');
@@ -29,7 +30,7 @@ const aliases = {
         : path.basename(args.path) === 'bonds.js' ? ['./bonds/core.js', './bonds/addon.js', './support/meta.js']
           : ['./bands/battle.js', './bands/meta.js'];
       const dispatch = `{${modules.map(name => `${JSON.stringify(name)}: () => import(${JSON.stringify(name)})`).join(',')}}`;
-      return { contents: source.replace('return await import(path);', `return await (${dispatch})[path]();`), loader: 'js', resolveDir: path.dirname(args.path) };
+      return { contents: replaceContract(source,'return await import(path);', `return await (${dispatch})[path]();`,args.path), loader: 'js', resolveDir: path.dirname(args.path) };
     });
   },
 };

@@ -26,6 +26,9 @@ const OPTION_FIELDS = [
 const PLAYER_EXCLUDE = new Set(['m', 'gd', '_diyRecords', 'diyStock', '_deployMap', '_lastPriv', '_prepScoutSig']);
 const PLATFORM_FIELDS = new Set(['send', 'broadcast', 'onEnd', 'data', 'scheduler', 'now', 'log']);
 const fingerprints = new WeakMap();
+// Shared codec primitives for the separate, capability-gated multiplayer PREP
+// adapter. This does not relax the solo capture/restore contract.
+export const checkpointCodec={encode,decode,fingerprint,rngAt,RNG_NAMES,MATCH_FIELDS,OPTION_FIELDS,PLAYER_EXCLUDE};
 
 function fail(message) { throw new TypeError(`休整存档：${message}`); }
 function own(object, key) { return Object.prototype.hasOwnProperty.call(object, key); }

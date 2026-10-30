@@ -4,6 +4,9 @@ import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
+import {buildIdentity,replaceContract,verifyNoUntrackedEngineFiles} from './build-identity.mjs';
+const identity=await buildIdentity();
+await verifyNoUntrackedEngineFiles();
 const root = fileURLToPath(new URL('../', import.meta.url));
 const dist = path.join(root, 'dist');
 await mkdir(dist, {recursive:true});
@@ -13,6 +16,7 @@ for (const [from,to] of [['public',''],['shared','shared'],['server/sim','sim'],
 }
 await cp(path.join(root,'personal/templates'),dist,{recursive:true});
 await mkdir(path.join(dist,'personal'),{recursive:true});
+await writeFile(path.join(dist,'personal/build-info.json'),JSON.stringify(identity));
 for (const name of ['local-client.mjs','personal.css','skeleton-codec.mjs','spine-urls.mjs']) await cp(path.join(root,'personal',name),path.join(dist,'personal',name));
 // Upstream's local-only model validator must recognize the externally hosted assets too.
 const assetsFile=path.join(dist,'js/assets.js');
@@ -48,7 +52,7 @@ clientCode=bundled.outputFiles[0].text;
 const clientName = `local-client-${hash(clientCode)}.mjs`;
 await writeFile(path.join(dist,'personal',clientName),clientCode);
 let html = await readFile(path.join(dist,'index.html'),'utf8');
-html = html.replace('/personal/local-client.mjs',`/personal/${clientName}`);
+html = replaceContract(html,'/personal/local-client.mjs',`/personal/${clientName}`,'client entry');
 html = html.replace('/personal/personal.css','/personal/personal.css?v='+hash(await readFile(path.join(dist,'personal/personal.css'))));
 await writeFile(path.join(dist,'index.html'),html);
 console.log('Personal build ready in dist/');

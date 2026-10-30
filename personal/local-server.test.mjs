@@ -119,6 +119,8 @@ for(const challenge of [null,CHALLENGE_PRESETS[1]]) test(`${challenge?'fixed-see
       const restoredMatch = [...restoredServer.lobby.rooms.values()].find(r => r.match).match;
       assert.equal(restoredMatch.order[0].playerId, welcome.playerId);
       assert.equal(restoredMatch.order[0].board.size, 1);
+      assert.notEqual(restoredMatch.battlePrefix,source.state.match.battlePrefix);
+      for(const key of ['rngSetup','rngShop','rngWaves','rngDraft','rngBots','rngMeta'])assert.equal(restoredMatch[key].state(),source.state.rng[key]);
       assert.deepEqual(restoredMatch.personalChallenge||null,challenge);
     } finally { restoredServer.dispose(); }
     }

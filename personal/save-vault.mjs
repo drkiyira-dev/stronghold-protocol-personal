@@ -120,13 +120,13 @@ export function createSaveVault(storage, {now = Date.now} = {}) {
         if(storage.getItem(RECOVERY_KEY)!==preserved)throw new Error('无法备份损坏副本，已取消修复');
         blocked=false;warning='已用导入文件恢复；损坏副本保留在原始恢复数据中。';
       }
-      if (incoming.legacy) return save(incoming.legacy, {manual:true, label:'导入旧版存档'});
+      if (incoming.legacy) return save(incoming.legacy, {manual:true,activate:false,label:'导入旧版存档'});
       const next = clone(state);
       const entries = new Map(next.saves.map(s => [s.id,s]));
       for (const item of incoming.saves) if (!entries.has(item.id)) entries.set(item.id, {...item, manual:true});
       if (entries.size > MAX_SAVES) throw new Error('合并后备份超过 18 个；请导入单个休整存档');
       next.saves = [...entries.values()].sort((a,b) => b.at-a.at);
-      next.activeId = state.activeId || incoming.activeId;
+      next.activeId = state.activeId; // Imported candidates activate only after engine ACK + vault commit.
       commit(next); return this.active();
     },
     exportOne: id => {

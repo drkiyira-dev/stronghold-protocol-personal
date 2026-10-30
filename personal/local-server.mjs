@@ -50,6 +50,9 @@ export async function createLocalServer({ emit, fetchData, data: suppliedData, n
       const match = restoreCheckpoint(snapshot, {
         data, now, log, send: options.send, broadcast: options.broadcast, onEnd: options.onEnd,
       });
+      // Fresh transport IDs reject reports from the abandoned combat attempt.
+      // Gameplay seed/RNG and the logical runId remain unchanged.
+      match.battlePrefix='r'+newRunId().slice(4);
       match.start = () => { match.onReconnect(options.seats[0].playerId); match.flush(true); };
       return match;
     }

@@ -1,18 +1,21 @@
+import {newRunId} from './run-identity.mjs';
+import {sha256Hex} from '../upstream/shared/sha256.js';
+import {evidenceId} from './evidence.mjs';
 const copy = v => JSON.parse(JSON.stringify(v));
 export const REPLAY_KIND = 'stronghold-tactical-replay';
 const DROP_KEYS=['frames','events','frameUnits','unitMetadata'];
 export function replayQuality(record) {
   const tracked=record.quality?.version===1;
   return {version:1,resultReceived:!!record.result,truncated:tracked?record.quality.truncated:null,
-    dropped:tracked?{...record.quality.dropped}:null};
+    dropped:tracked?{...record.quality.dropped}:null,gaps:record.quality?.gaps || []};
 }
 export function replayStatusText(record) {
   if(record.summaryOnly)return '旧版整局汇总 · 无时间轴';
   const q=replayQuality(record);
-  return `${q.resultReceived?'已收到结算':'未收到结算'} · ${q.truncated===true?'采样已截断':q.truncated===false?'采样未触及录制上限':'采样完整性未知'}`;
+  return `${q.resultReceived?'已收到结算':'未收到结算'} · ${q.truncated===true?'采样已截断':q.truncated===false?'采样未触及录制上限':'采样完整性未知'}${q.gaps.length?' · 记录中断/视角不完整':''}`;
 }
 export function validateReplay(value) {
-  if (!value || value.format !== REPLAY_KIND || value.version !== 1 || typeof value.id !== 'string' || value.id.length > 160) throw new Error('不支持的复盘文件');
+  if (!value || value.format !== REPLAY_KIND || ![1,2].includes(value.version) || typeof value.id !== 'string' || value.id.length > 160) throw new Error('不支持的复盘文件');
   if (!Array.isArray(value.frames) || value.frames.length > 600 || !Array.isArray(value.events) || value.events.length > 2500 || !value.units || typeof value.units !== 'object') throw new Error('复盘数据结构无效');
   if (Object.keys(value.units).length > 1500 || JSON.stringify(value).length > 5000000) throw new Error('复盘文件过大');
   if(value.quality!==undefined){
@@ -28,6 +31,11 @@ export function validateReplay(value) {
     for (const u of frame.units) if (!Array.isArray(u) || u.length < 5 || !['string','number'].includes(typeof u[0]) || u.slice(1,5).some(n=>!Number.isFinite(n)) || Math.abs(u[1])>1000 || Math.abs(u[2])>1000) throw new Error('复盘坐标或生命数据无效');
   }
   for (const event of value.events) if (!Number.isFinite(event.t) || typeof event.type !== 'string' || !['string','number'].includes(typeof event.unit)) throw new Error('复盘事件无效');
+  if(value.version===2){
+    if(value.events.some((e,i)=>e.id!==evidenceId(value,'e',i)))throw new Error('复盘事件引用损坏');
+    if(!value.provenance || value.provenance.source!=='client-simulator')throw new Error('复盘来源缺失');
+    if(!Array.isArray(value.quality?.gaps)||value.quality.gaps.length>10||value.quality.gaps.some(x=>!['restart','takeover','disconnect','field-view'].includes(x)))throw new Error('复盘缺口标记无效');
+  }
   if (value.result?.perPlayer) for (const p of Object.values(value.result.perPlayer)) {
     if (!p || !Array.isArray(p.unitStats) || p.unitStats.length > 160 || p.unitStats.some(u=>!u||typeof u!=='object'||Array.isArray(u)) || !Array.isArray(p.leaked) || p.leaked.some(u=>!u||typeof u!=='object')) throw new Error('复盘结算无效');
   }
@@ -35,7 +43,7 @@ export function validateReplay(value) {
 }
 export function createRecorder({save, context=()=>({}), now=Date.now, onError=()=>{}}) {
   const records=new Map();
-  const fields=new Map();
+  const fields=new Map(),battles=new Map(),session=newRunId();
   const lastSamples=new WeakMap();
   let writes=Promise.resolve();
   const persist=r=>{
@@ -45,18 +53,22 @@ export function createRecorder({save, context=()=>({}), now=Date.now, onError=()
   const drop=(r,key,count=1)=>{r.quality.truncated=true;r.quality.dropped[key]=Math.min(Number.MAX_SAFE_INTEGER,r.quality.dropped[key]+count);};
   return {
     start(message) {
-      if (!message.battleId || records.has(message.battleId)) return;
-      const c=context();
-      const r={format:REPLAY_KIND,version:1,id:message.battleId,at:now(),round:c.round || 1,seed:message.spec?.seed,
+      if (!message.battleId)return;
+      const c=context(),id='battle_'+sha256Hex(JSON.stringify([c.runId,c.attemptId || session,message.battleId])).slice(0,32);
+      if(records.has(id)){this.gap(message,'restart');return;}
+      battles.set(message.battleId,id);
+      const r={format:REPLAY_KIND,version:2,id,battleId:message.battleId,at:now(),round:c.round || 1,seed:message.spec?.seed,
         kind:message.spec?.kind || message.kind || 'normal',fieldId:message.fieldId,selfId:c.selfId,
         title:c.title || '',challenge:c.challenge || null,preparation:c.preparation || null,
         names:{},units:{},frames:[],events:[],result:null,partial:true,rect:message.spec?.rect || null,
-        quality:{version:1,resultReceived:false,truncated:false,dropped:{frames:0,events:0,frameUnits:0,unitMetadata:0}}};
+        provenance:{source:'client-simulator',engineHash:c.engineHash || null,dataHash:c.dataHash || null,cs:message.spec?.cs || null,
+          runId:c.runId || null,scenario:c.scenario || null},
+        quality:{version:1,resultReceived:false,truncated:false,gaps:message.authoritative===false?['field-view']:[],dropped:{frames:0,events:0,frameUnits:0,unitMetadata:0}}};
       records.set(r.id,r); fields.set(r.fieldId,r.id);
-      if (records.size > 5) {const old=records.get(records.keys().next().value);persist(old);records.delete(old.id);if(fields.get(old.fieldId)===old.id)fields.delete(old.fieldId);}
+      if (records.size > 5) {const old=records.get(records.keys().next().value);persist(old);records.delete(old.id);if(battles.get(old.battleId)===old.id)battles.delete(old.battleId);if(fields.get(old.fieldId)===old.id)fields.delete(old.fieldId);}
     },
     field(message) {
-      const r=records.get(message.battleId || fields.get(message.fieldId)); if(!r)return;
+      const r=records.get(battles.get(message.battleId) || fields.get(message.fieldId)); if(!r)return;
       r.rect=message.rect || r.rect;
       for(const u of message.units || []) this.unit(r,u);
     },
@@ -83,13 +95,18 @@ export function createRecorder({save, context=()=>({}), now=Date.now, onError=()
         if(ev[0]==='spawn') {this.unit(r,ev[1]);continue;}
         if(!['die','leak','deploy','skill'].includes(ev[0]) || (ev[0]==='skill' && !ev[2]))continue;
         if(r.events.length>=2500){drop(r,'events');continue;}
-        r.events.push({t:Math.round(message.gt*10)/10,type:ev[0],unit:ev[1]});
+        r.events.push({id:evidenceId(r,'e',r.events.length),t:Math.round(message.gt*10)/10,type:ev[0],unit:ev[1]});
       }
     },
     finish(message) {
-      const r=records.get(message.battleId); if(!r)return;
+      const r=records.get(battles.get(message.battleId)); if(!r)return;
       if(!message.result || typeof message.result!=='object')return;
+      if(r.result)return; // Result receipts are immutable, including retry deliveries.
       r.result=copy(message.result);r.partial=false;r.quality.resultReceived=true;persist(r);
+    },
+    gap(message,reason){
+      const targets=message?.battleId?[records.get(battles.get(message.battleId))]:[...records.values()].filter(r=>!r.result);
+      for(const r of targets)if(r&&!r.quality.gaps.includes(reason)){r.quality.gaps.push(reason);persist(r);}
     },
     flush() {return Promise.all([...records.values()].map(persist));},
   };
