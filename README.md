@@ -6,6 +6,14 @@
 
 Code: **GPL-3.0-or-later**, consistent with upstream. See [LICENSE](LICENSE) and [NOTICE.md](NOTICE.md). Game characters, artwork, music and data retain their respective rights and are not relicensed by this repository.
 
+## AI-Assisted Development
+
+This personal edition is developed and maintained by Dr.Kiriya with substantial engineering assistance from OpenAI Codex.
+
+Codex has assisted with browser-based engine adaptation, save-state persistence, asset optimization, testing, and deployment workflows.
+
+The project is based on the original Stronghold-Protocol repository. Original authorship and third-party intellectual property rights remain with their respective owners.
+
 ## Codex disclosure
 
 **The personal edition's additions and modifications were written by OpenAI Codex under the maintainer's direction. Its added tests were also written and run by Codex, including automated regression checks, browser gameplay checks, debugging and deployment verification.** This credit does not apply to the upstream implementation or its existing tests.
