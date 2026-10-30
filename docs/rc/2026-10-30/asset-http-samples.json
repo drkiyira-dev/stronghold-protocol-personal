@@ -1,0 +1,78 @@
+{
+  "at": "2026-10-30T14:17:37.235Z",
+  "method": "Direct HTTP samples of manifest or browser-observed external URLs; browser playback is separate evidence",
+  "rows": [
+    {
+      "key": "/assets/spine/op/char_127_estell/front/char_127_estell.skel",
+      "url": "https://raw.githubusercontent.com/fexli/ArknightsResource/main/spine/char_127_estell/char_127_estell/Front/char_127_estell.skel",
+      "status": 200,
+      "bytes": 102163,
+      "type": "application/octet-stream",
+      "signature": "1c634b65624d6c52",
+      "sha256": "c745481f14554577d9ea14b29b79c8a8f47f729e4f93edbd395c3cea5f981960"
+    },
+    {
+      "key": "/assets/spine/op/char_127_estell/front/char_127_estell.atlas",
+      "url": "https://raw.githubusercontent.com/fexli/ArknightsResource/main/spine/char_127_estell/char_127_estell/Front/char_127_estell.atlas",
+      "status": 200,
+      "bytes": 5647,
+      "type": "text/plain; charset=utf-8",
+      "signature": "636861725f313237",
+      "sha256": "7822628c0832be4dda66c4ad0cd4aa02f100af4cf73269149da1d96156a5b740"
+    },
+    {
+      "key": "/assets/spine/op/char_127_estell/front/char_127_estell.png",
+      "url": "https://raw.githubusercontent.com/fexli/ArknightsResource/main/spine/char_127_estell/char_127_estell/Front/char_127_estell.png",
+      "status": 200,
+      "bytes": 81139,
+      "type": "image/png",
+      "signature": "89504e470d0a1a0a",
+      "sha256": "8f6cf919dc606ac6896df623436a7fecf7c4cc309cad320ce8ec4131101f6380"
+    },
+    {
+      "key": "font",
+      "url": "https://raw.githubusercontent.com/TimWangZi/The-font-of-Arknights/master/font/Novecento-Wide-Normal-2.otf",
+      "status": 200,
+      "bytes": 45356,
+      "type": "application/octet-stream",
+      "signature": "4f54544f000b0080",
+      "sha256": "10aba19768ead3b038576d7baaf427d41b4a3b73d66f41c3ee7193ee65679156"
+    },
+    {
+      "key": "font",
+      "url": "https://raw.githubusercontent.com/TimWangZi/The-font-of-Arknights/master/font/Bender/BENDER.OTF",
+      "status": 200,
+      "bytes": 52536,
+      "type": "application/octet-stream",
+      "signature": "4f54544f000b0080",
+      "sha256": "b394fe0c3a3aa85784e9928b3a0288c578b438a0db7aa14fbcc686da64143444"
+    },
+    {
+      "key": "other",
+      "url": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/music/act1autochess/m_sys_act1autochess_intro.mp3",
+      "status": 200,
+      "bytes": 1138773,
+      "type": "audio/mpeg",
+      "signature": "4944330400000000",
+      "sha256": "823070ade73b125437ee0aebfdcdf6d6ddc38d754069ab52c20186fb25e4a12f"
+    },
+    {
+      "key": "other",
+      "url": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/music/act1autochess/m_sys_act1autochess_loop.mp3",
+      "status": 200,
+      "bytes": 1138773,
+      "type": "audio/mpeg",
+      "signature": "4944330400000000",
+      "sha256": "54a2e48d8ca925f30cde6dd4979fd7f793b95da4e2c2efcdfb2b89b84a02dde2"
+    },
+    {
+      "key": "avatar mirror",
+      "url": "https://cdn.jsdelivr.net/gh/yuanyan3060/ArknightsGameResource@main/avatar/char_127_estell.png",
+      "status": 200,
+      "bytes": 72652,
+      "type": "image/png",
+      "signature": "89504e470d0a1a0a",
+      "sha256": "2c17de8f3069d37928ae8f7b5384705865855286ba57efb572f4c012e254590d"
+    }
+  ]
+}

@@ -1,0 +1,208 @@
+{
+  "schema": 1,
+  "assessment": "HOLD",
+  "recommendedCandidate": "v1.2.0-rc.1",
+  "candidateCreated": false,
+  "testedMain": "f990e72b3c409290cbb8cfaa3a20c4c967c6ebb8",
+  "runtimeChanges": false,
+  "productionModified": false,
+  "environment": {
+    "os": "macOS 26.6",
+    "osBuild": "25G72",
+    "memoryGiB": 24,
+    "node": "26.7.0",
+    "sqlite": "3.53.4",
+    "playwright": "1.62.1",
+    "chrome": "156.0.8078.47",
+    "safari": "26.6",
+    "safariDriver": "21624.4.5.11.5",
+    "laterChromeViewport": {
+      "width": 1710,
+      "height": 930
+    }
+  },
+  "buildIdentity": {
+    "version": 1,
+    "edition": "Stronghold Protocol: Alliance — Enhanced Edition",
+    "upstream": "f07b8965061bbc311ad7aa815879b09264a1e47d",
+    "upstreamEngineHash": "f5d24b524429e4a069c770da2d83a350cc71921dac76c7e083489232b13566f7",
+    "adapterHash": "54ab044e910942e976b4015f51f3908ed41c4b3be31960e2a525470b5cc951dd",
+    "engineHash": "f4c5dcf5b08eb98eb24cb7c28db9e04f014d3b610e6bb5a152756c2d475f81d7",
+    "dataHash": "c15ba374d2b64b760105803ebf2c76f4929c85984dd32daeef0665153b869180",
+    "baselineHash": "9884d9e0450a88230610b85a9865bc33615670b38d8fd6fc7f49b45bd4a97fef",
+    "protocol": 2
+  },
+  "automated": {
+    "build": "PASS",
+    "externalMappings": 17098,
+    "atlasAdapters": 710,
+    "unmapped": 0,
+    "personal": {
+      "passed": 52,
+      "failed": 0,
+      "skipped": 0,
+      "durationMs": 24645.586292
+    },
+    "upstreamFull": {
+      "total": 10170,
+      "suites": 656,
+      "passed": 10067,
+      "failed": 6,
+      "skipped": 97,
+      "durationMs": 1126797.314416
+    },
+    "targetedSerialRerun": {
+      "total": 10,
+      "passed": 7,
+      "failed": 3
+    },
+    "golden": {
+      "passed": 288,
+      "failed": 0,
+      "families": {
+        "roster": 49,
+        "bonds": 46,
+        "fields": 22,
+        "matches": 21,
+        "standins": 10,
+        "diy": 140
+      },
+      "jobs": 4
+    },
+    "browser": {
+      "initialCombined": "FAIL: restore control readiness timeout",
+      "reliabilityDiagnosticPassed": 7,
+      "reliabilityOriginalRerunPassed": 7,
+      "enhancedSeparatePassed": 13,
+      "assetsBlocked": true,
+      "modelsMocked": true,
+      "initialFailureResolved": false
+    }
+  },
+  "solo": {
+    "method": "Actual Chrome UI, original solo Worker engine and rules",
+    "completedCombatRounds": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "reachedRound": 9,
+    "finalSettlementVerified": false,
+    "actualRound3Restore": {
+      "sameRunId": true,
+      "sameGameplayStateExcludingTransportPrefix": true,
+      "sameRound": true,
+      "freshBattlePrefix": true,
+      "source": "UI-exported actual browser saves, before and after combat interruption"
+    },
+    "runId": "run_6bba99ec641d762932ea6e38dc85add4",
+    "pausedRound9": {
+      "life": 20,
+      "bossHealthDisplay": "28.4万 / 28.5万"
+    },
+    "reasonStopped": "Maintainer reported memory pressure and thermal throttling"
+  },
+  "multiplayerProtocol": {
+    "method": "Two independent WebSocket/SimClient sessions, original paced engine at 2x; two original AI teammates; no injected victories, test commands, autoplay, rule or timer overrides",
+    "independentClients": 2,
+    "upstreamAiTeammates": 2,
+    "physicalComputers": 1,
+    "reconnect": {
+      "at": "2026-10-30T14:11:48.876Z",
+      "type": "disconnect-reconnect",
+      "round": 3,
+      "samePlayer": true
+    },
+    "restart": {
+      "at": "2026-10-30T14:14:50.203Z",
+      "type": "server-restart",
+      "round": 6,
+      "sameRunId": true,
+      "newEpoch": true,
+      "sameCommittedState": true,
+      "rollback": "Last committed PREP; discarded in-flight combat"
+    },
+    "result": {
+      "victory": true,
+      "reason": "victory",
+      "roundsPassed": 14,
+      "modeId": "mode_multi_funny",
+      "difficulty": "FUNNY",
+      "stageId": "act1autochess_m01",
+      "bossId": "boss_3",
+      "seed": 2083033013,
+      "durationMs": 1103377
+    },
+    "players": [
+      {
+        "name": "RC A",
+        "isBot": false,
+        "alive": true,
+        "roundsPassed": 14,
+        "bossDamage": 0
+      },
+      {
+        "name": "RC B",
+        "isBot": false,
+        "alive": true,
+        "roundsPassed": 14,
+        "bossDamage": 0
+      },
+      {
+        "name": "AI·华法琳",
+        "isBot": true,
+        "alive": true,
+        "roundsPassed": 14,
+        "bossDamage": 714871
+      },
+      {
+        "name": "AI·阿米娅",
+        "isBot": true,
+        "alive": true,
+        "roundsPassed": 14,
+        "bossDamage": 425129
+      }
+    ],
+    "error": null
+  },
+  "realBrowserMultiplayer": {
+    "browsers": [
+      "Chrome",
+      "Safari"
+    ],
+    "scope": [
+      "independent storage and identity",
+      "join same room",
+      "ready synchronization",
+      "round 1 started"
+    ],
+    "lateBossRecoveryUi": "NOT EXECUTED",
+    "safari": "Unqualified: blank-view observation and kit-load errors; root cause unresolved"
+  },
+  "assets": {
+    "httpSamples200": 8,
+    "actualSpineVisualSample": "PASS in Chrome",
+    "audioFileParsing": "Both sampled MP3s recognized by afinfo; no human listening claim",
+    "failureUi": "NOT EXECUTED; prepared fixture received no fault requests"
+  },
+  "mobileGameplay": "NOT EXECUTED; synthetic narrow terminal regression only",
+  "resourceStop": {
+    "at": "2026-10-30T14:37:16.988306+00:00",
+    "reason": "Maintainer reported memory pressure and CPU thermal throttling",
+    "action": "Paused solo R9 battle; stopped owned preview and fault-fixture servers; closing owned browser test tabs. Heavy tests are not being restarted.",
+    "coverageLimit": "Solo R9 final settlement, manual mobile checks, full external-resource-failure UI checks and completed Safari gameplay not verified."
+  },
+  "releaseGates": [
+    "Complete current-build nine-round browser settlement/history/replays",
+    "Qualify Safari",
+    "Actual mobile key gameplay flows",
+    "Actual external-resource degradation",
+    "Actual two-browser late/Boss recovery UI",
+    "Resolve or explicitly waive three repeatable upstream assertions and intermittent browser readiness failure"
+  ]
+}
