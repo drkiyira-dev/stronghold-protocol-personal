@@ -1,0 +1,15 @@
+{
+  "kind": "stronghold-personal-challenge",
+  "version": 1,
+  "id": "first-offer",
+  "name": "既定补给",
+  "description": "禁止刷新商店，围绕每回合发到手中的资源构建阵容。",
+  "seed": 20261031,
+  "difficulty": "FUNNY",
+  "rules": {
+    "maxDeploy": 8,
+    "noRefresh": true,
+    "noEquipment": false,
+    "bannedOperators": []
+  }
+}

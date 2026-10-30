@@ -358,11 +358,11 @@ export function HubEntry({ card, onOpen, timePoint = null, timeShort = null }) {
       : t(card.points[0], card.pointParams);
   return html`<div class="hub-entry-wrap">
     <span class="hub-entry__group"><${Icon} name=${card.icon} />${line}</span>
-    <button type="button" class=${`mode-card hub-entry hub-entry--${card.id}`} data-mode=${card.id} disabled=${card.id !== 'solo'} onClick=${() => onOpen(card.id)}
+    <button type="button" class=${`mode-card hub-entry hub-entry--${card.id}`} data-mode=${card.id} disabled=${card.id !== 'solo' && document.documentElement.dataset.personalTransport !== 'remote'} onClick=${() => onOpen(card.id)}
         title=${t(card.desc, card.params)}>
       <span class="hub-entry__icon" aria-hidden="true"><${Icon} name=${card.icon} /></span>
       <span class="hub-entry__en">${card.en}</span>
-      <span class="hub-entry__name">${t(card.name)}${card.id === 'coop' ? '（仅提供单人）' : ''}</span>
+      <span class="hub-entry__name">${t(card.name)}${card.id === 'coop' && document.documentElement.dataset.personalTransport !== 'remote' ? '（需自托管服务）' : ''}</span>
       <span class="hub-entry__corner" aria-hidden="true"></span>
     </button>
   </div>`;

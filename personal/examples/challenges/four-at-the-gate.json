@@ -1,0 +1,15 @@
+{
+  "kind": "stronghold-personal-challenge",
+  "version": 1,
+  "id": "four-at-the-gate",
+  "name": "四人防线",
+  "description": "最多部署四名干员，用站位与技能配合完成标准模拟。",
+  "seed": 20261030,
+  "difficulty": "FUNNY",
+  "rules": {
+    "maxDeploy": 4,
+    "noRefresh": false,
+    "noEquipment": false,
+    "bannedOperators": []
+  }
+}

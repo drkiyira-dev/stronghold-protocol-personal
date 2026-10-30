@@ -1,0 +1,62 @@
+{
+  "source": "https://raw.githubusercontent.com/Kengxxiao/ArknightsGameData/master/zh_CN/gamedata/excel/audio_data.json",
+  "files": {
+    "/assets/audio/bgm/m_sys_act1autochess_loop.mp3": [
+      "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/music/act1autochess/m_sys_act1autochess_loop.mp3"
+    ],
+    "/assets/audio/bgm/m_sys_act1autochess_intro.mp3": [
+      "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/music/act1autochess/m_sys_act1autochess_intro.mp3"
+    ],
+    "/assets/audio/bgm/m_bat_act1autochess_loop.mp3": [
+      "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/music/act1autochess/m_bat_act1autochess_loop.mp3"
+    ],
+    "/assets/audio/bgm/m_bat_rglk1phantomcastle_loop.mp3": [
+      "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/music/rogue_1/m_bat_rglk1phantomcastle_loop.mp3"
+    ],
+    "/assets/audio/bgm/m_bat_rglk1phantomcastle_intro.mp3": [
+      "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/music/rogue_1/m_bat_rglk1phantomcastle_intro.mp3"
+    ],
+    "/assets/audio/bgm/m_bat_kazimierz2_1_loop.mp3": [
+      "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/music/act13side/m_bat_kazimierz2_1_loop.mp3"
+    ],
+    "/assets/audio/bgm/m_bat_kazimierz2_1_intro.mp3": [
+      "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/music/act13side/m_bat_kazimierz2_1_intro.mp3"
+    ],
+    "/assets/audio/bgm/m_bat_kazimierz2_2_loop.mp3": [
+      "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/music/act13side/m_bat_kazimierz2_2_loop.mp3"
+    ],
+    "/assets/audio/bgm/m_bat_corrosion_loop.mp3": [
+      "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/music/act13d5d0/m_bat_corrosion_loop.mp3"
+    ],
+    "/assets/audio/bgm/m_bat_corrosion_intro.mp3": [
+      "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/music/act13d5d0/m_bat_corrosion_intro.mp3"
+    ],
+    "/assets/audio/bgm/m_bat_ancestor_loop.mp3": [
+      "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/music/act35side/m_bat_ancestor_loop.mp3"
+    ],
+    "/assets/audio/bgm/m_bat_abyssalhunters_loop.mp3": [
+      "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/music/act18d3d0/m_bat_abyssalhunters_loop.mp3"
+    ],
+    "/assets/audio/bgm/m_bat_abyssalhunters_intro.mp3": [
+      "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/music/act18d3d0/m_bat_abyssalhunters_intro.mp3"
+    ],
+    "/assets/audio/bgm/m_bat_vtlionk_loop.mp3": [
+      "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/music/act37side/m_bat_vtlionk_loop.mp3"
+    ],
+    "/assets/audio/bgm/m_bat_vtlionk_intro.mp3": [
+      "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/music/act37side/m_bat_vtlionk_intro.mp3"
+    ],
+    "/assets/audio/bgm/m_bat_rouge3boss1_loop.mp3": [
+      "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/music/rogue_3/m_bat_rouge3boss1_loop.mp3"
+    ],
+    "/assets/audio/bgm/m_bat_rouge3boss1_intro.mp3": [
+      "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/music/rogue_3/m_bat_rouge3boss1_intro.mp3"
+    ],
+    "/assets/audio/bgm/m_bat_prtsstage1_loop.mp3": [
+      "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/music/act15main/m_bat_prtsstage1_loop.mp3"
+    ],
+    "/assets/audio/bgm/m_bat_prtsstage1_intro.mp3": [
+      "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/music/act15main/m_bat_prtsstage1_intro.mp3"
+    ]
+  }
+}

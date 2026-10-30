@@ -1,0 +1,27 @@
+{
+  "manifest": 2,
+  "id": "personal-lab",
+  "name": {
+    "en": "Personal Tactical Lab",
+    "zh": "个人战术实验室"
+  },
+  "version": "0.1.0",
+  "app": ">=0.3.0 <0.4.0",
+  "api": 1,
+  "class": "content",
+  "scope": [
+    "room"
+  ],
+  "sourceLang": "zh",
+  "license": "GPL-3.0-or-later",
+  "permissions": [
+    "data.add",
+    "dsl"
+  ],
+  "operators": [
+    "operators/guard.json"
+  ],
+  "dsl": [
+    "dsl/income.json"
+  ]
+}

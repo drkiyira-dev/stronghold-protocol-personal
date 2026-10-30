@@ -1,0 +1,23 @@
+{
+  "dsl": 1,
+  "pluginId": "personal-lab",
+  "meta": {
+    "key": "effect:personal-lab:income",
+    "on": [
+      {
+        "when": "income",
+        "if": {
+          "round": 1
+        },
+        "do": [
+          {
+            "funds": {
+              "amount": 12,
+              "setIncome": true
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

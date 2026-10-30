@@ -5,9 +5,11 @@ import { Match } from '../upstream/server/match/Match.js';
 import { getData } from '../upstream/server/data.js';
 import { createRng } from '../upstream/server/sim/rng.js';
 import { collectViolations } from '../upstream/server/match/invariants.js';
+import {validateChallenge} from './challenges.mjs';
 
 const KIND = 'stronghold-solo-prep';
 const ENGINE = 'stronghold-protocol-0.3.3/prep-v1';
+export const checkpointCompatibility = data => ({engine:ENGINE,dataFingerprint:fingerprint(data)});
 const TAG = '$blackshoreCheckpoint';
 const RNG_NAMES = ['rngSetup', 'rngShop', 'rngWaves', 'rngDraft', 'rngBots', 'rngMeta'];
 const MATCH_FIELDS = [
@@ -119,6 +121,7 @@ export function captureCheckpoint(match) {
     kind: KIND, version: 1, engine: ENGINE, dataFingerprint: fingerprint(match.data),
     savedAt, elapsedMs: Math.max(0, savedAt - match.startedAt), round: match.round,
     options: JSON.parse(JSON.stringify(options)),
+    ...(match.personalChallenge ? {challenge:validateChallenge(match.personalChallenge,match.data.chess)} : {}),
     state: encode({
       match: Object.fromEntries(MATCH_FIELDS.filter(k => own(match, k)).map(k => [k, match[k]])),
       player, poolEntries: match.pool.entries, itemDebt: match.itemPool.debt, diyEntries: ps.diyStock.entries,
@@ -129,6 +132,7 @@ export function captureCheckpoint(match) {
 }
 
 export function validateCheckpoint(snapshot, data = getData()) {
+  if(snapshot?.challenge)validateChallenge(snapshot.challenge,data.chess);
   if (!plain(snapshot) || snapshot.kind !== KIND || snapshot.version !== 1 || snapshot.engine !== ENGINE) fail('存档版本不兼容');
   if (snapshot.dataFingerprint !== fingerprint(data)) fail('存档使用了不同版本的游戏数据');
   if (!plain(snapshot.options) || snapshot.options.mode !== 'solo' || !Array.isArray(snapshot.options.seats) || snapshot.options.seats.length !== 1) fail('玩家配置无效');
@@ -162,6 +166,7 @@ export function restoreCheckpoint(snapshot, platformOverrides = {}) {
   const opts = { ...snapshot.options, ...platformOverrides, data, journal: false, externalAI: null };
   if (typeof opts.send !== 'function' || typeof opts.broadcast !== 'function' || typeof opts.onEnd !== 'function') fail('需要消息和结算回调');
   const m = new Match(opts);
+  m.personalChallenge=snapshot.challenge ? validateChallenge(snapshot.challenge,data.chess) : null;
   try {
     for (const [key, value] of Object.entries(state.match)) m[key] = value;
     // The upstream factions array carries a non-enumerable pre-drawn schedule.

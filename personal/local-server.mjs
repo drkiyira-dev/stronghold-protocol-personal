@@ -7,7 +7,8 @@ import { Network, SessionRegistry } from '../upstream/server/net.js';
 import { setSimData } from '../upstream/server/sim/simdata.js';
 import { setData } from './shims/data.mjs';
 import { Match } from '../upstream/server/match/Match.js';
-import { captureCheckpoint, restoreCheckpoint, validateCheckpoint } from './checkpoint.mjs';
+import { captureCheckpoint, restoreCheckpoint, validateCheckpoint, checkpointCompatibility } from './checkpoint.mjs';
+import {validateChallenge,challengeViolation} from './challenges.mjs';
 
 const DATA_FILES = [
   'config', 'chess', 'bonds', 'garrisons', 'items', 'bands', 'effects', 'choices',
@@ -29,6 +30,7 @@ export async function createLocalServer({ emit, fetchData, data: suppliedData, n
   setSimData(data);
   const registry = new SessionRegistry({ now });
   let preferredIdentity = null, restoring = null, saveQueued = false, lastSaved = '', stopped = false;
+  let challenge = null;
   const createSession = registry.create.bind(registry);
   registry.create = name => {
     const session = createSession(name);
@@ -42,7 +44,7 @@ export async function createLocalServer({ emit, fetchData, data: suppliedData, n
   const log = { info() {}, debug() {}, warn: (...args) => console.warn(...args), error: (...args) => console.error(...args) };
   class LocalMatch {
     constructor(options) {
-      if (!restoring) return new Match(options);
+      if (!restoring) {const match=new Match({...options,...(challenge?{seed:challenge.seed,difficulty:challenge.difficulty}:{})});match.personalChallenge=challenge;return match;}
       const snapshot = { ...restoring, options: { ...restoring.options, roomCode: options.roomCode } };
       const match = restoreCheckpoint(snapshot, {
         data, now, log, send: options.send, broadcast: options.broadcast, onEnd: options.onEnd,
@@ -80,6 +82,7 @@ export async function createLocalServer({ emit, fetchData, data: suppliedData, n
       restoring = snapshot;
       const started = lobby.startMatch(lobby.roomOf(session));
       if (!started.ok) throw new Error(started.detail || started.error);
+      challenge = snapshot.challenge || null;
       emit({ t: 'local.restored', round: snapshot.round });
       saveSoon();
     } catch (error) { emit({ t: 'local.restore-error', message: error.message }); }
@@ -90,8 +93,18 @@ export async function createLocalServer({ emit, fetchData, data: suppliedData, n
     onDisconnect: (...args) => lobby.onDisconnect(...args),
     onExpire: (...args) => lobby.onExpire(...args),
     welcomeInfo: () => lobby.welcomeInfo(),
-    routeGame: (...args) => lobby.routeGame(...args),
+    routeGame(session,message) {
+      const match=lobby.roomOf(session)?.match;
+      const error=challengeViolation(match?.personalChallenge,message,match?.order.find(p=>p.playerId===session.playerId));
+      if(error)return {error:'BAD_MSG',detail:error};
+      return lobby.routeGame(session,message);
+    },
     onMessage(session, message) {
+      if(challenge&&message.t==='room.create')message={...message,difficulty:challenge.difficulty};
+      if(challenge&&message.t==='room.setDifficulty')return {error:'BAD_MSG',detail:'请在挑战工坊中设置挑战难度'};
+      const match=lobby.roomOf(session)?.match;
+      const violation=challengeViolation(match?.personalChallenge,message,match?.order.find(p=>p.playerId===session.playerId));
+      if(violation)return {error:'BAD_MSG',detail:violation};
       if (MULTIPLAYER_ONLY.has(message.t) || (message.t === 'room.create' && message.mode !== 'solo') || (message.t === 'room.setMode' && message.mode !== 'solo')) {
         return { error: 'BAD_MSG', detail: '个人站点仅支持独立模拟，不提供联机房间。' };
       }
@@ -106,6 +119,8 @@ export async function createLocalServer({ emit, fetchData, data: suppliedData, n
       on(type, listener) { if (!listeners.has(type)) listeners.set(type, []); listeners.get(type).push(listener); },
       send(raw) {
         const message = JSON.parse(raw);
+        const activeChallenge=[...lobby.rooms.values()].find(room=>room.match)?.match?.personalChallenge;
+        if(message.t==='m.result' && activeChallenge){message.test=true;message.personalChallenge=activeChallenge;}
         emit(message);
         if (message.t === 'm.result') { lastSaved = ''; emit({ t: 'local.clear-checkpoint' }); }
         saveSoon();
@@ -132,6 +147,14 @@ export async function createLocalServer({ emit, fetchData, data: suppliedData, n
         return;
       }
       if (message.t === 'local.restore') { restore(message.snapshot); return; }
+      if (message.t === 'local.challenge') {
+        try {
+          if([...lobby.rooms.values()].some(r=>r.match))throw new Error('请先离开当前对局再切换挑战');
+          challenge=message.challenge ? validateChallenge(message.challenge,data.chess) : null;
+          emit({t:'local.challenge-set',challenge});
+        }catch(error){emit({t:'local.challenge-error',message:error.message});}
+        return;
+      }
       // The original host closes idle pre-hello connections. A later browser
       // reconnect needs a fresh Connection, while keeping this lobby and its
       // sessions/match intact. Before Start, the client probes with ping rather
@@ -149,7 +172,7 @@ export async function createLocalServer({ emit, fetchData, data: suppliedData, n
       for (const timer of lobby.resyncTimers.values()) clearTimeout(timer);
     },
     // Introspection is kept inside the worker / tests, never attached to window.
-    lobby, registry,
+    lobby, registry, compatibility:checkpointCompatibility(data),
   };
 }
 
@@ -180,7 +203,7 @@ if (typeof self !== 'undefined' && typeof WorkerGlobalScope !== 'undefined' && s
     },
   }).then(value => {
     server = value;
-    self.postMessage({ t: 'local.ready' });
+    self.postMessage({ t: 'local.ready',compatibility:value.compatibility });
     queued.splice(0).forEach(message => server.receive(message));
   }).catch(error => {
     failed = error?.message || String(error);

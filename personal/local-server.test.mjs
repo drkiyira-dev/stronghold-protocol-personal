@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {CHALLENGE_PRESETS} from './challenges.mjs';
 import assert from 'node:assert/strict';
 import { readFile, readdir } from 'node:fs/promises';
 import { createLocalServer } from '../dist/personal/local-server.js';
@@ -9,7 +10,7 @@ import { StateReceiver, STATE_DELTA_VERSION } from '../upstream/shared/stateDelt
 const dataUrl = new URL('../upstream/data/', import.meta.url);
 const data = Object.fromEntries(await Promise.all((await readdir(dataUrl)).filter(name => name.endsWith('.json') && !name.startsWith('local-')).map(async name => [name.slice(0, -5), JSON.parse(await readFile(new URL(name, dataUrl), 'utf8'))])));
 
-test('original worker host supports solo briefing, original roster, shop, placement, real battle and settlement', { timeout: 30000 }, async () => {
+for(const challenge of [null,CHALLENGE_PRESETS[1]]) test(`${challenge?'fixed-seed challenge':'original worker host'} supports solo briefing, shop, placement, real battle, settlement and restore`, { timeout: 30000 }, async () => {
   const frames = [];
   const receiver = new StateReceiver();
   let rid = 0;
@@ -40,6 +41,7 @@ test('original worker host supports solo briefing, original roster, shop, placem
     return reply;
   };
   try {
+    if(challenge){server.receive({t:'local.challenge',challenge});await wait(f=>f.t==='local.challenge-set');}
     const welcome = await request({ t: 'hello', name: '个人测试博士', version: 1, delta: STATE_DELTA_VERSION });
     assert.equal(welcome.t, 'welcome');
     assert.ok(welcome.playerId);
@@ -59,6 +61,7 @@ test('original worker host supports solo briefing, original roster, shop, placem
     await wait(frame => frame.t === 'm.public' && frame.phase === 'BAND_DRAFT');
     await ok({ t: 'g.band', bandId: 'band_sarkazb' });
     await wait(frame => frame.t === 'm.public' && frame.phase === 'PREP' && frame.round === 1);
+    if(challenge){const deniedRefresh=await request({t:'g.refresh'});assert.equal(deniedRefresh.t,'error');assert.match(deniedRefresh.detail,/禁止刷新/);}
     const offer = await wait(frame => frame.t === 'm.private' && frame.shop?.slots?.length && frame.funds >= 2);
     const slot = offer.shop.slots.findIndex(item => item?.kind === 'chess' && item.price <= offer.funds);
     assert.ok(slot >= 0);
@@ -83,6 +86,7 @@ test('original worker host supports solo briefing, original roster, shop, placem
     await ok({ t: 'b.result', battleId: start.battleId, result: compactResult(battle.result()) });
     await wait(frame => frame.t === 'm.public' && frame.phase === 'PREP' && frame.round === 2);
     const saved = await wait(frame => frame.t === 'local.checkpoint' && frame.snapshot.round === 2);
+    if(challenge){assert.equal(saved.snapshot.options.seed,challenge.seed);assert.deepEqual(saved.snapshot.challenge,challenge);}
     const restoredFrames = [];
     const restoredReceiver = new StateReceiver();
     const restoredServer = await createLocalServer({data, emit: frame => {
@@ -102,6 +106,7 @@ test('original worker host supports solo briefing, original roster, shop, placem
       const restoredMatch = [...restoredServer.lobby.rooms.values()].find(r => r.match).match;
       assert.equal(restoredMatch.order[0].playerId, welcome.playerId);
       assert.equal(restoredMatch.order[0].board.size, 1);
+      assert.deepEqual(restoredMatch.personalChallenge||null,challenge);
     } finally { restoredServer.dispose(); }
     const fatal = frames.filter(frame => frame.t === 'error' && frame.rid == null);
     assert.deepEqual(fatal, []);
