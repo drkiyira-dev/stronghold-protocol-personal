@@ -9,6 +9,7 @@ import {createRecorder,createReplayStore,REPLAY_KIND} from './replays.mjs';
 import {mountToolkit} from './toolkit.mjs';
 import {readConnection} from './connection.mjs';
 import {sha256Hex} from '../upstream/shared/sha256.js';
+import {createRestoreSession} from './restore-session.mjs';
 await installExternalAssets();
 const connection=readConnection(localStorage,location);
 document.documentElement.dataset.personalTransport=connection.mode;
@@ -18,6 +19,12 @@ let worker,ready=false,currentSocket=null,fatal=null,resume,saveStatus,toolkit,r
 let preparation=null;
 try{challenge=JSON.parse(localStorage.getItem('stronghold.personal.challenge'));}catch{}
 const vaultWrite=fn=>navigator.locks ? navigator.locks.request('stronghold.personal.vault',fn) : Promise.resolve().then(fn);
+const stagedRestore=()=>{const id=sessionStorage.getItem('stronghold.personal.restore');return id==='1'?checkpoint:vault.list().find(s=>s.id===id)?.snapshot;};
+const restoreSession=createRestoreSession({
+  send:message=>worker.postMessage(message),
+  commit:snapshot=>vaultWrite(()=>vault.save(snapshot)).then(item=>item.snapshot),
+  onChange:pending=>{restoring=pending;updatePersonalUI();},
+});
 function updatePersonalUI(){
   if(!resume)return;const route=selectRoute(store.get());
   resume.hidden=connection.mode!=='local'||route!=='lobby'||!checkpoint;
@@ -42,31 +49,34 @@ function engine(){
   worker.onmessage=({data})=>{
     if(data.t==='local.ready'){
       ready=true;compatibility=data.compatibility;
-      if(checkpoint)worker.postMessage({t:'local.identity',playerId:checkpoint.options.seats[0].playerId});
+      const preferred=stagedRestore() || checkpoint;
+      if(preferred)worker.postMessage({t:'local.identity',playerId:preferred.options.seats[0].playerId});
       if(challenge)worker.postMessage({t:'local.challenge',challenge});
       if(currentSocket?.readyState===0)currentSocket._open();
       document.documentElement.dataset.personalEngine='ready';updatePersonalUI();return;
     }
     if(data.t==='local.checkpoint'){
+      if(!restoreSession.accepts(data))return;
       const snapshot=data.snapshot;
       vaultWrite(()=>vault.save(snapshot)).then(()=>{checkpoint=snapshot;saveError='';updatePersonalUI();}).catch(e=>{saveError=`休整保存失败：${e.message}`;updatePersonalUI();});return;
     }
     if(data.t==='local.clear-checkpoint'){
-      const completed=checkpoint;
+      if(!restoreSession.accepts(data)||!data.runId)return;
+      const completed={runId:data.runId};
       vaultWrite(()=>vault.complete(completed)).then(()=>{checkpoint=vault.active();updatePersonalUI();}).catch(e=>{saveError=e.message;updatePersonalUI();});return;
     }
     if(data.t==='local.restored'||data.t==='local.restore-error'){
-      restoring=false;if(data.t==='local.restore-error'){saveError=data.message;toolkit?.notify(data.message);}else{challenge=checkpoint?.challenge || null;saveError='';}updatePersonalUI();return;
+      restoreSession.receive(data);return;
     }
     if(data.t==='local.challenge-set'){challenge=data.challenge;localStorage.setItem('stronghold.personal.challenge',JSON.stringify(challenge));challengePending?.resolve();challengePending=null;return;}
     if(data.t==='local.challenge-error'){challengePending?.reject(new Error(data.message));challengePending=null;saveError=data.message;updatePersonalUI();return;}
     if(data.t==='local.save-unavailable'){saveError=data.message;updatePersonalUI();return;}
     if(data.t==='local.log'){(console[data.level]||console.warn)('[personal engine]',data.message);return;}
     if(data.t==='local.closed'){currentSocket?.close(data.code,data.reason);return;}
-    if(data.t==='local.error'){fatal=data.message || '本地引擎启动失败';const el=document.getElementById('boot-err');if(el)el.textContent=fatal;currentSocket?.onerror?.({message:fatal});return;}
+    if(data.t==='local.error'){fatal=data.message || '本地引擎启动失败';restoreSession.fail(new Error(fatal));const el=document.getElementById('boot-err');if(el)el.textContent=fatal;currentSocket?.onerror?.({message:fatal});return;}
     if(currentSocket?.readyState===1)currentSocket.onmessage?.({data:JSON.stringify(data)});
   };
-  worker.onerror=event=>{fatal=event.message || '本地引擎加载失败';saveError=fatal;updatePersonalUI();currentSocket?.onerror?.({message:fatal});};
+  worker.onerror=event=>{fatal=event.message || '本地引擎加载失败';restoreSession.fail(new Error(fatal));saveError=fatal;updatePersonalUI();currentSocket?.onerror?.({message:fatal});};
   return worker;
 }
 class LocalSocket{
@@ -93,20 +103,30 @@ resume=document.createElement('button');resume.className='personal-resume';resum
 saveStatus=document.createElement('div');saveStatus.className='personal-save-status';saveStatus.hidden=true;
 document.body.append(badge,about,resume,saveStatus);badge.onclick=()=>about.showModal();about.querySelector('button').onclick=()=>about.close();
 const assertLobby=()=>{if(!['lobby','title'].includes(selectRoute(store.get()))||store.get().room)throw new Error('请先返回大厅并离开房间');};
-function resumeCheckpoint(){if(!checkpoint||restoring)return;const c=saveCompatibility(checkpoint,compatibility);if(!c.ok)throw new Error(c.reason);restoring=true;updatePersonalUI();worker.postMessage({t:'local.restore',snapshot:checkpoint});}
-resume.onclick=()=>{try{resumeCheckpoint();}catch(e){saveError=e.message;updatePersonalUI();}};
+async function resumeCheckpoint(value=checkpoint){
+  if(!value)throw new Error('存档不存在');
+  const c=saveCompatibility(value,compatibility);if(!c.ok)throw new Error(c.reason);
+  try{
+    checkpoint=await restoreSession.start(value);challenge=checkpoint.challenge || null;saveError='';
+    try{localStorage.setItem('stronghold.personal.challenge',JSON.stringify(challenge));}
+    catch{saveError='休整恢复已完成；挑战偏好未能写入浏览器，请在下次新局前核对挑战设置。';}
+  }catch(error){saveError=`恢复未完成：${error.message}；原活动存档已保留。`;toolkit?.notify(saveError);throw error;}
+  finally{updatePersonalUI();}
+}
+resume.onclick=()=>{resumeCheckpoint().catch(()=>{});};
 let importedHistory=false;
 toolkit=mountToolkit({vault,replays,connection,vaultWrite,compatibility:()=>compatibility,challenge:()=>challenge,
   status:()=>recordError || saveError,
   refreshSave:()=>{checkpoint=vault.active();updatePersonalUI();},
-  async restore(id){assertLobby();if(connection.mode!=='local')throw new Error('请先切回本地单人模式');const value=vault.list().find(s=>s.id===id)?.snapshot;const c=saveCompatibility(value,compatibility);if(!c.ok)throw new Error(c.reason);await vaultWrite(()=>vault.select(id));checkpoint=vault.active();if(store.get().me.playerId!==checkpoint.options.seats[0].playerId){sessionStorage.setItem('stronghold.personal.restore','1');location.reload();return;}resumeCheckpoint();},
+  async restore(id){assertLobby();if(connection.mode!=='local')throw new Error('请先切回本地单人模式');const value=vault.list().find(s=>s.id===id)?.snapshot;if(!value)throw new Error('存档不存在');const c=saveCompatibility(value,compatibility);if(!c.ok)throw new Error(c.reason);if(store.get().me.playerId!==value.options.seats[0].playerId){sessionStorage.setItem('stronghold.personal.restore',id);location.reload();return;}await resumeCheckpoint(value);},
   async setChallenge(value){assertLobby();if(connection.mode!=='local')throw new Error('挑战工坊当前用于本地单人模式');if(!ready)throw new Error('请等待本地引擎就绪');return new Promise((resolve,reject)=>{challengePending={resolve,reject};worker.postMessage({t:'local.challenge',challenge:value});});},
   assertCanSwitch:assertLobby,
   async pauseCombat(){const m=store.get().match.public;if(connection.mode==='local'&&m&&isCombatPhase(m.phase)&&!m.paused){await net.request('g.pause',{on:true});return true;}return false;},
   resumeCombat(){const m=store.get().match.public;if(connection.mode==='local'&&m&&isCombatPhase(m.phase)&&m.paused)net.request('g.pause',{on:false}).catch(()=>{});},
   async importHistory(){if(importedHistory)return;const existing=new Set((await replays.list()).map(r=>r.id));for(const r of loadStats().records.slice(-15)){const id=`legacy-${r.id}`;if(existing.has(id))continue;const row=selfRowOf(r),s=row?.stats || {};await replays.put({format:REPLAY_KIND,version:1,id,at:r.t || Date.now(),round:r.roundsPassed || 1,seed:r.seed,kind:'match-summary',title:`旧版整局汇总 · ${r.roundsPassed || 0} 回合`,summaryOnly:true,partial:false,frames:[],events:[],units:{},names:{},result:null,summary:{damage:s.dmgDealt ?? s.damageDealt,healing:s.healingDone ?? s.healing,deaths:s.deaths,leaks:s.leaks}});}importedHistory=true;},
 });
-store.subscribe(()=>{const route=selectRoute(store.get());badge.classList.toggle('in-match',route==='game');updatePersonalUI();if(route==='lobby'&&ready&&checkpoint&&sessionStorage.getItem('stronghold.personal.restore')==='1'){sessionStorage.removeItem('stronghold.personal.restore');try{resumeCheckpoint();}catch(e){saveError=e.message;updatePersonalUI();}}});
+let autoRestoreStarted=false;
+store.subscribe(()=>{const route=selectRoute(store.get());badge.classList.toggle('in-match',route==='game');updatePersonalUI();if(route==='lobby'&&ready&&!autoRestoreStarted&&sessionStorage.getItem('stronghold.personal.restore')){autoRestoreStarted=true;const value=stagedRestore();resumeCheckpoint(value || null).catch(e=>{saveError=e.message;updatePersonalUI();}).finally(()=>sessionStorage.removeItem('stronghold.personal.restore'));}});
 window.addEventListener('storage',()=>{checkpoint=vault.active();updatePersonalUI();});
 updatePersonalUI();
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)return;recorder.flush();const m=store.get().match.public;if(connection.mode==='local'&&m&&isCombatPhase(m.phase)&&!m.paused)net.request('g.pause',{on:true}).catch(()=>{});});

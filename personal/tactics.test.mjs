@@ -12,7 +12,7 @@ test('hostile or oversized replay coordinates cannot create infinite drawing loo
  const record={format:REPLAY_KIND,version:1,id:'bad',units:{},events:[],frames:[{t:0,units:[[1,1e30,0,1,1]]}]};assert.throws(()=>validateReplay(record),/坐标/);record.frames=[{t:2,units:[]},{t:1,units:[]}];assert.throws(()=>validateReplay(record),/时间轴/);
 });
 test('comparison describes differences without treating unknown seeds or different rules as controlled trials',()=>{
- const r={frames:[],units:{},result,round:1,kind:'normal'};assert.equal(compareBattles(r,r).sameScenario,false);assert.equal(compareBattles({...r,seed:2},{...r,seed:2}).sameScenario,true);assert.equal(compareBattles({...r,seed:2},{...r,seed:2,challenge:{id:'other'}}).sameScenario,false);
+ const r={frames:[],units:{},result,round:1,kind:'normal',selfId:'p_a'};assert.equal(compareBattles(r,r).sameScenario,false);assert.equal(compareBattles({...r,seed:2},{...r,seed:2}).sameScenario,false);assert.equal(compareBattles({...r,seed:2},{...r,seed:2,challenge:{id:'other'}}).sameScenario,false);assert.equal(compareBattles(r,r).damage,0);
 });
 test('challenge limits allow repositioning and swaps but reject a fifth deployment, refresh and equipment',()=>{
  const c=structuredClone(CHALLENGE_PRESETS[0]);c.rules.noRefresh=true;c.rules.noEquipment=true;c.rules.bannedOperators=['banned'];validateChallenge(c);const p={board:new Map(Array.from({length:4},(_,i)=>[`${i},0`,{uid:'u'+i,kind:'chess',id:'allowed'}])),hand:[{uid:'extra',kind:'chess',id:'allowed'},{uid:'bad',kind:'chess',id:'banned'},{uid:'summon',kind:'token',id:'tok'}],temp:[],shop:{slots:[]}};

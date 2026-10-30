@@ -6,6 +6,22 @@ import {sha256Hex} from '../upstream/shared/sha256.js';
 const h=makeMatch({mode:'solo',seed:812,botRehearsal:0});h.start();h.toPrep(1);const original=captureCheckpoint(h.m),compat=checkpointCompatibility(h.m.data);h.m.dispose();
 function storage(){const map=new Map();return {map,getItem:k=>map.get(k)??null,setItem:(k,v)=>map.set(k,v),removeItem:k=>map.delete(k)};}
 const snapshot=(n)=>({...structuredClone(original),state:{...structuredClone(original.state),testRevision:n}});
+test('pre-runId legacy files and v2 journals remain readable and exportable without rewriting originals',()=>{
+ const legacy=structuredClone(original);delete legacy.runId;
+ const raw=JSON.stringify(legacy),s=storage();s.setItem(LEGACY_SAVE_KEY,raw);
+ const v=createSaveVault(s),id=v.list()[0].runId;
+ assert.deepEqual(v.active(),legacy);assert.equal(s.getItem(LEGACY_SAVE_KEY),raw);
+ const imported=createSaveVault(storage());imported.import(v.export());assert.deepEqual(imported.active(),legacy);
+ imported.save({...legacy,runId:id,options:{...legacy.options,roomCode:'restored-room'}});
+ assert.equal(imported.list()[0].runId,id);assert.deepEqual(imported.active().state,legacy.state);
+});
+test('restored room codes share retention but a same-seed different run cannot complete active progress',()=>{
+ const s=storage(),v=createSaveVault(s),runId='run_'+'a'.repeat(32);
+ for(let i=0;i<7;i++)v.save({...snapshot(i),runId,options:{...original.options,roomCode:'room'+i}});
+ assert.equal(v.list().length,3);assert.ok(v.list().every(x=>x.runId===runId));
+ const active=v.active();v.complete({...active,runId:'run_'+'b'.repeat(32)});assert.deepEqual(v.active(),active);
+ v.complete(active);assert.equal(v.active(),null);
+});
 test('old PREP saves migrate without deleting the original, and export/import preserves every RNG/state field',()=>{
  const s=storage();s.setItem(LEGACY_SAVE_KEY,JSON.stringify(original));const a=createSaveVault(s);assert.deepEqual(a.active(),original);assert.equal(a.list().length,1);assert.ok(s.getItem(LEGACY_SAVE_KEY));const b=createSaveVault(storage());b.import(a.export());assert.deepEqual(b.active(),original);assert.equal(saveCompatibility(b.active(),compat).ok,true);
 });
