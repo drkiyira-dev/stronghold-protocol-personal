@@ -115,7 +115,7 @@ function PlayerCard({ p, myId, titles, best, solo = false, skinOwnerId = null })
 export function ResultView({ res, pub = null, myId = null, backLabel, onBack, quiet = false, content = null, slot = true, version = null }) {
   // [ASSUMED] Stored statistics have no outfit snapshot: without pub, do not borrow a live match's choices.
   const gd = useGameData();
-  const r = normalizeResult(res, pub);
+  const r = normalizeResult(res, pub, gd.config);
   const titles = Array.isArray(gd.config?.titles) ? gd.config.titles : [];
   const best = {};
   for (const [k] of STAT_ROWS) {

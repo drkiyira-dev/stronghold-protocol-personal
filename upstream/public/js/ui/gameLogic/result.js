@@ -10,9 +10,13 @@ import { t } from '../../../../shared/i18n.js';
  * Normalise an m.result payload (free-form; see screens/result.js header for the expected shape).
  * @param {any} res
  * @param {any} pub last m.public (fallbacks)
+ * @param {any} config data for the viewed version (fallback for older stored results)
  */
-export function normalizeResult(res, pub) {
+export function normalizeResult(res, pub, config = null) {
   const r = isObj(res) ? res : {};
+  // History has no live m.public, and older m.result payloads omit lastRound.
+  // Recover it from that match's mode instead of treating every simulation as 14 rounds.
+  const modeLastRound = config?.modes?.[r.modeId || pub?.modeId]?.lastRound;
   const pubPlayers = new Map(sortedPlayers(pub).map((p) => [p.playerId, p]));
   // From the 最终攻势 on, every survivor's LP is one merged pool (m.public teamLp) and leaks / overtime only drain
   // that pool: a survivor's remaining LP is the pool, not its own LP from before the Final Assault.
@@ -45,7 +49,8 @@ export function normalizeResult(res, pub) {
   return {
     victory: !!r.victory,
     roundsPassed: Number.isFinite(r.roundsPassed) ? r.roundsPassed : Math.max(0, ...players.map((p) => p.roundsPassed), 0),
-    lastRound: Number.isFinite(r.lastRound) ? r.lastRound : (Number.isFinite(pub?.lastRound) ? pub.lastRound : 14),
+    lastRound: Number.isFinite(r.lastRound) ? r.lastRound : (Number.isFinite(pub?.lastRound) ? pub.lastRound
+      : (Number.isFinite(modeLastRound) ? modeLastRound : 14)),
     hiddenCleared: !!r.hiddenCleared,
     // the Hidden Core (R15) was fought: only then does the result show its boss medal (m.result.hiddenReached;
     // older payloads without it: a clear implies it was reached)
