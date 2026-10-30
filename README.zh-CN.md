@@ -79,7 +79,9 @@ node upstream/tools/plugin.mjs check personal/examples/personal-lab --strict
 npm run test:browser
 ```
 
-**当前 RC 结论：HOLD，尚未批准发布。** [10 月 31 日复验报告](docs/RELEASE-CANDIDATE-2026-10-31.zh-CN.md)（[English](docs/RELEASE-CANDIDATE-2026-10-31.md)）记录了 Safari 初始化最小修复与三项测试失败修复。串行检查通过：53 项个人层测试、27 项相关测试（重叠一项）、20 项既有浏览器检查；原生 Safari 和 Chromium 的主线程及 Worker 均完整加载 254 项注册表。Safari 完成真实战斗并进入 R2。原 Chrome 对局已接续至第九回合失败结算，历史正确显示 **8/9**，第 1–9 回合完成记录的 runId 一致。第 1–8 回合来自原 main，并非修复后从头重跑九回合，也不是通关。本次未重跑完整上游/Golden；真实移动端、可控素材降级、双浏览器后期/Boss 恢复界面和间歇性就绪失败仍待处理。[原报告](docs/RELEASE-CANDIDATE-2026-10-30.zh-CN.md)保留历史失败和协议测试证据。测试页及服务已关闭，生产站点未更新。
+**当前 RC 结论：HOLD，尚未批准发布。** 最新[浏览器补充验收](docs/RC-BROWSER-ACCEPTANCE-2026-10-31.zh-CN.md)（[English](docs/RC-BROWSER-ACCEPTANCE-2026-10-31.md)）记录 Chrome + 原生 Safari 完成全部 14 回合同盟局并击败 Boss，通过实时重连、R9 已提交休整崩溃恢复及双端确认、完成后重启且历史不重复。真实外部素材抽样、镜像重试及全部模型失效后的战斗通过。移动模拟覆盖菜单、招募、战斗/复盘和休整恢复，但触控拖动/朝向未验证，发现两项 UI 遮挡；实机已明确延期。
+
+[前次修复复验](docs/RELEASE-CANDIDATE-2026-10-31.zh-CN.md)保留 Safari 与三项测试修复及串行自动化结果。原单人局跨两个构建完成第九回合失败结算，实际通关数为 8/9；尚未在修复版从头重跑完整九回合或重新执行完整上游/Golden。间歇性就绪超时仍未定位。[原报告](docs/RELEASE-CANDIDATE-2026-10-30.zh-CN.md)保留失败证据。各场景串行执行，测试页和服务已关闭，生产站点未更新。
 
 以下为历史 Codex 验证记录，不代替本次 RC 结论：
 

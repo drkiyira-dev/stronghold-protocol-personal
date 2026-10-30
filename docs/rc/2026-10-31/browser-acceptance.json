@@ -1,0 +1,410 @@
+{
+  "schema": 1,
+  "assessment": "HOLD",
+  "recommendedCandidate": "v1.2.0-rc.1",
+  "candidateCreated": false,
+  "productionModified": false,
+  "applicationCodeChanged": false,
+  "testedCheckout": "9dde56149866026ee6aaeca23249ecfe786dffae",
+  "testedExecutableSource": "46c41ed953632b06393b70d601b2069d2c0b391a",
+  "baseMain": "f990e72b3c409290cbb8cfaa3a20c4c967c6ebb8",
+  "buildIdentity": {
+    "version": 1,
+    "edition": "Stronghold Protocol: Alliance — Enhanced Edition",
+    "upstream": "f07b8965061bbc311ad7aa815879b09264a1e47d",
+    "upstreamEngineHash": "f5d24b524429e4a069c770da2d83a350cc71921dac76c7e083489232b13566f7",
+    "adapterHash": "54ab044e910942e976b4015f51f3908ed41c4b3be31960e2a525470b5cc951dd",
+    "engineHash": "f4c5dcf5b08eb98eb24cb7c28db9e04f014d3b610e6bb5a152756c2d475f81d7",
+    "dataHash": "c15ba374d2b64b760105803ebf2c76f4929c85984dd32daeef0665153b869180",
+    "baselineHash": "9884d9e0450a88230610b85a9865bc33615670b38d8fd6fc7f49b45bd4a97fef",
+    "protocol": 2
+  },
+  "registrySha256": "4fea0419418704ab258769861a0334d81124fecfb12ea117757de5e7a5eeb58f",
+  "environment": {
+    "os": "macOS 26.6",
+    "osBuild": "25G72",
+    "memoryGiB": 24,
+    "node": "26.7.0",
+    "sqlite": "3.53.4",
+    "playwright": "1.62.1",
+    "chrome": "156.0.8078.47",
+    "safari": "26.6",
+    "safariDriver": "21624.4.5.11.5",
+    "multiplayerTopology": "Two independent browser profiles, one Mac, loopback server, two original AI teammates",
+    "safariIsNative": true,
+    "physicalMobileTested": false
+  },
+  "execution": {
+    "serialScenarios": true,
+    "peakGameplayBrowsers": 2,
+    "concurrentTestJobs": false,
+    "graphics": "Original low preset on QA origins",
+    "temperatureMeasured": false,
+    "thermalProbe": "pmset -g therm failed with 0xe00002bc; no thermal conclusion",
+    "freeMemoryPercentSamples": [
+      73,
+      67,
+      66,
+      65,
+      62,
+      63
+    ],
+    "ownedTabsClosed": true,
+    "ownedServersStopped": true,
+    "deviceEmulationReset": true
+  },
+  "automated": {
+    "buildThisPass": "NOT RERUN; reused verified fix build",
+    "productSuitesThisPass": "NOT RERUN; no executable changes",
+    "priorResults": "acceptance.json",
+    "unexplainedReadinessTimeoutResolved": false
+  },
+  "multiplayer": {
+    "status": "PASS for documented scope",
+    "runId": "run_32f75347a7fa51d8cc10c7bec33081fb",
+    "uiMode": "标准模拟 AC-1",
+    "humanBrowserClients": 2,
+    "originalAiTeammates": 2,
+    "summary": {
+      "victory": true,
+      "roundsPassed": 14,
+      "hiddenReached": false,
+      "hiddenCleared": false,
+      "reason": "victory",
+      "teamLp": 97,
+      "modeId": "mode_multi_funny",
+      "difficulty": "FUNNY",
+      "stageId": "act1autochess_m01",
+      "bossId": "boss_4",
+      "hiddenBossId": null,
+      "seed": 78786244,
+      "durationMs": 2443777,
+      "errors": 0
+    },
+    "roundsExecuted": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "roundIntentionallyReplayed": 9,
+    "sameExecutableThroughout": true,
+    "completionRevision": 107,
+    "ordinaryReconnect": {
+      "disconnectRound": 3,
+      "rejoinRound": 4,
+      "identityPreserved": true
+    },
+    "bossReconnect": {
+      "phase": "FINAL_ASSAULT",
+      "round": 14,
+      "connectedSequence": [
+        true,
+        false,
+        true
+      ],
+      "chromeContinued": true
+    },
+    "crashRecovery": {
+      "signal": "SIGKILL",
+      "interruptedRound": 9,
+      "restoredPhase": "PREP",
+      "committedRevision": 83,
+      "combatResumedRevision": 85,
+      "allHumanConsentRequiredObserved": true,
+      "stateComparison": {
+        "round": 9,
+        "revision": 83,
+        "runIdUnchanged": true,
+        "clockOriginShiftMs": 43409,
+        "onlyExpectedRuntimeDifferences": true,
+        "normalizedGameplayStateEqual": true
+      },
+      "differencePaths": [
+        "state.match.battlePrefix",
+        "state.players.0.player.connected",
+        "state.players.1.player.connected",
+        "state.players.2.player.lastEmoteAt",
+        "state.players.3.player.lastEmoteAt"
+      ],
+      "rollbackScope": "Latest committed PREP; later operations, combat and uncommitted settlement discarded"
+    },
+    "completedServerRestart": {
+      "activeRooms": 0,
+      "historyEntriesPerClient": [
+        1,
+        1
+      ],
+      "displayedAwardsUnchanged": true,
+      "duplicateResultObserved": false
+    }
+  },
+  "replaySamples": [
+    {
+      "file": "replay-battle_88e074a3ec05dbb6a58f4be8c63ef35f.json",
+      "round": 9,
+      "battleId": "1awnus-1.9.39.n:p_31b384b44b",
+      "runId": "run_32f75347a7fa51d8cc10c7bec33081fb",
+      "quality": {
+        "version": 1,
+        "resultReceived": true,
+        "truncated": false,
+        "gaps": [
+          "disconnect"
+        ],
+        "dropped": {
+          "frames": 0,
+          "events": 0,
+          "frameUnits": 0,
+          "unitMetadata": 0
+        }
+      },
+      "frames": 95,
+      "events": 40
+    },
+    {
+      "file": "replay-battle_d3b5d2569de492d25545d343d5787f8d.json",
+      "round": 9,
+      "battleId": "rf1715f9afbe245ba9e9740f79bf9f35f.9.39.n:p_31b384b44b",
+      "runId": "run_32f75347a7fa51d8cc10c7bec33081fb",
+      "quality": {
+        "version": 1,
+        "resultReceived": true,
+        "truncated": false,
+        "gaps": [],
+        "dropped": {
+          "frames": 0,
+          "events": 0,
+          "frameUnits": 0,
+          "unitMetadata": 0
+        }
+      },
+      "frames": 95,
+      "events": 40
+    },
+    {
+      "file": "replay-battle_d4106d7ab3aaf9d814e53ad343f1f944.json",
+      "round": 14,
+      "battleId": "rf1715f9afbe245ba9e9740f79bf9f35f.14.63.b1",
+      "runId": "run_32f75347a7fa51d8cc10c7bec33081fb",
+      "quality": {
+        "version": 1,
+        "resultReceived": true,
+        "truncated": false,
+        "gaps": [],
+        "dropped": {
+          "frames": 0,
+          "events": 0,
+          "frameUnits": 0,
+          "unitMetadata": 0
+        }
+      },
+      "frames": 143,
+      "events": 93
+    }
+  ],
+  "mobile": {
+    "status": "PARTIAL",
+    "method": "Chrome DevTools iPhone 16 preset with native taps and some keyboard assistance",
+    "portrait": {
+      "width": 393,
+      "height": 852,
+      "rotationPromptObserved": true
+    },
+    "landscape": {
+      "width": 852,
+      "height": 393
+    },
+    "passedActions": [
+      "lobby navigation",
+      "strategy selection",
+      "two-tap recruit twice",
+      "terminal tabs",
+      "battle transition",
+      "replay viewing",
+      "PREP restore"
+    ],
+    "touchDragFacing": "NOT VERIFIED: native window-control errors and CDP mouse-dispatch timeouts",
+    "battle": {
+      "roundCompleted": 1,
+      "deployedUnits": 0,
+      "nextPrepRound": 2,
+      "life": 24,
+      "benchUnits": 2
+    },
+    "restore": {
+      "round": 2,
+      "runId": "run_5a6757165a9059c88e329429c7bfc79c",
+      "runIdPreserved": true,
+      "stateDifferencePaths": [
+        ".match.battlePrefix"
+      ],
+      "gameplayStateEqual": true
+    },
+    "physicalDevices": "NOT EXECUTED by agreed scope",
+    "keyboardSettingsWorkaroundUsed": true,
+    "settingsHitTest": {
+      "target": "settings",
+      "centerHit": "adjacent fullscreen button",
+      "buttonSize": [
+        16,
+        16
+      ],
+      "pseudoElementSize": [
+        44,
+        44
+      ]
+    }
+  },
+  "assets": {
+    "realSamples": {
+      "kind": "rc-real-external-assets",
+      "at": "2026-10-30T16:48:21.755Z",
+      "checks": [
+        {
+          "name": "Spine skeleton bytes",
+          "status": "pass",
+          "url": "https://raw.githubusercontent.com/fexli/ArknightsResource/main/spine/char_003_kalts/char_003_kalts/Front/char_003_kalts.skel",
+          "statusCode": 200,
+          "bytes": 139125,
+          "sha256": "cf7d424394eb283ecfc78c199f6576e6f983374e8d45a40bebee31d3503a6d2a"
+        },
+        {
+          "name": "Spine atlas normalization",
+          "status": "pass",
+          "url": "https://raw.githubusercontent.com/fexli/ArknightsResource/main/spine/char_003_kalts/char_003_kalts/Front/char_003_kalts.atlas",
+          "characters": 8390,
+          "normalizedSize": true
+        },
+        {
+          "name": "External texture decode",
+          "status": "pass",
+          "src": "https://raw.githubusercontent.com/fexli/ArknightsResource/main/spine/char_003_kalts/char_003_kalts/Front/char_003_kalts.png",
+          "width": 512,
+          "height": 512
+        },
+        {
+          "name": "External audio decode",
+          "status": "pass",
+          "url": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/music/act1autochess/m_sys_act1autochess_intro.mp3",
+          "bytes": 1138773,
+          "duration": 71.11110416666666,
+          "channels": 2,
+          "sampleRate": 48000
+        },
+        {
+          "name": "External font load",
+          "status": "pass",
+          "url": "https://raw.githubusercontent.com/TimWangZi/The-font-of-Arknights/master/font/Bender/BENDER.OTF",
+          "fontStatus": "loaded"
+        },
+        {
+          "name": "Fetch retry: 503 then external mirror",
+          "status": "pass",
+          "finalUrl": "https://cdn.jsdelivr.net/gh/yuanyan3060/ArknightsGameResource@main/portrait/char_003_kalts_1.png",
+          "statusCode": 200,
+          "bytes": 115421
+        },
+        {
+          "name": "Image retry: 503 then external mirror",
+          "status": "pass",
+          "src": "https://cdn.jsdelivr.net/gh/yuanyan3060/ArknightsGameResource@main/portrait/char_003_kalts_1.png?rc=image",
+          "width": 180,
+          "height": 360
+        }
+      ],
+      "complete": true
+    },
+    "controlledSpineOutage": {
+      "controlledFailuresByScenario": {
+        "probe": 2,
+        "spine-outage": 147
+      },
+      "allInjectedStatusCodes": [
+        503
+      ],
+      "gameRequestsUnique": 12,
+      "result": {
+        "round": 1,
+        "nextPrep": 2,
+        "life": 28,
+        "replayQuality": {
+          "version": 1,
+          "resultReceived": true,
+          "truncated": false,
+          "gaps": [],
+          "dropped": {
+            "frames": 0,
+            "events": 0,
+            "frameUnits": 0,
+            "unitMetadata": 0
+          }
+        },
+        "frames": 46,
+        "events": 8
+      }
+    },
+    "fallbackBattle": {
+      "reason": "cleared",
+      "time": 45.467,
+      "killed": 4,
+      "total": 4,
+      "errors": 0
+    },
+    "fallbackDamageDisplayed": 9075,
+    "mappingCountIsNotAvailabilityProof": true,
+    "optionalStatisticsStylesheet": {
+      "observedStatus": 403,
+      "gameplayContinued": true
+    },
+    "allResourceUrlsQualified": false,
+    "audioAuditoryQualityChecked": false
+  },
+  "openIssues": [
+    {
+      "id": "RC-04",
+      "severity": "P2",
+      "finding": "Intermittent restore readiness timeout remains unexplained"
+    },
+    {
+      "id": "RC-07",
+      "severity": "P2",
+      "finding": "Homepage coarse-pointer settings hit target overlaps fullscreen"
+    },
+    {
+      "id": "RC-08",
+      "severity": "P2",
+      "finding": "Floating terminal partially obscures mobile lobby start action"
+    },
+    {
+      "id": "RC-09",
+      "severity": "P3",
+      "finding": "Optional official statistics stylesheet returned HTTP 403"
+    }
+  ],
+  "remainingScope": [
+    "Touch drag/facing not qualified",
+    "Physical iOS/Android deferred",
+    "No fresh nine-round solo campaign entirely on fixed executable",
+    "Full upstream/golden suite not rerun on fix",
+    "No LAN/WAN, separate devices, other difficulties or hidden Boss qualification",
+    "No new migration or production executable rollback exercise",
+    "No sustained-device thermal/performance qualification"
+  ],
+  "evidence": {
+    "directory": ".cache/rc-browser-2026-10-31",
+    "manifest": "browser-evidence-manifest.json",
+    "rawPublished": false,
+    "priorAssessment": "acceptance.json"
+  }
+}

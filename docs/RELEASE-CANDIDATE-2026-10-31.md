@@ -2,6 +2,8 @@
 
 [简体中文](RELEASE-CANDIDATE-2026-10-31.zh-CN.md) · [Original assessment](RELEASE-CANDIDATE-2026-10-30.md)
 
+Later two-browser, mobile-emulation and asset checks are recorded in the [browser acceptance follow-up](RC-BROWSER-ACCEPTANCE-2026-10-31.md). The scope and results below describe the earlier fix pass.
+
 ## Decision and source
 
 **HOLD pending the remaining acceptance gates.** The Safari kit-initialization defect and the three repeatable test failures have been fixed. The interrupted solo campaign now has a ninth-round result, final settlement, replay exports and retained history. This is a continuation of the original assessment, not a replacement for its failed-run evidence or independent human-player acceptance.
