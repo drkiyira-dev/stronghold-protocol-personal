@@ -1,5 +1,7 @@
 # 卫戍协议：盟约 Enhanced Edition — RC 验收报告
 
+> 后续：[10 月 31 日最小修复及串行复验](RELEASE-CANDIDATE-2026-10-31.zh-CN.md)。本原始报告保留为历史证据。
+
 [English](RELEASE-CANDIDATE-2026-10-30.md) · 2026 年 10 月 30 日
 
 ## 结论与提交基线

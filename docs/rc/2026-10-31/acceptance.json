@@ -1,0 +1,283 @@
+{
+  "schema": 1,
+  "assessment": "HOLD",
+  "recommendedCandidate": "v1.2.0-rc.1",
+  "candidateCreated": false,
+  "baseMain": "f990e72b3c409290cbb8cfaa3a20c4c967c6ebb8",
+  "testedFix": "46c41ed953632b06393b70d601b2069d2c0b391a",
+  "productionModified": false,
+  "environment": {
+    "os": "macOS 26.6",
+    "osBuild": "25G72",
+    "memoryGiB": 24,
+    "node": "26.7.0",
+    "sqlite": "3.53.4",
+    "playwright": "1.62.1",
+    "chrome": "156.0.8078.47",
+    "safari": "26.6",
+    "safariDriver": "21624.4.5.11.5",
+    "laterChromeViewport": {
+      "width": 1710,
+      "height": 930
+    }
+  },
+  "execution": {
+    "serial": true,
+    "nodeTestFileConcurrency": 1,
+    "simultaneousGameplayBrowsers": 1,
+    "quality": "Original low setting on local QA origins",
+    "nice": "Attempted but sandbox setpriority denied; no effective priority reduction claimed",
+    "temperatureMeasured": false,
+    "ownedGameTabsClosed": true,
+    "ownedPreviewServerStopped": true
+  },
+  "buildIdentity": {
+    "version": 1,
+    "edition": "Stronghold Protocol: Alliance — Enhanced Edition",
+    "upstream": "f07b8965061bbc311ad7aa815879b09264a1e47d",
+    "upstreamEngineHash": "f5d24b524429e4a069c770da2d83a350cc71921dac76c7e083489232b13566f7",
+    "adapterHash": "54ab044e910942e976b4015f51f3908ed41c4b3be31960e2a525470b5cc951dd",
+    "engineHash": "f4c5dcf5b08eb98eb24cb7c28db9e04f014d3b610e6bb5a152756c2d475f81d7",
+    "dataHash": "c15ba374d2b64b760105803ebf2c76f4929c85984dd32daeef0665153b869180",
+    "baselineHash": "9884d9e0450a88230610b85a9865bc33615670b38d8fd6fc7f49b45bd4a97fef",
+    "protocol": 2
+  },
+  "buildRegistry": {
+    "path": "dist/sim/content/kits/index.js",
+    "sha256": "4fea0419418704ab258769861a0334d81124fecfb12ea117757de5e7a5eeb58f",
+    "change": "Static import of shared/tier4.js before concurrent registry loads",
+    "saveCompatibilityFingerprintsUnchanged": true
+  },
+  "automated": {
+    "build": "PASS",
+    "pluginSuitesAndIgnoreRegression": {
+      "passed": 27,
+      "failed": 0,
+      "skipped": 0,
+      "durationMs": 5585.00725
+    },
+    "personal": {
+      "passed": 53,
+      "failed": 0,
+      "skipped": 0,
+      "durationMs": 57982.554291
+    },
+    "overlap": "The ignore regression occurs in both counts",
+    "reliabilityBrowser": {
+      "passed": 7,
+      "assetsBlocked": true
+    },
+    "enhancedBrowser": {
+      "passed": 13,
+      "assetsBlocked": true,
+      "modelCallsMocked": true
+    },
+    "kitBrowser": {
+      "safariBaseline": {
+        "source": "safari-regression-before.json",
+        "at": "2026-10-30T15:03:03.335Z",
+        "passed": false,
+        "baseline": true,
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+        "main": {
+          "keys": 214,
+          "errors": 16
+        },
+        "worker": {
+          "keys": 214,
+          "errors": 16
+        }
+      },
+      "safariPatched": {
+        "source": "safari-regression-after.json",
+        "at": "2026-10-30T15:03:31.097Z",
+        "passed": true,
+        "baseline": false,
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+        "main": {
+          "keys": 254,
+          "errors": 0
+        },
+        "worker": {
+          "keys": 254,
+          "errors": 0
+        }
+      },
+      "chromiumPatched": {
+        "source": "chromium-regression.json",
+        "at": "2026-10-30T15:03:50.850Z",
+        "passed": true,
+        "baseline": false,
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+        "main": {
+          "keys": 254,
+          "errors": 0
+        },
+        "worker": {
+          "keys": 254,
+          "errors": 0
+        }
+      }
+    },
+    "fullUpstream": "NOT RERUN on fix; see previous assessment",
+    "golden": "NOT RERUN on fix; see previous assessment",
+    "historicalReadinessFailureResolved": false
+  },
+  "solo": {
+    "method": "Real Chrome UI; ordinary shop/deploy/ready controls, unchanged rules",
+    "coverage": "Same run: rounds 1-8 on base main; round 9 restored and completed on tested fix",
+    "freshNineRoundsOnFix": false,
+    "result": "defeat",
+    "roundsPassed": 8,
+    "roundsScheduled": 9,
+    "life": 0,
+    "bossDamage": 570,
+    "kills": 108,
+    "certifications": 100,
+    "finalSettlementVerified": true,
+    "historyReloadVerified": true,
+    "completedHistoryEntriesObserved": 1,
+    "victoryUiVerifiedOnFix": false,
+    "restore": {
+      "round": [
+        9,
+        9
+      ],
+      "runId": [
+        "run_6bba99ec641d762932ea6e38dc85add4",
+        "run_6bba99ec641d762932ea6e38dc85add4"
+      ],
+      "sameRunId": true,
+      "sameEngine": true,
+      "sameData": true,
+      "gameplayStateEqualExceptBattlePrefix": true,
+      "battlePrefixes": [
+        "r1d2057a5864afe52a4c7beb4e0913c37",
+        "rc3886274548d161b5938f49122674e7b"
+      ]
+    },
+    "completedRecordings": [
+      {
+        "round": 1,
+        "runId": "run_6bba99ec641d762932ea6e38dc85add4",
+        "frames": 29,
+        "events": 11,
+        "resultReceived": true,
+        "truncated": false,
+        "partial": false
+      },
+      {
+        "round": 2,
+        "runId": "run_6bba99ec641d762932ea6e38dc85add4",
+        "frames": 47,
+        "events": 14,
+        "resultReceived": true,
+        "truncated": false,
+        "partial": false
+      },
+      {
+        "round": 3,
+        "runId": "run_6bba99ec641d762932ea6e38dc85add4",
+        "frames": 80,
+        "events": 18,
+        "resultReceived": true,
+        "truncated": false,
+        "partial": false
+      },
+      {
+        "round": 4,
+        "runId": "run_6bba99ec641d762932ea6e38dc85add4",
+        "frames": 54,
+        "events": 26,
+        "resultReceived": true,
+        "truncated": false,
+        "partial": false
+      },
+      {
+        "round": 5,
+        "runId": "run_6bba99ec641d762932ea6e38dc85add4",
+        "frames": 72,
+        "events": 29,
+        "resultReceived": true,
+        "truncated": false,
+        "partial": false
+      },
+      {
+        "round": 6,
+        "runId": "run_6bba99ec641d762932ea6e38dc85add4",
+        "frames": 73,
+        "events": 39,
+        "resultReceived": true,
+        "truncated": false,
+        "partial": false
+      },
+      {
+        "round": 7,
+        "runId": "run_6bba99ec641d762932ea6e38dc85add4",
+        "frames": 82,
+        "events": 39,
+        "resultReceived": true,
+        "truncated": false,
+        "partial": false
+      },
+      {
+        "round": 8,
+        "runId": "run_6bba99ec641d762932ea6e38dc85add4",
+        "frames": 101,
+        "events": 39,
+        "resultReceived": true,
+        "truncated": false,
+        "partial": false
+      },
+      {
+        "round": 9,
+        "runId": "run_6bba99ec641d762932ea6e38dc85add4",
+        "frames": 281,
+        "events": 36,
+        "resultReceived": true,
+        "truncated": false,
+        "partial": false
+      }
+    ],
+    "coachCitation": {
+      "factSource": "result.perPlayer[self].unitStats[4].attacks",
+      "factValue": 0,
+      "eventTime": 106.9,
+      "nearestSample": 107
+    }
+  },
+  "safariGameplay": {
+    "method": "Native Safari UI, actual external models",
+    "completedCombatRounds": [
+      1
+    ],
+    "reachedPrepRound": 2,
+    "life": 28,
+    "diagnosticErrors": 0,
+    "actions": [
+      "restore",
+      "buy",
+      "drag",
+      "facing",
+      "ready",
+      "combat",
+      "PREP checkpoint"
+    ],
+    "fullCampaignVerified": false
+  },
+  "multiplayer": "Not rerun in follow-up. Historical protocol recovery only: latest committed PREP; later operations/combat/uncommitted settlement discarded.",
+  "remainingAcceptanceGaps": [
+    "Native Safari late-game and full two-browser Boss/reconnect/restart consent UI",
+    "Physical mobile key gameplay actions",
+    "Controlled external-resource fallback UI",
+    "Fresh single-build nine-round campaign and victory UI not performed",
+    "Intermittent restore-readiness failure remains unexplained",
+    "No new full-upstream/golden run or sustained-device performance qualification"
+  ],
+  "evidence": {
+    "directory": ".cache/rc-fixes-2026-10-30",
+    "manifest": "evidence-manifest.json",
+    "rawPublished": false,
+    "priorAssessment": "../2026-10-30/acceptance.json"
+  }
+}

@@ -1,0 +1,207 @@
+{
+  "schema": 1,
+  "directory": ".cache/rc-fixes-2026-10-30",
+  "rawPublished": false,
+  "files": [
+    {
+      "file": "baseline-tests.log",
+      "bytes": 3728,
+      "sha256": "58fdc6115c8eac1e2500ea6d6f3c2ec1bb6afdf161a2558b222a7e9ed1d2f484"
+    },
+    {
+      "file": "build.log",
+      "bytes": 416,
+      "sha256": "982ac61c391ea0dcdfd8be083ce52bde17bc5471afe90b4b2acbe6bb279d7342"
+    },
+    {
+      "file": "chromium-regression.json",
+      "bytes": 13699,
+      "sha256": "3b292e20ec77e6a2d5faf8ce0d9fdbe84c064f6f54ce3c3f1b7fa34d2a0178c0"
+    },
+    {
+      "file": "chromium-regression.log",
+      "bytes": 208,
+      "sha256": "df3568e88b8ba5096bf2ff33fabf690021e0a79e8f69f0a61c41f07db7665f88"
+    },
+    {
+      "file": "completed-round-options.json",
+      "bytes": 1496,
+      "sha256": "117bfe88591dc18febc011293cf5f6f29739a78685b100da096238e147990ecc"
+    },
+    {
+      "file": "enhanced-browser.log",
+      "bytes": 839,
+      "sha256": "3bd95421bfef278482f2922f6b076ee1dacd82433c08369acf454e483619d134"
+    },
+    {
+      "file": "nine-round-replays.json",
+      "bytes": 1688,
+      "sha256": "939dc0c4d72860eb32e1d7e98c5f31cb15739d7b26e23135dad40ad09c974c01"
+    },
+    {
+      "file": "personal-tests.log",
+      "bytes": 11255,
+      "sha256": "b9b479cf3dd7d9635d5b31fb057aebbdc228a559eaa50adac04d202d7575106d"
+    },
+    {
+      "file": "plugin-tests.log",
+      "bytes": 3046,
+      "sha256": "8b7c3072b71ad18dd5126d48bc27cdfadf79e77a9a2cdacfebe0424e5c52da21"
+    },
+    {
+      "file": "reliability-browser.log",
+      "bytes": 324,
+      "sha256": "4234fe88cde87de1c71caced87976f5e309b00706881140c24fc3fff59ad431f"
+    },
+    {
+      "file": "round1-replay.json",
+      "bytes": 30599,
+      "sha256": "7df6dd91046a8bec332d92fc200c14fd5aa1dbf9af374c96121812d8a6128248"
+    },
+    {
+      "file": "round2-replay.json",
+      "bytes": 60318,
+      "sha256": "857da952cd9939c59e9a1603b99b280f370c66df1e7eaa6d7525b22d1fd49c5f"
+    },
+    {
+      "file": "round3-replay.json",
+      "bytes": 112701,
+      "sha256": "271ef3f6edacb48e1ac5f961b2b2c7aa62b5f96deac220c722c44176acd09d6d"
+    },
+    {
+      "file": "round4-replay.json",
+      "bytes": 103445,
+      "sha256": "8a127bf0d7e53792b482d0ee953e07b9f3bd9a4927bbc228b01933c79e31dfdd"
+    },
+    {
+      "file": "round5-replay.json",
+      "bytes": 125185,
+      "sha256": "4ded4c77067f3cebc40f7e550214b5aaed5904409e1367050ffbedf7507a8807"
+    },
+    {
+      "file": "round6-replay.json",
+      "bytes": 146060,
+      "sha256": "9462e73c20755a43f6457a01a5bcb4684d58e27e04d29aca74a96d55324c306e"
+    },
+    {
+      "file": "round7-replay.json",
+      "bytes": 164407,
+      "sha256": "6701653d367aa19e6dabcb7be6313f8730bf1b7b1703cc51fdc615ce465868f9"
+    },
+    {
+      "file": "round8-replay.json",
+      "bytes": 192827,
+      "sha256": "c57f849cdd094ca2f3f88a9b289d2e39d86922cd107da8f06cd70b7360872bbe"
+    },
+    {
+      "file": "round9-after-restore.json",
+      "bytes": 26993,
+      "sha256": "f4158399031d688547d08eca61774ec7bfef231fd1042ef7d8e4c5f82d3cc5ce"
+    },
+    {
+      "file": "round9-before-restore.json",
+      "bytes": 26993,
+      "sha256": "557f27d97b7bbfa2321ce1f2723e86ca2d7f797ed2cd6987743a4007389e59e4"
+    },
+    {
+      "file": "round9-coach.json",
+      "bytes": 14486,
+      "sha256": "1bff99a42995f4f71ac8593ce194514460d9b76d908156347362320696ead4cf"
+    },
+    {
+      "file": "round9-history-after-reload.png",
+      "bytes": 77982,
+      "sha256": "98958a336aee495a1ca0c0e950899f0e2e137734e18bb71865b580da085014bd"
+    },
+    {
+      "file": "round9-history-after-reload.txt",
+      "bytes": 2217,
+      "sha256": "d24d6884ff9ce8164dbf5189dfe5523d0704b804f711e83e4712ec4e46a5c2b4"
+    },
+    {
+      "file": "round9-replay.json",
+      "bytes": 484246,
+      "sha256": "29a3d612a14d34aa2f8cd5dcdcfeab63cdd6fa2ad69b6a4ca38692362b981837"
+    },
+    {
+      "file": "round9-replay.png",
+      "bytes": 119425,
+      "sha256": "67a9de0a54851005fe8dd92867f7aa407874c535154b6b131e5bbe33fac29193"
+    },
+    {
+      "file": "round9-restore-comparison.json",
+      "bytes": 358,
+      "sha256": "a7ebb59865f6eb6f48725a056cf0e5bd49ee8befa58ccbc9a2e854da41b9952d"
+    },
+    {
+      "file": "round9-result-details.txt",
+      "bytes": 2627,
+      "sha256": "def76a885a654a96924d084f8640747c677b3025de172aa6c669948032f8fd33"
+    },
+    {
+      "file": "round9-settlement.png",
+      "bytes": 167228,
+      "sha256": "15bf2ebc649436be0a52a4cd7482875ff0e47bab8c3816cd7a49e61dbd47ec8e"
+    },
+    {
+      "file": "safari-diagnostics.txt",
+      "bytes": 197,
+      "sha256": "518dd5c84c2210bf684f130d6c9391b4bb66c4e5dbc6ee494684cd8bd2c2fc12"
+    },
+    {
+      "file": "safari-prep-preliminary.png",
+      "bytes": 1004051,
+      "sha256": "274ca17f66fb457565a3240605787b5cda5cfcaa88f4f129030642fcd018b4a7"
+    },
+    {
+      "file": "safari-probe-1793372167374.json",
+      "bytes": 2541,
+      "sha256": "eb8c9f6ac6208c73903ae2735181a5b9176b40a82df81096a790aebec33c360f"
+    },
+    {
+      "file": "safari-probe-1793372188351.json",
+      "bytes": 3655,
+      "sha256": "1e49ec25b54ea1676aececb18da298d177b91d12fdde7b94fc39cdb0fa684df9"
+    },
+    {
+      "file": "safari-probe-1793372222739.json",
+      "bytes": 190,
+      "sha256": "b51beceb27c5a04cb5f21dd1ed9e90d065a272dd78a282ed296e460d694ef569"
+    },
+    {
+      "file": "safari-regression-after.json",
+      "bytes": 13691,
+      "sha256": "cfed2b9b5c643e8d206c01857edd4c03a9385402be626f04cc42777a9dc999bd"
+    },
+    {
+      "file": "safari-regression-after.log",
+      "bytes": 200,
+      "sha256": "8d7ffdf3bc757ddf03ab8de3f87d86db46168ebc226299f2de007bf049cb1b83"
+    },
+    {
+      "file": "safari-regression-before.json",
+      "bytes": 16591,
+      "sha256": "2b6337fcd7bed66d25b91fa58aafcf971377f8f3df350df30b33d1536d615b2d"
+    },
+    {
+      "file": "safari-regression-before.log",
+      "bytes": 5660,
+      "sha256": "1c8d289f61e256d6b1d542e68f0741a865adb7bbe0647ad1ab6719326c0c2c2c"
+    },
+    {
+      "file": "safari-round2.png",
+      "bytes": 865132,
+      "sha256": "52be449b9d4efbb97e1c48d94b798f18bd456d9cd65eaeb1e6715bd668591b38"
+    },
+    {
+      "file": "targeted-tests.log",
+      "bytes": 1778,
+      "sha256": "6af863906be3de754afcdc8e0b94d36379128e839ff495da00d0025c877ff55c"
+    }
+  ],
+  "localArchive": {
+    "file": "stronghold-rc-fixes-evidence-2026-10-31.zip",
+    "bytes": 3823306,
+    "sha256": "86afea505915b29c8e22eeb60e11c9a2a3ac924d2a5ddd052b303a3b837ee368"
+  }
+}

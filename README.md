@@ -22,7 +22,7 @@ See [contribution attribution](CONTRIBUTING.md) for the verified Codex co-author
 
 ## Run
 
-Use **Node.js 26.7.0**, the runtime used for the SQLite recovery backend and RC checks. The full upstream suite has unresolved failures on this setup; see the [RC report](docs/RELEASE-CANDIDATE-2026-10-30.md). No bulk artwork download is needed for the current build.
+Use **Node.js 26.7.0**, the runtime used for the SQLite recovery backend and RC checks. The three remaining serial-test failures are fixed; the full upstream suite has not been rerun on the fix. See the [RC follow-up](docs/RELEASE-CANDIDATE-2026-10-31.md). No bulk artwork download is needed for the current build.
 
 ```sh
 npm ci
@@ -79,7 +79,7 @@ node upstream/tools/plugin.mjs check personal/examples/personal-lab --strict
 npm run test:browser
 ```
 
-**Current RC assessment: HOLD — not approved for release.** The [October 30 RC report](docs/RELEASE-CANDIDATE-2026-10-30.md) ([中文](docs/RELEASE-CANDIDATE-2026-10-30.zh-CN.md)) records the exact source SHA, failures and coverage limits. The build and 52 enhanced-layer tests passed. The full upstream run had 6 failures and 97 skips; 3 failures remained in targeted serial retesting. The two-client protocol campaign reached round 14 and victory after reconnect/restart recovery. The real single-player browser run reached round 9, but its final settlement was not verified. Safari showed rendering/module-load problems. Further heavy checks stopped after the maintainer reported memory pressure and thermal throttling. No production deployment occurred.
+**Current RC assessment: HOLD — not approved for release.** The [October 31 follow-up](docs/RELEASE-CANDIDATE-2026-10-31.md) ([中文](docs/RELEASE-CANDIDATE-2026-10-31.zh-CN.md)) records the minimal Safari initialization fix and three repaired test failures. Serial checks passed: 53 personal tests, 27 affected tests (one overlaps), 20 existing browser checks, and complete 254-key registries in native Safari and Chromium, in both main thread and Worker. Safari completed a real battle and reached R2. The original Chrome campaign was resumed through R9 defeat: settlement/history correctly show **8/9**, and completed replays for rounds 1–9 retain the same run ID. R1–8 ran on the prior main; this is not a fresh all-nine-round run on the fix or a victory. The full upstream/golden suites were not rerun. Mobile gameplay, controlled asset fallback, full two-browser late/Boss recovery UI and an intermittent readiness failure remain open. The [original report](docs/RELEASE-CANDIDATE-2026-10-30.md) retains all previous failures and protocol evidence. Owned QA tabs/server were closed; production was not updated.
 
 Historical Codex verification (these results do not replace the current RC assessment):
 

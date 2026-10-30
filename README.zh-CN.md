@@ -24,7 +24,7 @@ Codex 协助完成了浏览器端引擎适配、存档持久化、素材优化�
 
 ## 运行
 
-使用本轮 SQLite 恢复后端及 RC 检查采用的 **Node.js 26.7.0**。此环境下完整上游测试仍有未解决的失败，详见 [RC 报告](docs/RELEASE-CANDIDATE-2026-10-30.zh-CN.md)。当前构建无需提前批量下载美术资源。
+使用本轮 SQLite 恢复后端及 RC 检查采用的 **Node.js 26.7.0**。剩余三项串行测试失败已修复，但尚未在修复提交上重跑完整上游测试，详见 [RC 复验报告](docs/RELEASE-CANDIDATE-2026-10-31.zh-CN.md)。当前构建无需提前批量下载美术资源。
 
 ```sh
 npm ci
@@ -79,7 +79,7 @@ node upstream/tools/plugin.mjs check personal/examples/personal-lab --strict
 npm run test:browser
 ```
 
-**当前 RC 结论：HOLD，尚不具备发布验收通过条件。** [10 月 30 日 RC 报告](docs/RELEASE-CANDIDATE-2026-10-30.zh-CN.md)（[English](docs/RELEASE-CANDIDATE-2026-10-30.md)）记录了准确源码 SHA、失败项与覆盖边界。构建及 52 项增强层测试通过；完整上游测试有 6 项失败、97 项跳过，定向串行复测仍有 3 项失败。双协议客户端经过断线重连和服务器重启恢复后，完成第 14 回合并获胜。真实单人浏览器流程进入第 9 回合，但未验证最终结算；Safari 出现画面与模块加载异常。维护者报告内存压力和温度降频后，已停止后续高负载检查。生产站点未更新。
+**当前 RC 结论：HOLD，尚未批准发布。** [10 月 31 日复验报告](docs/RELEASE-CANDIDATE-2026-10-31.zh-CN.md)（[English](docs/RELEASE-CANDIDATE-2026-10-31.md)）记录了 Safari 初始化最小修复与三项测试失败修复。串行检查通过：53 项个人层测试、27 项相关测试（重叠一项）、20 项既有浏览器检查；原生 Safari 和 Chromium 的主线程及 Worker 均完整加载 254 项注册表。Safari 完成真实战斗并进入 R2。原 Chrome 对局已接续至第九回合失败结算，历史正确显示 **8/9**，第 1–9 回合完成记录的 runId 一致。第 1–8 回合来自原 main，并非修复后从头重跑九回合，也不是通关。本次未重跑完整上游/Golden；真实移动端、可控素材降级、双浏览器后期/Boss 恢复界面和间歇性就绪失败仍待处理。[原报告](docs/RELEASE-CANDIDATE-2026-10-30.zh-CN.md)保留历史失败和协议测试证据。测试页及服务已关闭，生产站点未更新。
 
 以下为历史 Codex 验证记录，不代替本次 RC 结论：
 

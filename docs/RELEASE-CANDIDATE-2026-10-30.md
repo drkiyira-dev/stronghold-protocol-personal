@@ -1,5 +1,7 @@
 # Enhanced Edition — Release Candidate assessment, 2026-10-30
 
+> Follow-up: [October 31 minimal fixes and serial verification](RELEASE-CANDIDATE-2026-10-31.md). This original assessment is retained as historical evidence.
+
 [简体中文](RELEASE-CANDIDATE-2026-10-30.zh-CN.md)
 
 ## Decision and source
