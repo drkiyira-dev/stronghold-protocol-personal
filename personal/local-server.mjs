@@ -134,8 +134,9 @@ export async function createLocalServer({ emit, fetchData, data: suppliedData, n
       if (message.t === 'local.restore') { restore(message.snapshot); return; }
       // The original host closes idle pre-hello connections. A later browser
       // reconnect needs a fresh Connection, while keeping this lobby and its
-      // sessions/match intact. Reusing the old listener silently drops hello.
-      if (message.t === 'hello' && transport.socket.readyState !== 1) transport = connectTransport();
+      // sessions/match intact. Before Start, the client probes with ping rather
+      // than hello; both must recover a closed transport.
+      if ((message.t === 'hello' || message.t === 'ping') && transport.socket.readyState !== 1) transport = connectTransport();
       for (const fn of transport.listeners.get('message') || []) fn(JSON.stringify(message), false);
       saveSoon();
     },

@@ -118,10 +118,17 @@ test('idle-title timeout can reconnect, and a later transport close preserves th
   const server = await createLocalServer({data, now:()=>clock, emit:frame=>frames.push(frame)});
   const flush = () => new Promise(resolve=>setImmediate(resolve));
   try {
-    clock += 150000;
-    t.mock.timers.tick(150000);
-    await flush();
-    assert.ok(frames.some(f=>f.t==='local.closed' && f.code===4002), 'original pre-hello timeout was exercised');
+    for (let cycle=0;cycle<3;cycle++) {
+      const before=frames.length;
+      clock += 150000;
+      t.mock.timers.tick(150000);
+      await flush();
+      assert.ok(frames.slice(before).some(f=>f.t==='local.closed' && f.code===4002), 'original pre-hello timeout was exercised');
+      server.receive({t:'ping',c:clock});
+      await flush();
+      assert.ok(frames.slice(before).some(f=>f.t==='pong'&&f.c===clock), 'title heartbeat recovers before Start is clicked');
+      assert.equal(server.registry.size,0,'a heartbeat does not create a player');
+    }
     server.receive({t:'hello',name:'闲置后开始',version:1,rid:1});
     await flush();
     const welcome=frames.find(f=>f.t==='welcome' && f.rid===1);
