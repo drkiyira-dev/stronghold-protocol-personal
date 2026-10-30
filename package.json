@@ -1,0 +1,1 @@
+{"name":"stronghold-personal-sites","version":"1.0.0","private":true,"type":"module","license":"GPL-3.0-or-later","scripts":{"build":"node personal/build.mjs","test":"node --test personal/*.test.mjs"},"devDependencies":{"esbuild":"^0.25.0"}}

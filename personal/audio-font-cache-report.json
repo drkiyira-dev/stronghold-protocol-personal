@@ -1,0 +1,394 @@
+{
+  "requested": 77,
+  "downloaded": 77,
+  "bytes": 16014851,
+  "elapsedSeconds": 5,
+  "failures": [],
+  "records": [
+    {
+      "path": "/assets/audio/bgm/m_bat_rglk1phantomcastle_intro.mp3",
+      "bytes": 974933,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/music/rogue_1/m_bat_rglk1phantomcastle_intro.mp3"
+    },
+    {
+      "path": "/assets/audio/bgm/m_bat_kazimierz2_1_intro.mp3",
+      "bytes": 16553,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/music/act13side/m_bat_kazimierz2_1_intro.mp3"
+    },
+    {
+      "path": "/assets/audio/bgm/m_bat_corrosion_loop.mp3",
+      "bytes": 1870620,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/music/act13d5d0/m_bat_corrosion_loop.mp3"
+    },
+    {
+      "path": "/assets/audio/bgm/m_bat_corrosion_intro.mp3",
+      "bytes": 568677,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/music/act13d5d0/m_bat_corrosion_intro.mp3"
+    },
+    {
+      "path": "/assets/audio/bgm/m_bat_rglk1phantomcastle_loop.mp3",
+      "bytes": 1542104,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/music/rogue_1/m_bat_rglk1phantomcastle_loop.mp3"
+    },
+    {
+      "path": "/assets/audio/bgm/m_bat_kazimierz2_1_loop.mp3",
+      "bytes": 1920775,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/music/act13side/m_bat_kazimierz2_1_loop.mp3"
+    },
+    {
+      "path": "/assets/audio/bgm/m_bat_act1autochess_loop.mp3",
+      "bytes": 1997679,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/music/act1autochess/m_bat_act1autochess_loop.mp3"
+    },
+    {
+      "path": "/assets/audio/bgm/m_bat_kazimierz2_2_loop.mp3",
+      "bytes": 3054698,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/music/act13side/m_bat_kazimierz2_2_loop.mp3"
+    },
+    {
+      "path": "/assets/audio/bgm/m_sys_act1autochess_intro.mp3",
+      "bytes": 1138773,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/music/act1autochess/m_sys_act1autochess_intro.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/battle/b_enemy/b_enemy_dead_h.mp3",
+      "bytes": 47064,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/battle/b_enemy/b_enemy_dead_h.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/battle/b_char/b_char_dead.mp3",
+      "bytes": 32017,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/battle/b_char/b_char_dead.mp3"
+    },
+    {
+      "path": "/assets/audio/bgm/m_sys_act1autochess_loop.mp3",
+      "bytes": 1138773,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/music/act1autochess/m_sys_act1autochess_loop.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/battle/b_char/b_char_set.mp3",
+      "bytes": 22822,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/battle/b_char/b_char_set.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/battle/b_char/b_char_tokenset.mp3",
+      "bytes": 8194,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/battle/b_char/b_char_tokenset.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/battle/b_ui/b_ui_alarmenter.mp3",
+      "bytes": 23240,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/battle/b_ui/b_ui_alarmenter.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/battle/b_enemy/b_enemy_dead_n.mp3",
+      "bytes": 9840,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/battle/b_enemy/b_enemy_dead_n.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/battle/b_ui/b_ui_lose.mp3",
+      "bytes": 37451,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/battle/b_ui/b_ui_lose.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_a_bat_usmgbf.mp3",
+      "bytes": 15213,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_a_bat_usmgbf.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_b_ui_battleover_noreduce.mp3",
+      "bytes": 22893,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_b_ui_battleover_noreduce.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_b_ui_battleover_reduce.mp3",
+      "bytes": 22125,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_b_ui_battleover_reduce.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/battle/b_ui/b_ui_win.mp3",
+      "bytes": 37451,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/battle/b_ui/b_ui_win.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_b_ui_battleover_normal.mp3",
+      "bytes": 22893,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_b_ui_battleover_normal.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_b_ui_battlestart.mp3",
+      "bytes": 42093,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_b_ui_battlestart.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_b_ui_bossround_secret.mp3",
+      "bytes": 41709,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_b_ui_bossround_secret.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_b_ui_battlestart_boss.mp3",
+      "bytes": 73197,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_b_ui_battlestart_boss.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_b_ui_bossround_team.mp3",
+      "bytes": 42477,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_b_ui_bossround_team.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_b_ui_broadcasthint.mp3",
+      "bytes": 9837,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_b_ui_broadcasthint.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_b_ui_buffup.mp3",
+      "bytes": 25197,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_b_ui_buffup.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_b_ui_bossround_single.mp3",
+      "bytes": 35565,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_b_ui_bossround_single.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_b_ui_defence_start.mp3",
+      "bytes": 52845,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_b_ui_defence_start.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_b_ui_characterupgrade.mp3",
+      "bytes": 29805,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_b_ui_characterupgrade.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_b_ui_equipupgrade.mp3",
+      "bytes": 12909,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_b_ui_equipupgrade.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_b_ui_equip.mp3",
+      "bytes": 10221,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_b_ui_equip.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_b_ui_defence_unite.mp3",
+      "bytes": 32493,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_b_ui_defence_unite.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_b_ui_getmoney.mp3",
+      "bytes": 10221,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_b_ui_getmoney.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_b_ui_killboss_all.mp3",
+      "bytes": 39021,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_b_ui_killboss_all.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_b_ui_harmful.mp3",
+      "bytes": 60141,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_b_ui_harmful.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_b_ui_rest.mp3",
+      "bytes": 16749,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_b_ui_rest.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_b_ui_killboss.mp3",
+      "bytes": 39021,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_b_ui_killboss.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_b_ui_roundstart.mp3",
+      "bytes": 25197,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_b_ui_roundstart.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_b_ui_shop_lock.mp3",
+      "bytes": 20589,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_b_ui_shop_lock.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_b_ui_killboss_normal.mp3",
+      "bytes": 36717,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_b_ui_killboss_normal.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_b_ui_shop_upgrade.mp3",
+      "bytes": 17901,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_b_ui_shop_upgrade.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_g_ui_countdown.mp3",
+      "bytes": 9837,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_g_ui_countdown.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_b_ui_target.mp3",
+      "bytes": 14445,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_b_ui_target.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_g_ui_disconnect.mp3",
+      "bytes": 32493,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_g_ui_disconnect.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_g_ui_gofirst.mp3",
+      "bytes": 24429,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_g_ui_gofirst.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_b_ui_yourturn_circle.mp3",
+      "bytes": 20205,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_b_ui_yourturn_circle.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_g_ui_goodevaluation.mp3",
+      "bytes": 19053,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_g_ui_goodevaluation.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_g_ui_match_cancel.mp3",
+      "bytes": 26733,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_g_ui_match_cancel.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_g_ui_load.mp3",
+      "bytes": 58605,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_g_ui_load.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_g_ui_player_ready.mp3",
+      "bytes": 16749,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_g_ui_player_ready.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_g_ui_match_succeed.mp3",
+      "bytes": 32109,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_g_ui_match_succeed.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_g_ui_match_fail.mp3",
+      "bytes": 34029,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_g_ui_match_fail.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_g_ui_settlement_bosssign.mp3",
+      "bytes": 22893,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_g_ui_settlement_bosssign.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_g_ui_player_joinroom.mp3",
+      "bytes": 10989,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_g_ui_player_joinroom.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_g_ui_yourturn.mp3",
+      "bytes": 29421,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_g_ui_yourturn.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_g_ui_settlement_succeed.mp3",
+      "bytes": 50925,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_g_ui_settlement_succeed.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_g_ui_settlement_fail.mp3",
+      "bytes": 52077,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_g_ui_settlement_fail.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_g_ui_settlement_team.mp3",
+      "bytes": 20589,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_g_ui_settlement_team.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_g_ui_start.mp3",
+      "bytes": 45549,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_g_ui_start.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/enemy/e_imp/e_imp_general_w.mp3",
+      "bytes": 6078,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/enemy/e_imp/e_imp_general_w.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/enemy/e_skill/e_skill_gldcndd.mp3",
+      "bytes": 6957,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/enemy/e_skill/e_skill_gldcndd.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/customse/act1autochess/act1autochess_g_ui_strategy.mp3",
+      "bytes": 21741,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/customse/act1autochess/act1autochess_g_ui_strategy.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/general/g_ui/g_ui_btn_h.mp3",
+      "bytes": 8194,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/general/g_ui/g_ui_btn_h.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/general/g_ui/g_ui_emojidialogue.mp3",
+      "bytes": 9069,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/general/g_ui/g_ui_emojidialogue.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/general/g_ui/g_ui_scwarning.mp3",
+      "bytes": 6765,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/general/g_ui/g_ui_scwarning.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/general/g_ui/g_ui_pick.mp3",
+      "bytes": 8301,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/general/g_ui/g_ui_pick.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/general/g_ui/g_ui_btn_u.mp3",
+      "bytes": 6104,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/general/g_ui/g_ui_btn_u.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/general/g_ui/g_ui_rtargetrefresh.mp3",
+      "bytes": 19053,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/general/g_ui/g_ui_rtargetrefresh.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/general/g_ui/g_ui_confirm_h.mp3",
+      "bytes": 15299,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/general/g_ui/g_ui_confirm_h.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/general/g_ui/g_ui_tabswitch.mp3",
+      "bytes": 6522,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/general/g_ui/g_ui_tabswitch.mp3"
+    },
+    {
+      "path": "/assets/audio/sfx/general/g_ui/g_ui_unpick.mp3",
+      "bytes": 8301,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/general/g_ui/g_ui_unpick.mp3"
+    },
+    {
+      "path": "/fonts/bender-light.ttf",
+      "bytes": 68256,
+      "source": "https://raw.githubusercontent.com/TimWangZi/The-font-of-Arknights/master/font/Bender/BenderLight.woff.ttf"
+    },
+    {
+      "path": "/fonts/bender-regular.otf",
+      "bytes": 52536,
+      "source": "https://raw.githubusercontent.com/TimWangZi/The-font-of-Arknights/master/font/Bender/BENDER.OTF"
+    },
+    {
+      "path": "/assets/audio/sfx/player/p_imp/p_imp_heal_n.mp3",
+      "bytes": 6496,
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/player/p_imp/p_imp_heal_n.mp3"
+    },
+    {
+      "path": "/fonts/novecento-wide-normal.otf",
+      "bytes": 45356,
+      "source": "https://raw.githubusercontent.com/TimWangZi/The-font-of-Arknights/master/font/Novecento-Wide-Normal-2.otf"
+    }
+  ]
+}
