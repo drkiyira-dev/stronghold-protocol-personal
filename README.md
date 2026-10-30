@@ -18,6 +18,8 @@ The project is based on the original Stronghold-Protocol repository. Original au
 
 **The personal edition's additions and modifications were written by OpenAI Codex under the maintainer's direction. Its added tests were also written and run by Codex, including automated regression checks, browser gameplay checks, debugging and deployment verification.** This credit does not apply to the upstream implementation or its existing tests.
 
+See [contribution attribution](CONTRIBUTING.md) for the verified Codex co-author identity and the policy for future commits.
+
 ## Run
 
 Node.js **22.9+** is required. No bulk artwork download is needed for the current build.
