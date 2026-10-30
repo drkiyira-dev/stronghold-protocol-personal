@@ -56,6 +56,8 @@ Replays retain up to 30 records, with at most 600 sampled frames and 2,500 key e
 
 ## Guides and development
 
+The next-phase [design and audit](docs/ENHANCED-DESIGN.zh-CN.md) preserve the original game, engine, plugins, Studio and AI teammates. The first reliability patch fixes unknown replay metrics, visible recording truncation, stable save-run identity and activation only after a confirmed restore. See the [patch scope and verification](docs/RELIABILITY.md). These source changes do not authorize or perform a production deployment.
+
 See **[setup, saves, coach, challenges and Mods](docs/PERSONAL.md)** ([中文](docs/PERSONAL.zh-CN.md)).
 
 - `personal/`: browser host, save vault, tactical terminal, external asset adaptation, backend and tests.
@@ -73,8 +75,10 @@ node upstream/tools/plugin.mjs check personal/examples/personal-lab --strict
 
 Codex verification on **October 30, 2026**:
 
+- Reliability patch: **38 personal regression tests passed**, including the new missing-data, truncation, run-identity, legacy restore, failed-write and late-acknowledgement cases. Browser checks use an isolated localhost server and synthetic fixtures; see the patch report. The full nine-round browser run was not repeated for this patch.
+
 - Version 1.1: **27 personal regression tests passed**, including save migration/corruption/quota cases, real local combat and challenge restore, two WebSocket players with reconnect and progression to round 2, Mod composition, replay validation and the optional coach proxy. Model-provider calls were mocked; no paid model was called.
-- Browser: completed a real battle, inspected its 2,025-damage replay and local advice, exported the record, and refreshed/restored round 2. External Spine character models were visually verified.
+- Version 1.1 browser: completed a real battle, inspected its 2,025-damage replay and local advice, exported the record, and refreshed/restored round 2. External Spine character models were visually verified.
 - Previous release: completed all **9 rounds**, defeated the final leader with **25/25 life**, and verified final settlement/history, including the `9/14` → `9/9` historical-report fix. That release passed 140 relevant upstream/regression tests and 10 personal tests (overlapping suites). The entire nine-round run was not repeated for 1.1.
 
 These checks cover the documented scenarios, not every operator, asset, difficulty or combination. Research and source references remain in `personal/迁移研究.md`.

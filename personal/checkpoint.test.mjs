@@ -56,6 +56,20 @@ function compareState(a, b) {
   assert.deepEqual(a.publicView(), b.publicView());
 }
 
+test('run identity survives changed room codes and real restore; same-seed new matches stay distinct', () => {
+  const a=makeMatch({mode:'solo',seed:812,botRehearsal:0}),b=makeMatch({mode:'solo',seed:812,botRehearsal:0});
+  a.start();a.toPrep(1);b.start();b.toPrep(1);
+  const first=captureCheckpoint(a.m),second=captureCheckpoint(b.m);
+  let restored;
+  try {
+    assert.equal(typeof first.runId,'string');assert.notEqual(first.runId,second.runId);
+    restored=restore({...first,options:{...first.options,roomCode:'NEWROOM'}},a.m.data);
+    const next=captureCheckpoint(restored.m);
+    assert.equal(next.runId,first.runId);assert.deepEqual(next.state,first.state);
+    assert.throws(()=>validateCheckpoint({...first,runId:{}},a.m.data),/身份/);
+  } finally {restored?.m.dispose();a.m.dispose();b.m.dispose();}
+});
+
 test('JSON PREP checkpoint preserves board, money, shop, bonds, loadout, stock and six RNG streams', () => {
   const h = makeMatch({ mode: 'solo', seed: 832, botRehearsal: 0 });
   h.start(); h.toPrep(1); buyAndPlace(h.m);

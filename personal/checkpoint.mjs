@@ -6,6 +6,7 @@ import { getData } from '../upstream/server/data.js';
 import { createRng } from '../upstream/server/sim/rng.js';
 import { collectViolations } from '../upstream/server/match/invariants.js';
 import {validateChallenge} from './challenges.mjs';
+import {newRunId, checkpointRunId, validRunId} from './run-identity.mjs';
 
 const KIND = 'stronghold-solo-prep';
 const ENGINE = 'stronghold-protocol-0.3.3/prep-v1';
@@ -119,6 +120,7 @@ export function captureCheckpoint(match) {
   const savedAt = match.sched.now();
   return {
     kind: KIND, version: 1, engine: ENGINE, dataFingerprint: fingerprint(match.data),
+    runId: match.personalRunId ||= newRunId(),
     savedAt, elapsedMs: Math.max(0, savedAt - match.startedAt), round: match.round,
     options: JSON.parse(JSON.stringify(options)),
     ...(match.personalChallenge ? {challenge:validateChallenge(match.personalChallenge,match.data.chess)} : {}),
@@ -134,6 +136,7 @@ export function captureCheckpoint(match) {
 export function validateCheckpoint(snapshot, data = getData()) {
   if(snapshot?.challenge)validateChallenge(snapshot.challenge,data.chess);
   if (!plain(snapshot) || snapshot.kind !== KIND || snapshot.version !== 1 || snapshot.engine !== ENGINE) fail('存档版本不兼容');
+  if (snapshot.runId !== undefined && !validRunId(snapshot.runId)) fail('对局身份无效');
   if (snapshot.dataFingerprint !== fingerprint(data)) fail('存档使用了不同版本的游戏数据');
   if (!plain(snapshot.options) || snapshot.options.mode !== 'solo' || !Array.isArray(snapshot.options.seats) || snapshot.options.seats.length !== 1) fail('玩家配置无效');
   const seat = snapshot.options.seats[0];
@@ -166,6 +169,7 @@ export function restoreCheckpoint(snapshot, platformOverrides = {}) {
   const opts = { ...snapshot.options, ...platformOverrides, data, journal: false, externalAI: null };
   if (typeof opts.send !== 'function' || typeof opts.broadcast !== 'function' || typeof opts.onEnd !== 'function') fail('需要消息和结算回调');
   const m = new Match(opts);
+  m.personalRunId=checkpointRunId(snapshot);
   m.personalChallenge=snapshot.challenge ? validateChallenge(snapshot.challenge,data.chess) : null;
   try {
     for (const [key, value] of Object.entries(state.match)) m[key] = value;

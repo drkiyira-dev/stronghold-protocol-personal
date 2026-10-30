@@ -9,6 +9,7 @@ import { setData } from './shims/data.mjs';
 import { Match } from '../upstream/server/match/Match.js';
 import { captureCheckpoint, restoreCheckpoint, validateCheckpoint, checkpointCompatibility } from './checkpoint.mjs';
 import {validateChallenge,challengeViolation} from './challenges.mjs';
+import {checkpointRunId, newRunId} from './run-identity.mjs';
 
 const DATA_FILES = [
   'config', 'chess', 'bonds', 'garrisons', 'items', 'bands', 'effects', 'choices',
@@ -44,8 +45,8 @@ export async function createLocalServer({ emit, fetchData, data: suppliedData, n
   const log = { info() {}, debug() {}, warn: (...args) => console.warn(...args), error: (...args) => console.error(...args) };
   class LocalMatch {
     constructor(options) {
-      if (!restoring) {const match=new Match({...options,...(challenge?{seed:challenge.seed,difficulty:challenge.difficulty}:{})});match.personalChallenge=challenge;return match;}
-      const snapshot = { ...restoring, options: { ...restoring.options, roomCode: options.roomCode } };
+      if (!restoring) {const match=new Match({...options,...(challenge?{seed:challenge.seed,difficulty:challenge.difficulty}:{})});match.personalChallenge=challenge;match.personalRunId=newRunId();return match;}
+      const snapshot = { ...restoring, runId:checkpointRunId(restoring), options: { ...restoring.options, roomCode: options.roomCode } };
       const match = restoreCheckpoint(snapshot, {
         data, now, log, send: options.send, broadcast: options.broadcast, onEnd: options.onEnd,
       });
@@ -64,28 +65,33 @@ export async function createLocalServer({ emit, fetchData, data: suppliedData, n
       if (!match || match.phase !== 'PREP' || match.order[0]?.ready || match._prepEndQueued) return;
       try {
         const snapshot = captureCheckpoint(match);
-        const signature = JSON.stringify(snapshot.state);
+        const signature = JSON.stringify([snapshot.runId,snapshot.state]);
         if (signature === lastSaved) return;
         lastSaved = signature;
-        emit({ t: 'local.checkpoint', snapshot });
+        emit({ t: 'local.checkpoint', snapshot,restoreRequestId:match.personalRestoreRequestId });
       } catch (error) { emit({ t: 'local.save-unavailable', message: error.message }); }
     });
   }
-  function restore(snapshot) {
+  function restore(snapshot,requestId) {
+    let session,createdRoom;
     try {
       validateCheckpoint(snapshot, data);
-      const session = [...registry.byPlayerId.values()][0];
+      session = [...registry.byPlayerId.values()][0];
       if (!session || session.playerId !== snapshot.options.seats[0].playerId) throw new Error('存档身份不匹配，请重新打开页面。');
       if (lobby.roomOf(session)?.match) throw new Error('请先离开当前模拟。');
       const created = lobby.create(session, { mode: 'solo', difficulty: snapshot.options.difficulty });
       if (!created.ok) throw new Error(created.detail || created.error);
+      createdRoom=lobby.roomOf(session);
       restoring = snapshot;
       const started = lobby.startMatch(lobby.roomOf(session));
       if (!started.ok) throw new Error(started.detail || started.error);
+      const match=createdRoom.match;
+      match.personalRestoreRequestId=requestId;
+      const confirmed=captureCheckpoint(match);
       challenge = snapshot.challenge || null;
-      emit({ t: 'local.restored', round: snapshot.round });
+      emit({ t: 'local.restored', round: snapshot.round,requestId,snapshot:confirmed });
       saveSoon();
-    } catch (error) { emit({ t: 'local.restore-error', message: error.message }); }
+    } catch (error) {if(createdRoom&&lobby.roomOf(session)===createdRoom)lobby.leave(session);emit({ t: 'local.restore-error',requestId,message: error.message }); }
     finally { restoring = null; }
   }
   const handler = {
@@ -119,10 +125,11 @@ export async function createLocalServer({ emit, fetchData, data: suppliedData, n
       on(type, listener) { if (!listeners.has(type)) listeners.set(type, []); listeners.get(type).push(listener); },
       send(raw) {
         const message = JSON.parse(raw);
-        const activeChallenge=[...lobby.rooms.values()].find(room=>room.match)?.match?.personalChallenge;
+        const activeMatch=[...lobby.rooms.values()].find(room=>room.match)?.match;
+        const activeChallenge=activeMatch?.personalChallenge;
         if(message.t==='m.result' && activeChallenge){message.test=true;message.personalChallenge=activeChallenge;}
         emit(message);
-        if (message.t === 'm.result') { lastSaved = ''; emit({ t: 'local.clear-checkpoint' }); }
+        if (message.t === 'm.result') { lastSaved = ''; emit({ t: 'local.clear-checkpoint',runId:activeMatch?.personalRunId,restoreRequestId:activeMatch?.personalRestoreRequestId }); }
         saveSoon();
       },
       ping() { for (const fn of listeners.get('pong') || []) fn(); },
@@ -146,7 +153,7 @@ export async function createLocalServer({ emit, fetchData, data: suppliedData, n
         if (!registry.size && /^p_[a-zA-Z0-9_]{1,60}$/.test(message.playerId)) preferredIdentity = message.playerId;
         return;
       }
-      if (message.t === 'local.restore') { restore(message.snapshot); return; }
+      if (message.t === 'local.restore') { restore(message.snapshot,message.requestId); return; }
       if (message.t === 'local.challenge') {
         try {
           if([...lobby.rooms.values()].some(r=>r.match))throw new Error('请先离开当前对局再切换挑战');

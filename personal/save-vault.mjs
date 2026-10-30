@@ -1,5 +1,6 @@
 // Crash-safe, versioned PREP save storage. Never interprets a combat frame as a save.
 import {sha256Hex} from '../upstream/shared/sha256.js';
+import {checkpointRunId,validRunId} from './run-identity.mjs';
 
 export const LEGACY_SAVE_KEY = 'stronghold.personal.prep.v1';
 export const VAULT_KEYS = ['stronghold.personal.vault.2.a', 'stronghold.personal.vault.2.b'];
@@ -14,6 +15,7 @@ export function inspectSave(snapshot) {
       !Number.isInteger(snapshot.round) || snapshot.round < 1 || snapshot.options?.mode !== 'solo' ||
       !snapshot.options?.seats?.[0]?.playerId || !snapshot.state) throw new Error('不是有效的休整存档');
   if (JSON.stringify(snapshot).length > 900000) throw new Error('存档过大');
+  if (snapshot.runId !== undefined && !validRunId(snapshot.runId)) throw new Error('存档对局身份无效');
   return snapshot;
 }
 function signed(payload) { const body = JSON.stringify(payload); return JSON.stringify({kind:'stronghold-save-vault', body, checksum:sha256Hex(body)}); }
@@ -29,6 +31,7 @@ function unpack(raw) {
   for (const save of payload.saves) {
     inspectSave(save.snapshot);
     if (typeof save.id !== 'string' || ids.has(save.id) || typeof save.runId !== 'string' || !Number.isFinite(save.at)) throw new Error('存档条目损坏');
+    if (save.runId !== checkpointRunId(save.snapshot)) throw new Error('存档对局身份不一致');
     ids.add(save.id);
   }
   if (payload.activeId !== null && !ids.has(payload.activeId)) throw new Error('活动存档缺失');
@@ -70,7 +73,7 @@ export function createSaveVault(storage, {now = Date.now} = {}) {
   function save(snapshot, {manual = false, label = '', activate = true} = {}) {
     refresh();
     inspectSave(snapshot);
-    const runId = sha256Hex(JSON.stringify([snapshot.options.seats[0].playerId, snapshot.options.roomCode, snapshot.options.seed])).slice(0,20);
+    const runId = checkpointRunId(snapshot);
     const id = sha256Hex(JSON.stringify([runId,snapshot.state,snapshot.challenge || null])).slice(0,24);
     const next = clone(state);
     const item = {id, runId, at:now(), manual, label:String(label).slice(0,80), snapshot:clone(snapshot)};
@@ -103,7 +106,7 @@ export function createSaveVault(storage, {now = Date.now} = {}) {
       if (!next.saves.some(s => s.id === id)) throw new Error('存档不存在');
       next.activeId = id; commit(next); return this.active();
     },
-    complete(snapshot) {if(!snapshot)return;refresh();const active=state.saves.find(s=>s.id===state.activeId)?.snapshot;if(snapshot&&active&&(active.options.seed!==snapshot.options.seed||active.options.seats[0].playerId!==snapshot.options.seats[0].playerId))return;const next = clone(state); next.activeId = null; commit(next); },
+    complete(snapshot) {if(!snapshot)return;refresh();const active=state.saves.find(s=>s.id===state.activeId);if(!active||active.runId!==checkpointRunId(snapshot))return;const next = clone(state); next.activeId = null; commit(next); },
     export: () => {refresh();return signed(state);},
     exportRaw: () => JSON.stringify(Object.fromEntries([...VAULT_KEYS, LEGACY_SAVE_KEY, RECOVERY_KEY].map(k => [k, storage.getItem(k)]))),
     import(raw) {

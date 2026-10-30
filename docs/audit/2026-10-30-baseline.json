@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-30",
+  "personalSha": "9a96d852ab9b1ed8195796484faec12f4c291ccd",
+  "upstreamSha": "f07b8965061bbc311ad7aa815879b09264a1e47d",
+  "truncated": false,
+  "localFiles": 2370,
+  "upstreamFiles": 2370,
+  "same": 2367,
+  "changed": [
+    {
+      "path": "package-lock.json",
+      "local": "29165a40762da80b081eaf1e7987ee3159e410ca",
+      "upstream": "819fe728e8bd1555dcd747cb34a09b7fa75807a9"
+    },
+    {
+      "path": "public/js/screens/result.js",
+      "local": "d83747395edc24be9e5aa85efb2561af240042d0",
+      "upstream": "ac0ff1a02980d80d83a45e41f0e11eca0a97b015"
+    },
+    {
+      "path": "public/js/ui/gameLogic/result.js",
+      "local": "dbe56129fe704b3953b40219abaa815369b49e5f",
+      "upstream": "7d17365fbaf98f2c6c88d0408f9d7af737e48953"
+    }
+  ],
+  "localOnly": [],
+  "remoteOnly": [],
+  "lockSemanticallyEqual": true,
+  "method": "GitHub recursive tree (truncated=false) vs git ls-tree -r HEAD upstream; compare Git blob SHA-1 IDs, not file counts only. Lock JSON canonicalized recursively.",
+  "tests": {
+    "command": "node --test personal/checkpoint.test.mjs personal/save-vault.test.mjs personal/tactics.test.mjs",
+    "pass": 16,
+    "fail": 0,
+    "scope": "Current main; no full nine-round, live, full-suite or kill/restart test in this audit."
+  },
+  "probes": {
+    "scope": "Synthetic observations against current main; no production state modified",
+    "runIdChangesWithRoomCode": true,
+    "cappedReplay": {
+      "inputEvents": 2501,
+      "storedEvents": 2500,
+      "partial": false,
+      "truncationFlagPresent": false
+    },
+    "missingResultLeaks": 0,
+    "missingSelfUsesOtherDamage": 120,
+    "differentEngineStillSameScenario": true
+  }
+}

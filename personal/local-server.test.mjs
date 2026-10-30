@@ -6,6 +6,7 @@ import { createLocalServer } from '../dist/personal/local-server.js';
 import { createBattleFromSpec, compactResult, battleProgress } from '../upstream/server/sim/spec.js';
 import { DataSource } from '../upstream/server/sim/simdata.js';
 import { StateReceiver, STATE_DELTA_VERSION } from '../upstream/shared/stateDelta.js';
+import {checkpointRunId} from './run-identity.mjs';
 
 const dataUrl = new URL('../upstream/data/', import.meta.url);
 const data = Object.fromEntries(await Promise.all((await readdir(dataUrl)).filter(name => name.endsWith('.json') && !name.startsWith('local-')).map(async name => [name.slice(0, -5), JSON.parse(await readFile(new URL(name, dataUrl), 'utf8'))])));
@@ -87,6 +88,10 @@ for(const challenge of [null,CHALLENGE_PRESETS[1]]) test(`${challenge?'fixed-see
     await wait(frame => frame.t === 'm.public' && frame.phase === 'PREP' && frame.round === 2);
     const saved = await wait(frame => frame.t === 'local.checkpoint' && frame.snapshot.round === 2);
     if(challenge){assert.equal(saved.snapshot.options.seed,challenge.seed);assert.deepEqual(saved.snapshot.challenge,challenge);}
+    assert.equal(typeof saved.snapshot.runId,'string');
+    for(const legacy of [false,true]) {
+    const source=structuredClone(saved.snapshot);if(legacy)delete source.runId;
+    const expectedRunId=checkpointRunId(source);
     const restoredFrames = [];
     const restoredReceiver = new StateReceiver();
     const restoredServer = await createLocalServer({data, emit: frame => {
@@ -99,18 +104,32 @@ for(const challenge of [null,CHALLENGE_PRESETS[1]]) test(`${challenge?'fixed-see
     try {
       restoredServer.receive({t:'local.identity', playerId:welcome.playerId});
       restoredServer.receive({t:'hello',name:'继续演习',version:1,delta:STATE_DELTA_VERSION,rid:1});
-      restoredServer.receive({t:'local.restore',snapshot:saved.snapshot});
+      const invalid=structuredClone(source);invalid.state.match.stageId='missing-stage';
+      restoredServer.receive({t:'local.restore',requestId:'bad-restore',snapshot:invalid});
+      assert.ok(restoredFrames.some(f=>f.t==='local.restore-error'&&f.requestId==='bad-restore'));
+      assert.equal(restoredServer.lobby.rooms.size,0,'a failed trial restore leaves no orphan room');
+      restoredServer.receive({t:'local.restore',requestId:'good-restore',snapshot:source});
       await new Promise(resolve => setTimeout(resolve, 50));
       assert.ok(restoredFrames.some(f => f.t === 'local.restored'), JSON.stringify(restoredFrames.slice(-3)));
+      const confirmed=restoredFrames.find(f=>f.t==='local.restored');
+      assert.equal(confirmed.requestId,'good-restore');assert.equal(confirmed.snapshot.runId,expectedRunId);
+      const auto=restoredFrames.find(f=>f.t==='local.checkpoint');
+      assert.equal(auto.snapshot.runId,expectedRunId);assert.equal(auto.restoreRequestId,'good-restore');
       assert.ok(restoredFrames.some(f => f.t === 'm.public' && f.phase === 'PREP' && f.round === 2));
       const restoredMatch = [...restoredServer.lobby.rooms.values()].find(r => r.match).match;
       assert.equal(restoredMatch.order[0].playerId, welcome.playerId);
       assert.equal(restoredMatch.order[0].board.size, 1);
       assert.deepEqual(restoredMatch.personalChallenge||null,challenge);
     } finally { restoredServer.dispose(); }
+    }
     const fatal = frames.filter(frame => frame.t === 'error' && frame.rid == null);
     assert.deepEqual(fatal, []);
-    await ok({ t: 'g.leave' });
+    // Exercise the actual final-result path; leaving a room alone is not a
+    // victory/defeat settlement and intentionally does not emit m.result.
+    const finishing=[...server.lobby.rooms.values()].find(r=>r.match).match;
+    finishing.finish({victory:false,reason:'defeat'});
+    await wait(f=>f.t==='m.result');
+    assert.ok(frames.some(f=>f.t==='local.clear-checkpoint'&&f.runId===saved.snapshot.runId),'completion names the actual run, not whichever save is active');
   } finally {
     server.dispose();
   }
