@@ -15,6 +15,11 @@ for (const [from,to] of [['public',''],['shared','shared'],['server/sim','sim'],
   await cp(path.join(root,'upstream',from), path.join(dist,to), {recursive:true, filter: source => !/(?:\/assets|\/fonts)(?:\/|$)/.test(source)});
 }
 await cp(path.join(root,'personal/templates'),dist,{recursive:true});
+// Safari can evaluate concurrent dynamic kit imports before tier4's const helpers.
+// Initialize that shared dependency first; keep every upstream kit and rule intact.
+const kitsFile=path.join(dist,'sim/content/kits/index.js');
+await writeFile(kitsFile,replaceContract(await readFile(kitsFile,'utf8'),'export const KIT_FILES =',
+  "import './shared/tier4.js';\n\nexport const KIT_FILES =",'Safari kit helper initialization'));
 await mkdir(path.join(dist,'personal'),{recursive:true});
 await writeFile(path.join(dist,'personal/build-info.json'),JSON.stringify(identity));
 for (const name of ['local-client.mjs','personal.css','skeleton-codec.mjs','spine-urls.mjs']) await cp(path.join(root,'personal',name),path.join(dist,'personal',name));

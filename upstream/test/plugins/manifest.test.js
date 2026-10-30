@@ -134,14 +134,24 @@ test('manifest 2: what keeps a plugin out', () => {
   assert.match(problemsOf(marathon(), 'my_plug'), /not a plugin id/, 'no underscore: it would collide in record ids');
 });
 
-test('a value JSON.parse reads but JSON.stringify cannot write back (deep nesting) is quoted by its kind, never thrown', () => {
+test('deep nesting produces bounded diagnostics without depending on JSON.stringify stack limits', () => {
   const deep = (open, close, n = 20000) => JSON.parse(`${open.repeat(n)}${close.repeat(n)}`);
-  assert.match(readPluginManifest({ manifest: deep('[', ']') }, ctx('deep')).problems.join(), /"manifest": \[…\] is not 2/);
-  assert.match(readPluginManifest({ ...marathon(), api: deep('[', ']') }, ctx('marathon')).problems.join(), /"api": \[…\] is not an integer/);
-  assert.match(readPluginManifest({ ...marathon(), class: { a: deep('[', ']') } }, ctx('marathon')).problems.join(), /unknown class \{…\}/);
-  assert.match(normalizeManifest({ name: 'Q', machineTranslated: deep('[', ']') }, { id: 'qam', type: 'lang', lang: 'qam' }).warnings.join(), /"machineTranslated": \[…\] is not true or false/);
+  // Iterative serializers can write this input; both the 40-character quote and
+  // the overflow fallback satisfy the diagnostic contract. Never accept unbounded output.
+  assert.match(readPluginManifest({ manifest: deep('[', ']') }, ctx('deep')).problems.join(), /"manifest": (?:\[…\]|\[{40}) is not 2/);
+  assert.match(readPluginManifest({ ...marathon(), api: deep('[', ']') }, ctx('marathon')).problems.join(), /"api": (?:\[…\]|\[{40}) is not an integer/);
+  assert.match(readPluginManifest({ ...marathon(), class: { a: deep('[', ']') } }, ctx('marathon')).problems.join(), /unknown class (?:\{…\}|\{"a":\[{35}) \(known:/);
+  assert.match(normalizeManifest({ name: 'Q', machineTranslated: deep('[', ']') }, { id: 'qam', type: 'lang', lang: 'qam' }).warnings.join(), /"machineTranslated": (?:\[…\]|\[{40}) is not true or false/);
   assert.equal(normalizeManifest({ name: 'Q', machineTranslated: { yes: 1 } }, { id: 'qam', type: 'lang', lang: 'qam' }).warnings[0],
     '"machineTranslated": {"yes":1} is not true or false (read as false)', 'an ordinary value is quoted as 0.2.0 quoted it');
+});
+
+test('unserializable cyclic values still use the diagnostic fallback', () => {
+  const array = []; array.push(array);
+  const object = {}; object.self = object;
+  assert.match(readPluginManifest({ manifest: array }, ctx('deep')).problems.join(), /"manifest": \[…\] is not 2/);
+  assert.match(readPluginManifest({ ...marathon(), class: object }, ctx('marathon')).problems.join(), /unknown class \{…\}/);
+  assert.match(normalizeManifest({ name: 'Q', machineTranslated: array }, { id: 'qam', type: 'lang', lang: 'qam' }).warnings.join(), /"machineTranslated": \[…\] is not true or false/);
 });
 
 test('manifest 2: settings — four types, bounded, no free text', () => {
