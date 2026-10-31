@@ -7,6 +7,7 @@ import {execFileSync} from 'node:child_process';
 import {buildIdentity,replaceContract,verifyNoUntrackedEngineFiles} from './build-identity.mjs';
 import {adaptAudio,adaptAudioSettings,adaptAudioSettingsUI,AUDIO_LABELS} from './audio-build.mjs';
 import {adaptMapShadow} from './maps-build.mjs';
+import {loadSceneCatalog,sceneManifest} from './scene-assets.mjs';
 const identity=await buildIdentity();
 await verifyNoUntrackedEngineFiles();
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -48,7 +49,7 @@ await writeFile(assetsFile,assetsCode);
 for (const name of ['LICENSE','NOTICE.md']) await cp(path.join(root,name),path.join(dist,name));
 for (const [file,value] of Object.entries({
   'healthz':{ok:true,build:'personal-1.1.0',content:{plugins:0,notices:false},personal:true},
-  'data/local-assets.json':{groups:{}},
+  'data/local-assets.json':process.env.PERSONAL_SCENE_ORIGIN?sceneManifest(await loadSceneCatalog(),process.env.PERSONAL_SCENE_ORIGIN):{groups:{}},
   'plugins/index.json':{version:1,plugins:[]},
 })) {
   await mkdir(path.dirname(path.join(dist,file)),{recursive:true});

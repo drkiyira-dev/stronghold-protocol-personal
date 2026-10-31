@@ -1,0 +1,3292 @@
+{
+  "source": {
+    "tag": "v0.3.3",
+    "url": "https://api.github.com/repos/sganggs/Stronghold-Protocol/releases/assets/673357309",
+    "size": 861090941
+  },
+  "manifest": {
+    "version": 1,
+    "source": "upstream-release-v0.3.3",
+    "groups": {
+      "map/autochess": {
+        "TX_autochessi_BG": {
+          "path": "/assets/local/map/autochess/TX_autochessi_BG.webp",
+          "w": 1024,
+          "h": 1024,
+          "kind": "Texture2D",
+          "webp": "lossy"
+        },
+        "TX_autochessi_D": {
+          "path": "/assets/local/map/autochess/TX_autochessi_D.webp",
+          "w": 2048,
+          "h": 2048,
+          "kind": "Texture2D",
+          "webp": "lossy"
+        },
+        "TX_autochessi_E": {
+          "path": "/assets/local/map/autochess/TX_autochessi_E.webp",
+          "w": 512,
+          "h": 512,
+          "kind": "Texture2D",
+          "webp": "lossless"
+        },
+        "TX_autochessi_M": {
+          "path": "/assets/local/map/autochess/TX_autochessi_M.png",
+          "w": 512,
+          "h": 512,
+          "kind": "Texture2D"
+        },
+        "TX_autochessi_M_rough": {
+          "path": "/assets/local/map/autochess/TX_autochessi_M_rough.webp",
+          "w": 512,
+          "h": 512,
+          "kind": "Derived",
+          "from": "TX_autochessi_M",
+          "derive": "rough_from_gloss",
+          "webp": "lossless"
+        },
+        "TX_autochessi_N": {
+          "path": "/assets/local/map/autochess/TX_autochessi_N.png",
+          "w": 1024,
+          "h": 1024,
+          "kind": "Texture2D"
+        },
+        "TX_autochessi_N_rgb": {
+          "path": "/assets/local/map/autochess/TX_autochessi_N_rgb.webp",
+          "w": 1024,
+          "h": 1024,
+          "kind": "Derived",
+          "from": "TX_autochessi_N",
+          "derive": "normal_rg",
+          "webp": "lossless"
+        },
+        "TX_autochessi_Transparent_D": {
+          "path": "/assets/local/map/autochess/TX_autochessi_Transparent_D.png",
+          "w": 1024,
+          "h": 1024,
+          "kind": "Texture2D"
+        },
+        "TX_autochessi_Transparent_E": {
+          "path": "/assets/local/map/autochess/TX_autochessi_Transparent_E.png",
+          "w": 512,
+          "h": 512,
+          "kind": "Texture2D"
+        },
+        "TX_autochessi_Transparent_M": {
+          "path": "/assets/local/map/autochess/TX_autochessi_Transparent_M.png",
+          "w": 1024,
+          "h": 1024,
+          "kind": "Texture2D"
+        },
+        "TX_autochessi_Transparent_N": {
+          "path": "/assets/local/map/autochess/TX_autochessi_Transparent_N.png",
+          "w": 1024,
+          "h": 1024,
+          "kind": "Texture2D"
+        },
+        "TX_autochessi_common_D": {
+          "path": "/assets/local/map/autochess/TX_autochessi_common_D.webp",
+          "w": 1024,
+          "h": 1024,
+          "kind": "Texture2D",
+          "webp": "lossy"
+        },
+        "TX_autochessi_common_E": {
+          "path": "/assets/local/map/autochess/TX_autochessi_common_E.webp",
+          "w": 1024,
+          "h": 1024,
+          "kind": "Texture2D",
+          "webp": "lossless"
+        },
+        "materials": {
+          "path": "/assets/local/map/autochess/materials.json",
+          "kind": "Materials",
+          "count": 4
+        }
+      },
+      "map/autochesssand": {
+        "TX_AutochessSand_A": {
+          "path": "/assets/local/map/autochesssand/TX_AutochessSand_A.png",
+          "w": 2048,
+          "h": 2048,
+          "kind": "Texture2D"
+        },
+        "TX_AutochessSand_Grass_A": {
+          "path": "/assets/local/map/autochesssand/TX_AutochessSand_Grass_A.png",
+          "w": 1024,
+          "h": 1024,
+          "kind": "Texture2D"
+        },
+        "TX_AutochessSand_Grass_M": {
+          "path": "/assets/local/map/autochesssand/TX_AutochessSand_Grass_M.png",
+          "w": 512,
+          "h": 512,
+          "kind": "Texture2D"
+        },
+        "TX_AutochessSand_Grass_N": {
+          "path": "/assets/local/map/autochesssand/TX_AutochessSand_Grass_N.png",
+          "w": 512,
+          "h": 512,
+          "kind": "Texture2D"
+        },
+        "TX_AutochessSand_M": {
+          "path": "/assets/local/map/autochesssand/TX_AutochessSand_M.png",
+          "w": 1024,
+          "h": 1024,
+          "kind": "Texture2D"
+        },
+        "TX_AutochessSand_N": {
+          "path": "/assets/local/map/autochesssand/TX_AutochessSand_N.png",
+          "w": 1024,
+          "h": 1024,
+          "kind": "Texture2D"
+        },
+        "TX_AutochessSand_background_A": {
+          "path": "/assets/local/map/autochesssand/TX_AutochessSand_background_A.png",
+          "w": 512,
+          "h": 512,
+          "kind": "Texture2D"
+        },
+        "TX_AutochessSand_background_N": {
+          "path": "/assets/local/map/autochesssand/TX_AutochessSand_background_N.png",
+          "w": 512,
+          "h": 512,
+          "kind": "Texture2D"
+        },
+        "TX_AutochessSand_common_A": {
+          "path": "/assets/local/map/autochesssand/TX_AutochessSand_common_A.png",
+          "w": 1024,
+          "h": 1024,
+          "kind": "Texture2D"
+        },
+        "TX_AutochessSand_sand_A": {
+          "path": "/assets/local/map/autochesssand/TX_AutochessSand_sand_A.png",
+          "w": 1024,
+          "h": 1024,
+          "kind": "Texture2D"
+        },
+        "TX_AutochessSand_shuidi_A": {
+          "path": "/assets/local/map/autochesssand/TX_AutochessSand_shuidi_A.png",
+          "w": 1024,
+          "h": 1024,
+          "kind": "Texture2D"
+        },
+        "TX_AutochessSand_shuidi_N": {
+          "path": "/assets/local/map/autochesssand/TX_AutochessSand_shuidi_N.png",
+          "w": 1024,
+          "h": 1024,
+          "kind": "Texture2D"
+        },
+        "materials": {
+          "path": "/assets/local/map/autochesssand/materials.json",
+          "kind": "Materials",
+          "count": 8
+        }
+      },
+      "map/common": {
+        "TX_wind_device": {
+          "path": "/assets/local/map/common/TX_wind_device.webp",
+          "w": 1024,
+          "h": 1024,
+          "kind": "Texture2D",
+          "webp": "lossy"
+        },
+        "materials": {
+          "path": "/assets/local/map/common/materials.json",
+          "kind": "Materials",
+          "count": 1
+        }
+      },
+      "map/fx": {
+        "S_start_Fly_down": {
+          "path": "/assets/local/map/fx/S_start_Fly_down.obj",
+          "kind": "Mesh",
+          "verts": 4
+        },
+        "S_start_Fly_mid": {
+          "path": "/assets/local/map/fx/S_start_Fly_mid.obj",
+          "kind": "Mesh",
+          "verts": 4
+        },
+        "S_start_Fly_up": {
+          "path": "/assets/local/map/fx/S_start_Fly_up.obj",
+          "kind": "Mesh",
+          "verts": 4
+        },
+        "Start_back": {
+          "path": "/assets/local/map/fx/Start_back.obj",
+          "kind": "Mesh",
+          "verts": 20
+        },
+        "Start_back_4235658232235163369": {
+          "path": "/assets/local/map/fx/Start_back_4235658232235163369.obj",
+          "kind": "Mesh",
+          "verts": 16
+        },
+        "Start_down": {
+          "path": "/assets/local/map/fx/Start_down.obj",
+          "kind": "Mesh",
+          "verts": 24
+        },
+        "Start_down1": {
+          "path": "/assets/local/map/fx/Start_down1.obj",
+          "kind": "Mesh",
+          "verts": 40
+        },
+        "Start_up": {
+          "path": "/assets/local/map/fx/Start_up.obj",
+          "kind": "Mesh",
+          "verts": 60
+        },
+        "Start_up1": {
+          "path": "/assets/local/map/fx/Start_up1.obj",
+          "kind": "Mesh",
+          "verts": 60
+        },
+        "T_ending_A": {
+          "path": "/assets/local/map/fx/T_ending_A.png",
+          "w": 128,
+          "h": 128,
+          "kind": "Texture2D"
+        },
+        "T_ending_P": {
+          "path": "/assets/local/map/fx/T_ending_P.png",
+          "w": 128,
+          "h": 128,
+          "kind": "Texture2D"
+        },
+        "T_ending_arrow": {
+          "path": "/assets/local/map/fx/T_ending_arrow.png",
+          "w": 128,
+          "h": 128,
+          "kind": "Texture2D"
+        },
+        "T_ending_grey": {
+          "path": "/assets/local/map/fx/T_ending_grey.png",
+          "w": 128,
+          "h": 128,
+          "kind": "Texture2D"
+        },
+        "T_ending_multiplayer_01": {
+          "path": "/assets/local/map/fx/T_ending_multiplayer_01.png",
+          "w": 128,
+          "h": 128,
+          "kind": "Texture2D"
+        },
+        "T_ending_multiplayer_02": {
+          "path": "/assets/local/map/fx/T_ending_multiplayer_02.png",
+          "w": 128,
+          "h": 128,
+          "kind": "Texture2D"
+        },
+        "T_ending_multiplayer_03": {
+          "path": "/assets/local/map/fx/T_ending_multiplayer_03.png",
+          "w": 256,
+          "h": 256,
+          "kind": "Texture2D"
+        },
+        "T_ending_multiplayer_04": {
+          "path": "/assets/local/map/fx/T_ending_multiplayer_04.png",
+          "w": 256,
+          "h": 256,
+          "kind": "Texture2D"
+        },
+        "T_starting_A": {
+          "path": "/assets/local/map/fx/T_starting_A.png",
+          "w": 128,
+          "h": 128,
+          "kind": "Texture2D"
+        },
+        "T_starting_A_green": {
+          "path": "/assets/local/map/fx/T_starting_A_green.png",
+          "w": 128,
+          "h": 128,
+          "kind": "Texture2D"
+        },
+        "T_starting_Mask": {
+          "path": "/assets/local/map/fx/T_starting_Mask.png",
+          "w": 128,
+          "h": 128,
+          "kind": "Texture2D"
+        },
+        "T_starting_Mask2": {
+          "path": "/assets/local/map/fx/T_starting_Mask2.png",
+          "w": 128,
+          "h": 128,
+          "kind": "Texture2D"
+        },
+        "[opt]merged_textures": {
+          "path": "/assets/local/map/fx/[opt]merged_textures.webp",
+          "w": 256,
+          "h": 256,
+          "kind": "Texture2D",
+          "webp": "lossless"
+        },
+        "[opt]merged_textures_2": {
+          "path": "/assets/local/map/fx/[opt]merged_textures_2.png",
+          "w": 256,
+          "h": 256,
+          "kind": "Texture2D"
+        },
+        "[opt]merged_textures_green": {
+          "path": "/assets/local/map/fx/[opt]merged_textures_green.png",
+          "w": 256,
+          "h": 256,
+          "kind": "Texture2D"
+        },
+        "[opt]merged_textures_multiplayer_01": {
+          "path": "/assets/local/map/fx/[opt]merged_textures_multiplayer_01.png",
+          "w": 256,
+          "h": 256,
+          "kind": "Texture2D"
+        },
+        "[opt]merged_textures_multiplayer_02": {
+          "path": "/assets/local/map/fx/[opt]merged_textures_multiplayer_02.png",
+          "w": 256,
+          "h": 256,
+          "kind": "Texture2D"
+        },
+        "materials": {
+          "path": "/assets/local/map/fx/materials.json",
+          "kind": "Materials",
+          "count": 34
+        },
+        "pPlane2": {
+          "path": "/assets/local/map/fx/pPlane2.obj",
+          "kind": "Mesh",
+          "verts": 100
+        },
+        "prefab": {
+          "path": "/assets/local/map/fx/prefab.json",
+          "kind": "Prefab",
+          "count": 17
+        }
+      },
+      "map/water": {
+        "TX_Caustics256": {
+          "path": "/assets/local/map/water/TX_Caustics256.webp",
+          "w": 256,
+          "h": 256,
+          "kind": "Texture2D",
+          "webp": "lossy"
+        },
+        "TX_SmoothWaves": {
+          "path": "/assets/local/map/water/TX_SmoothWaves.png",
+          "w": 256,
+          "h": 256,
+          "kind": "Texture2D"
+        },
+        "TX_WaterNoise": {
+          "path": "/assets/local/map/water/TX_WaterNoise.png",
+          "w": 256,
+          "h": 256,
+          "kind": "Texture2D"
+        },
+        "TX_Water_Foam": {
+          "path": "/assets/local/map/water/TX_Water_Foam.png",
+          "w": 256,
+          "h": 256,
+          "kind": "Texture2D"
+        },
+        "T_noise_clouds_01": {
+          "path": "/assets/local/map/water/T_noise_clouds_01.webp",
+          "w": 1024,
+          "h": 1024,
+          "kind": "Texture2D",
+          "webp": "lossless"
+        },
+        "[ucp]TX_water_normal": {
+          "path": "/assets/local/map/water/[ucp]TX_water_normal.webp",
+          "w": 256,
+          "h": 256,
+          "kind": "Texture2D",
+          "webp": "lossless"
+        }
+      },
+      "mesh/map_autochess_bkg": {
+        "S_Background_shadow": {
+          "path": "/assets/local/mesh/map_autochess_bkg/S_Background_shadow.obj",
+          "kind": "Mesh",
+          "verts": 24
+        },
+        "materials": {
+          "path": "/assets/local/mesh/map_autochess_bkg/materials.json",
+          "kind": "Materials",
+          "count": 1
+        },
+        "pPlane1": {
+          "path": "/assets/local/mesh/map_autochess_bkg/pPlane1.obj",
+          "kind": "Mesh",
+          "verts": 4
+        },
+        "prefab": {
+          "path": "/assets/local/mesh/map_autochess_bkg/prefab.json",
+          "kind": "Prefab",
+          "count": 2
+        }
+      },
+      "mesh/s_background_common": {
+        "pPlane1": {
+          "path": "/assets/local/mesh/s_background_common/pPlane1.obj",
+          "kind": "Mesh",
+          "verts": 4
+        },
+        "prefab": {
+          "path": "/assets/local/mesh/s_background_common/prefab.json",
+          "kind": "Prefab",
+          "count": 1
+        }
+      },
+      "mesh/s_common_box_01": {
+        "pCube2": {
+          "path": "/assets/local/mesh/s_common_box_01/pCube2.obj",
+          "kind": "Mesh",
+          "verts": 25
+        },
+        "prefab": {
+          "path": "/assets/local/mesh/s_common_box_01/prefab.json",
+          "kind": "Prefab",
+          "count": 1
+        }
+      },
+      "mesh/s_wind_device": {
+        "S_wild_wind_device": {
+          "path": "/assets/local/mesh/s_wind_device/S_wild_wind_device.obj",
+          "kind": "Mesh",
+          "verts": 172
+        },
+        "prefab": {
+          "path": "/assets/local/mesh/s_wind_device/prefab.json",
+          "kind": "Prefab",
+          "count": 1
+        }
+      },
+      "mesh/trap_110": {
+        "TX_trap_1105_accrate": {
+          "path": "/assets/local/mesh/trap_110/TX_trap_1105_accrate.webp",
+          "w": 1024,
+          "h": 1024,
+          "kind": "Texture2D",
+          "webp": "lossy"
+        },
+        "TX_trap_1106_achplat": {
+          "path": "/assets/local/mesh/trap_110/TX_trap_1106_achplat.webp",
+          "w": 1024,
+          "h": 1024,
+          "kind": "Texture2D",
+          "webp": "lossy"
+        },
+        "materials": {
+          "path": "/assets/local/mesh/trap_110/materials.json",
+          "kind": "Materials",
+          "count": 2
+        },
+        "prefab": {
+          "path": "/assets/local/mesh/trap_110/prefab.json",
+          "kind": "Prefab",
+          "count": 2
+        },
+        "trap_1105_accrate": {
+          "path": "/assets/local/mesh/trap_110/trap_1105_accrate.obj",
+          "kind": "Mesh",
+          "verts": 636
+        },
+        "trap_1106_achplat": {
+          "path": "/assets/local/mesh/trap_110/trap_1106_achplat.obj",
+          "kind": "Mesh",
+          "verts": 460
+        }
+      },
+      "scene/act1autochess_m01": {
+        "bin": {
+          "path": "/assets/local/scene/act1autochess_m01/scene.bin",
+          "kind": "SceneData",
+          "bytes": 2108116
+        },
+        "env": {
+          "path": "/assets/local/scene/act1autochess_m01/env.png",
+          "w": 768,
+          "h": 255,
+          "kind": "Reflection"
+        },
+        "lm0": {
+          "path": "/assets/local/scene/act1autochess_m01/lm0.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossy",
+          "kind": "Lightmap"
+        },
+        "lm1": {
+          "path": "/assets/local/scene/act1autochess_m01/lm1.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossy",
+          "kind": "Lightmap"
+        },
+        "scene": {
+          "path": "/assets/local/scene/act1autochess_m01/scene.json",
+          "kind": "Scene",
+          "chunks": 17,
+          "version": 4
+        }
+      },
+      "scene/act1autochess_m02": {
+        "bin": {
+          "path": "/assets/local/scene/act1autochess_m02/scene.bin",
+          "kind": "SceneData",
+          "bytes": 2014344
+        },
+        "env": {
+          "path": "/assets/local/scene/act1autochess_m02/env.png",
+          "w": 768,
+          "h": 255,
+          "kind": "Reflection"
+        },
+        "lm0": {
+          "path": "/assets/local/scene/act1autochess_m02/lm0.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossy",
+          "kind": "Lightmap"
+        },
+        "lm1": {
+          "path": "/assets/local/scene/act1autochess_m02/lm1.webp",
+          "w": 512,
+          "h": 512,
+          "webp": "lossy",
+          "kind": "Lightmap"
+        },
+        "scene": {
+          "path": "/assets/local/scene/act1autochess_m02/scene.json",
+          "kind": "Scene",
+          "chunks": 19,
+          "version": 4
+        }
+      },
+      "scene/act1autochess_m03": {
+        "bin": {
+          "path": "/assets/local/scene/act1autochess_m03/scene.bin",
+          "kind": "SceneData",
+          "bytes": 2090668
+        },
+        "env": {
+          "path": "/assets/local/scene/act1autochess_m03/env.png",
+          "w": 768,
+          "h": 255,
+          "kind": "Reflection"
+        },
+        "lm0": {
+          "path": "/assets/local/scene/act1autochess_m03/lm0.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossy",
+          "kind": "Lightmap"
+        },
+        "scene": {
+          "path": "/assets/local/scene/act1autochess_m03/scene.json",
+          "kind": "Scene",
+          "chunks": 15,
+          "version": 4
+        }
+      },
+      "scene/act1autochess_m04": {
+        "bin": {
+          "path": "/assets/local/scene/act1autochess_m04/scene.bin",
+          "kind": "SceneData",
+          "bytes": 2080668
+        },
+        "env": {
+          "path": "/assets/local/scene/act1autochess_m04/env.png",
+          "w": 768,
+          "h": 255,
+          "kind": "Reflection"
+        },
+        "lm0": {
+          "path": "/assets/local/scene/act1autochess_m04/lm0.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossy",
+          "kind": "Lightmap"
+        },
+        "scene": {
+          "path": "/assets/local/scene/act1autochess_m04/scene.json",
+          "kind": "Scene",
+          "chunks": 16,
+          "version": 4
+        }
+      },
+      "scene/act1autochess_m05": {
+        "bin": {
+          "path": "/assets/local/scene/act1autochess_m05/scene.bin",
+          "kind": "SceneData",
+          "bytes": 2298124
+        },
+        "env": {
+          "path": "/assets/local/scene/act1autochess_m05/env.png",
+          "w": 768,
+          "h": 255,
+          "kind": "Reflection"
+        },
+        "lm0": {
+          "path": "/assets/local/scene/act1autochess_m05/lm0.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossy",
+          "kind": "Lightmap"
+        },
+        "scene": {
+          "path": "/assets/local/scene/act1autochess_m05/scene.json",
+          "kind": "Scene",
+          "chunks": 22,
+          "version": 4
+        }
+      },
+      "scene/act1autochess_m06": {
+        "bin": {
+          "path": "/assets/local/scene/act1autochess_m06/scene.bin",
+          "kind": "SceneData",
+          "bytes": 2070028
+        },
+        "env": {
+          "path": "/assets/local/scene/act1autochess_m06/env.png",
+          "w": 768,
+          "h": 255,
+          "kind": "Reflection"
+        },
+        "lm0": {
+          "path": "/assets/local/scene/act1autochess_m06/lm0.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossy",
+          "kind": "Lightmap"
+        },
+        "scene": {
+          "path": "/assets/local/scene/act1autochess_m06/scene.json",
+          "kind": "Scene",
+          "chunks": 16,
+          "version": 4
+        }
+      },
+      "scene/act1autochess_m07": {
+        "bin": {
+          "path": "/assets/local/scene/act1autochess_m07/scene.bin",
+          "kind": "SceneData",
+          "bytes": 2065484
+        },
+        "env": {
+          "path": "/assets/local/scene/act1autochess_m07/env.png",
+          "w": 768,
+          "h": 255,
+          "kind": "Reflection"
+        },
+        "lm0": {
+          "path": "/assets/local/scene/act1autochess_m07/lm0.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossy",
+          "kind": "Lightmap"
+        },
+        "scene": {
+          "path": "/assets/local/scene/act1autochess_m07/scene.json",
+          "kind": "Scene",
+          "chunks": 14,
+          "version": 4
+        }
+      },
+      "scene/act2autochess_m01": {
+        "bin": {
+          "path": "/assets/local/scene/act2autochess_m01/scene.bin",
+          "kind": "SceneData",
+          "bytes": 6544564
+        },
+        "env": {
+          "path": "/assets/local/scene/act2autochess_m01/env.png",
+          "w": 768,
+          "h": 255,
+          "kind": "Reflection"
+        },
+        "lm0": {
+          "path": "/assets/local/scene/act2autochess_m01/lm0.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossy",
+          "kind": "Lightmap"
+        },
+        "lm1": {
+          "path": "/assets/local/scene/act2autochess_m01/lm1.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossy",
+          "kind": "Lightmap"
+        },
+        "scene": {
+          "path": "/assets/local/scene/act2autochess_m01/scene.json",
+          "kind": "Scene",
+          "chunks": 19,
+          "version": 4
+        }
+      },
+      "scene/act2autochess_m02": {
+        "bin": {
+          "path": "/assets/local/scene/act2autochess_m02/scene.bin",
+          "kind": "SceneData",
+          "bytes": 2413496
+        },
+        "env": {
+          "path": "/assets/local/scene/act2autochess_m02/env.png",
+          "w": 768,
+          "h": 255,
+          "kind": "Reflection"
+        },
+        "lm0": {
+          "path": "/assets/local/scene/act2autochess_m02/lm0.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossy",
+          "kind": "Lightmap"
+        },
+        "lm1": {
+          "path": "/assets/local/scene/act2autochess_m02/lm1.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossy",
+          "kind": "Lightmap"
+        },
+        "lm2": {
+          "path": "/assets/local/scene/act2autochess_m02/lm2.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossy",
+          "kind": "Lightmap"
+        },
+        "lm3": {
+          "path": "/assets/local/scene/act2autochess_m02/lm3.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossy",
+          "kind": "Lightmap"
+        },
+        "lm4": {
+          "path": "/assets/local/scene/act2autochess_m02/lm4.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossy",
+          "kind": "Lightmap"
+        },
+        "scene": {
+          "path": "/assets/local/scene/act2autochess_m02/scene.json",
+          "kind": "Scene",
+          "chunks": 36,
+          "version": 4
+        }
+      },
+      "scene/act2autochess_m03": {
+        "bin": {
+          "path": "/assets/local/scene/act2autochess_m03/scene.bin",
+          "kind": "SceneData",
+          "bytes": 3020640
+        },
+        "env": {
+          "path": "/assets/local/scene/act2autochess_m03/env.png",
+          "w": 768,
+          "h": 255,
+          "kind": "Reflection"
+        },
+        "lm0": {
+          "path": "/assets/local/scene/act2autochess_m03/lm0.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossy",
+          "kind": "Lightmap"
+        },
+        "lm1": {
+          "path": "/assets/local/scene/act2autochess_m03/lm1.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossy",
+          "kind": "Lightmap"
+        },
+        "scene": {
+          "path": "/assets/local/scene/act2autochess_m03/scene.json",
+          "kind": "Scene",
+          "chunks": 21,
+          "version": 4
+        }
+      },
+      "scene/act2autochess_m04": {
+        "bin": {
+          "path": "/assets/local/scene/act2autochess_m04/scene.bin",
+          "kind": "SceneData",
+          "bytes": 2139668
+        },
+        "env": {
+          "path": "/assets/local/scene/act2autochess_m04/env.png",
+          "w": 768,
+          "h": 255,
+          "kind": "Reflection"
+        },
+        "lm0": {
+          "path": "/assets/local/scene/act2autochess_m04/lm0.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossy",
+          "kind": "Lightmap"
+        },
+        "lm1": {
+          "path": "/assets/local/scene/act2autochess_m04/lm1.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossy",
+          "kind": "Lightmap"
+        },
+        "scene": {
+          "path": "/assets/local/scene/act2autochess_m04/scene.json",
+          "kind": "Scene",
+          "chunks": 26,
+          "version": 4
+        }
+      },
+      "scene/tex": {
+        "TX_AutochessSand_A": {
+          "path": "/assets/local/scene/tex/TX_AutochessSand_A.webp",
+          "w": 2048,
+          "h": 2048,
+          "webp": "lossy",
+          "kind": "Texture2D"
+        },
+        "TX_AutochessSand_Grass_A": {
+          "path": "/assets/local/scene/tex/TX_AutochessSand_Grass_A.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossy",
+          "kind": "Texture2D"
+        },
+        "TX_AutochessSand_Grass_M": {
+          "path": "/assets/local/scene/tex/TX_AutochessSand_Grass_M.webp",
+          "w": 512,
+          "h": 512,
+          "webp": "lossless",
+          "kind": "Texture2D"
+        },
+        "TX_AutochessSand_Grass_N": {
+          "path": "/assets/local/scene/tex/TX_AutochessSand_Grass_N.webp",
+          "w": 512,
+          "h": 512,
+          "webp": "lossless",
+          "kind": "Texture2D"
+        },
+        "TX_AutochessSand_M": {
+          "path": "/assets/local/scene/tex/TX_AutochessSand_M.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossless",
+          "kind": "Texture2D"
+        },
+        "TX_AutochessSand_N": {
+          "path": "/assets/local/scene/tex/TX_AutochessSand_N.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossless",
+          "kind": "Texture2D"
+        },
+        "TX_AutochessSand_background_A": {
+          "path": "/assets/local/scene/tex/TX_AutochessSand_background_A.webp",
+          "w": 512,
+          "h": 512,
+          "webp": "lossy",
+          "kind": "Texture2D"
+        },
+        "TX_AutochessSand_background_N": {
+          "path": "/assets/local/scene/tex/TX_AutochessSand_background_N.webp",
+          "w": 512,
+          "h": 512,
+          "webp": "lossless",
+          "kind": "Texture2D"
+        },
+        "TX_AutochessSand_common_A": {
+          "path": "/assets/local/scene/tex/TX_AutochessSand_common_A.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossy",
+          "kind": "Texture2D"
+        },
+        "TX_AutochessSand_sand_A": {
+          "path": "/assets/local/scene/tex/TX_AutochessSand_sand_A.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossy",
+          "kind": "Texture2D"
+        },
+        "TX_AutochessSand_shuidi_A": {
+          "path": "/assets/local/scene/tex/TX_AutochessSand_shuidi_A.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossy",
+          "kind": "Texture2D"
+        },
+        "TX_AutochessSand_shuidi_N": {
+          "path": "/assets/local/scene/tex/TX_AutochessSand_shuidi_N.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossless",
+          "kind": "Texture2D"
+        },
+        "TX_KXMR_A": {
+          "path": "/assets/local/scene/tex/TX_KXMR_A.webp",
+          "w": 2048,
+          "h": 2048,
+          "webp": "lossy",
+          "kind": "Texture2D"
+        },
+        "TX_KXMR_E": {
+          "path": "/assets/local/scene/tex/TX_KXMR_E.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossless",
+          "kind": "Texture2D"
+        },
+        "TX_KXMR_M": {
+          "path": "/assets/local/scene/tex/TX_KXMR_M.webp",
+          "w": 512,
+          "h": 512,
+          "webp": "lossless",
+          "kind": "Texture2D"
+        },
+        "TX_KXMR_N": {
+          "path": "/assets/local/scene/tex/TX_KXMR_N.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossless",
+          "kind": "Texture2D"
+        },
+        "TX_LMC_common_M": {
+          "path": "/assets/local/scene/tex/TX_LMC_common_M.webp",
+          "w": 512,
+          "h": 512,
+          "webp": "lossless",
+          "kind": "Texture2D"
+        },
+        "TX_LMZ_A": {
+          "path": "/assets/local/scene/tex/TX_LMZ_A.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossy",
+          "kind": "Texture2D"
+        },
+        "TX_LMZ_E": {
+          "path": "/assets/local/scene/tex/TX_LMZ_E.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossless",
+          "kind": "Texture2D"
+        },
+        "TX_LMZ_M": {
+          "path": "/assets/local/scene/tex/TX_LMZ_M.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossless",
+          "kind": "Texture2D"
+        },
+        "TX_LMZ_N": {
+          "path": "/assets/local/scene/tex/TX_LMZ_N.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossless",
+          "kind": "Texture2D"
+        },
+        "TX_LMZ_common": {
+          "path": "/assets/local/scene/tex/TX_LMZ_common.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossy",
+          "kind": "Texture2D"
+        },
+        "TX_LMZ_common_E": {
+          "path": "/assets/local/scene/tex/TX_LMZ_common_E.webp",
+          "w": 512,
+          "h": 512,
+          "webp": "lossless",
+          "kind": "Texture2D"
+        },
+        "TX_Syracuse_metro_BG": {
+          "path": "/assets/local/scene/tex/TX_Syracuse_metro_BG.webp",
+          "w": 1024,
+          "h": 512,
+          "webp": "lossy",
+          "kind": "Texture2D"
+        },
+        "TX_Syracuse_metro_D": {
+          "path": "/assets/local/scene/tex/TX_Syracuse_metro_D.webp",
+          "w": 2048,
+          "h": 2048,
+          "webp": "lossy",
+          "kind": "Texture2D"
+        },
+        "TX_Syracuse_metro_E": {
+          "path": "/assets/local/scene/tex/TX_Syracuse_metro_E.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossless",
+          "kind": "Texture2D"
+        },
+        "TX_Syracuse_metro_M": {
+          "path": "/assets/local/scene/tex/TX_Syracuse_metro_M.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossless",
+          "kind": "Texture2D"
+        },
+        "TX_Syracuse_metro_N": {
+          "path": "/assets/local/scene/tex/TX_Syracuse_metro_N.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossless",
+          "kind": "Texture2D"
+        },
+        "TX_Syracuse_metro_common_D": {
+          "path": "/assets/local/scene/tex/TX_Syracuse_metro_common_D.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossy",
+          "kind": "Texture2D"
+        },
+        "TX_Syracuse_metro_common_E": {
+          "path": "/assets/local/scene/tex/TX_Syracuse_metro_common_E.webp",
+          "w": 512,
+          "h": 512,
+          "webp": "lossless",
+          "kind": "Texture2D"
+        },
+        "TX_Syracuse_metro_common_M": {
+          "path": "/assets/local/scene/tex/TX_Syracuse_metro_common_M.webp",
+          "w": 512,
+          "h": 512,
+          "webp": "lossless",
+          "kind": "Texture2D"
+        },
+        "TX_Syracuse_metro_floor_D": {
+          "path": "/assets/local/scene/tex/TX_Syracuse_metro_floor_D.webp",
+          "w": 512,
+          "h": 512,
+          "webp": "lossy",
+          "kind": "Texture2D"
+        },
+        "TX_Syracuse_metro_floor_M": {
+          "path": "/assets/local/scene/tex/TX_Syracuse_metro_floor_M.webp",
+          "w": 512,
+          "h": 512,
+          "webp": "lossless",
+          "kind": "Texture2D"
+        },
+        "TX_Syracuse_metro_floor_N": {
+          "path": "/assets/local/scene/tex/TX_Syracuse_metro_floor_N.webp",
+          "w": 512,
+          "h": 512,
+          "webp": "lossless",
+          "kind": "Texture2D"
+        },
+        "TX_Syracuse_metro_grass_D": {
+          "path": "/assets/local/scene/tex/TX_Syracuse_metro_grass_D.webp",
+          "w": 1024,
+          "h": 1024,
+          "webp": "lossy",
+          "kind": "Texture2D"
+        },
+        "TX_Syracuse_metro_grass_M": {
+          "path": "/assets/local/scene/tex/TX_Syracuse_metro_grass_M.webp",
+          "w": 512,
+          "h": 512,
+          "webp": "lossless",
+          "kind": "Texture2D"
+        },
+        "fangkuai_06": {
+          "path": "/assets/local/scene/tex/fangkuai_06.webp",
+          "w": 128,
+          "h": 128,
+          "webp": "lossy",
+          "kind": "Texture2D"
+        }
+      }
+    }
+  },
+  "files": {
+    "mesh/s_background_common/pPlane1.obj": {
+      "name": "Stronghold-Protocol/public/assets/local/mesh/s_background_common/pPlane1.obj",
+      "method": 8,
+      "crc": 28812187,
+      "compressed": 77,
+      "size": 174,
+      "offset": 316363444,
+      "span": 183
+    },
+    "mesh/s_background_common/prefab.json": {
+      "name": "Stronghold-Protocol/public/assets/local/mesh/s_background_common/prefab.json",
+      "method": 8,
+      "crc": 1813291788,
+      "compressed": 120,
+      "size": 164,
+      "offset": 316363627,
+      "span": 226
+    },
+    "mesh/map_autochess_bkg/pPlane1.obj": {
+      "name": "Stronghold-Protocol/public/assets/local/mesh/map_autochess_bkg/pPlane1.obj",
+      "method": 8,
+      "crc": 28812187,
+      "compressed": 77,
+      "size": 174,
+      "offset": 316363946,
+      "span": 181
+    },
+    "mesh/map_autochess_bkg/materials.json": {
+      "name": "Stronghold-Protocol/public/assets/local/mesh/map_autochess_bkg/materials.json",
+      "method": 8,
+      "crc": 1380305234,
+      "compressed": 259,
+      "size": 450,
+      "offset": 316364127,
+      "span": 366
+    },
+    "mesh/map_autochess_bkg/S_Background_shadow.obj": {
+      "name": "Stronghold-Protocol/public/assets/local/mesh/map_autochess_bkg/S_Background_shadow.obj",
+      "method": 8,
+      "crc": 2563188087,
+      "compressed": 332,
+      "size": 1788,
+      "offset": 316364493,
+      "span": 448
+    },
+    "mesh/map_autochess_bkg/prefab.json": {
+      "name": "Stronghold-Protocol/public/assets/local/mesh/map_autochess_bkg/prefab.json",
+      "method": 8,
+      "crc": 333074402,
+      "compressed": 167,
+      "size": 343,
+      "offset": 316364941,
+      "span": 271
+    },
+    "mesh/s_common_box_01/pCube2.obj": {
+      "name": "Stronghold-Protocol/public/assets/local/mesh/s_common_box_01/pCube2.obj",
+      "method": 8,
+      "crc": 3193803286,
+      "compressed": 701,
+      "size": 3200,
+      "offset": 316365303,
+      "span": 802
+    },
+    "mesh/s_common_box_01/prefab.json": {
+      "name": "Stronghold-Protocol/public/assets/local/mesh/s_common_box_01/prefab.json",
+      "method": 8,
+      "crc": 1715812324,
+      "compressed": 108,
+      "size": 146,
+      "offset": 316366105,
+      "span": 210
+    },
+    "mesh/s_wind_device/S_wild_wind_device.obj": {
+      "name": "Stronghold-Protocol/public/assets/local/mesh/s_wind_device/S_wild_wind_device.obj",
+      "method": 8,
+      "crc": 4222813132,
+      "compressed": 4464,
+      "size": 21019,
+      "offset": 316366404,
+      "span": 4575
+    },
+    "mesh/s_wind_device/prefab.json": {
+      "name": "Stronghold-Protocol/public/assets/local/mesh/s_wind_device/prefab.json",
+      "method": 8,
+      "crc": 108577826,
+      "compressed": 101,
+      "size": 153,
+      "offset": 316370979,
+      "span": 201
+    },
+    "mesh/trap_110/TX_trap_1105_accrate.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/mesh/trap_110/TX_trap_1105_accrate.webp",
+      "method": 8,
+      "crc": 2300724602,
+      "compressed": 75919,
+      "size": 75904,
+      "offset": 316371264,
+      "span": 76028
+    },
+    "mesh/trap_110/trap_1106_achplat.obj": {
+      "name": "Stronghold-Protocol/public/assets/local/mesh/trap_110/trap_1106_achplat.obj",
+      "method": 8,
+      "crc": 1455084137,
+      "compressed": 5837,
+      "size": 42717,
+      "offset": 316447292,
+      "span": 5942
+    },
+    "mesh/trap_110/TX_trap_1106_achplat.png": {
+      "name": "Stronghold-Protocol/public/assets/local/mesh/trap_110/TX_trap_1106_achplat.png",
+      "method": 8,
+      "crc": 3854705070,
+      "compressed": 274487,
+      "size": 275393,
+      "offset": 316453234,
+      "span": 274595
+    },
+    "mesh/trap_110/TX_trap_1106_achplat.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/mesh/trap_110/TX_trap_1106_achplat.webp",
+      "method": 8,
+      "crc": 2995967897,
+      "compressed": 77411,
+      "size": 77396,
+      "offset": 316727829,
+      "span": 77520
+    },
+    "mesh/trap_110/trap_1105_accrate.obj": {
+      "name": "Stronghold-Protocol/public/assets/local/mesh/trap_110/trap_1105_accrate.obj",
+      "method": 8,
+      "crc": 3897599229,
+      "compressed": 7620,
+      "size": 62395,
+      "offset": 316805349,
+      "span": 7725
+    },
+    "mesh/trap_110/materials.json": {
+      "name": "Stronghold-Protocol/public/assets/local/mesh/trap_110/materials.json",
+      "method": 8,
+      "crc": 2675187690,
+      "compressed": 400,
+      "size": 1357,
+      "offset": 316813074,
+      "span": 498
+    },
+    "mesh/trap_110/prefab.json": {
+      "name": "Stronghold-Protocol/public/assets/local/mesh/trap_110/prefab.json",
+      "method": 8,
+      "crc": 3295137104,
+      "compressed": 127,
+      "size": 353,
+      "offset": 316813572,
+      "span": 222
+    },
+    "mesh/trap_110/TX_trap_1105_accrate.png": {
+      "name": "Stronghold-Protocol/public/assets/local/mesh/trap_110/TX_trap_1105_accrate.png",
+      "method": 8,
+      "crc": 2358472493,
+      "compressed": 280688,
+      "size": 282842,
+      "offset": 316813794,
+      "span": 280796
+    },
+    "map/autochesssand/TX_AutochessSand_background_A.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochesssand/TX_AutochessSand_background_A.png",
+      "method": 8,
+      "crc": 519561748,
+      "compressed": 120808,
+      "size": 120788,
+      "offset": 419158779,
+      "span": 120929
+    },
+    "map/autochesssand/TX_AutochessSand_M.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochesssand/TX_AutochessSand_M.png",
+      "method": 8,
+      "crc": 2790094365,
+      "compressed": 559575,
+      "size": 560705,
+      "offset": 419279708,
+      "span": 559685
+    },
+    "map/autochesssand/TX_AutochessSand_Grass_A.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochesssand/TX_AutochessSand_Grass_A.png",
+      "method": 8,
+      "crc": 1839259157,
+      "compressed": 466227,
+      "size": 470210,
+      "offset": 419839393,
+      "span": 466343
+    },
+    "map/autochesssand/TX_AutochessSand_shuidi_N.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochesssand/TX_AutochessSand_shuidi_N.png",
+      "method": 8,
+      "crc": 3435271187,
+      "compressed": 2227059,
+      "size": 2226719,
+      "offset": 420305736,
+      "span": 2227176
+    },
+    "map/autochesssand/TX_AutochessSand_N.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochesssand/TX_AutochessSand_N.png",
+      "method": 8,
+      "crc": 232097786,
+      "compressed": 393739,
+      "size": 398293,
+      "offset": 422532912,
+      "span": 393849
+    },
+    "map/autochesssand/TX_AutochessSand_common_A.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochesssand/TX_AutochessSand_common_A.png",
+      "method": 8,
+      "crc": 3628222437,
+      "compressed": 474402,
+      "size": 475709,
+      "offset": 422926761,
+      "span": 474519
+    },
+    "map/autochesssand/materials.json": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochesssand/materials.json",
+      "method": 8,
+      "crc": 580218796,
+      "compressed": 1703,
+      "size": 11623,
+      "offset": 423401280,
+      "span": 1805
+    },
+    "map/autochesssand/TX_AutochessSand_background_N.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochesssand/TX_AutochessSand_background_N.png",
+      "method": 8,
+      "crc": 3120956460,
+      "compressed": 315095,
+      "size": 315045,
+      "offset": 423403085,
+      "span": 315216
+    },
+    "map/autochesssand/TX_AutochessSand_Grass_N.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochesssand/TX_AutochessSand_Grass_N.png",
+      "method": 8,
+      "crc": 302476911,
+      "compressed": 93411,
+      "size": 95760,
+      "offset": 423718301,
+      "span": 93527
+    },
+    "map/autochesssand/TX_AutochessSand_shuidi_A.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochesssand/TX_AutochessSand_shuidi_A.png",
+      "method": 8,
+      "crc": 3798312815,
+      "compressed": 829959,
+      "size": 829829,
+      "offset": 423811828,
+      "span": 830076
+    },
+    "map/autochesssand/TX_AutochessSand_A.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochesssand/TX_AutochessSand_A.png",
+      "method": 8,
+      "crc": 3882227767,
+      "compressed": 1914166,
+      "size": 1921276,
+      "offset": 424641904,
+      "span": 1914276
+    },
+    "map/autochesssand/TX_AutochessSand_Grass_M.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochesssand/TX_AutochessSand_Grass_M.png",
+      "method": 8,
+      "crc": 745531982,
+      "compressed": 98206,
+      "size": 98370,
+      "offset": 426556180,
+      "span": 98322
+    },
+    "map/autochesssand/TX_AutochessSand_sand_A.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochesssand/TX_AutochessSand_sand_A.png",
+      "method": 8,
+      "crc": 944103811,
+      "compressed": 508055,
+      "size": 511516,
+      "offset": 426654502,
+      "span": 508170
+    },
+    "map/water/T_noise_clouds_01.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/map/water/T_noise_clouds_01.webp",
+      "method": 8,
+      "crc": 3505210923,
+      "compressed": 197217,
+      "size": 197182,
+      "offset": 427162752,
+      "span": 197319
+    },
+    "map/water/[ucp]TX_water_normal.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/map/water/[ucp]TX_water_normal.webp",
+      "method": 8,
+      "crc": 547057388,
+      "compressed": 59082,
+      "size": 59072,
+      "offset": 427360071,
+      "span": 59187
+    },
+    "map/water/TX_Water_Foam.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/water/TX_Water_Foam.png",
+      "method": 8,
+      "crc": 2438386902,
+      "compressed": 38130,
+      "size": 38283,
+      "offset": 427419258,
+      "span": 38227
+    },
+    "map/water/[ucp]TX_water_normal.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/water/[ucp]TX_water_normal.png",
+      "method": 8,
+      "crc": 2158450523,
+      "compressed": 89100,
+      "size": 89085,
+      "offset": 427457485,
+      "span": 89204
+    },
+    "map/water/TX_SmoothWaves.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/water/TX_SmoothWaves.png",
+      "method": 8,
+      "crc": 916714657,
+      "compressed": 62749,
+      "size": 62739,
+      "offset": 427546689,
+      "span": 62847
+    },
+    "map/water/TX_WaterNoise.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/water/TX_WaterNoise.png",
+      "method": 8,
+      "crc": 4279819016,
+      "compressed": 67562,
+      "size": 67547,
+      "offset": 427609536,
+      "span": 67659
+    },
+    "map/water/TX_Caustics256.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/water/TX_Caustics256.png",
+      "method": 8,
+      "crc": 736217845,
+      "compressed": 96380,
+      "size": 96365,
+      "offset": 427677195,
+      "span": 96478
+    },
+    "map/water/T_noise_clouds_01.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/water/T_noise_clouds_01.png",
+      "method": 8,
+      "crc": 2111084007,
+      "compressed": 428689,
+      "size": 430215,
+      "offset": 427773673,
+      "span": 428790
+    },
+    "map/water/TX_Caustics256.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/map/water/TX_Caustics256.webp",
+      "method": 0,
+      "crc": 1926430360,
+      "compressed": 15220,
+      "size": 15220,
+      "offset": 428202463,
+      "span": 15319
+    },
+    "map/fx/Start_up.obj": {
+      "name": "Stronghold-Protocol/public/assets/local/map/fx/Start_up.obj",
+      "method": 8,
+      "crc": 585841064,
+      "compressed": 623,
+      "size": 4920,
+      "offset": 428217859,
+      "span": 712
+    },
+    "map/fx/[opt]merged_textures_green.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/fx/[opt]merged_textures_green.png",
+      "method": 8,
+      "crc": 948541254,
+      "compressed": 12489,
+      "size": 12582,
+      "offset": 428218571,
+      "span": 12596
+    },
+    "map/fx/pPlane2.obj": {
+      "name": "Stronghold-Protocol/public/assets/local/map/fx/pPlane2.obj",
+      "method": 8,
+      "crc": 2172495972,
+      "compressed": 837,
+      "size": 7213,
+      "offset": 428231167,
+      "span": 925
+    },
+    "map/fx/T_starting_Mask.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/fx/T_starting_Mask.png",
+      "method": 0,
+      "crc": 624953396,
+      "compressed": 6533,
+      "size": 6533,
+      "offset": 428232092,
+      "span": 6629
+    },
+    "map/fx/T_starting_A_green.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/fx/T_starting_A_green.png",
+      "method": 8,
+      "crc": 891673398,
+      "compressed": 2471,
+      "size": 2523,
+      "offset": 428238721,
+      "span": 2570
+    },
+    "map/fx/T_ending_multiplayer_03.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/fx/T_ending_multiplayer_03.png",
+      "method": 8,
+      "crc": 2271510963,
+      "compressed": 22977,
+      "size": 23268,
+      "offset": 428241291,
+      "span": 23081
+    },
+    "map/fx/T_ending_multiplayer_02.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/fx/T_ending_multiplayer_02.png",
+      "method": 8,
+      "crc": 2485077542,
+      "compressed": 5110,
+      "size": 5164,
+      "offset": 428264372,
+      "span": 5214
+    },
+    "map/fx/[opt]merged_textures_multiplayer_02.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/fx/[opt]merged_textures_multiplayer_02.png",
+      "method": 8,
+      "crc": 447660389,
+      "compressed": 14606,
+      "size": 14736,
+      "offset": 428269586,
+      "span": 14722
+    },
+    "map/fx/Start_back.obj": {
+      "name": "Stronghold-Protocol/public/assets/local/map/fx/Start_back.obj",
+      "method": 8,
+      "crc": 2468356322,
+      "compressed": 342,
+      "size": 1688,
+      "offset": 428284308,
+      "span": 433
+    },
+    "map/fx/[opt]merged_textures.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/map/fx/[opt]merged_textures.webp",
+      "method": 0,
+      "crc": 1778110935,
+      "compressed": 5454,
+      "size": 5454,
+      "offset": 428284741,
+      "span": 5556
+    },
+    "map/fx/Start_back_4235658232235163369.obj": {
+      "name": "Stronghold-Protocol/public/assets/local/map/fx/Start_back_4235658232235163369.obj",
+      "method": 8,
+      "crc": 758212627,
+      "compressed": 270,
+      "size": 1310,
+      "offset": 428290297,
+      "span": 381
+    },
+    "map/fx/T_ending_multiplayer_01.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/fx/T_ending_multiplayer_01.png",
+      "method": 8,
+      "crc": 620092336,
+      "compressed": 4371,
+      "size": 4387,
+      "offset": 428290678,
+      "span": 4475
+    },
+    "map/fx/[opt]merged_textures_multiplayer_01.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/fx/[opt]merged_textures_multiplayer_01.png",
+      "method": 8,
+      "crc": 3045718743,
+      "compressed": 14212,
+      "size": 14317,
+      "offset": 428295153,
+      "span": 14328
+    },
+    "map/fx/S_start_Fly_down.obj": {
+      "name": "Stronghold-Protocol/public/assets/local/map/fx/S_start_Fly_down.obj",
+      "method": 8,
+      "crc": 3034049806,
+      "compressed": 108,
+      "size": 254,
+      "offset": 428309481,
+      "span": 205
+    },
+    "map/fx/T_ending_arrow.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/fx/T_ending_arrow.png",
+      "method": 8,
+      "crc": 2384033852,
+      "compressed": 1501,
+      "size": 1570,
+      "offset": 428309686,
+      "span": 1596
+    },
+    "map/fx/S_start_Fly_mid.obj": {
+      "name": "Stronghold-Protocol/public/assets/local/map/fx/S_start_Fly_mid.obj",
+      "method": 8,
+      "crc": 3356145343,
+      "compressed": 107,
+      "size": 252,
+      "offset": 428311282,
+      "span": 203
+    },
+    "map/fx/T_ending_multiplayer_04.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/fx/T_ending_multiplayer_04.png",
+      "method": 8,
+      "crc": 577081909,
+      "compressed": 24522,
+      "size": 24828,
+      "offset": 428311485,
+      "span": 24626
+    },
+    "map/fx/[opt]merged_textures_2.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/fx/[opt]merged_textures_2.png",
+      "method": 8,
+      "crc": 3168783783,
+      "compressed": 11049,
+      "size": 11171,
+      "offset": 428336111,
+      "span": 11152
+    },
+    "map/fx/T_ending_A.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/fx/T_ending_A.png",
+      "method": 8,
+      "crc": 2436990542,
+      "compressed": 2912,
+      "size": 2955,
+      "offset": 428347263,
+      "span": 3003
+    },
+    "map/fx/T_starting_A.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/fx/T_starting_A.png",
+      "method": 8,
+      "crc": 3969563146,
+      "compressed": 2964,
+      "size": 3003,
+      "offset": 428350266,
+      "span": 3057
+    },
+    "map/fx/Start_down1.obj": {
+      "name": "Stronghold-Protocol/public/assets/local/map/fx/Start_down1.obj",
+      "method": 8,
+      "crc": 348002930,
+      "compressed": 452,
+      "size": 3294,
+      "offset": 428353323,
+      "span": 544
+    },
+    "map/fx/S_start_Fly_up.obj": {
+      "name": "Stronghold-Protocol/public/assets/local/map/fx/S_start_Fly_up.obj",
+      "method": 8,
+      "crc": 2812450359,
+      "compressed": 106,
+      "size": 250,
+      "offset": 428353867,
+      "span": 201
+    },
+    "map/fx/materials.json": {
+      "name": "Stronghold-Protocol/public/assets/local/map/fx/materials.json",
+      "method": 8,
+      "crc": 327111569,
+      "compressed": 997,
+      "size": 22005,
+      "offset": 428354068,
+      "span": 1088
+    },
+    "map/fx/T_ending_P.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/fx/T_ending_P.png",
+      "method": 8,
+      "crc": 56372134,
+      "compressed": 1778,
+      "size": 1829,
+      "offset": 428355156,
+      "span": 1869
+    },
+    "map/fx/T_starting_Mask2.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/fx/T_starting_Mask2.png",
+      "method": 0,
+      "crc": 1785514687,
+      "compressed": 7567,
+      "size": 7567,
+      "offset": 428357025,
+      "span": 7664
+    },
+    "map/fx/Start_up1.obj": {
+      "name": "Stronghold-Protocol/public/assets/local/map/fx/Start_up1.obj",
+      "method": 8,
+      "crc": 1664321314,
+      "compressed": 621,
+      "size": 4876,
+      "offset": 428364689,
+      "span": 711
+    },
+    "map/fx/T_ending_grey.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/fx/T_ending_grey.png",
+      "method": 8,
+      "crc": 709804790,
+      "compressed": 3455,
+      "size": 3488,
+      "offset": 428365400,
+      "span": 3549
+    },
+    "map/fx/[opt]merged_textures.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/fx/[opt]merged_textures.png",
+      "method": 8,
+      "crc": 1175110831,
+      "compressed": 9823,
+      "size": 9914,
+      "offset": 428368949,
+      "span": 9924
+    },
+    "map/fx/Start_down.obj": {
+      "name": "Stronghold-Protocol/public/assets/local/map/fx/Start_down.obj",
+      "method": 8,
+      "crc": 3655264612,
+      "compressed": 328,
+      "size": 1998,
+      "offset": 428378873,
+      "span": 419
+    },
+    "map/fx/prefab.json": {
+      "name": "Stronghold-Protocol/public/assets/local/map/fx/prefab.json",
+      "method": 8,
+      "crc": 2102451055,
+      "compressed": 420,
+      "size": 2786,
+      "offset": 428379292,
+      "span": 508
+    },
+    "map/common/TX_wind_device.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/common/TX_wind_device.png",
+      "method": 8,
+      "crc": 42239381,
+      "compressed": 421238,
+      "size": 422802,
+      "offset": 428379881,
+      "span": 421337
+    },
+    "map/common/TX_wind_device.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/map/common/TX_wind_device.webp",
+      "method": 8,
+      "crc": 1964977451,
+      "compressed": 88395,
+      "size": 88446,
+      "offset": 428801218,
+      "span": 88495
+    },
+    "map/common/materials.json": {
+      "name": "Stronghold-Protocol/public/assets/local/map/common/materials.json",
+      "method": 8,
+      "crc": 163807628,
+      "compressed": 305,
+      "size": 551,
+      "offset": 428889713,
+      "span": 400
+    },
+    "map/autochess/TX_autochessi_E.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochess/TX_autochessi_E.webp",
+      "method": 0,
+      "crc": 3965065478,
+      "compressed": 14028,
+      "size": 14028,
+      "offset": 428890197,
+      "span": 14132
+    },
+    "map/autochess/TX_autochessi_M_rough.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochess/TX_autochessi_M_rough.png",
+      "method": 8,
+      "crc": 1147350011,
+      "compressed": 178901,
+      "size": 178871,
+      "offset": 428904329,
+      "span": 179010
+    },
+    "map/autochess/TX_autochessi_D.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochess/TX_autochessi_D.webp",
+      "method": 8,
+      "crc": 4007959108,
+      "compressed": 685213,
+      "size": 685108,
+      "offset": 429083339,
+      "span": 685317
+    },
+    "map/autochess/TX_autochessi_Transparent_E.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochess/TX_autochessi_Transparent_E.png",
+      "method": 8,
+      "crc": 183280641,
+      "compressed": 6921,
+      "size": 8719,
+      "offset": 429768656,
+      "span": 7036
+    },
+    "map/autochess/TX_autochessi_common_D.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochess/TX_autochessi_common_D.webp",
+      "method": 8,
+      "crc": 3234485848,
+      "compressed": 191334,
+      "size": 191638,
+      "offset": 429775692,
+      "span": 191445
+    },
+    "map/autochess/TX_autochessi_Transparent_D.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochess/TX_autochessi_Transparent_D.png",
+      "method": 8,
+      "crc": 980883080,
+      "compressed": 531932,
+      "size": 532969,
+      "offset": 429967137,
+      "span": 532047
+    },
+    "map/autochess/TX_autochessi_N_rgb.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochess/TX_autochessi_N_rgb.webp",
+      "method": 8,
+      "crc": 1326804304,
+      "compressed": 341908,
+      "size": 341894,
+      "offset": 430499184,
+      "span": 342016
+    },
+    "map/autochess/TX_autochessi_common_E.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochess/TX_autochessi_common_E.webp",
+      "method": 8,
+      "crc": 1993684054,
+      "compressed": 31696,
+      "size": 31816,
+      "offset": 430841200,
+      "span": 31807
+    },
+    "map/autochess/TX_autochessi_E.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochess/TX_autochessi_E.png",
+      "method": 8,
+      "crc": 3398603577,
+      "compressed": 22565,
+      "size": 23785,
+      "offset": 430873007,
+      "span": 22668
+    },
+    "map/autochess/TX_autochessi_D.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochess/TX_autochessi_D.png",
+      "method": 8,
+      "crc": 677915705,
+      "compressed": 3289834,
+      "size": 3289397,
+      "offset": 430895675,
+      "span": 3289937
+    },
+    "map/autochess/TX_autochessi_BG.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochess/TX_autochessi_BG.webp",
+      "method": 8,
+      "crc": 2195825360,
+      "compressed": 349137,
+      "size": 349082,
+      "offset": 434185612,
+      "span": 349242
+    },
+    "map/autochess/TX_autochessi_M_rough.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochess/TX_autochessi_M_rough.webp",
+      "method": 8,
+      "crc": 2952400815,
+      "compressed": 118712,
+      "size": 118692,
+      "offset": 434534854,
+      "span": 118822
+    },
+    "map/autochess/TX_autochessi_BG.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochess/TX_autochessi_BG.png",
+      "method": 8,
+      "crc": 3779164226,
+      "compressed": 1504619,
+      "size": 1504389,
+      "offset": 434653676,
+      "span": 1504723
+    },
+    "map/autochess/TX_autochessi_Transparent_N.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochess/TX_autochessi_Transparent_N.png",
+      "method": 8,
+      "crc": 705177536,
+      "compressed": 260234,
+      "size": 260574,
+      "offset": 436158399,
+      "span": 260349
+    },
+    "map/autochess/TX_autochessi_common_E.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochess/TX_autochessi_common_E.png",
+      "method": 8,
+      "crc": 1071182726,
+      "compressed": 53452,
+      "size": 59028,
+      "offset": 436418748,
+      "span": 53562
+    },
+    "map/autochess/TX_autochessi_common_D.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochess/TX_autochessi_common_D.png",
+      "method": 8,
+      "crc": 902152786,
+      "compressed": 436201,
+      "size": 438564,
+      "offset": 436472310,
+      "span": 436311
+    },
+    "map/autochess/TX_autochessi_Transparent_M.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochess/TX_autochessi_Transparent_M.png",
+      "method": 8,
+      "crc": 3991265585,
+      "compressed": 589990,
+      "size": 589939,
+      "offset": 436908621,
+      "span": 590105
+    },
+    "map/autochess/materials.json": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochess/materials.json",
+      "method": 8,
+      "crc": 1798277879,
+      "compressed": 776,
+      "size": 5045,
+      "offset": 437498726,
+      "span": 874
+    },
+    "map/autochess/TX_autochessi_M.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochess/TX_autochessi_M.png",
+      "method": 8,
+      "crc": 2343332796,
+      "compressed": 207356,
+      "size": 207321,
+      "offset": 437499600,
+      "span": 207459
+    },
+    "map/autochess/TX_autochessi_N.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochess/TX_autochessi_N.png",
+      "method": 8,
+      "crc": 2843984392,
+      "compressed": 392271,
+      "size": 392632,
+      "offset": 437707059,
+      "span": 392374
+    },
+    "map/autochess/TX_autochessi_N_rgb.png": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochess/TX_autochessi_N_rgb.png",
+      "method": 8,
+      "crc": 2872949442,
+      "compressed": 451585,
+      "size": 451905,
+      "offset": 438099433,
+      "span": 451692
+    },
+    "map/autochess/tiles.json": {
+      "name": "Stronghold-Protocol/public/assets/local/map/autochess/tiles.json",
+      "method": 8,
+      "crc": 1210717847,
+      "compressed": 1383,
+      "size": 8745,
+      "offset": 438551125,
+      "span": 1477
+    },
+    "scene/tex/TX_AutochessSand_background_A.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_AutochessSand_background_A.png",
+      "method": 8,
+      "crc": 519561748,
+      "compressed": 120808,
+      "size": 120788,
+      "offset": 438553036,
+      "span": 120921
+    },
+    "scene/tex/TX_AutochessSand_M.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_AutochessSand_M.png",
+      "method": 8,
+      "crc": 2790094365,
+      "compressed": 559575,
+      "size": 560705,
+      "offset": 438673957,
+      "span": 559677
+    },
+    "scene/tex/TX_Syracuse_metro_M.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_Syracuse_metro_M.png",
+      "method": 8,
+      "crc": 2686469379,
+      "compressed": 851926,
+      "size": 853288,
+      "offset": 439233634,
+      "span": 852029
+    },
+    "scene/tex/TX_AutochessSand_Grass_A.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_AutochessSand_Grass_A.png",
+      "method": 8,
+      "crc": 1839259157,
+      "compressed": 466227,
+      "size": 470210,
+      "offset": 440085663,
+      "span": 466335
+    },
+    "scene/tex/TX_Syracuse_metro_common_E.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_Syracuse_metro_common_E.png",
+      "method": 8,
+      "crc": 304948648,
+      "compressed": 27283,
+      "size": 29317,
+      "offset": 440551998,
+      "span": 27393
+    },
+    "scene/tex/TX_LMZ_E.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_LMZ_E.webp",
+      "method": 8,
+      "crc": 3713833279,
+      "compressed": 106266,
+      "size": 106322,
+      "offset": 440579391,
+      "span": 106359
+    },
+    "scene/tex/TX_Syracuse_metro_common_D.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_Syracuse_metro_common_D.png",
+      "method": 8,
+      "crc": 429230204,
+      "compressed": 318707,
+      "size": 320281,
+      "offset": 440685750,
+      "span": 318817
+    },
+    "scene/tex/TX_LMZ_A.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_LMZ_A.png",
+      "method": 8,
+      "crc": 3579419667,
+      "compressed": 759706,
+      "size": 759847,
+      "offset": 441004567,
+      "span": 759798
+    },
+    "scene/tex/TX_Syracuse_metro_grass_D.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_Syracuse_metro_grass_D.webp",
+      "method": 8,
+      "crc": 1334296925,
+      "compressed": 76831,
+      "size": 78004,
+      "offset": 441764365,
+      "span": 76941
+    },
+    "scene/tex/TX_AutochessSand_shuidi_N.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_AutochessSand_shuidi_N.png",
+      "method": 8,
+      "crc": 864208016,
+      "compressed": 2036328,
+      "size": 2036013,
+      "offset": 441841306,
+      "span": 2036437
+    },
+    "scene/tex/TX_AutochessSand_N.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_AutochessSand_N.png",
+      "method": 8,
+      "crc": 733741821,
+      "compressed": 364193,
+      "size": 367538,
+      "offset": 443877743,
+      "span": 364295
+    },
+    "scene/tex/TX_Syracuse_metro_N.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_Syracuse_metro_N.png",
+      "method": 8,
+      "crc": 4251137341,
+      "compressed": 621304,
+      "size": 621699,
+      "offset": 444242038,
+      "span": 621407
+    },
+    "scene/tex/TX_Syracuse_metro_common_M.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_Syracuse_metro_common_M.webp",
+      "method": 8,
+      "crc": 252497457,
+      "compressed": 14082,
+      "size": 14134,
+      "offset": 444863445,
+      "span": 14193
+    },
+    "scene/tex/TX_Syracuse_metro_M.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_Syracuse_metro_M.webp",
+      "method": 8,
+      "crc": 3195656733,
+      "compressed": 513592,
+      "size": 513512,
+      "offset": 444877638,
+      "span": 513696
+    },
+    "scene/tex/TX_Syracuse_metro_BG.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_Syracuse_metro_BG.png",
+      "method": 8,
+      "crc": 1713237923,
+      "compressed": 341554,
+      "size": 341499,
+      "offset": 445391334,
+      "span": 341658
+    },
+    "scene/tex/TX_AutochessSand_N.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_AutochessSand_N.webp",
+      "method": 8,
+      "crc": 4188083612,
+      "compressed": 291759,
+      "size": 291714,
+      "offset": 445732992,
+      "span": 291862
+    },
+    "scene/tex/TX_KXMR_N.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_KXMR_N.webp",
+      "method": 8,
+      "crc": 3120591665,
+      "compressed": 439761,
+      "size": 439818,
+      "offset": 446024854,
+      "span": 439855
+    },
+    "scene/tex/TX_AutochessSand_shuidi_N.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_AutochessSand_shuidi_N.webp",
+      "method": 8,
+      "crc": 1190098890,
+      "compressed": 1697769,
+      "size": 1697530,
+      "offset": 446464709,
+      "span": 1697879
+    },
+    "scene/tex/TX_Syracuse_metro_grass_M.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_Syracuse_metro_grass_M.png",
+      "method": 8,
+      "crc": 3295850734,
+      "compressed": 28397,
+      "size": 29531,
+      "offset": 448162588,
+      "span": 28506
+    },
+    "scene/tex/TX_LMZ_E.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_LMZ_E.png",
+      "method": 8,
+      "crc": 764488977,
+      "compressed": 160642,
+      "size": 165221,
+      "offset": 448191094,
+      "span": 160734
+    },
+    "scene/tex/TX_Syracuse_metro_floor_D.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_Syracuse_metro_floor_D.png",
+      "method": 8,
+      "crc": 3605912407,
+      "compressed": 230339,
+      "size": 230299,
+      "offset": 448351828,
+      "span": 230448
+    },
+    "scene/tex/TX_AutochessSand_Grass_N.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_AutochessSand_Grass_N.webp",
+      "method": 8,
+      "crc": 3879096472,
+      "compressed": 65118,
+      "size": 65112,
+      "offset": 448582276,
+      "span": 65227
+    },
+    "scene/tex/TX_LMZ_common.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_LMZ_common.webp",
+      "method": 8,
+      "crc": 3877938218,
+      "compressed": 202149,
+      "size": 202114,
+      "offset": 448647503,
+      "span": 202247
+    },
+    "scene/tex/TX_LMZ_common_E.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_LMZ_common_E.webp",
+      "method": 8,
+      "crc": 4067546483,
+      "compressed": 12634,
+      "size": 12660,
+      "offset": 448849750,
+      "span": 12734
+    },
+    "scene/tex/TX_LMC_common_M.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_LMC_common_M.png",
+      "method": 8,
+      "crc": 1033792904,
+      "compressed": 183118,
+      "size": 183652,
+      "offset": 448862484,
+      "span": 183217
+    },
+    "scene/tex/TX_KXMR_E.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_KXMR_E.webp",
+      "method": 8,
+      "crc": 2415240306,
+      "compressed": 206497,
+      "size": 206478,
+      "offset": 449045701,
+      "span": 206591
+    },
+    "scene/tex/TX_AutochessSand_common_A.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_AutochessSand_common_A.png",
+      "method": 8,
+      "crc": 3628222437,
+      "compressed": 474402,
+      "size": 475709,
+      "offset": 449252292,
+      "span": 474511
+    },
+    "scene/tex/TX_KXMR_M.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_KXMR_M.png",
+      "method": 8,
+      "crc": 2811256572,
+      "compressed": 144725,
+      "size": 145087,
+      "offset": 449726803,
+      "span": 144818
+    },
+    "scene/tex/TX_AutochessSand_background_A.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_AutochessSand_background_A.webp",
+      "method": 0,
+      "crc": 487020280,
+      "compressed": 15518,
+      "size": 15518,
+      "offset": 449871621,
+      "span": 15632
+    },
+    "scene/tex/TX_KXMR_N.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_KXMR_N.png",
+      "method": 8,
+      "crc": 1489013159,
+      "compressed": 547069,
+      "size": 551454,
+      "offset": 449887253,
+      "span": 547162
+    },
+    "scene/tex/TX_Syracuse_metro_floor_M.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_Syracuse_metro_floor_M.webp",
+      "method": 8,
+      "crc": 79006317,
+      "compressed": 97337,
+      "size": 97322,
+      "offset": 450434415,
+      "span": 97447
+    },
+    "scene/tex/TX_LMZ_N.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_LMZ_N.webp",
+      "method": 8,
+      "crc": 1980892803,
+      "compressed": 567303,
+      "size": 567230,
+      "offset": 450531862,
+      "span": 567396
+    },
+    "scene/tex/TX_LMC_common_M.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_LMC_common_M.webp",
+      "method": 8,
+      "crc": 3168463624,
+      "compressed": 107179,
+      "size": 107234,
+      "offset": 451099258,
+      "span": 107279
+    },
+    "scene/tex/TX_AutochessSand_common_A.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_AutochessSand_common_A.webp",
+      "method": 8,
+      "crc": 1169807103,
+      "compressed": 173397,
+      "size": 173470,
+      "offset": 451206537,
+      "span": 173507
+    },
+    "scene/tex/TX_KXMR_E.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_KXMR_E.png",
+      "method": 8,
+      "crc": 3564188449,
+      "compressed": 303289,
+      "size": 307741,
+      "offset": 451380044,
+      "span": 303382
+    },
+    "scene/tex/TX_LMZ_M.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_LMZ_M.webp",
+      "method": 8,
+      "crc": 516409862,
+      "compressed": 396554,
+      "size": 396554,
+      "offset": 451683426,
+      "span": 396647
+    },
+    "scene/tex/TX_LMZ_common.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_LMZ_common.png",
+      "method": 8,
+      "crc": 1856858659,
+      "compressed": 606132,
+      "size": 607254,
+      "offset": 452080073,
+      "span": 606229
+    },
+    "scene/tex/TX_Syracuse_metro_floor_N.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_Syracuse_metro_floor_N.webp",
+      "method": 8,
+      "crc": 2426661607,
+      "compressed": 376310,
+      "size": 376250,
+      "offset": 452686302,
+      "span": 376420
+    },
+    "scene/tex/TX_Syracuse_metro_E.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_Syracuse_metro_E.webp",
+      "method": 8,
+      "crc": 3781120795,
+      "compressed": 3887,
+      "size": 4080,
+      "offset": 453062722,
+      "span": 3991
+    },
+    "scene/tex/TX_LMZ_A.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_LMZ_A.webp",
+      "method": 8,
+      "crc": 1235847086,
+      "compressed": 165588,
+      "size": 165558,
+      "offset": 453066713,
+      "span": 165681
+    },
+    "scene/tex/TX_Syracuse_metro_common_E.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_Syracuse_metro_common_E.webp",
+      "method": 8,
+      "crc": 1018556285,
+      "compressed": 17279,
+      "size": 17312,
+      "offset": 453232394,
+      "span": 17390
+    },
+    "scene/tex/TX_AutochessSand_sand_A.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_AutochessSand_sand_A.webp",
+      "method": 8,
+      "crc": 2952867197,
+      "compressed": 233997,
+      "size": 234474,
+      "offset": 453249784,
+      "span": 234105
+    },
+    "scene/tex/TX_Syracuse_metro_common_D.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_Syracuse_metro_common_D.webp",
+      "method": 8,
+      "crc": 2324837036,
+      "compressed": 113206,
+      "size": 113448,
+      "offset": 453483889,
+      "span": 113317
+    },
+    "scene/tex/TX_Syracuse_metro_D.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_Syracuse_metro_D.webp",
+      "method": 8,
+      "crc": 1440189920,
+      "compressed": 822484,
+      "size": 822378,
+      "offset": 453597206,
+      "span": 822588
+    },
+    "scene/tex/TX_AutochessSand_background_N.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_AutochessSand_background_N.webp",
+      "method": 8,
+      "crc": 1385955722,
+      "compressed": 226603,
+      "size": 228332,
+      "offset": 454419794,
+      "span": 226717
+    },
+    "scene/tex/TX_LMZ_common_E.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_LMZ_common_E.png",
+      "method": 8,
+      "crc": 178841630,
+      "compressed": 21340,
+      "size": 23394,
+      "offset": 454646511,
+      "span": 21439
+    },
+    "scene/tex/TX_KXMR_A.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_KXMR_A.png",
+      "method": 8,
+      "crc": 4211669264,
+      "compressed": 2763360,
+      "size": 2769056,
+      "offset": 454667950,
+      "span": 2763453
+    },
+    "scene/tex/TX_Syracuse_metro_grass_M.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_Syracuse_metro_grass_M.webp",
+      "method": 8,
+      "crc": 2339361697,
+      "compressed": 14934,
+      "size": 14942,
+      "offset": 457431403,
+      "span": 15044
+    },
+    "scene/tex/fangkuai_06.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/fangkuai_06.png",
+      "method": 8,
+      "crc": 1389932426,
+      "compressed": 146,
+      "size": 410,
+      "offset": 457446447,
+      "span": 241
+    },
+    "scene/tex/fangkuai_06.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/fangkuai_06.webp",
+      "method": 8,
+      "crc": 1208451797,
+      "compressed": 133,
+      "size": 140,
+      "offset": 457446688,
+      "span": 229
+    },
+    "scene/tex/TX_AutochessSand_A.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_AutochessSand_A.webp",
+      "method": 8,
+      "crc": 3859154094,
+      "compressed": 397463,
+      "size": 397810,
+      "offset": 457446917,
+      "span": 397566
+    },
+    "scene/tex/TX_KXMR_M.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_KXMR_M.webp",
+      "method": 8,
+      "crc": 3130879498,
+      "compressed": 91851,
+      "size": 92266,
+      "offset": 457844483,
+      "span": 91945
+    },
+    "scene/tex/TX_Syracuse_metro_D.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_Syracuse_metro_D.png",
+      "method": 8,
+      "crc": 1165104925,
+      "compressed": 3280131,
+      "size": 3281296,
+      "offset": 457936428,
+      "span": 3280234
+    },
+    "scene/tex/TX_AutochessSand_Grass_M.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_AutochessSand_Grass_M.webp",
+      "method": 8,
+      "crc": 2315839906,
+      "compressed": 52332,
+      "size": 52542,
+      "offset": 461216662,
+      "span": 52441
+    },
+    "scene/tex/TX_Syracuse_metro_common_M.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_Syracuse_metro_common_M.png",
+      "method": 8,
+      "crc": 2022241704,
+      "compressed": 26456,
+      "size": 29114,
+      "offset": 461269103,
+      "span": 26566
+    },
+    "scene/tex/TX_Syracuse_metro_E.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_Syracuse_metro_E.png",
+      "method": 8,
+      "crc": 3362852912,
+      "compressed": 7075,
+      "size": 13123,
+      "offset": 461295669,
+      "span": 7178
+    },
+    "scene/tex/TX_AutochessSand_M.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_AutochessSand_M.webp",
+      "method": 8,
+      "crc": 2918861184,
+      "compressed": 326620,
+      "size": 326570,
+      "offset": 461302847,
+      "span": 326723
+    },
+    "scene/tex/TX_KXMR_A.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_KXMR_A.webp",
+      "method": 8,
+      "crc": 3443435763,
+      "compressed": 582076,
+      "size": 582448,
+      "offset": 461629570,
+      "span": 582170
+    },
+    "scene/tex/TX_AutochessSand_shuidi_A.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_AutochessSand_shuidi_A.webp",
+      "method": 8,
+      "crc": 3784406332,
+      "compressed": 140897,
+      "size": 140872,
+      "offset": 462211740,
+      "span": 141007
+    },
+    "scene/tex/TX_Syracuse_metro_floor_D.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_Syracuse_metro_floor_D.webp",
+      "method": 8,
+      "crc": 1845919134,
+      "compressed": 47294,
+      "size": 47284,
+      "offset": 462352747,
+      "span": 47404
+    },
+    "scene/tex/TX_AutochessSand_Grass_A.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_AutochessSand_Grass_A.webp",
+      "method": 8,
+      "crc": 1222928606,
+      "compressed": 140743,
+      "size": 141260,
+      "offset": 462400151,
+      "span": 140852
+    },
+    "scene/tex/TX_AutochessSand_background_N.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_AutochessSand_background_N.png",
+      "method": 8,
+      "crc": 1304453711,
+      "compressed": 294452,
+      "size": 294407,
+      "offset": 462541003,
+      "span": 294565
+    },
+    "scene/tex/TX_AutochessSand_Grass_N.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_AutochessSand_Grass_N.png",
+      "method": 8,
+      "crc": 432958063,
+      "compressed": 87239,
+      "size": 88930,
+      "offset": 462835568,
+      "span": 87347
+    },
+    "scene/tex/TX_Syracuse_metro_floor_N.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_Syracuse_metro_floor_N.png",
+      "method": 8,
+      "crc": 3685995942,
+      "compressed": 457066,
+      "size": 456996,
+      "offset": 462922915,
+      "span": 457175
+    },
+    "scene/tex/TX_LMZ_N.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_LMZ_N.png",
+      "method": 8,
+      "crc": 4255167819,
+      "compressed": 740586,
+      "size": 741545,
+      "offset": 463380090,
+      "span": 740678
+    },
+    "scene/tex/TX_Syracuse_metro_N.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_Syracuse_metro_N.webp",
+      "method": 8,
+      "crc": 3273011626,
+      "compressed": 500864,
+      "size": 501650,
+      "offset": 464120768,
+      "span": 500968
+    },
+    "scene/tex/TX_AutochessSand_shuidi_A.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_AutochessSand_shuidi_A.png",
+      "method": 8,
+      "crc": 3798312815,
+      "compressed": 829959,
+      "size": 829829,
+      "offset": 464621736,
+      "span": 830068
+    },
+    "scene/tex/TX_Syracuse_metro_BG.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_Syracuse_metro_BG.webp",
+      "method": 8,
+      "crc": 2930659215,
+      "compressed": 63308,
+      "size": 63298,
+      "offset": 465451804,
+      "span": 63413
+    },
+    "scene/tex/TX_AutochessSand_A.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_AutochessSand_A.png",
+      "method": 8,
+      "crc": 3882227767,
+      "compressed": 1914166,
+      "size": 1921276,
+      "offset": 465515217,
+      "span": 1914268
+    },
+    "scene/tex/TX_AutochessSand_Grass_M.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_AutochessSand_Grass_M.png",
+      "method": 8,
+      "crc": 745531982,
+      "compressed": 98206,
+      "size": 98370,
+      "offset": 467429485,
+      "span": 98314
+    },
+    "scene/tex/TX_Syracuse_metro_grass_D.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_Syracuse_metro_grass_D.png",
+      "method": 8,
+      "crc": 3421753889,
+      "compressed": 234139,
+      "size": 237696,
+      "offset": 467527799,
+      "span": 234248
+    },
+    "scene/tex/TX_Syracuse_metro_floor_M.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_Syracuse_metro_floor_M.png",
+      "method": 8,
+      "crc": 4139956402,
+      "compressed": 166236,
+      "size": 166407,
+      "offset": 467762047,
+      "span": 166345
+    },
+    "scene/tex/TX_AutochessSand_sand_A.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_AutochessSand_sand_A.png",
+      "method": 8,
+      "crc": 944103811,
+      "compressed": 508055,
+      "size": 511516,
+      "offset": 467928392,
+      "span": 508162
+    },
+    "scene/tex/TX_LMZ_M.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/tex/TX_LMZ_M.png",
+      "method": 8,
+      "crc": 1639670675,
+      "compressed": 656315,
+      "size": 657419,
+      "offset": 468436554,
+      "span": 656407
+    },
+    "scene/act2autochess_m01/lm0.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act2autochess_m01/lm0.png",
+      "method": 8,
+      "crc": 790540349,
+      "compressed": 1007604,
+      "size": 1007449,
+      "offset": 469093055,
+      "span": 1007705
+    },
+    "scene/act2autochess_m01/lm1.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act2autochess_m01/lm1.png",
+      "method": 8,
+      "crc": 2627024972,
+      "compressed": 883179,
+      "size": 883184,
+      "offset": 470100760,
+      "span": 883280
+    },
+    "scene/act2autochess_m01/env.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act2autochess_m01/env.png",
+      "method": 8,
+      "crc": 65996212,
+      "compressed": 153462,
+      "size": 153762,
+      "offset": 470984040,
+      "span": 153563
+    },
+    "scene/act2autochess_m01/scene.json": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act2autochess_m01/scene.json",
+      "method": 8,
+      "crc": 3833944982,
+      "compressed": 1945,
+      "size": 9674,
+      "offset": 471137603,
+      "span": 2049
+    },
+    "scene/act2autochess_m01/lm1.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act2autochess_m01/lm1.webp",
+      "method": 8,
+      "crc": 3746314178,
+      "compressed": 240330,
+      "size": 240290,
+      "offset": 471139652,
+      "span": 240432
+    },
+    "scene/act2autochess_m01/scene.bin": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act2autochess_m01/scene.bin",
+      "method": 8,
+      "crc": 631227474,
+      "compressed": 1844341,
+      "size": 6544564,
+      "offset": 471380084,
+      "span": 1844444
+    },
+    "scene/act2autochess_m01/lm0.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act2autochess_m01/lm0.webp",
+      "method": 8,
+      "crc": 4262841548,
+      "compressed": 288165,
+      "size": 288128,
+      "offset": 473224528,
+      "span": 288267
+    },
+    "scene/act1autochess_m05/lm0.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m05/lm0.png",
+      "method": 8,
+      "crc": 3065474977,
+      "compressed": 1092305,
+      "size": 1092671,
+      "offset": 473512889,
+      "span": 1092406
+    },
+    "scene/act1autochess_m05/env.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m05/env.png",
+      "method": 8,
+      "crc": 449749889,
+      "compressed": 157749,
+      "size": 158028,
+      "offset": 474605295,
+      "span": 157850
+    },
+    "scene/act1autochess_m05/scene.json": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m05/scene.json",
+      "method": 8,
+      "crc": 327136802,
+      "compressed": 3029,
+      "size": 17780,
+      "offset": 474763145,
+      "span": 3133
+    },
+    "scene/act1autochess_m05/scene.bin": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m05/scene.bin",
+      "method": 8,
+      "crc": 1739208835,
+      "compressed": 792091,
+      "size": 2298124,
+      "offset": 474766278,
+      "span": 792194
+    },
+    "scene/act1autochess_m05/lm0.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m05/lm0.webp",
+      "method": 8,
+      "crc": 3314809989,
+      "compressed": 339860,
+      "size": 340100,
+      "offset": 475558472,
+      "span": 339962
+    },
+    "scene/act1autochess_m02/lm0.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m02/lm0.png",
+      "method": 8,
+      "crc": 1307720950,
+      "compressed": 948591,
+      "size": 948497,
+      "offset": 475898528,
+      "span": 948692
+    },
+    "scene/act1autochess_m02/lm1.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m02/lm1.png",
+      "method": 8,
+      "crc": 3342341871,
+      "compressed": 176464,
+      "size": 176885,
+      "offset": 476847220,
+      "span": 176565
+    },
+    "scene/act1autochess_m02/env.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m02/env.png",
+      "method": 8,
+      "crc": 449749889,
+      "compressed": 157749,
+      "size": 158028,
+      "offset": 477023785,
+      "span": 157850
+    },
+    "scene/act1autochess_m02/scene.json": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m02/scene.json",
+      "method": 8,
+      "crc": 2238201644,
+      "compressed": 2766,
+      "size": 14366,
+      "offset": 477181635,
+      "span": 2870
+    },
+    "scene/act1autochess_m02/lm1.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m02/lm1.webp",
+      "method": 8,
+      "crc": 962289026,
+      "compressed": 51924,
+      "size": 51914,
+      "offset": 477184505,
+      "span": 52026
+    },
+    "scene/act1autochess_m02/scene.bin": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m02/scene.bin",
+      "method": 8,
+      "crc": 2644211554,
+      "compressed": 719283,
+      "size": 2014344,
+      "offset": 477236531,
+      "span": 719386
+    },
+    "scene/act1autochess_m02/lm0.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m02/lm0.webp",
+      "method": 8,
+      "crc": 3981923260,
+      "compressed": 283712,
+      "size": 283718,
+      "offset": 477955917,
+      "span": 283814
+    },
+    "scene/act1autochess_m03/lm0.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m03/lm0.png",
+      "method": 8,
+      "crc": 1285348365,
+      "compressed": 1047990,
+      "size": 1047946,
+      "offset": 478239825,
+      "span": 1048091
+    },
+    "scene/act1autochess_m03/env.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m03/env.png",
+      "method": 8,
+      "crc": 449749889,
+      "compressed": 157749,
+      "size": 158028,
+      "offset": 479287916,
+      "span": 157850
+    },
+    "scene/act1autochess_m03/scene.json": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m03/scene.json",
+      "method": 8,
+      "crc": 356227046,
+      "compressed": 2618,
+      "size": 13703,
+      "offset": 479445766,
+      "span": 2722
+    },
+    "scene/act1autochess_m03/scene.bin": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m03/scene.bin",
+      "method": 8,
+      "crc": 3402214320,
+      "compressed": 725680,
+      "size": 2090668,
+      "offset": 479448488,
+      "span": 725783
+    },
+    "scene/act1autochess_m03/lm0.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m03/lm0.webp",
+      "method": 8,
+      "crc": 310501905,
+      "compressed": 325454,
+      "size": 325414,
+      "offset": 480174271,
+      "span": 325556
+    },
+    "scene/act1autochess_m04/lm0.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m04/lm0.png",
+      "method": 8,
+      "crc": 3027982563,
+      "compressed": 1024171,
+      "size": 1024286,
+      "offset": 480499921,
+      "span": 1024272
+    },
+    "scene/act1autochess_m04/env.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m04/env.png",
+      "method": 8,
+      "crc": 449749889,
+      "compressed": 157749,
+      "size": 158028,
+      "offset": 481524193,
+      "span": 157850
+    },
+    "scene/act1autochess_m04/scene.json": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m04/scene.json",
+      "method": 8,
+      "crc": 660370142,
+      "compressed": 2635,
+      "size": 13874,
+      "offset": 481682043,
+      "span": 2739
+    },
+    "scene/act1autochess_m04/scene.bin": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m04/scene.bin",
+      "method": 8,
+      "crc": 3280029464,
+      "compressed": 739190,
+      "size": 2080668,
+      "offset": 481684782,
+      "span": 739293
+    },
+    "scene/act1autochess_m04/lm0.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m04/lm0.webp",
+      "method": 8,
+      "crc": 3406768856,
+      "compressed": 320122,
+      "size": 320072,
+      "offset": 482424075,
+      "span": 320224
+    },
+    "scene/act2autochess_m02/lm0.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act2autochess_m02/lm0.png",
+      "method": 8,
+      "crc": 1581842437,
+      "compressed": 863810,
+      "size": 863718,
+      "offset": 482744393,
+      "span": 863911
+    },
+    "scene/act2autochess_m02/lm1.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act2autochess_m02/lm1.png",
+      "method": 8,
+      "crc": 335607718,
+      "compressed": 653383,
+      "size": 653299,
+      "offset": 483608304,
+      "span": 653484
+    },
+    "scene/act2autochess_m02/lm3.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act2autochess_m02/lm3.png",
+      "method": 8,
+      "crc": 2677191101,
+      "compressed": 724039,
+      "size": 724050,
+      "offset": 484261788,
+      "span": 724140
+    },
+    "scene/act2autochess_m02/lm2.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act2autochess_m02/lm2.png",
+      "method": 8,
+      "crc": 3176566133,
+      "compressed": 634214,
+      "size": 634357,
+      "offset": 484985928,
+      "span": 634315
+    },
+    "scene/act2autochess_m02/lm4.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act2autochess_m02/lm4.webp",
+      "method": 8,
+      "crc": 433167386,
+      "compressed": 65515,
+      "size": 66202,
+      "offset": 485620243,
+      "span": 65617
+    },
+    "scene/act2autochess_m02/lm4.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act2autochess_m02/lm4.png",
+      "method": 8,
+      "crc": 3106961955,
+      "compressed": 270220,
+      "size": 274489,
+      "offset": 485685860,
+      "span": 270321
+    },
+    "scene/act2autochess_m02/env.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act2autochess_m02/env.png",
+      "method": 8,
+      "crc": 449749889,
+      "compressed": 157749,
+      "size": 158028,
+      "offset": 485956181,
+      "span": 157850
+    },
+    "scene/act2autochess_m02/lm3.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act2autochess_m02/lm3.webp",
+      "method": 8,
+      "crc": 1414741276,
+      "compressed": 177356,
+      "size": 177326,
+      "offset": 486114031,
+      "span": 177458
+    },
+    "scene/act2autochess_m02/lm2.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act2autochess_m02/lm2.webp",
+      "method": 8,
+      "crc": 4172607665,
+      "compressed": 143581,
+      "size": 143556,
+      "offset": 486291489,
+      "span": 143683
+    },
+    "scene/act2autochess_m02/scene.json": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act2autochess_m02/scene.json",
+      "method": 8,
+      "crc": 2768534177,
+      "compressed": 3308,
+      "size": 17233,
+      "offset": 486435172,
+      "span": 3412
+    },
+    "scene/act2autochess_m02/lm1.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act2autochess_m02/lm1.webp",
+      "method": 8,
+      "crc": 579619439,
+      "compressed": 151725,
+      "size": 151782,
+      "offset": 486438584,
+      "span": 151827
+    },
+    "scene/act2autochess_m02/scene.bin": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act2autochess_m02/scene.bin",
+      "method": 8,
+      "crc": 899418432,
+      "compressed": 845236,
+      "size": 2413496,
+      "offset": 486590411,
+      "span": 845339
+    },
+    "scene/act2autochess_m02/lm0.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act2autochess_m02/lm0.webp",
+      "method": 8,
+      "crc": 913333768,
+      "compressed": 239364,
+      "size": 239324,
+      "offset": 487435750,
+      "span": 239466
+    },
+    "scene/act2autochess_m03/lm0.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act2autochess_m03/lm0.png",
+      "method": 8,
+      "crc": 2261237030,
+      "compressed": 882419,
+      "size": 882284,
+      "offset": 487675310,
+      "span": 882520
+    },
+    "scene/act2autochess_m03/lm1.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act2autochess_m03/lm1.png",
+      "method": 8,
+      "crc": 2073734867,
+      "compressed": 694031,
+      "size": 694723,
+      "offset": 488557830,
+      "span": 694132
+    },
+    "scene/act2autochess_m03/env.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act2autochess_m03/env.png",
+      "method": 8,
+      "crc": 4209376649,
+      "compressed": 126216,
+      "size": 126484,
+      "offset": 489251962,
+      "span": 126317
+    },
+    "scene/act2autochess_m03/scene.json": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act2autochess_m03/scene.json",
+      "method": 8,
+      "crc": 3297450560,
+      "compressed": 1517,
+      "size": 7127,
+      "offset": 489378279,
+      "span": 1621
+    },
+    "scene/act2autochess_m03/lm1.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act2autochess_m03/lm1.webp",
+      "method": 8,
+      "crc": 523524616,
+      "compressed": 207428,
+      "size": 207622,
+      "offset": 489379900,
+      "span": 207530
+    },
+    "scene/act2autochess_m03/scene.bin": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act2autochess_m03/scene.bin",
+      "method": 8,
+      "crc": 1672386747,
+      "compressed": 844512,
+      "size": 3020640,
+      "offset": 489587430,
+      "span": 844615
+    },
+    "scene/act2autochess_m03/lm0.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act2autochess_m03/lm0.webp",
+      "method": 8,
+      "crc": 736978445,
+      "compressed": 260098,
+      "size": 260362,
+      "offset": 490432045,
+      "span": 260200
+    },
+    "scene/act2autochess_m04/lm0.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act2autochess_m04/lm0.png",
+      "method": 8,
+      "crc": 2029054279,
+      "compressed": 898707,
+      "size": 898631,
+      "offset": 490692339,
+      "span": 898808
+    },
+    "scene/act2autochess_m04/lm1.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act2autochess_m04/lm1.png",
+      "method": 8,
+      "crc": 1456289755,
+      "compressed": 686464,
+      "size": 688933,
+      "offset": 491591147,
+      "span": 686565
+    },
+    "scene/act2autochess_m04/env.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act2autochess_m04/env.png",
+      "method": 8,
+      "crc": 449749889,
+      "compressed": 157749,
+      "size": 158028,
+      "offset": 492277712,
+      "span": 157850
+    },
+    "scene/act2autochess_m04/scene.json": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act2autochess_m04/scene.json",
+      "method": 8,
+      "crc": 3337777885,
+      "compressed": 3181,
+      "size": 18446,
+      "offset": 492435562,
+      "span": 3285
+    },
+    "scene/act2autochess_m04/lm1.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act2autochess_m04/lm1.webp",
+      "method": 8,
+      "crc": 2928531783,
+      "compressed": 196078,
+      "size": 196348,
+      "offset": 492438847,
+      "span": 196180
+    },
+    "scene/act2autochess_m04/scene.bin": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act2autochess_m04/scene.bin",
+      "method": 8,
+      "crc": 2956939133,
+      "compressed": 739295,
+      "size": 2139668,
+      "offset": 492635027,
+      "span": 739398
+    },
+    "scene/act2autochess_m04/lm0.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act2autochess_m04/lm0.webp",
+      "method": 8,
+      "crc": 1796816894,
+      "compressed": 262342,
+      "size": 262510,
+      "offset": 493374425,
+      "span": 262444
+    },
+    "scene/act1autochess_m01/lm0.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m01/lm0.png",
+      "method": 8,
+      "crc": 3248652550,
+      "compressed": 974598,
+      "size": 974465,
+      "offset": 493636963,
+      "span": 974699
+    },
+    "scene/act1autochess_m01/lm1.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m01/lm1.png",
+      "method": 8,
+      "crc": 2938869270,
+      "compressed": 289785,
+      "size": 294347,
+      "offset": 494611662,
+      "span": 289886
+    },
+    "scene/act1autochess_m01/env.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m01/env.png",
+      "method": 8,
+      "crc": 449749889,
+      "compressed": 157749,
+      "size": 158028,
+      "offset": 494901548,
+      "span": 157850
+    },
+    "scene/act1autochess_m01/scene.json": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m01/scene.json",
+      "method": 8,
+      "crc": 3881423191,
+      "compressed": 2688,
+      "size": 14028,
+      "offset": 495059398,
+      "span": 2792
+    },
+    "scene/act1autochess_m01/lm1.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m01/lm1.webp",
+      "method": 8,
+      "crc": 55210044,
+      "compressed": 76250,
+      "size": 76692,
+      "offset": 495062190,
+      "span": 76352
+    },
+    "scene/act1autochess_m01/scene.bin": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m01/scene.bin",
+      "method": 8,
+      "crc": 2513598960,
+      "compressed": 727844,
+      "size": 2108116,
+      "offset": 495138542,
+      "span": 727947
+    },
+    "scene/act1autochess_m01/lm0.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m01/lm0.webp",
+      "method": 8,
+      "crc": 3905254366,
+      "compressed": 293266,
+      "size": 293246,
+      "offset": 495866489,
+      "span": 293368
+    },
+    "scene/act1autochess_m06/lm0.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m06/lm0.png",
+      "method": 8,
+      "crc": 105171616,
+      "compressed": 930716,
+      "size": 931557,
+      "offset": 496159951,
+      "span": 930817
+    },
+    "scene/act1autochess_m06/env.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m06/env.png",
+      "method": 8,
+      "crc": 449749889,
+      "compressed": 157749,
+      "size": 158028,
+      "offset": 497090768,
+      "span": 157850
+    },
+    "scene/act1autochess_m06/scene.json": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m06/scene.json",
+      "method": 8,
+      "crc": 2377735960,
+      "compressed": 2669,
+      "size": 13875,
+      "offset": 497248618,
+      "span": 2773
+    },
+    "scene/act1autochess_m06/scene.bin": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m06/scene.bin",
+      "method": 8,
+      "crc": 1700038419,
+      "compressed": 733990,
+      "size": 2070028,
+      "offset": 497251391,
+      "span": 734093
+    },
+    "scene/act1autochess_m06/lm0.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m06/lm0.webp",
+      "method": 8,
+      "crc": 928859273,
+      "compressed": 291046,
+      "size": 291084,
+      "offset": 497985484,
+      "span": 291148
+    },
+    "scene/act1autochess_m07/lm0.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m07/lm0.png",
+      "method": 8,
+      "crc": 3219498632,
+      "compressed": 764665,
+      "size": 768836,
+      "offset": 498276726,
+      "span": 764766
+    },
+    "scene/act1autochess_m07/env.png": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m07/env.png",
+      "method": 8,
+      "crc": 449749889,
+      "compressed": 157749,
+      "size": 158028,
+      "offset": 499041492,
+      "span": 157850
+    },
+    "scene/act1autochess_m07/scene.json": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m07/scene.json",
+      "method": 8,
+      "crc": 1884398440,
+      "compressed": 2573,
+      "size": 13528,
+      "offset": 499199342,
+      "span": 2677
+    },
+    "scene/act1autochess_m07/scene.bin": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m07/scene.bin",
+      "method": 8,
+      "crc": 1918825802,
+      "compressed": 701671,
+      "size": 2065484,
+      "offset": 499202019,
+      "span": 701774
+    },
+    "scene/act1autochess_m07/lm0.webp": {
+      "name": "Stronghold-Protocol/public/assets/local/scene/act1autochess_m07/lm0.webp",
+      "method": 8,
+      "crc": 2231028212,
+      "compressed": 255580,
+      "size": 255916,
+      "offset": 499903793,
+      "span": 255682
+    }
+  }
+}
