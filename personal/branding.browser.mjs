@@ -67,7 +67,10 @@ try{
     await page.getByRole('tab',{name:'终端概览',exact:true}).click();
     assert.ok((await page.locator('dialog.tactics').innerText()).includes('卫戍协议：盟约 / Stronghold Protocol: Alliance'));
     assert.doesNotMatch(await page.locator('dialog.tactics').innerText(),retired);
-    for(const href of ['/LICENSE','/NOTICE.md','https://github.com/sganggs/Stronghold-Protocol'])assert.ok(await page.locator(`dialog.tactics a[href="${href}"]`).count());
+    for(const href of ['/LICENSE','/NOTICE.md','/THIRD-PARTY-NOTICES.md','/licenses/README.md','https://github.com/sganggs/Stronghold-Protocol','https://github.com/drkiyira-dev/stronghold-protocol-personal'])assert.ok(await page.locator(`dialog.tactics a[href="${href}"]`).count());
+    for(const file of ['/THIRD-PARTY-NOTICES.md','/upstream/NOTICE.md','/upstream/THIRD-PARTY-NOTICES.md','/upstream/LICENSE','/licenses/README.md','/licenses/ses/LICENSE-v8']){
+      const response=await page.request.get(app.url+file);assert.equal(response.status(),200,file);assert.doesNotMatch(await response.text(),/<html/i,file);
+    }
     assert.deepEqual(errors,[]);
     checks.push(`${device}: Chinese/English titles, terminal attribution and rights links retained`);
     await context.close();

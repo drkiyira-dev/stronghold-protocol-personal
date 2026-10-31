@@ -9,6 +9,7 @@ import {adaptAudio,adaptAudioSettings,adaptAudioSettingsUI,AUDIO_LABELS} from '.
 import {adaptMapShadow} from './maps-build.mjs';
 import {loadSceneCatalog,sceneManifest} from './scene-assets.mjs';
 import {adaptSceneImport,adaptSceneTiles} from './scene-imports-build.mjs';
+import {publishLicenses} from './licenses-build.mjs';
 const identity=await buildIdentity();
 await verifyNoUntrackedEngineFiles();
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -55,7 +56,7 @@ const validator=/export function validSpine\(sp\) \{\n[^\n]+\n\}/;
 if(!validator.test(assetsCode))throw new Error('Upstream Spine validator changed; review the external-resource adapter');
 assetsCode="import {validPersonalSpine} from '/personal/spine-urls.mjs';\n"+assetsCode.replace(validator,'export function validSpine(sp) { return validPersonalSpine(sp); }');
 await writeFile(assetsFile,assetsCode);
-for (const name of ['LICENSE','NOTICE.md']) await cp(path.join(root,name),path.join(dist,name));
+await publishLicenses(root,dist);
 for (const [file,value] of Object.entries({
   'healthz':{ok:true,build:'personal-1.1.0',content:{plugins:0,notices:false},personal:true},
   'data/local-assets.json':process.env.PERSONAL_SCENE_ORIGIN?sceneManifest(await loadSceneCatalog(),process.env.PERSONAL_SCENE_ORIGIN):{groups:{}},
