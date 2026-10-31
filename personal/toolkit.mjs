@@ -18,6 +18,12 @@ export function mountToolkit(api) {
   const dialog=document.createElement('dialog');dialog.className='tactics';dialog.setAttribute('aria-label','战术终端');
   dialog.innerHTML=`<header class="tactics-header"><div><small>TACTICAL TERMINAL</small><h2>战术终端</h2></div><button data-close aria-label="关闭战术终端">返回游戏 ×</button></header><nav aria-label="战术终端分页"></nav><p class="tactics-status" role="status"></p><main class="tactics-body"></main>`;
   document.body.append(button,dialog);
+  // Empty slots are owned by the screen renderer; this single persistent button
+  // keeps its handlers and focus identity when a screen is replaced.
+  customElements.define('personal-terminal-slot',class extends HTMLElement {
+    connectedCallback(){this.append(button);}
+    disconnectedCallback(){if(button.parentNode===this)document.body.append(button);}
+  });
   const tabs=[['overview','终端概览'],['replays','战斗复盘'],['saves','存档保险库'],['challenges','自定义挑战'],['network','联机与 AI'],['assets','素材状态']];
   let tab='replays',records=[],selected=null,timer=null,at=0,renderToken=0,requestAbort=null,returnFocus=null;
   const body=dialog.querySelector('main'),nav=dialog.querySelector('nav'),status=dialog.querySelector('[role=status]');

@@ -26,3 +26,16 @@
 .tactics .personal-resume{position:static;margin:10px 0;font-size:14px}
 .tactics select[data-record]{max-width:min(700px,78vw)}
 @media(max-width:650px){.tactics-header h2{font-size:20px}.tactics-citations button{max-width:100%;overflow-wrap:anywhere}.tactics-save-list .tactics-actions{flex-wrap:wrap}}
+
+/* Put project metadata with attribution, and the terminal in each screen's tools. */
+.project-notice .title-foot__meta{justify-content:flex-start;align-items:center;gap:8px;margin-top:4px;pointer-events:auto;font:11px/1.4 system-ui}
+.project-notice .title-foot__meta .micro{font:inherit;letter-spacing:.06em}
+personal-terminal-slot{display:inline-flex;align-items:center;flex-shrink:0}
+personal-terminal-slot>.tactics-open{position:static;min-height:32px;white-space:nowrap;margin:0;line-height:1.2;border-radius:2px}
+.tactics-open:hover{background:var(--bg-3,#254e3c);border-color:var(--mint-400,#8ee7c1)}
+.tactics-open:focus-visible{outline:2px solid var(--mint-400,#8ee7c1);outline-offset:3px}
+@media(max-height:520px) and (orientation:landscape){
+  personal-terminal-slot>.tactics-open{padding:6px 9px;min-height:30px;font-size:11px}
+  .title-foot .project-notice{max-width:min(320px,calc(50vw - 135px))}
+  .project-notice .title-foot__meta{margin-top:2px;gap:6px;font-size:10px}
+}

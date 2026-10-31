@@ -45,12 +45,27 @@ for(const [lang,labels]of Object.entries(AUDIO_LABELS)) {
   Object.assign(pack,{'界面音效':labels[0],'战斗音效':labels[1],
     '本机导入场景素材，建议使用普通窗口；完成后刷新。':{en:'Use a regular window to import scene art, then reload.',ja:'通常ウィンドウで素材を読み込み後、再読み込みしてください。',ko:'일반 창에서 장면 리소스를 가져온 후 새로 고치세요.','zh-TW':'建議在一般視窗匯入場景素材，完成後重新整理。'}[lang]});await writeFile(file,JSON.stringify(pack));
 }
-// Add the project statement without replacing the upstream footer or its credits.
+// Keep attribution together at the lower left; reserve existing toolbars for
+// the terminal instead of covering the footer or shop with a floating button.
 const titleFile=path.join(dist,'js/screens/title.js');
 const rightsLine="<span>${t('非官方同人复刻 · 游戏素材版权归 上海鹰角网络 / Yostar 所有')}</span>";
-await writeFile(titleFile,replaceContract(await readFile(titleFile,'utf8'),rightsLine,
-  `<div class="project-notice"><p>本项目为非官方、非商业性同人二次创作，与《明日方舟》官方无关。</p>${rightsLine}</div>`,
-  'title project statement'));
+let titleCode=await readFile(titleFile,'utf8');
+const footerMeta=titleCode.match(/      <span class="title-foot__meta">[\s\S]*?      <\/span>\n(?=    <\/footer>)/)?.[0];
+if(!footerMeta)throw new Error('Upstream title footer changed; review project link placement');
+titleCode=replaceContract(titleCode,footerMeta,'','title metadata location');
+titleCode=replaceContract(titleCode,rightsLine,
+  `<div class="project-notice"><p>本项目为非官方、非商业性同人二次创作，与《明日方舟》官方无关。</p>${rightsLine}${footerMeta}</div>`,
+  'title project statement');
+await writeFile(titleFile,titleCode);
+for(const [file,anchor]of [
+  ['js/screens/title.js','<div class="title-corner__tools">'],
+  ['js/screens/lobby.js','<div class="topbar__tools">'],
+  ['js/screens/game.js','<div class="gm__corner">'],
+]){
+  const target=path.join(dist,file);
+  await writeFile(target,replaceContract(await readFile(target,'utf8'),anchor,
+    anchor+'<personal-terminal-slot></personal-terminal-slot>','terminal toolbar: '+file));
+}
 // Safari can evaluate concurrent dynamic kit imports before tier4's const helpers.
 // Initialize that shared dependency first; keep every upstream kit and rule intact.
 const kitsFile=path.join(dist,'sim/content/kits/index.js');
