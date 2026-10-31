@@ -1,0 +1,63 @@
+/* Phase 1: reuse original art, SVG, hub motes and route entrance keyframes.
+   Only transform/opacity move; no WebGL, perpetual JS loop or large blur layers. */
+.menu-atmosphere { position: absolute; inset: -2%; overflow: hidden; pointer-events: none;
+  --mote: rgba(190, 236, 214, .65); transform: translate(var(--menu-x, 0px), var(--menu-y, 0px));
+  transition: transform 650ms ease-out; }
+.menu-light { position: absolute; pointer-events: none; opacity: .6; }
+.menu-light--far { inset: -10% 44% 4% -18%;
+  background: linear-gradient(118deg, transparent 35%, rgba(110, 190, 159, .10) 46%, rgba(183, 222, 199, .19) 49%, transparent 61%);
+  animation: menu-light-drift 22s ease-in-out infinite alternate; }
+.menu-light--near { inset: 20% -20% -15% 40%; opacity: .45;
+  background: radial-gradient(ellipse at 75% 70%, rgba(145, 209, 180, .18), transparent 66%);
+  animation: menu-light-drift 17s ease-in-out -8s infinite alternate-reverse; }
+.menu-horizon { position: absolute; left: 5%; right: 5%; bottom: 8%; height: 36%; opacity: .35;
+  background: radial-gradient(ellipse at 50% 100%, rgba(151, 198, 178, .15), transparent 68%);
+  animation: menu-horizon-breathe 13s ease-in-out infinite alternate; }
+.menu-atmosphere .hub-bg__mote { opacity: .5; }
+.menu-atmosphere .hub-bg__mote:nth-child(3n) { opacity: .22; }
+.menu-atmosphere .hub-bg__mote:nth-child(4n) { opacity: .75; }
+.menu-atmosphere--lobby { opacity: .7; }
+@keyframes menu-light-drift { from { transform: translate(-2%, -1%) rotate(-3deg); opacity: .35; }
+  to { transform: translate(3%, 2%) rotate(3deg); opacity: .8; } }
+@keyframes menu-horizon-breathe { to { transform: translateY(-5%); opacity: .65; } }
+html[data-menu-quality="high"][data-menu-motion="on"] .title-bg__art {
+  transform: translate(calc(var(--menu-x, 0px) * -.45), calc(var(--menu-y, 0px) * -.45)) scale(1.025);
+  transition: opacity 600ms, transform 650ms ease-out; }
+html[data-menu-quality="high"][data-menu-motion="on"] :is(.title-bg__ridges, .title-bg__ridge-art) {
+  transform: translate(calc(var(--menu-x, 0px) * 1.3), calc(var(--menu-y, 0px) * .7)) scale(1.025);
+  transition: transform 650ms ease-out; }
+/* Shorten the original staged entrance; route/input handling stays synchronous. */
+.title-screen :is(.emblem, .title-en, .title-cn, .title-tag, .title-login) { animation-duration: 420ms; }
+.title-screen .title-login { animation-delay: 120ms; }
+.lobby-hub .hub-entries .hub-entry-wrap { animation-duration: 320ms; animation-delay: 80ms; }
+.lobby-hub .hub-entries .hub-entry-wrap:nth-child(2) { animation-delay: 120ms; }
+.lobby-hub .hub-entries .hub-entry-wrap:nth-child(3) { animation-delay: 160ms; }
+.lobby-hub .hub-entries .hub-entry-wrap:nth-child(4) { animation-delay: 200ms; }
+:is(.title-screen, .lobby-hub) :is(.btn, .hub-entry, .hub-plate, .hub-tile, .tactics-open) {
+  transition: transform 160ms ease-out, border-color 160ms, background-color 160ms, box-shadow 160ms; }
+@media (hover: hover) and (pointer: fine) {
+  html[data-menu-motion="on"] :is(.title-screen, .lobby-hub) :is(.btn, .hub-entry, .hub-plate, .hub-tile, .tactics-open):enabled:hover {
+    transform: translateY(-2px); }
+}
+html[data-menu-motion="on"] :is(.title-screen, .lobby-hub) :is(.btn, .hub-entry, .hub-plate, .hub-tile, .tactics-open):enabled:active {
+  transform: translateY(1px); transition-duration: 60ms; }
+:is(.title-screen, .lobby-hub) button:disabled { transform: none; }
+.menu-visual-settings { margin: 0; }
+/* Quality also caps upstream decoration; low keeps the original static composition. */
+html[data-menu-quality="low"] :is(.title-bg, .hub-bg, .hub-radar, .emblem) *,
+html[data-menu-quality="low"] .menu-atmosphere { animation: none !important; }
+html[data-menu-quality="low"] .menu-light--near { display: none; }
+html[data-menu-quality="medium"] .emblem__svg circle { animation: none; }
+html[data-menu-quality="medium"] .hub-scene .hub-bg__mote:nth-child(n+9),
+html[data-menu-quality="low"] .hub-scene .hub-bg__motes { display: none; }
+html[data-menu-motion="off"] :is(.title-screen, .lobby-hub) *,
+html[data-menu-motion="off"] :is(.title-screen, .lobby-hub) *::before,
+html[data-menu-motion="off"] :is(.title-screen, .lobby-hub) *::after { animation: none !important; transition: none !important; }
+html[data-menu-motion="off"] .lobby-hub .pcard.is-on .pcard__ring path { stroke-dashoffset: 0; }
+html[data-menu-paused="true"] :is(.title-screen, .lobby-hub) *,
+html[data-menu-paused="true"] :is(.title-screen, .lobby-hub) *::before,
+html[data-menu-paused="true"] :is(.title-screen, .lobby-hub) *::after { animation-play-state: paused !important; }
+@media (prefers-reduced-motion: reduce) {
+  :is(.title-screen, .lobby-hub) *, :is(.title-screen, .lobby-hub) *::before,
+  :is(.title-screen, .lobby-hub) *::after { animation: none !important; transition: none !important; }
+}

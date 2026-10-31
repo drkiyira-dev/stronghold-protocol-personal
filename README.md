@@ -51,6 +51,8 @@ Production deployment requires the maintainer's **explicit approval**, separatel
 
 ## Enhanced development preview
 
+**Menu visual preview (v12 phase 1):** the title and default lobby gain layered light, upstream ambient particles and high-quality pointer parallax. In **Settings → Menu motion**, choose Animated or Static; the existing Low/Medium/High quality controls the budget. System reduced motion takes precedence. See the [preview guide and visual comparison](docs/V12-MENU-VISUALS.md). This development preview does not publish or replace the v11 Site.
+
 Open **「战术终端」** in the game:
 
 - **Save vault v3:** atomic IndexedDB transactions, retained legacy originals, checksummed snapshots, migration rollback/undo and old-tab conflict archival. Imports remain candidates until the engine confirms restoration. Completed runs retain their backups.
