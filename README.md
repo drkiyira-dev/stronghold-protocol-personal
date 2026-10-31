@@ -24,7 +24,7 @@ See [contribution attribution](CONTRIBUTING.md) for the verified Codex co-author
 
 ## Run
 
-Development audio feedback reuses the upstream manager and recordings, with separate BGM, UI SFX, battle SFX and voice controls. See the [reuse and validation report](docs/AUDIO-MAPS-REVIEW.md) for coverage and remaining browser checks. This does not imply that production has been updated.
+Development audio feedback reuses the upstream manager and recordings, with separate BGM, UI SFX, battle SFX and voice controls. See the [pre-merge acceptance report](docs/PR5-MERGE-ACCEPTANCE.md) for current results, the eight default static maps, optional imported scene art and known limits; the [reuse report](docs/AUDIO-MAPS-REVIEW.md) retains earlier evidence. This does not imply that production has been updated.
 
 Audio initializes on the first click or keypress of each page load. Clicking **Start** counts; a reload that returns directly to the lobby still needs one interaction. This is the upstream gesture-unlock behavior used for browser autoplay compatibility.
 

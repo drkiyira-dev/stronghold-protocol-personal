@@ -1,5 +1,7 @@
 # Audio and map reuse review
 
+The subsequent [PR #5 pre-merge acceptance](PR5-MERGE-ACCEPTANCE.md) records the final audio, static-map and license-distribution checks; earlier revision-specific evidence below remains historical.
+
 Development base: `19ab6554ee2e3dc480feaaa8484ec8fde748df4d` (main). No production deployment or access change is part of this work. The upstream source, GPL license and third-party asset notices are retained.
 
 The subsequent [static scene audit and acceptance report](STATIC-SCENES-REVIEW.md) adds the upstream browser-local import path, a per-scene inventory, HTTPS/CORS/cache findings and native Safari evidence. The self-hosted results below remain separately scoped.

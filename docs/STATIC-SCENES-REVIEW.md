@@ -2,6 +2,8 @@
 
 Audit date: 2026-10-31. Development identifier: Enhanced Edition. The game remains **卫戍协议：盟约 / Stronghold Protocol: Alliance**.
 
+See the subsequent [PR #5 pre-merge acceptance](PR5-MERGE-ACCEPTANCE.md) for the final checks, default/imported map distinction, license packaging repair and review decision. The revision-specific results below are retained as audit history.
+
 Code revision: `8b8e24d5da806404d117e607da359fbff1e48d8c` (base main: `19ab6554ee2e3dc480feaaa8484ec8fde748df4d`). This extends the earlier [audio/map review](AUDIO-MAPS-REVIEW.md); its self-hosted bridge results are **not** static-hosting results.
 
 ## Decision
