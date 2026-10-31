@@ -21,7 +21,7 @@ try{
     await context.route('**/*',route=>new URL(route.request().url()).origin===app.url?route.continue():route.abort());
     const page=await context.newPage(),errors=[];
     page.on('pageerror',error=>errors.push(error.message));page.setDefaultTimeout(20000);
-    const checkNotice=async(route)=>{
+    const checkNotice=async(route,variant='')=>{
       // Let entrance transitions settle before measuring hit areas or taking evidence.
       await page.evaluate(async()=>{await Promise.all(document.getAnimations()
         .filter(a=>Number.isFinite(a.effect?.getComputedTiming().endTime))
@@ -45,7 +45,7 @@ try{
         assert.ok(await page.locator('.project-notice .title-foot__meta .title-repo').count(),'repository grouped with attribution');
         assert.ok(await page.locator('.title-repo').evaluate(el=>{const r=el.getBoundingClientRect();return el.contains(document.elementFromPoint(r.x+r.width/2,r.y+r.height/2));}),'repository remains clickable inside notice');
       }
-      await page.screenshot({path:output+`branding-${device}-${route}.png`});
+      await page.screenshot({path:output+`branding-${device}-${route}${variant?'-'+variant:''}.png`});
       for(const selector of ['.title-login','[data-testid=asset-import]','.tactics-open','[data-mode="solo"]','[data-mode="coop"]']){
         const target=page.locator(selector).first();if(!await target.isVisible())continue;
         const b=await target.boundingBox();
@@ -65,6 +65,17 @@ try{
     assert.equal(await page.locator('meta[name="apple-mobile-web-app-title"]').getAttribute('content'),'卫戍协议：盟约');
     assert.doesNotMatch(await page.locator('meta[name="description"]').getAttribute('content'),retired);
     await checkNotice('title');
+    // Normal Chrome can expose this after the initial render; incognito/headless
+    // usually cannot. Footer controls must not push attribution to the right.
+    await page.evaluate(()=>{
+      const offer=new Event('beforeinstallprompt',{cancelable:true});
+      offer.prompt=async()=>({outcome:'dismissed'});window.dispatchEvent(offer);
+    });
+    const install=page.locator('.title-foot [data-testid="pwa-install"]');
+    await install.waitFor({state:'visible'});
+    await checkNotice('title','pwa-offer');
+    assert.ok(await install.evaluate(el=>{const r=el.getBoundingClientRect();return el.contains(document.elementFromPoint(r.x+r.width/2,r.y+r.height/2));}),'PWA control remains clickable beside attribution');
+    assert.equal(await page.locator('.title-foot').evaluate(el=>el.firstElementChild.className),'project-notice','DOM and keyboard order match the visible left-to-right footer');
     await page.locator('[data-testid="lang-toggle"] select').selectOption('en');
     await page.waitForFunction(()=>document.title==='Stronghold Protocol: Alliance');
     await page.getByRole('heading',{name:'Stronghold Protocol: Alliance',exact:true}).waitFor();

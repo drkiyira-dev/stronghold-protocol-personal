@@ -12,6 +12,7 @@ import {adaptSceneImport,adaptSceneTiles} from './scene-imports-build.mjs';
 import {publishLicenses} from './licenses-build.mjs';
 import {vendor,VENDOR_FILES} from '../upstream/tools/vendor.mjs';
 import {writeArtifactManifest} from './artifact-integrity.mjs';
+import {VISUAL_ADAPTERS,VISUAL_EN} from './visuals-build.mjs';
 const identity=await buildIdentity();
 await verifyNoUntrackedEngineFiles();
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -38,6 +39,11 @@ for(const [file,adapt]of [['js/audio.js',adaptAudio],['js/ui/gameLogic/settings.
 for(const [file,adapt]of [['js/assetPack.js',adaptSceneImport],['js/render/board3d/load.js',adaptSceneTiles],['js/render/boardArt.js',adaptSceneTiles]]){
   const target=path.join(dist,file);await writeFile(target,adapt(await readFile(target,'utf8')));
 }
+for(const [file,adapt] of VISUAL_ADAPTERS) {
+  const target=path.join(dist,file);await writeFile(target,adapt(await readFile(target,'utf8')));
+}
+const visualEnglish=path.join(dist,'i18n/en.json');
+await writeFile(visualEnglish,JSON.stringify({...JSON.parse(await readFile(visualEnglish,'utf8')),...VISUAL_EN}));
 const importUI=path.join(dist,'js/ui/assetImport.js');
 await writeFile(importUI,replaceContract(await readFile(importUI,'utf8'),'读取自己的素材包，美术不占服务器流量。','本机导入场景素材，建议使用普通窗口；完成后刷新。','scene import hint'));
 for(const [lang,labels]of Object.entries(AUDIO_LABELS)) {
@@ -53,9 +59,12 @@ let titleCode=await readFile(titleFile,'utf8');
 const footerMeta=titleCode.match(/      <span class="title-foot__meta">[\s\S]*?      <\/span>\n(?=    <\/footer>)/)?.[0];
 if(!footerMeta)throw new Error('Upstream title footer changed; review project link placement');
 titleCode=replaceContract(titleCode,footerMeta,'','title metadata location');
-titleCode=replaceContract(titleCode,rightsLine,
-  `<div class="project-notice"><p>本项目为非官方、非商业性同人二次创作，与《明日方舟》官方无关。</p>${rightsLine}${footerMeta}</div>`,
-  'title project statement');
+titleCode=replaceContract(titleCode,rightsLine,'','original title rights location');
+// Install/resume/notices controls appear conditionally. Keep attribution first
+// in DOM order too, so their arrival cannot displace it to the opposite corner.
+titleCode=replaceContract(titleCode,'<footer class="title-foot">',
+  `<footer class="title-foot"><div class="project-notice"><p>本项目为非官方、非商业性同人二次创作，与《明日方舟》官方无关。</p>${rightsLine}${footerMeta}</div>`,
+  'leftmost title project statement');
 await writeFile(titleFile,titleCode);
 for(const [file,anchor]of [
   ['js/screens/title.js','<div class="title-corner__tools">'],
@@ -75,7 +84,8 @@ await mkdir(path.join(dist,'personal'),{recursive:true});
 const importCatalog=JSON.parse(await readFile(path.join(root,'personal/scene-import-catalog.json'),'utf8'));
 await writeFile(path.join(dist,'personal/scene-import.json'),JSON.stringify(importCatalog.manifest));
 await writeFile(path.join(dist,'personal/build-info.json'),JSON.stringify(identity));
-for (const name of ['local-client.mjs','personal.css','skeleton-codec.mjs','spine-urls.mjs']) await cp(path.join(root,'personal',name),path.join(dist,'personal',name));
+for (const name of ['local-client.mjs','personal.css','skeleton-codec.mjs','spine-urls.mjs','visual-policy.mjs','visual-state.mjs','visuals.mjs']) await cp(path.join(root,'personal',name),path.join(dist,'personal',name));
+await writeFile(path.join(dist,'personal/personal.css'),await readFile(path.join(root,'personal/personal.css'),'utf8')+'\n'+await readFile(path.join(root,'personal/visuals.css'),'utf8'));
 // Upstream's local-only model validator must recognize the externally hosted assets too.
 const assetsFile=path.join(dist,'js/assets.js');
 let assetsCode=await readFile(assetsFile,'utf8');
