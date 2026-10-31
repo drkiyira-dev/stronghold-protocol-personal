@@ -10,12 +10,24 @@ import {adaptMapShadow} from './maps-build.mjs';
 import {loadSceneCatalog,sceneManifest} from './scene-assets.mjs';
 import {adaptSceneImport,adaptSceneTiles} from './scene-imports-build.mjs';
 import {publishLicenses} from './licenses-build.mjs';
+import {vendor,VENDOR_FILES} from '../upstream/tools/vendor.mjs';
+import {writeArtifactManifest} from './artifact-integrity.mjs';
 const identity=await buildIdentity();
 await verifyNoUntrackedEngineFiles();
 const root = fileURLToPath(new URL('../', import.meta.url));
 const dist = path.join(root, 'dist');
+// A reused node_modules tree does not run upstream's postinstall. Generate its
+// browser libraries explicitly, and never let stale output conceal a missing file.
+await rm(dist, {recursive:true,force:true});
+try {
+  const generated=new Set(vendor());
+  const missing=VENDOR_FILES.map(([,name])=>name).filter(name=>!generated.has(name));
+  if(missing.length)throw new Error('Missing browser libraries: '+missing.join(', '));
+} catch(error) {
+  throw new Error('Cannot prepare browser dependencies. Run npm --prefix upstream ci --omit=dev, then rebuild.',{cause:error});
+}
 await mkdir(dist, {recursive:true});
-// Keep downloaded, ignored art intact between builds.
+// Art remains external; rebuilding dist never changes the source art cache.
 for (const [from,to] of [['public',''],['shared','shared'],['server/sim','sim'],['data','data']]) {
   await cp(path.join(root,'upstream',from), path.join(dist,to), {recursive:true, filter: source => !/(?:\/assets|\/fonts)(?:\/|$)/.test(source)});
 }
@@ -86,4 +98,5 @@ let html = await readFile(path.join(dist,'index.html'),'utf8');
 html = replaceContract(html,'/personal/local-client.mjs',`/personal/${clientName}`,'client entry');
 html = html.replace('/personal/personal.css','/personal/personal.css?v='+hash(await readFile(path.join(dist,'personal/personal.css'))));
 await writeFile(path.join(dist,'index.html'),html);
+await writeArtifactManifest(dist);
 console.log('Personal build ready in dist/');

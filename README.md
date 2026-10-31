@@ -93,6 +93,19 @@ npm run test:browser
 
 `npm test` runs test files one at a time. Run build, automated tests and browser suites sequentially on resource-constrained machines; the browser command also runs its suites sequentially.
 
+The build regenerates browser libraries with the existing upstream vendor tool, including when dependencies were reused or installed with `--ignore-scripts`. It clears generated `dist/` first, checks the HTML/import-map and hashed client/worker dependencies, and writes `dist/artifact-manifest.json` with file sizes and SHA-256 hashes. A missing dependency fails the build with an installation hint. Source artwork caches and browser saves are unaffected.
+
+Run `npm run check:dist` to detect missing, changed, extra or linked files after building. Archive checks additionally require **Python 3.8+** on `PATH` (standard library only). After browser tests, rebuild to remove test probes; use the approved Sites workflow to package that same checkout, then run this mandatory gate **before saving or deploying the returned archive**:
+
+```sh
+npm run build
+npm run check:dist
+# Package this reviewed source using the Sites workflow, then verify its actual output:
+npm run check:artifact -- /absolute/path/to/site.tar.gz
+```
+
+The archive gate streams the final tar.gz without extracting it and compares every file against the separate local build manifest, including the manifest itself and the source hosting configuration. Missing files, altered content, unexpected files, links, duplicate entries, unsafe paths and truncated gzip data fail with a nonzero exit. Keep that verified archive unchanged. This verifies delivery completeness, not external-resource availability or gameplay acceptance. CI builds with upstream install hooks disabled and checks a real static archive before its serial browser suites; it never deploys. Sites **v9 remains Public**; this build-process fix requires separate review and deployment approval.
+
 **Current RC assessment: HOLD — not approved for release.** The latest [browser acceptance report](docs/RC-BROWSER-ACCEPTANCE-2026-10-31.md) ([中文](docs/RC-BROWSER-ACCEPTANCE-2026-10-31.zh-CN.md)) records Chrome + native Safari completing all 14 cooperative rounds with Boss victory, live reconnect, R9 committed-PREP crash recovery with both-client consent, and completed-match restart without duplicate history. Real external asset samples, mirror retry and a full-Spine-outage battle passed. Mobile emulation covered menus, recruitment, battle/replay and PREP restore, but touch drag/facing remains unverified and two UI overlaps were found; physical devices were explicitly deferred.
 
 The [earlier fix verification](docs/RELEASE-CANDIDATE-2026-10-31.md) preserves the Safari/three-test fixes and serial automated results. The original solo campaign completed R9 defeat across two builds (8/9 passed); a fresh nine-round solo run on the fix and a new full upstream/golden run were not performed. The intermittent readiness timeout remains unexplained. The [original assessment](docs/RELEASE-CANDIDATE-2026-10-30.md) retains failed-run evidence. Tests ran serially; owned QA tabs/servers are closed. Production was not updated.
