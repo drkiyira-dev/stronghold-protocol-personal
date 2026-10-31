@@ -16,6 +16,24 @@ try{
     return route.abort();
   });
   await page.goto(app.url);await page.getByPlaceholder(/输入你的代号/).waitFor();
+  // A restored name is not a gesture. The Start button itself must unlock queued
+  // lobby music; entering the lobby must not require a second, unrelated click.
+  const beforeStart=await page.evaluate(async()=>{
+    window.a=(await import('/js/audio.js')).audio;
+    const input=document.querySelector('input[placeholder*="输入你的代号"]');
+    input.value='First gesture';input.dispatchEvent(new Event('input',{bubbles:true}));
+    return {context:a.ctx?.state||null,playing:!!a.bgm};
+  });
+  // Playwright evaluation can itself mark browser activation; observe the actual
+  // audio manager, then send exactly one real button click.
+  assert.deepEqual(beforeStart,{context:null,playing:false});
+  await page.getByRole('button',{name:'开始',exact:true}).click();
+  await page.getByRole('button',{name:'战术终端',exact:true}).waitFor();
+  await page.waitForFunction(()=>a.ctx?.state==='running'&&a.bgm?.nodes.some(n=>n.src.buffer?.length>1));
+  checks.push('first Start click unlocks queued BGM without a second interaction');
+  // Return only this isolated test session to the title for the settings cases.
+  await page.evaluate(async()=>(await import('/js/net.js')).identity.setEntered(false));
+  await page.reload();await page.getByPlaceholder(/输入你的代号/).waitFor();
   await page.evaluate(async()=>{
     window.a=(await import('/js/audio.js')).audio;window.cues=[];window.started=0;
     const s=a.sfx.bind(a);a.sfx=(name,opts)=>{cues.push(name);return s(name,opts);};
