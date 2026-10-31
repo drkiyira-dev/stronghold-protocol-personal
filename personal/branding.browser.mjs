@@ -36,7 +36,7 @@ try{
       assert.ok(await notice.evaluate(el=>el.scrollWidth<=el.clientWidth+1),'statement does not overflow');
       assert.ok(await notice.evaluate(el=>parseFloat(getComputedStyle(el).fontSize)>=12),'readable font size');
       await page.screenshot({path:output+`branding-${device}-${route}.png`});
-      for(const selector of ['.title-login','.title-foot__meta','.tactics-open','[data-mode="solo"]','[data-mode="coop"]']){
+      for(const selector of ['.title-login','[data-testid=asset-import]','.title-foot__meta','.tactics-open','[data-mode="solo"]','[data-mode="coop"]']){
         const target=page.locator(selector).first();if(!await target.isVisible())continue;
         const b=await target.boundingBox();
         assert.ok(box.x+box.width<=b.x||b.x+b.width<=box.x||box.y+box.height<=b.y||b.y+b.height<=box.y,`${device}/${route}: no statement overlap with ${selector}: ${JSON.stringify({notice:box,control:b})}`);

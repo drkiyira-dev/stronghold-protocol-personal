@@ -1,5 +1,6 @@
 import {newRunId} from './run-identity.mjs';
 import {installExternalAssets} from './external-assets.mjs';
+import {installSceneImports} from './scene-imports.mjs';
 import {net,identity,createIdentity} from '/js/net.js';
 import {store,selectRoute} from '/js/store.js';
 import {isCombatPhase} from '/js/ui/gameLogic/phases.js';
@@ -18,6 +19,7 @@ import {audio} from '/js/audio.js';
 import {data} from '/js/data.js';
 import {installAudioFeedback} from './audio-feedback.mjs';
 await installExternalAssets();
+await installSceneImports();
 let buildInfo={};try{const response=await fetch('/personal/build-info.json');if(response.ok)buildInfo=await response.json();}catch{}
 const connection=readConnection(localStorage,location);
 document.documentElement.dataset.personalTransport=connection.mode;
