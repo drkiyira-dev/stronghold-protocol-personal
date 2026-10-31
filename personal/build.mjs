@@ -5,6 +5,7 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {buildIdentity,replaceContract,verifyNoUntrackedEngineFiles} from './build-identity.mjs';
+import {adaptAudio,adaptAudioSettings,adaptAudioSettingsUI,AUDIO_LABELS} from './audio-build.mjs';
 const identity=await buildIdentity();
 await verifyNoUntrackedEngineFiles();
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -15,6 +16,13 @@ for (const [from,to] of [['public',''],['shared','shared'],['server/sim','sim'],
   await cp(path.join(root,'upstream',from), path.join(dist,to), {recursive:true, filter: source => !/(?:\/assets|\/fonts)(?:\/|$)/.test(source)});
 }
 await cp(path.join(root,'personal/templates'),dist,{recursive:true});
+for(const [file,adapt]of [['js/audio.js',adaptAudio],['js/ui/gameLogic/settings.js',adaptAudioSettings],['js/ui/settings.js',adaptAudioSettingsUI]]) {
+  const target=path.join(dist,file);await writeFile(target,adapt(await readFile(target,'utf8')));
+}
+for(const [lang,labels]of Object.entries(AUDIO_LABELS)) {
+  const file=path.join(dist,'i18n',lang+'.json'),pack=JSON.parse(await readFile(file,'utf8'));
+  Object.assign(pack,{'界面音效':labels[0],'战斗音效':labels[1]});await writeFile(file,JSON.stringify(pack));
+}
 // Add the project statement without replacing the upstream footer or its credits.
 const titleFile=path.join(dist,'js/screens/title.js');
 const rightsLine="<span>${t('非官方同人复刻 · 游戏素材版权归 上海鹰角网络 / Yostar 所有')}</span>";

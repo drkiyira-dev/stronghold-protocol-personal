@@ -14,6 +14,9 @@ import {sha256Hex} from '../upstream/shared/sha256.js';
 import {createRestoreSession} from './restore-session.mjs';
 import {terminalCapabilities} from './terminal-session.mjs';
 import {getLang,onLangChange} from '/shared/i18n.js';
+import {audio} from '/js/audio.js';
+import {data} from '/js/data.js';
+import {installAudioFeedback} from './audio-feedback.mjs';
 await installExternalAssets();
 let buildInfo={};try{const response=await fetch('/personal/build-info.json');if(response.ok)buildInfo=await response.json();}catch{}
 const connection=readConnection(localStorage,location);
@@ -120,6 +123,7 @@ if(connection.mode==='remote'){
   challenge=null;
 }else net.WS=LocalSocket;
 await import('/js/main.js');
+installAudioFeedback({audio,store,selectRoute,data});
 const updateGameTitle=()=>{document.title=/^en/i.test(getLang())?'Stronghold Protocol: Alliance':'卫戍协议：盟约';};
 onLangChange(updateGameTitle);updateGameTitle();
 const badge=document.createElement('button');badge.className='personal-edition';badge.textContent=connection.mode==='remote'?'房间服务器':'本地单人';badge.title='项目说明';

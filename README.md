@@ -24,6 +24,8 @@ See [contribution attribution](CONTRIBUTING.md) for the verified Codex co-author
 
 ## Run
 
+Development audio feedback reuses the upstream manager and recordings, with separate BGM, UI SFX, battle SFX and voice controls. See the [reuse and validation report](docs/AUDIO-MAPS-REVIEW.md) for coverage and remaining browser checks. This does not imply that production has been updated.
+
 Use **Node.js 26.7.0**, the runtime used for the SQLite recovery backend and RC checks. The three remaining serial-test failures are fixed; the full upstream suite has not been rerun on the fix. See the [RC follow-up](docs/RELEASE-CANDIDATE-2026-10-31.md). No bulk artwork download is needed for the current build.
 
 ```sh
