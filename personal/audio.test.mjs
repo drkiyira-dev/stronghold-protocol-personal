@@ -21,7 +21,7 @@ function harness(){
     createGain(){const g={gain:{value:0,setTargetAtTime(v){this.value=v;}},connect(to){this.to=to;},disconnect(){}};gains.push(g);return g;}
     createBufferSource(){const s={playbackRate:{value:1},connect(to){this.to=to;},disconnect(){},start(){starts.push(this);this.onended?.();},stop(){}};return s;}
   }
-  const audio=new AudioManager({win:{AudioContext:Context,addEventListener(k,f){listeners.set(k,f);},removeEventListener(k){listeners.delete(k);},document:{}},getManifest:()=>({audio:{sfx:{ui:{click:'ui',buy:'buy'},battle:{deploy:'battle'}}}})});
+  const audio=new AudioManager({win:{AudioContext:Context,addEventListener(k,f){listeners.set(k,f);},removeEventListener(k){listeners.delete(k);},document:{}},getManifest:()=>({audio:{sfx:{ui:Object.fromEntries(WARM_UI.map(k=>[k,k])),battle:{deploy:'battle'}}}})});
   audio._buffer=async()=>({duration:0.001});audio.install();
   return {audio,starts,gains,listeners,unlock(){listeners.get('pointerdown')();}};
 }
@@ -29,6 +29,12 @@ test('four channels migrate the old combined SFX preference without changing it'
   const legacy=sanitizeSettings({sfx:0.32});assert.equal(legacy.uiSfx,.32);assert.equal(legacy.sfx,.32);
   const s=sanitizeSettings({sfx:0,uiSfx:.75});assert.equal(s.uiSfx,.75);assert.equal(s.sfx,0);
   assert.equal(sanitizeSettings({sfx:2,uiSfx:NaN}).uiSfx,1);
+});
+test('every added UI/merge cue stays silent and does not decode before a gesture',async()=>{
+  const h=harness();let decodes=0;h.audio._buffer=async()=>{decodes++;return {duration:.001};};
+  for(const cue of WARM_UI)h.audio.sfx(cue);
+  h.audio.battle('deploy');await tick();
+  assert.equal(h.audio.ctx,null);assert.equal(decodes,0);assert.equal(h.starts.length,0);
 });
 test('context is gesture-created; UI and battle route through independent gains',async()=>{
   const h=harness();assert.equal(h.audio.ctx,null);h.audio.sfx('click');assert.equal(h.starts.length,0);
