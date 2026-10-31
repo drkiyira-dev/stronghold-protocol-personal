@@ -6,9 +6,9 @@
   "license": "GPL-3.0-or-later",
   "scripts": {
     "build": "node personal/build.mjs",
-    "test": "node --test personal/*.test.mjs",
+    "test": "node --test --test-concurrency=1 personal/*.test.mjs",
     "server": "node --env-file-if-exists=.env personal/host.mjs",
-    "test:browser": "node personal/reliability.browser.mjs && node personal/enhanced.browser.mjs && node personal/kit-loader.browser.mjs"
+    "test:browser": "node personal/reliability.browser.mjs && node personal/enhanced.browser.mjs && node personal/kit-loader.browser.mjs && node personal/branding.browser.mjs"
   },
   "devDependencies": {
     "esbuild": "^0.25.0",

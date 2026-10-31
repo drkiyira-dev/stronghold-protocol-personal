@@ -1,6 +1,6 @@
 # Contributing and AI attribution
 
-This personal edition is maintained by **Dr.Kiriya**. OpenAI Codex is credited as an AI collaborator only for work it actually helped produce. Upstream authorship and third-party rights remain unchanged.
+This Enhanced Edition development project is maintained by **Dr.Kiriya**. OpenAI Codex is credited as an AI collaborator only for work it actually helped produce. Upstream authorship and third-party rights remain unchanged.
 
 ## Verified Codex identity
 

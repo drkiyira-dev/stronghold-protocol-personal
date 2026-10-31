@@ -487,7 +487,7 @@ function HubTitle() {
   const version = useStore(lobbyVersion);
   return html`<div class="hub-center">
     <div class="hub-center__mark"><${HubRadar} /><${Sprite} k="entry/season_logo" class="hub-center__logo" fallback=${html`<${Emblem} />`} /></div>
-    ${alphabetic ? null : html`<div class="hub-center__en">STRONGHOLD PROTOCOL <b>ALLIANCE</b></div>`}
+    ${alphabetic ? null : html`<div class="hub-center__en">STRONGHOLD PROTOCOL: <b>ALLIANCE</b></div>`}
     <h1 class=${`hub-center__title${alphabetic ? ' hub-center__title--latin' : ''}`}>${t('卫戍协议')}<span>${alphabetic ? ': ' : '：'}</span><em>${t('盟约')}</em></h1>
     ${version !== DEFAULT_VERSION ? html`<div class="hub-center__ver" data-testid="hub-version">· ${versionLabel(version)}</div>` : null}
   </div>`;
@@ -792,6 +792,7 @@ export function LobbyScreen() {
       </section>
     </main>
 
+    <p class="project-notice lobby-project-notice">本项目为非官方、非商业性同人二次创作，与《明日方舟》官方无关。</p>
     ${allyOpen ? html`<${AllianceSelect} onClose=${() => setAllyOpen(false)} onCreate=${() => create('coop')} difficulty=${shownCoop}
       code=${code} onCode=${(v) => setCode(normalizeCode(v))} codeOk=${codeOk} online=${online} busy=${busy}
       onJoin=${join} onSpectate=${spectate} recent=${recent} marks=${marks} focusKey=${!coarse}

@@ -1,10 +1,12 @@
-# Stronghold Protocol: Alliance — Enhanced Edition
+# 卫戍协议：盟约 / Stronghold Protocol: Alliance
 
 **English** | [简体中文](README.zh-CN.md)
 
 **An unofficial derivative of [sganggs/Stronghold-Protocol](https://github.com/sganggs/Stronghold-Protocol) 0.3.3, maintained by [drkiyira-dev](https://github.com/drkiyira-dev).** This is not an original game built from scratch or an official Hypergryph project. The upstream operators, skills, alliances, shop and combat simulation remain the foundation. Thanks to the original author and contributors.
 
 Code: **GPL-3.0-or-later**, consistent with upstream. See [LICENSE](LICENSE) and [NOTICE.md](NOTICE.md). Game characters, artwork, music and data retain their respective rights and are not relicensed by this repository.
+
+This is an unofficial, non-commercial fan derivative and is not affiliated with the official Arknights project.
 
 ## AI-Assisted Development
 
@@ -35,7 +37,9 @@ npm run server
 - Open [http://127.0.0.1:4174/?server=local](http://127.0.0.1:4174/?server=local) for rooms hosted by the running Node server.
 - LAN: run `npm run server -- --host 0.0.0.0`, then open `http://YOUR_LAN_IP:4174/?server=local` on each device. Share the room code.
 
-For static hosting, publish `dist/`. The hosted Site remains private; public source does not change its access permissions. A static deployment does not itself run a room server.
+The [hosted Site](https://blackshore-protocol-kiriya.fluffymelon1026.chatgpt.site/) is **Public** and must remain publicly accessible during development. Repository changes and RC release holds do not authorize closing, deleting or restricting it. A static deployment serves `dist/` and does not itself run a room server. The live deployment and this development branch can contain different versions.
+
+Production deployment requires the maintainer's **explicit approval**, separately from PR review or merge. Do not deploy an unreviewed development branch. The current GitHub workflow runs verification on `push` and `pull_request`; it has no deployment step. See the [deployment audit and PR #3 review](docs/PR3-REVIEW-2026-10-31.md) for the checked scope, limitations and rollback procedure.
 
 ## Enhanced development preview
 
@@ -56,7 +60,7 @@ Replays retain up to 30 records, with at most 600 sampled frames and 2,500 key e
 
 ## Guides and development
 
-**Enhanced Edition** is the current public name. Internal `personal/` paths, package identifiers, save keys and historical Personal Edition reports retain their existing names for compatibility and traceability.
+The game is **卫戍协议：盟约 / Stronghold Protocol: Alliance**. **Enhanced Edition** identifies this development edition, not a different game name. Internal `personal/` paths, package identifiers, save keys and dated historical reports retain their existing identifiers for compatibility and traceability.
 
 The [implementation report](docs/ENHANCED-IMPLEMENTATION.md) ([中文](docs/ENHANCED-IMPLEMENTATION.zh-CN.md)) describes the enhancements, recovery boundaries and remaining work. They have **not been deployed to production**.
 
@@ -78,6 +82,8 @@ node upstream/tools/plugin.mjs check personal/examples/personal-lab --strict
 # Optional browser checks (installed Chrome):
 npm run test:browser
 ```
+
+`npm test` runs test files one at a time. Run build, automated tests and browser suites sequentially on resource-constrained machines; the browser command also runs its suites sequentially.
 
 **Current RC assessment: HOLD — not approved for release.** The latest [browser acceptance report](docs/RC-BROWSER-ACCEPTANCE-2026-10-31.md) ([中文](docs/RC-BROWSER-ACCEPTANCE-2026-10-31.zh-CN.md)) records Chrome + native Safari completing all 14 cooperative rounds with Boss victory, live reconnect, R9 committed-PREP crash recovery with both-client consent, and completed-match restart without duplicate history. Real external asset samples, mirror retry and a full-Spine-outage battle passed. Mobile emulation covered menus, recruitment, battle/replay and PREP restore, but touch drag/facing remains unverified and two UI overlaps were found; physical devices were explicitly deferred.
 

@@ -1,4 +1,4 @@
-# 个人战术实验室配置指南
+# 战术终端配置指南
 
 [English](PERSONAL.md) · [项目说明](../README.zh-CN.md)
 

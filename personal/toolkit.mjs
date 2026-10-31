@@ -15,8 +15,8 @@ export function downloadJSON(name,value) {
 }
 export function mountToolkit(api) {
   const button=document.createElement('button');button.className='tactics-open';button.textContent='战术终端';button.title='复盘、战术教练、存档与挑战';
-  const dialog=document.createElement('dialog');dialog.className='tactics';dialog.setAttribute('aria-label','个人版战术终端');
-  dialog.innerHTML=`<header class="tactics-header"><div><small>PERSONAL TACTICAL LAB</small><h2>战术终端</h2></div><button data-close aria-label="关闭战术终端">返回游戏 ×</button></header><nav aria-label="战术终端分页"></nav><p class="tactics-status" role="status"></p><main class="tactics-body"></main>`;
+  const dialog=document.createElement('dialog');dialog.className='tactics';dialog.setAttribute('aria-label','战术终端');
+  dialog.innerHTML=`<header class="tactics-header"><div><small>TACTICAL TERMINAL</small><h2>战术终端</h2></div><button data-close aria-label="关闭战术终端">返回游戏 ×</button></header><nav aria-label="战术终端分页"></nav><p class="tactics-status" role="status"></p><main class="tactics-body"></main>`;
   document.body.append(button,dialog);
   const tabs=[['overview','终端概览'],['replays','战斗复盘'],['saves','存档保险库'],['challenges','自定义挑战'],['network','联机与 AI'],['assets','素材状态']];
   let tab='replays',records=[],selected=null,timer=null,at=0,renderToken=0,requestAbort=null,returnFocus=null;
@@ -32,7 +32,7 @@ export function mountToolkit(api) {
   dialog.querySelector('[data-close]').onclick=close;
   dialog.addEventListener('cancel',event=>{event.preventDefault();close();});
   const en={overview:'Overview',replays:'Battle review',saves:'Save vault',challenges:'Challenges',network:'Multiplayer & AI',assets:'Resources'};
-  const updateLabels=()=>{const english=/^en/i.test(api.getLang?.() || '');button.textContent=english?'Tactical terminal':'战术终端';dialog.querySelector('h2').textContent=button.textContent;dialog.querySelector('[data-close]').textContent=english?'Return to game ×':'返回游戏 ×';dialog.querySelector('[data-close]').setAttribute('aria-label',english?'Close tactical terminal':'关闭战术终端');for(const el of nav.children)el.textContent=english?en[el.dataset.tab]:tabs.find(x=>x[0]===el.dataset.tab)[1];};
+  const updateLabels=()=>{const english=/^en/i.test(api.getLang?.() || '');button.textContent=english?'Tactical terminal':'战术终端';dialog.setAttribute('aria-label',button.textContent);dialog.querySelector('h2').textContent=button.textContent;dialog.querySelector('[data-close]').textContent=english?'Return to game ×':'返回游戏 ×';dialog.querySelector('[data-close]').setAttribute('aria-label',english?'Close tactical terminal':'关闭战术终端');for(const el of nav.children)el.textContent=english?en[el.dataset.tab]:tabs.find(x=>x[0]===el.dataset.tab)[1];};
   nav.setAttribute('role','tablist');nav.innerHTML=tabs.map(([id,name])=>`<button role="tab" aria-controls="tactical-panel" data-tab="${id}">${name}</button>`).join('');
   body.id='tactical-panel';body.setAttribute('role','tabpanel');
   nav.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const buttons=[...nav.children],i=buttons.indexOf(document.activeElement),next=e.key==='Home'?0:e.key==='End'?buttons.length-1:(i+(e.key==='ArrowRight'?1:-1)+buttons.length)%buttons.length;buttons[next].click();buttons[next].focus();});

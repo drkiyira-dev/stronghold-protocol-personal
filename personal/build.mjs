@@ -15,6 +15,12 @@ for (const [from,to] of [['public',''],['shared','shared'],['server/sim','sim'],
   await cp(path.join(root,'upstream',from), path.join(dist,to), {recursive:true, filter: source => !/(?:\/assets|\/fonts)(?:\/|$)/.test(source)});
 }
 await cp(path.join(root,'personal/templates'),dist,{recursive:true});
+// Add the project statement without replacing the upstream footer or its credits.
+const titleFile=path.join(dist,'js/screens/title.js');
+const rightsLine="<span>${t('非官方同人复刻 · 游戏素材版权归 上海鹰角网络 / Yostar 所有')}</span>";
+await writeFile(titleFile,replaceContract(await readFile(titleFile,'utf8'),rightsLine,
+  `<div class="project-notice"><p>本项目为非官方、非商业性同人二次创作，与《明日方舟》官方无关。</p>${rightsLine}</div>`,
+  'title project statement'));
 // Safari can evaluate concurrent dynamic kit imports before tier4's const helpers.
 // Initialize that shared dependency first; keep every upstream kit and rule intact.
 const kitsFile=path.join(dist,'sim/content/kits/index.js');
