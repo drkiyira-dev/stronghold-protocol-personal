@@ -8,7 +8,7 @@
 
 ## AI 辅助开发
 
-本个人版由 Dr.Kiriya 开发和维护，OpenAI Codex 提供了大量工程协助。
+本增强版（Enhanced Edition）由 Dr.Kiriya 开发和维护，OpenAI Codex 提供了大量工程协助。
 
 Codex 协助完成了浏览器端引擎适配、存档持久化、素材优化、测试与部署流程。
 
@@ -16,13 +16,15 @@ Codex 协助完成了浏览器端引擎适配、存档持久化、素材优化�
 
 ## Codex 开发与测试声明
 
-**本个人版新增或修改的代码由 OpenAI Codex 在维护者指导下编写；新增测试也由 Codex 编写并执行。自动化回归、浏览器实玩、调试及部署验证由 Codex 完成。** 这一署名不覆盖上游原有实现与测试，其贡献仍属于原作者。
+**本增强版新增或修改的代码由 OpenAI Codex 在维护者指导下编写；新增测试也由 Codex 编写并执行。自动化回归、浏览器实玩、调试及部署验证由 Codex 完成。** 这一署名不覆盖上游原有实现与测试，其贡献仍属于原作者。
 
 已核验的 Codex 共同作者身份及后续提交规则见 [贡献归属说明](CONTRIBUTING.md)。
 
+当前对外名称统一为 **Enhanced Edition（增强版）**。为保持兼容性和可追溯性，内部 `personal/` 目录、包标识、存档键及历史 Personal Edition（个人版）报告保留原名。
+
 ## 运行
 
-推荐使用已验证的 **Node.js 26.7.0**，以运行 SQLite 恢复后端及完整测试。当前构建无需提前批量下载美术资源。
+使用本轮 SQLite 恢复后端及 RC 检查采用的 **Node.js 26.7.0**。剩余三项串行测试失败已修复，但尚未在修复提交上重跑完整上游测试，详见 [RC 复验报告](docs/RELEASE-CANDIDATE-2026-10-31.zh-CN.md)。当前构建无需提前批量下载美术资源。
 
 ```sh
 npm ci
@@ -56,7 +58,7 @@ npm run server
 
 ## 指南与开发入口
 
-本审查分支的功能、回退范围和剩余工作见[实现报告](docs/ENHANCED-IMPLEMENTATION.zh-CN.md)（[English](docs/ENHANCED-IMPLEMENTATION.md)）。**尚未部署到生产站点。**
+增强功能、回退范围和剩余工作见[实现报告](docs/ENHANCED-IMPLEMENTATION.zh-CN.md)（[English](docs/ENHANCED-IMPLEMENTATION.md)）。**尚未部署到生产站点。**
 
 下一阶段的[设计与审计](docs/ENHANCED-DESIGN.zh-CN.md)继续复用原游戏、引擎、插件、Studio 和 AI 队友。首批可靠性修复处理缺失统计、采样截断提示、稳定对局身份及恢复确认后再激活存档，详见[修复范围与验证](docs/RELIABILITY.zh-CN.md)。这些源码改动不代表生产部署已获授权或已经完成。
 
@@ -77,7 +79,11 @@ node upstream/tools/plugin.mjs check personal/examples/personal-lab --strict
 npm run test:browser
 ```
 
-**2026 年 10 月 30 日由 Codex 验证：**
+**当前 RC 结论：HOLD，尚未批准发布。** 最新[浏览器补充验收](docs/RC-BROWSER-ACCEPTANCE-2026-10-31.zh-CN.md)（[English](docs/RC-BROWSER-ACCEPTANCE-2026-10-31.md)）记录 Chrome + 原生 Safari 完成全部 14 回合同盟局并击败 Boss，通过实时重连、R9 已提交休整崩溃恢复及双端确认、完成后重启且历史不重复。真实外部素材抽样、镜像重试及全部模型失效后的战斗通过。移动模拟覆盖菜单、招募、战斗/复盘和休整恢复，但触控拖动/朝向未验证，发现两项 UI 遮挡；实机已明确延期。
+
+[前次修复复验](docs/RELEASE-CANDIDATE-2026-10-31.zh-CN.md)保留 Safari 与三项测试修复及串行自动化结果。原单人局跨两个构建完成第九回合失败结算，实际通关数为 8/9；尚未在修复版从头重跑完整九回合或重新执行完整上游/Golden。间歇性就绪超时仍未定位。[原报告](docs/RELEASE-CANDIDATE-2026-10-30.zh-CN.md)保留失败证据。各场景串行执行，测试页和服务已关闭，生产站点未更新。
+
+以下为历史 Codex 验证记录，不代替本次 RC 结论：
 
 - 增强预览：**52 项自动化测试、20 项本地浏览器检查通过**，覆盖真实进程强杀、提交中断、结算屏障、加密备份还原、IndexedDB 并发/回退及证据跳转。浏览器测试阻断外部素材、模型采用测试桩；未重跑完整九回合或生产验收。CI 仅构建和测试，不部署。
 

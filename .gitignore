@@ -10,7 +10,7 @@ upstream/public/fonts/
 .env
 .env.*
 !.env.example
-plugins/
+/plugins/
 .personal-state/
 *.sqlite
 *.sqlite-wal

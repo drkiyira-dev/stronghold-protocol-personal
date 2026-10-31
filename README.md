@@ -8,7 +8,7 @@ Code: **GPL-3.0-or-later**, consistent with upstream. See [LICENSE](LICENSE) and
 
 ## AI-Assisted Development
 
-This personal edition is developed and maintained by Dr.Kiriya with substantial engineering assistance from OpenAI Codex.
+This Enhanced Edition is developed and maintained by Dr.Kiriya with substantial engineering assistance from OpenAI Codex.
 
 Codex has assisted with browser-based engine adaptation, save-state persistence, asset optimization, testing, and deployment workflows.
 
@@ -16,13 +16,13 @@ The project is based on the original Stronghold-Protocol repository. Original au
 
 ## Codex disclosure
 
-**The personal edition's additions and modifications were written by OpenAI Codex under the maintainer's direction. Its added tests were also written and run by Codex, including automated regression checks, browser gameplay checks, debugging and deployment verification.** This credit does not apply to the upstream implementation or its existing tests.
+**The Enhanced Edition's additions and modifications were written by OpenAI Codex under the maintainer's direction. Its added tests were also written and run by Codex, including automated regression checks, browser gameplay checks, debugging and deployment verification.** This credit does not apply to the upstream implementation or its existing tests.
 
 See [contribution attribution](CONTRIBUTING.md) for the verified Codex co-author identity and the policy for future commits.
 
 ## Run
 
-Use **Node.js 26.7.0**, the tested runtime for the SQLite recovery backend and regression suite. No bulk artwork download is needed for the current build.
+Use **Node.js 26.7.0**, the runtime used for the SQLite recovery backend and RC checks. The three remaining serial-test failures are fixed; the full upstream suite has not been rerun on the fix. See the [RC follow-up](docs/RELEASE-CANDIDATE-2026-10-31.md). No bulk artwork download is needed for the current build.
 
 ```sh
 npm ci
@@ -56,7 +56,9 @@ Replays retain up to 30 records, with at most 600 sampled frames and 2,500 key e
 
 ## Guides and development
 
-The [implementation report](docs/ENHANCED-IMPLEMENTATION.md) ([中文](docs/ENHANCED-IMPLEMENTATION.zh-CN.md)) describes this review branch, recovery boundaries and remaining work. It has **not been deployed to production**.
+**Enhanced Edition** is the current public name. Internal `personal/` paths, package identifiers, save keys and historical Personal Edition reports retain their existing names for compatibility and traceability.
+
+The [implementation report](docs/ENHANCED-IMPLEMENTATION.md) ([中文](docs/ENHANCED-IMPLEMENTATION.zh-CN.md)) describes the enhancements, recovery boundaries and remaining work. They have **not been deployed to production**.
 
 The next-phase [design and audit](docs/ENHANCED-DESIGN.zh-CN.md) preserve the original game, engine, plugins, Studio and AI teammates. The first reliability patch fixes unknown replay metrics, visible recording truncation, stable save-run identity and activation only after a confirmed restore. See the [patch scope and verification](docs/RELIABILITY.md). These source changes do not authorize or perform a production deployment.
 
@@ -77,7 +79,11 @@ node upstream/tools/plugin.mjs check personal/examples/personal-lab --strict
 npm run test:browser
 ```
 
-Codex verification on **October 30, 2026**:
+**Current RC assessment: HOLD — not approved for release.** The latest [browser acceptance report](docs/RC-BROWSER-ACCEPTANCE-2026-10-31.md) ([中文](docs/RC-BROWSER-ACCEPTANCE-2026-10-31.zh-CN.md)) records Chrome + native Safari completing all 14 cooperative rounds with Boss victory, live reconnect, R9 committed-PREP crash recovery with both-client consent, and completed-match restart without duplicate history. Real external asset samples, mirror retry and a full-Spine-outage battle passed. Mobile emulation covered menus, recruitment, battle/replay and PREP restore, but touch drag/facing remains unverified and two UI overlaps were found; physical devices were explicitly deferred.
+
+The [earlier fix verification](docs/RELEASE-CANDIDATE-2026-10-31.md) preserves the Safari/three-test fixes and serial automated results. The original solo campaign completed R9 defeat across two builds (8/9 passed); a fresh nine-round solo run on the fix and a new full upstream/golden run were not performed. The intermittent readiness timeout remains unexplained. The [original assessment](docs/RELEASE-CANDIDATE-2026-10-30.md) retains failed-run evidence. Tests ran serially; owned QA tabs/servers are closed. Production was not updated.
+
+Historical Codex verification (these results do not replace the current RC assessment):
 
 - Enhanced preview: **52 automated tests** and **20 local browser checks** passed, including real process termination/restart, interrupted commits, settlement barriers, encrypted backup restoration, concurrent IndexedDB writes, migration rollback and evidence navigation. Browser assets were blocked and model calls mocked; this is not a new nine-round or production acceptance run. CI verifies builds/tests and contains no deployment step.
 

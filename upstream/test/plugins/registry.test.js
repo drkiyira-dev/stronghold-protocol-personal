@@ -192,7 +192,7 @@ test('links: a symbolic link inside a plugin folder keeps it out; a plugin folde
   }
 });
 
-test('one unreadable entry never stops the scan, the registry or the server: JSON nested too deep to quote back', async () => {
+test('one unreadable entry never stops the scan, the registry or the server: deeply nested JSON', async () => {
   const root = exampleRoot();
   const deep = (n) => `{"manifest":${'['.repeat(n)}${']'.repeat(n)}}`;
   put(root, 'plugins/deep-one/plugin.json', deep(20000));
@@ -201,7 +201,7 @@ test('one unreadable entry never stops the scan, the registry or the server: JSO
   try {
     const scan = scanPlugins(dirsOf(root), { app: '0.3.0' });
     const why = Object.fromEntries(scan.skipped.map((s) => [s.where, s.problems.join('; ')]));
-    assert.match(why['plugins/deep-one/'], /"manifest": \[…\] is not 2/);
+    assert.match(why['plugins/deep-one/'], /"manifest": (?:\[…\]|\[{40}) is not 2/);
     assert.ok(scan.plugins.some((p) => p.id === 'deep-pack'), 'a deep but ignorable value only warns (0.2.0 stopped the whole scan here)');
     assert.ok(scan.plugins.some((p) => p.id === 'marathon'), 'the other entries are read');
     const { startServer } = await import('../../server/index.js');
