@@ -59,9 +59,12 @@ let titleCode=await readFile(titleFile,'utf8');
 const footerMeta=titleCode.match(/      <span class="title-foot__meta">[\s\S]*?      <\/span>\n(?=    <\/footer>)/)?.[0];
 if(!footerMeta)throw new Error('Upstream title footer changed; review project link placement');
 titleCode=replaceContract(titleCode,footerMeta,'','title metadata location');
-titleCode=replaceContract(titleCode,rightsLine,
-  `<div class="project-notice"><p>本项目为非官方、非商业性同人二次创作，与《明日方舟》官方无关。</p>${rightsLine}${footerMeta}</div>`,
-  'title project statement');
+titleCode=replaceContract(titleCode,rightsLine,'','original title rights location');
+// Install/resume/notices controls appear conditionally. Keep attribution first
+// in DOM order too, so their arrival cannot displace it to the opposite corner.
+titleCode=replaceContract(titleCode,'<footer class="title-foot">',
+  `<footer class="title-foot"><div class="project-notice"><p>本项目为非官方、非商业性同人二次创作，与《明日方舟》官方无关。</p>${rightsLine}${footerMeta}</div>`,
+  'leftmost title project statement');
 await writeFile(titleFile,titleCode);
 for(const [file,anchor]of [
   ['js/screens/title.js','<div class="title-corner__tools">'],
