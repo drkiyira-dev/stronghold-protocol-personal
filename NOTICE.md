@@ -4,6 +4,8 @@
 
 本项目新增的 `personal/` 源码与上游代码采用相同的 **GPL-3.0-or-later** 许可，全文见 [LICENSE](LICENSE)。游戏素材、数据和第三方组件的例外不变。
 
+可选 3D 场景转发使用上游 v0.3.3 完整发布包中的现有资源。`personal/scene-catalog.json` 只保存索引与素材元数据；被引用的网格、贴图和其他游戏素材仍属原权利人，不因外部加载、临时缓存或转发而获得 GPL 授权。
+
 下面保留上游声明。文中上游目录路径在本仓库均位于 `upstream/` 内；原始声明另存于 [upstream/NOTICE.md](upstream/NOTICE.md)。
 
 ---

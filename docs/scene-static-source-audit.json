@@ -1,0 +1,306 @@
+{
+  "at": "2026-10-31T11:04:01.843Z",
+  "requestOrigin": "https://blackshore-protocol-kiriya.fluffymelon1026.chatgpt.site",
+  "source": {
+    "tag": "v0.3.3",
+    "url": "https://api.github.com/repos/sganggs/Stronghold-Protocol/releases/assets/673357309",
+    "size": 861090941
+  },
+  "headers": [
+    {
+      "label": "legacy upstream site",
+      "url": "https://weishuxieyi.icu/",
+      "https": true,
+      "status": 200,
+      "headers": {
+        "content-type": "text/html; charset=utf-8",
+        "content-length": "20",
+        "access-control-allow-origin": null,
+        "cache-control": "no-store",
+        "etag": "\"dm5dwayermqu-xzv-gzip\"",
+        "last-modified": "Thu, 15 Oct 2026 11:44:01 GMT",
+        "content-range": null
+      }
+    },
+    {
+      "label": "upstream scene manifest",
+      "url": "https://weishuxieyiwangye.cn:8443/_build/032r4-2de434b86a55-1/data/local-assets.json",
+      "https": true,
+      "status": 200,
+      "headers": {
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "36751",
+        "access-control-allow-origin": null,
+        "cache-control": "public, max-age=31536000, immutable",
+        "etag": null,
+        "last-modified": null,
+        "content-range": null
+      }
+    },
+    {
+      "label": "converted scene JSON",
+      "url": "https://weishuxieyiwangye.cn:8443/_build/032r4-2de434b86a55-1/assets/~a2e6d3e924f3bc5d/local/scene/act1autochess_m05/scene.json",
+      "https": true,
+      "status": 200,
+      "headers": {
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "17780",
+        "access-control-allow-origin": null,
+        "cache-control": "public, max-age=31536000, immutable",
+        "etag": "\"a2e6d3e924f3bc5d\"",
+        "last-modified": "Thu, 22 Oct 2026 08:07:13 GMT",
+        "content-range": null
+      }
+    },
+    {
+      "label": "converted scene binary",
+      "url": "https://weishuxieyiwangye.cn:8443/_build/032r4-2de434b86a55-1/assets/~3d1153a71bb145a8/local/scene/act1autochess_m05/scene.bin",
+      "https": true,
+      "status": 200,
+      "headers": {
+        "content-type": "application/octet-stream",
+        "content-length": "2298124",
+        "access-control-allow-origin": null,
+        "cache-control": "public, max-age=31536000, immutable",
+        "etag": "\"3d1153a71bb145a8\"",
+        "last-modified": "Thu, 22 Oct 2026 08:07:13 GMT",
+        "content-range": null
+      }
+    },
+    {
+      "label": "converted board texture",
+      "url": "https://weishuxieyiwangye.cn:8443/_build/032r4-2de434b86a55-1/assets/~e46c2ff06317af18/local/map/autochess/TX_autochessi_D.webp",
+      "https": true,
+      "status": 200,
+      "headers": {
+        "content-type": "image/webp",
+        "content-length": "685108",
+        "access-control-allow-origin": null,
+        "cache-control": "public, max-age=31536000, immutable",
+        "etag": "\"e46c2ff06317af18\"",
+        "last-modified": "Thu, 22 Oct 2026 08:07:13 GMT",
+        "content-range": null
+      }
+    },
+    {
+      "label": "release range api.github.com",
+      "url": "https://api.github.com",
+      "https": true,
+      "status": 302,
+      "headers": {
+        "content-type": "text/html;charset=utf-8",
+        "content-length": "0",
+        "access-control-allow-origin": "*",
+        "cache-control": null,
+        "etag": null,
+        "last-modified": null,
+        "content-range": null
+      }
+    },
+    {
+      "label": "release range release-assets.githubusercontent.com",
+      "url": "https://release-assets.githubusercontent.com",
+      "https": true,
+      "status": 206,
+      "headers": {
+        "content-type": "application/octet-stream",
+        "content-length": "8",
+        "access-control-allow-origin": null,
+        "cache-control": null,
+        "etag": "\"0x8DF32161D936A90\"",
+        "last-modified": "Sat, 24 Oct 2026 21:31:07 GMT",
+        "content-range": "bytes 0-7/861090941"
+      }
+    },
+    {
+      "label": "UI click audio",
+      "url": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/general/g_ui/g_ui_btn_h.mp3",
+      "https": true,
+      "status": 200,
+      "headers": {
+        "content-type": "audio/mpeg",
+        "content-length": "8194",
+        "access-control-allow-origin": "*",
+        "cache-control": "max-age=300",
+        "etag": "W/\"86538a01a564c54578ad26f3a96fa9b313690fc08f90aab8f2b0cae960e97e55\"",
+        "last-modified": null,
+        "content-range": null
+      }
+    },
+    {
+      "label": "battle deployment audio",
+      "url": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/voice/assets/dyn/audio/sound_beta_2/battle/b_char/b_char_set.mp3",
+      "https": true,
+      "status": 200,
+      "headers": {
+        "content-type": "audio/mpeg",
+        "content-length": "22822",
+        "access-control-allow-origin": "*",
+        "cache-control": "max-age=300",
+        "etag": "W/\"745d166abe8ee1b027122c71dda84aa908312260681b58e47cf6ea811f2b84b0\"",
+        "last-modified": null,
+        "content-range": null
+      }
+    },
+    {
+      "label": "current public production (read only)",
+      "url": "https://blackshore-protocol-kiriya.fluffymelon1026.chatgpt.site",
+      "https": true,
+      "status": 200,
+      "headers": {
+        "content-type": "text/html",
+        "content-length": null,
+        "access-control-allow-origin": null,
+        "cache-control": "public, max-age=0, must-revalidate",
+        "etag": null,
+        "last-modified": null,
+        "content-range": null
+      }
+    }
+  ],
+  "inventory": [
+    {
+      "stage": "act1autochess_m01",
+      "files": 17,
+      "bytes": 6415314,
+      "compressedBytes": 5020013,
+      "chunks": 17,
+      "lightmaps": 2,
+      "staticDirect": false,
+      "privateImport": true
+    },
+    {
+      "stage": "act1autochess_m02",
+      "files": 17,
+      "bytes": 6287574,
+      "compressedBytes": 4977650,
+      "chunks": 19,
+      "lightmaps": 2,
+      "staticDirect": false,
+      "privateImport": true
+    },
+    {
+      "stage": "act1autochess_m03",
+      "files": 16,
+      "bytes": 6353017,
+      "compressedBytes": 4973717,
+      "chunks": 15,
+      "lightmaps": 1,
+      "staticDirect": false,
+      "privateImport": true
+    },
+    {
+      "stage": "act1autochess_m04",
+      "files": 16,
+      "bytes": 6337846,
+      "compressedBytes": 4981912,
+      "chunks": 16,
+      "lightmaps": 1,
+      "staticDirect": false,
+      "privateImport": true
+    },
+    {
+      "stage": "act1autochess_m05",
+      "files": 17,
+      "bytes": 6579376,
+      "compressedBytes": 5055078,
+      "chunks": 22,
+      "lightmaps": 1,
+      "staticDirect": false,
+      "privateImport": true
+    },
+    {
+      "stage": "act1autochess_m06",
+      "files": 16,
+      "bytes": 6298219,
+      "compressedBytes": 4947670,
+      "chunks": 16,
+      "lightmaps": 1,
+      "staticDirect": false,
+      "privateImport": true
+    },
+    {
+      "stage": "act1autochess_m07",
+      "files": 16,
+      "bytes": 6258160,
+      "compressedBytes": 4879789,
+      "chunks": 14,
+      "lightmaps": 1,
+      "staticDirect": false,
+      "privateImport": true
+    },
+    {
+      "stage": "act2autochess_m01",
+      "files": 18,
+      "bytes": 9900032,
+      "compressedBytes": 5189651,
+      "chunks": 19,
+      "lightmaps": 2,
+      "staticDirect": false,
+      "privateImport": true
+    },
+    {
+      "stage": "act2autochess_m02",
+      "files": 20,
+      "bytes": 7132151,
+      "compressedBytes": 5546050,
+      "chunks": 36,
+      "lightmaps": 5,
+      "staticDirect": false,
+      "privateImport": true
+    },
+    {
+      "stage": "act2autochess_m03",
+      "files": 16,
+      "bytes": 6500917,
+      "compressedBytes": 4317629,
+      "chunks": 21,
+      "lightmaps": 2,
+      "staticDirect": false,
+      "privateImport": true
+    },
+    {
+      "stage": "act2autochess_m04",
+      "files": 18,
+      "bytes": 6540344,
+      "compressedBytes": 5120994,
+      "chunks": 26,
+      "lightmaps": 2,
+      "staticDirect": false,
+      "privateImport": true
+    }
+  ],
+  "shared": {
+    "files": 81,
+    "bytes": 12787039,
+    "compressedBytes": 12576858
+  },
+  "formats": {
+    "webp": {
+      "files": 71,
+      "bytes": 16030178
+    },
+    "png": {
+      "files": 48,
+      "bytes": 12027362
+    },
+    "json": {
+      "files": 24,
+      "bytes": 207355
+    },
+    "obj": {
+      "files": 17,
+      "bytes": 157522
+    },
+    "bin": {
+      "files": 11,
+      "bytes": 28845800
+    }
+  },
+  "total": {
+    "files": 171,
+    "bytes": 57268217,
+    "compressedBytes": 37489150
+  },
+  "rights": "Game art remains third-party intellectual property; no redistribution permission inferred from HTTPS availability. No art is included in the static build."
+}

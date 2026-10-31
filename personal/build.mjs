@@ -5,6 +5,11 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {buildIdentity,replaceContract,verifyNoUntrackedEngineFiles} from './build-identity.mjs';
+import {adaptAudio,adaptAudioSettings,adaptAudioSettingsUI,AUDIO_LABELS} from './audio-build.mjs';
+import {adaptMapShadow} from './maps-build.mjs';
+import {loadSceneCatalog,sceneManifest} from './scene-assets.mjs';
+import {adaptSceneImport,adaptSceneTiles} from './scene-imports-build.mjs';
+import {publishLicenses} from './licenses-build.mjs';
 const identity=await buildIdentity();
 await verifyNoUntrackedEngineFiles();
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -15,6 +20,19 @@ for (const [from,to] of [['public',''],['shared','shared'],['server/sim','sim'],
   await cp(path.join(root,'upstream',from), path.join(dist,to), {recursive:true, filter: source => !/(?:\/assets|\/fonts)(?:\/|$)/.test(source)});
 }
 await cp(path.join(root,'personal/templates'),dist,{recursive:true});
+for(const [file,adapt]of [['js/audio.js',adaptAudio],['js/ui/gameLogic/settings.js',adaptAudioSettings],['js/ui/settings.js',adaptAudioSettingsUI],['js/render/app.js',adaptMapShadow]]) {
+  const target=path.join(dist,file);await writeFile(target,adapt(await readFile(target,'utf8')));
+}
+for(const [file,adapt]of [['js/assetPack.js',adaptSceneImport],['js/render/board3d/load.js',adaptSceneTiles],['js/render/boardArt.js',adaptSceneTiles]]){
+  const target=path.join(dist,file);await writeFile(target,adapt(await readFile(target,'utf8')));
+}
+const importUI=path.join(dist,'js/ui/assetImport.js');
+await writeFile(importUI,replaceContract(await readFile(importUI,'utf8'),'读取自己的素材包，美术不占服务器流量。','本机导入场景素材，建议使用普通窗口；完成后刷新。','scene import hint'));
+for(const [lang,labels]of Object.entries(AUDIO_LABELS)) {
+  const file=path.join(dist,'i18n',lang+'.json'),pack=JSON.parse(await readFile(file,'utf8'));
+  Object.assign(pack,{'界面音效':labels[0],'战斗音效':labels[1],
+    '本机导入场景素材，建议使用普通窗口；完成后刷新。':{en:'Use a regular window to import scene art, then reload.',ja:'通常ウィンドウで素材を読み込み後、再読み込みしてください。',ko:'일반 창에서 장면 리소스를 가져온 후 새로 고치세요.','zh-TW':'建議在一般視窗匯入場景素材，完成後重新整理。'}[lang]});await writeFile(file,JSON.stringify(pack));
+}
 // Add the project statement without replacing the upstream footer or its credits.
 const titleFile=path.join(dist,'js/screens/title.js');
 const rightsLine="<span>${t('非官方同人复刻 · 游戏素材版权归 上海鹰角网络 / Yostar 所有')}</span>";
@@ -27,6 +45,8 @@ const kitsFile=path.join(dist,'sim/content/kits/index.js');
 await writeFile(kitsFile,replaceContract(await readFile(kitsFile,'utf8'),'export const KIT_FILES =',
   "import './shared/tier4.js';\n\nexport const KIT_FILES =",'Safari kit helper initialization'));
 await mkdir(path.join(dist,'personal'),{recursive:true});
+const importCatalog=JSON.parse(await readFile(path.join(root,'personal/scene-import-catalog.json'),'utf8'));
+await writeFile(path.join(dist,'personal/scene-import.json'),JSON.stringify(importCatalog.manifest));
 await writeFile(path.join(dist,'personal/build-info.json'),JSON.stringify(identity));
 for (const name of ['local-client.mjs','personal.css','skeleton-codec.mjs','spine-urls.mjs']) await cp(path.join(root,'personal',name),path.join(dist,'personal',name));
 // Upstream's local-only model validator must recognize the externally hosted assets too.
@@ -36,10 +56,10 @@ const validator=/export function validSpine\(sp\) \{\n[^\n]+\n\}/;
 if(!validator.test(assetsCode))throw new Error('Upstream Spine validator changed; review the external-resource adapter');
 assetsCode="import {validPersonalSpine} from '/personal/spine-urls.mjs';\n"+assetsCode.replace(validator,'export function validSpine(sp) { return validPersonalSpine(sp); }');
 await writeFile(assetsFile,assetsCode);
-for (const name of ['LICENSE','NOTICE.md']) await cp(path.join(root,name),path.join(dist,name));
+await publishLicenses(root,dist);
 for (const [file,value] of Object.entries({
   'healthz':{ok:true,build:'personal-1.1.0',content:{plugins:0,notices:false},personal:true},
-  'data/local-assets.json':{groups:{}},
+  'data/local-assets.json':process.env.PERSONAL_SCENE_ORIGIN?sceneManifest(await loadSceneCatalog(),process.env.PERSONAL_SCENE_ORIGIN):{groups:{}},
   'plugins/index.json':{version:1,plugins:[]},
 })) {
   await mkdir(path.dirname(path.join(dist,file)),{recursive:true});

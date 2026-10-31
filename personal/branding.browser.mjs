@@ -36,7 +36,7 @@ try{
       assert.ok(await notice.evaluate(el=>el.scrollWidth<=el.clientWidth+1),'statement does not overflow');
       assert.ok(await notice.evaluate(el=>parseFloat(getComputedStyle(el).fontSize)>=12),'readable font size');
       await page.screenshot({path:output+`branding-${device}-${route}.png`});
-      for(const selector of ['.title-login','.title-foot__meta','.tactics-open','[data-mode="solo"]','[data-mode="coop"]']){
+      for(const selector of ['.title-login','[data-testid=asset-import]','.title-foot__meta','.tactics-open','[data-mode="solo"]','[data-mode="coop"]']){
         const target=page.locator(selector).first();if(!await target.isVisible())continue;
         const b=await target.boundingBox();
         assert.ok(box.x+box.width<=b.x||b.x+b.width<=box.x||box.y+box.height<=b.y||b.y+b.height<=box.y,`${device}/${route}: no statement overlap with ${selector}: ${JSON.stringify({notice:box,control:b})}`);
@@ -67,7 +67,10 @@ try{
     await page.getByRole('tab',{name:'终端概览',exact:true}).click();
     assert.ok((await page.locator('dialog.tactics').innerText()).includes('卫戍协议：盟约 / Stronghold Protocol: Alliance'));
     assert.doesNotMatch(await page.locator('dialog.tactics').innerText(),retired);
-    for(const href of ['/LICENSE','/NOTICE.md','https://github.com/sganggs/Stronghold-Protocol'])assert.ok(await page.locator(`dialog.tactics a[href="${href}"]`).count());
+    for(const href of ['/LICENSE','/NOTICE.md','/THIRD-PARTY-NOTICES.md','/licenses/README.md','https://github.com/sganggs/Stronghold-Protocol','https://github.com/drkiyira-dev/stronghold-protocol-personal'])assert.ok(await page.locator(`dialog.tactics a[href="${href}"]`).count());
+    for(const file of ['/THIRD-PARTY-NOTICES.md','/upstream/NOTICE.md','/upstream/THIRD-PARTY-NOTICES.md','/upstream/LICENSE','/licenses/README.md','/licenses/ses/LICENSE-v8']){
+      const response=await page.request.get(app.url+file);assert.equal(response.status(),200,file);assert.doesNotMatch(await response.text(),/<html/i,file);
+    }
     assert.deepEqual(errors,[]);
     checks.push(`${device}: Chinese/English titles, terminal attribution and rights links retained`);
     await context.close();
