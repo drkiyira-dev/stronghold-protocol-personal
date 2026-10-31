@@ -20,7 +20,9 @@ export async function startPersonalServer(options={}){
     recovery=createRoomRecovery(openRoomStore(path.resolve(stateDir),options.stateOptions),identity,{allowedOrigins:(process.env.PERSONAL_ALLOWED_ORIGINS || '').split(',').map(x=>x.trim()).filter(Boolean)});
   }
   let app;
-  try{app=await startServer({host:'127.0.0.1',port:4174,publicDir,dataDir:path.join(publicDir,'data'),sharedDir:path.join(publicDir,'shared'),packsDir:path.join(publicDir,'packs'),pluginsDir:path.join(root,'plugins'),studio:false,assetIndex:false,versions:{enabled:['act2autochess'],default:'act2autochess'},...options,...(recovery?{MatchClass:recovery.MatchClass}:{})});
+  // Reuse upstream's content negotiation and isolated version hosts. Other
+  // versions load lazily; one alternate host bounds memory on personal machines.
+  try{app=await startServer({host:'127.0.0.1',port:4174,publicDir,dataDir:path.join(publicDir,'data'),sharedDir:path.join(publicDir,'shared'),packsDir:path.join(publicDir,'packs'),pluginsDir:path.join(root,'plugins'),studio:false,assetIndex:false,versions:{enabled:'all',default:'act2autochess',maxHosts:1},...options,...(recovery?{MatchClass:recovery.MatchClass}:{})});
     recovery?.attach(app);
   }catch(e){recovery?.stop();await app?.close();recovery?.close();throw e;}
   const close=app.close;app.close=async()=>{recovery?.stop();await close();recovery?.close();};app.recovery=recovery;

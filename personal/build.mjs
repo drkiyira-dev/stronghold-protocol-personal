@@ -6,6 +6,7 @@ import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {buildIdentity,replaceContract,verifyNoUntrackedEngineFiles} from './build-identity.mjs';
 import {adaptAudio,adaptAudioSettings,adaptAudioSettingsUI,AUDIO_LABELS} from './audio-build.mjs';
+import {adaptMapShadow} from './maps-build.mjs';
 const identity=await buildIdentity();
 await verifyNoUntrackedEngineFiles();
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -16,7 +17,7 @@ for (const [from,to] of [['public',''],['shared','shared'],['server/sim','sim'],
   await cp(path.join(root,'upstream',from), path.join(dist,to), {recursive:true, filter: source => !/(?:\/assets|\/fonts)(?:\/|$)/.test(source)});
 }
 await cp(path.join(root,'personal/templates'),dist,{recursive:true});
-for(const [file,adapt]of [['js/audio.js',adaptAudio],['js/ui/gameLogic/settings.js',adaptAudioSettings],['js/ui/settings.js',adaptAudioSettingsUI]]) {
+for(const [file,adapt]of [['js/audio.js',adaptAudio],['js/ui/gameLogic/settings.js',adaptAudioSettings],['js/ui/settings.js',adaptAudioSettingsUI],['js/render/app.js',adaptMapShadow]]) {
   const target=path.join(dist,file);await writeFile(target,adapt(await readFile(target,'utf8')));
 }
 for(const [lang,labels]of Object.entries(AUDIO_LABELS)) {

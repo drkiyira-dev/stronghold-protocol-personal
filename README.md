@@ -39,6 +39,8 @@ npm run server
 - Open [http://127.0.0.1:4174/?server=local](http://127.0.0.1:4174/?server=local) for rooms hosted by the running Node server.
 - LAN: run `npm run server -- --host 0.0.0.0`, then open `http://YOUR_LAN_IP:4174/?server=local` on each device. Share the room code.
 
+Self-hosted rooms now expose all four upstream official-version previews through the existing lobby/room version picker. Alternate versions use upstream isolated match hosts, limited to one alternate host at a time. The static/browser-local engine still uses the default second-season version; non-default rooms do **not** have personal checkpoint persistence. Map pools, mode restrictions and the upstream preview warnings remain unchanged. See the [map support matrix and remaining art limitations](docs/AUDIO-MAPS-REVIEW.md#map-support).
+
 The [hosted Site](https://blackshore-protocol-kiriya.fluffymelon1026.chatgpt.site/) is **Public** and must remain publicly accessible during development. Repository changes and RC release holds do not authorize closing, deleting or restricting it. A static deployment serves `dist/` and does not itself run a room server. The live deployment and this development branch can contain different versions.
 
 Production deployment requires the maintainer's **explicit approval**, separately from PR review or merge. Do not deploy an unreviewed development branch. The current GitHub workflow runs verification on `push` and `pull_request`; it has no deployment step. See the [deployment audit and PR #3 review](docs/PR3-REVIEW-2026-10-31.md) for the checked scope, limitations and rollback procedure.
