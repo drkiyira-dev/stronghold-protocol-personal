@@ -37,6 +37,21 @@ try{
     assert.equal(app.result().audio.context,'running');assert.ok(app.result().audio.decodedSeconds>0);assert.ok(app.result().audio.starts>0);assert.ok(app.result().audio.failedBufferIsNull);
     checks.push('real HTTPS UI audio decoded and started after gesture; failed audio returns null');
   }
+  const cacheCount=()=>page.evaluate(async()=>((await (await caches.open('sp-imported-assets-v1')).keys()).length));
+  const beforeRejected=await cacheCount();
+  await page.getByTestId('asset-import').click();
+  await page.getByTestId('asset-import-zip-input').setInputFiles({name:'invalid.zip',mimeType:'application/zip',buffer:Buffer.from('invalid QA zip')});
+  await page.getByTestId('asset-import-status').filter({hasText:'素材包不是有效的 zip'}).waitFor();
+  const badRoot=resolve('.cache/scene-incompatible/Stronghold-Protocol');
+  await mkdir(badRoot+'/public/assets/local/scene/act1autochess_m01',{recursive:true});
+  await writeFile(badRoot+'/public/assets/local/scene/act1autochess_m01/scene.bin','wrong-version QA bytes');
+  await page.getByTestId('asset-import-folder-input').setInputFiles(badRoot);
+  await page.getByTestId('asset-import-counts').filter({hasText:'校验不符 1 个'}).waitFor();
+  assert.match(await page.getByTestId('asset-import-status').innerText(),/没有找到|未通过校验/);
+  const rejected=await page.evaluate(async()=>(await import('/js/assetPack.js')).assetImport.get());
+  assert.equal(rejected.accepted,0);assert.equal(rejected.rejected,1);assert.equal(await cacheCount(),beforeRejected);
+  await page.keyboard.press('Escape');await page.getByTestId('asset-import-zip').waitFor({state:'hidden'});
+  checks.push('invalid ZIP and incompatible hash show actionable rejection without overwriting cached art');
   await page.locator('#static-scenes').click();await page.waitForFunction(()=>['scenes checked','failed'].includes(JSON.parse(document.querySelector('#static-status').textContent).phase),null,{timeout:90000});
   assert.equal(app.result().phase,'scenes checked');assert.equal(app.result().cachedSceneGroups,live?11:0);
   if(live){assert.equal(app.result().sceneChecks.length,11);assert.ok(app.result().tileTable);assert.equal(app.requests.length,0,'original art must come from browser cache, not the static server');}

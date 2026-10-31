@@ -42,6 +42,17 @@ test('upstream importer accepts matching local bytes and rejects corruption, wit
   assert.ok(requests.every(u=>u.startsWith('/data/')));
 });
 
+test('a changed catalog cannot mix old geometry into a new scene; rollback remains optional-art only',async()=>{
+  const manifest=catalog.manifest,group='scene/act1autochess_m01';
+  const old=manifest.groups[group],paths=new Set([old.scene.path,old.bin.path]);
+  const cache={match:async path=>paths.has(path)?new Response('previous verified bytes'):undefined};
+  const next=structuredClone(manifest);next.groups[group].bin.path=old.bin.path.replace(/~[a-f0-9]{16}/,'~1111111111111111');
+  assert.ok((await cachedSceneManifest(manifest,cache)).groups[group]);
+  assert.equal((await cachedSceneManifest(next,cache)).groups[group],undefined);
+  assert.ok((await cachedSceneManifest(manifest,cache)).groups[group],'old catalog can reuse retained bytes');
+  paths.clear();assert.deepEqual(await cachedSceneManifest(manifest,cache),{groups:{}},'evicted rollback art requires reimport, not a broken scene');
+});
+
 test('checked build adapters retain upstream code and resolve distinct content hashes for 2D and 3D tiles',async()=>{
   const importer=await readFile(new URL('assetPack.js',root),'utf8');
   assert.equal((adaptSceneImport(importer).match(/\/personal\/scene-import.json/g)||[]).length,2);
