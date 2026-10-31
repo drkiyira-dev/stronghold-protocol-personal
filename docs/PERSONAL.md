@@ -1,4 +1,4 @@
-# Personal Tactical Lab guide
+# Tactical terminal guide
 
 [中文](PERSONAL.zh-CN.md) · [Project README](../README.md)
 

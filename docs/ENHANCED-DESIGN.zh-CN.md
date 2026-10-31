@@ -8,7 +8,7 @@ English overview: This is an unofficial enhanced fan edition of Arknights: Stron
 
 ## 1. 定位、目标与约束
 
-保留「卫戍协议：盟约 / Stronghold Protocol: Alliance」名称、原规则和上游署名；Enhanced Edition 是增强版本标识，不把作品改称独立原创游戏。基于上游已有实现发展个人版功能。
+保留「卫戍协议：盟约 / Stronghold Protocol: Alliance」名称、原规则和上游署名；Enhanced Edition 是增强版本标识，不把作品改称独立原创游戏。基于上游已有实现发展增强功能。
 
 本阶段四项设计目标：统一战术终端；能点击证据核查的战术教练 2.0；可验证、可回退的 PREP 存档迁移；可自托管的多人房间持久化。先修正数据质量和兼容身份，再在其上提供可信 UI 和建议。
 

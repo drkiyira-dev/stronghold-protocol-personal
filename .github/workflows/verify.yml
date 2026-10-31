@@ -1,4 +1,4 @@
-name: Verify personal edition
+name: "Verify Stronghold Protocol: Alliance"
 on: [push, pull_request]
 permissions:
   contents: read

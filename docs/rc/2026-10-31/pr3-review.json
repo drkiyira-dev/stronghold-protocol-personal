@@ -1,0 +1,150 @@
+{
+  "date": "2026-10-31",
+  "reviewedMain": "f990e72b3c409290cbb8cfaa3a20c4c967c6ebb8",
+  "reviewedPR3": "6a724aad137fa5f0baae321b7fece743d5d5c025",
+  "testedSource": "7856e20ca780e6f1600f0dfce782cc506377c62b",
+  "build": "pass",
+  "personalTests": {
+    "passed": 53,
+    "failed": 0,
+    "skipped": 0,
+    "fileConcurrency": 1
+  },
+  "affectedUpstreamTests": {
+    "passed": 26,
+    "failed": 0
+  },
+  "browser": {
+    "reliabilityChecks": 7,
+    "enhancedChecks": 13,
+    "branding": {
+      "checks": 6,
+      "passed": [
+        "desktop: title statement fits, is readable and leaves controls clear",
+        "desktop: lobby statement fits, is readable and leaves controls clear",
+        "desktop: Chinese/English titles, terminal attribution and rights links retained",
+        "mobile-landscape: title statement fits, is readable and leaves controls clear",
+        "mobile-landscape: lobby statement fits, is readable and leaves controls clear",
+        "mobile-landscape: Chinese/English titles, terminal attribution and rights links retained"
+      ],
+      "externalAssets": "blocked",
+      "physicalMobile": false,
+      "productionModified": false
+    },
+    "nativeSafari": {
+      "at": "2026-10-31T07:53:22.412Z",
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+      "passed": true,
+      "mainKeys": 254,
+      "workerKeys": 254,
+      "mainErrors": [],
+      "workerErrors": []
+    },
+    "chromiumKit": {
+      "mainKeys": 254,
+      "workerKeys": 254,
+      "errors": 0
+    }
+  },
+  "buildIdentity": {
+    "version": 1,
+    "edition": "Stronghold Protocol: Alliance — Enhanced Edition",
+    "upstream": "f07b8965061bbc311ad7aa815879b09264a1e47d",
+    "upstreamEngineHash": "f5d24b524429e4a069c770da2d83a350cc71921dac76c7e083489232b13566f7",
+    "adapterHash": "54ab044e910942e976b4015f51f3908ed41c4b3be31960e2a525470b5cc951dd",
+    "engineHash": "f4c5dcf5b08eb98eb24cb7c28db9e04f014d3b610e6bb5a152756c2d475f81d7",
+    "dataHash": "c15ba374d2b64b760105803ebf2c76f4929c85984dd32daeef0665153b869180",
+    "baselineHash": "9884d9e0450a88230610b85a9865bc33615670b38d8fd6fc7f49b45bd4a97fef",
+    "protocol": 2
+  },
+  "deploymentAudit": {
+    "actionsTriggers": [
+      "push",
+      "pull_request"
+    ],
+    "deploymentSteps": false,
+    "webhooks": [],
+    "pagesHttpStatus": 404,
+    "githubDeployments": [],
+    "siteAccess": "public",
+    "siteVersion": 6,
+    "siteAutomations": [],
+    "productionModified": false,
+    "unlistedExternalIntegrations": "not exhaustively audited"
+  },
+  "scopeLimits": [
+    "No new nine-round playthrough",
+    "Full upstream/golden not rerun",
+    "UI assets blocked; model calls mocked",
+    "Mobile emulated, no physical iOS Safari",
+    "Native Safari recheck is kit-only",
+    "No production deployment or rollback exercised"
+  ],
+  "localEvidence": [
+    {
+      "path": ".cache/pr3-review-build.log",
+      "bytes": 373,
+      "sha256": "1b4e8ade6e7bee9ab4c7996df0a972a29a36af87283bb770624f49fe2fae4879"
+    },
+    {
+      "path": ".cache/pr3-review-tests-final.log",
+      "bytes": 11335,
+      "sha256": "1aee3358fb629f132e63b4cd8a2f1e8da63a4a62281d913a9505c010210c7d27"
+    },
+    {
+      "path": ".cache/pr3-review-upstream.log",
+      "bytes": 2947,
+      "sha256": "3bf0433ec0af901b238454f0dfd1cf0e381ee8b2ec5b1e72553ff80fbc7302e7"
+    },
+    {
+      "path": ".cache/pr3-review-browser.log",
+      "bytes": 2152,
+      "sha256": "e4e65c7a2c7f99174512f514c2f4491049e747465568ba834818a04df84ba303"
+    },
+    {
+      "path": ".cache/pr3-review-branding.log",
+      "bytes": 576,
+      "sha256": "5e62c5c4eee067c00bbe6cb420ff2f2203e0d87386435affa23b7ba1b581800c"
+    },
+    {
+      "path": ".cache/verification/pr3-native-safari-kit.json",
+      "bytes": 13691,
+      "sha256": "0a322311ddcd9b20c60e49a3cd73c5c9f0b8674f346f348398257f661493ffca"
+    },
+    {
+      "path": ".cache/verification/reliability-browser.json",
+      "bytes": 365,
+      "sha256": "20909c3a4c379e47b2d0da27a15da4bef3a18f408ce18d6f869015b0921de5cf"
+    },
+    {
+      "path": ".cache/verification/enhanced-report.json",
+      "bytes": 927,
+      "sha256": "b0ed5b0f34a8c09a8d3d04f55cb82523168756af31e8ca3174a5f7cff6f2620a"
+    },
+    {
+      "path": ".cache/verification/branding-report.json",
+      "bytes": 630,
+      "sha256": "76625080e32eb768c93bd4b610366958353273e2f458549b44cbbbcf167cda21"
+    },
+    {
+      "path": ".cache/verification/branding-desktop-lobby.png",
+      "bytes": 491848,
+      "sha256": "e6bf4606ad66c6d94e8b8a527aae47a62c9d21be3144b050dc0fe3655c42d8cf"
+    },
+    {
+      "path": ".cache/verification/branding-desktop-title.png",
+      "bytes": 1513544,
+      "sha256": "a3ac8468fbd3c85d4bedcbe4fbb6e4764455957661d7e8e9776b46806f23ac7e"
+    },
+    {
+      "path": ".cache/verification/branding-mobile-landscape-lobby.png",
+      "bytes": 152688,
+      "sha256": "01e045ef92ad4c16364c3fac99f8145515e6cb274dfc439bbd34a02428ef5556"
+    },
+    {
+      "path": ".cache/verification/branding-mobile-landscape-title.png",
+      "bytes": 442627,
+      "sha256": "f9e395c38854b69fe8261bdeb183a3c631f6f4a74800dcf434cfbe64744a0796"
+    }
+  ]
+}
