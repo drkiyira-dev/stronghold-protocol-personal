@@ -12,9 +12,18 @@ jobs:
           node-version: '26.7.0'
           cache: npm
       - run: npm ci
-      - run: npm --prefix upstream ci --omit=dev
+      # Reproduce a cached/reused dependency tree: build must not need postinstall.
+      - run: npm --prefix upstream ci --omit=dev --ignore-scripts
       - run: npm run build
       - run: npm test
+      - name: Verify static release archive (no deployment)
+        run: |
+          npm run check:dist
+          mkdir -p .cache/release/dist/.openai .cache/verification
+          cp -R dist/. .cache/release/dist/
+          cp .openai/hosting.json .cache/release/dist/.openai/hosting.json
+          tar -C .cache/release -czf .cache/verification/static-site.tar.gz dist
+          npm run check:artifact -- .cache/verification/static-site.tar.gz
       - run: npx playwright install --with-deps chromium
       - run: npm run test:browser
         env:
