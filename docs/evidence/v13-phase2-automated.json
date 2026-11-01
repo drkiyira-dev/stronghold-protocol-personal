@@ -1,0 +1,110 @@
+{
+  "confirmedActions": {
+    "active": 2,
+    "budget": 4,
+    "counts": {
+      "deploy": 2,
+      "move": 1,
+      "retreat": 1,
+      "skill": 0
+    },
+    "error": null
+  },
+  "final": {
+    "seed": "combat",
+    "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "phase": "combat-feedback",
+    "stats": {
+      "active": 0,
+      "budget": 4,
+      "counts": {
+        "deploy": 2,
+        "move": 1,
+        "retreat": 1,
+        "skill": 1
+      },
+      "error": null
+    },
+    "records": [
+      {
+        "action": "deploy",
+        "stats": {
+          "active": 1,
+          "budget": 4,
+          "counts": {
+            "deploy": 2,
+            "move": 0,
+            "retreat": 1,
+            "skill": 0
+          },
+          "error": null
+        }
+      },
+      {
+        "action": "move",
+        "stats": {
+          "active": 2,
+          "budget": 4,
+          "counts": {
+            "deploy": 2,
+            "move": 1,
+            "retreat": 1,
+            "skill": 0
+          },
+          "error": null
+        }
+      },
+      {
+        "action": "move",
+        "stats": {
+          "active": 0,
+          "budget": 0,
+          "counts": {
+            "deploy": 2,
+            "move": 1,
+            "retreat": 1,
+            "skill": 0
+          },
+          "error": null
+        }
+      },
+      {
+        "action": "inspect",
+        "stats": {
+          "active": 0,
+          "budget": 4,
+          "counts": {
+            "deploy": 2,
+            "move": 1,
+            "retreat": 1,
+            "skill": 1
+          },
+          "error": null
+        }
+      }
+    ],
+    "results": [
+      {
+        "text": "BATTLE OVER作战结束全员无伤！",
+        "animation": "personal-result-in",
+        "pointerEvents": "none",
+        "round": 1,
+        "feedback": {
+          "active": 0,
+          "budget": 4,
+          "counts": {
+            "deploy": 2,
+            "move": 1,
+            "retreat": 1,
+            "skill": 1
+          },
+          "error": null
+        }
+      }
+    ],
+    "matchPhase": "PREP",
+    "round": 2
+  },
+  "teardown": true,
+  "errors": []
+}

@@ -1,0 +1,1680 @@
+{
+  "runtimeCommit": "1785843",
+  "qaCommit": "2f538d8",
+  "date": "2026-11-01",
+  "sequence": "Chrome then native Safari; no concurrent test browsers",
+  "browsers": {
+    "chrome": {
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+      "round": 2,
+      "feedback": {
+        "active": 0,
+        "budget": 0,
+        "counts": {
+          "deploy": 2,
+          "move": 1,
+          "retreat": 1,
+          "skill": 1
+        },
+        "error": null
+      },
+      "actions": [
+        {
+          "action": "deploy",
+          "stats": {
+            "active": 1,
+            "budget": 4,
+            "counts": {
+              "deploy": 2,
+              "move": 0,
+              "retreat": 1,
+              "skill": 0
+            },
+            "error": null
+          }
+        },
+        {
+          "action": "move",
+          "stats": {
+            "active": 1,
+            "budget": 4,
+            "counts": {
+              "deploy": 2,
+              "move": 1,
+              "retreat": 1,
+              "skill": 0
+            },
+            "error": null
+          }
+        },
+        {
+          "action": "move",
+          "stats": {
+            "active": 0,
+            "budget": 0,
+            "counts": {
+              "deploy": 2,
+              "move": 1,
+              "retreat": 1,
+              "skill": 0
+            },
+            "error": null
+          }
+        },
+        {
+          "action": "inspect",
+          "stats": {
+            "active": 0,
+            "budget": 0,
+            "counts": {
+              "deploy": 2,
+              "move": 1,
+              "retreat": 1,
+              "skill": 1
+            },
+            "error": null
+          }
+        },
+        {
+          "action": "inspect",
+          "stats": {
+            "active": 0,
+            "budget": 0,
+            "counts": {
+              "deploy": 2,
+              "move": 1,
+              "retreat": 1,
+              "skill": 1
+            },
+            "error": null
+          }
+        }
+      ],
+      "settlement": [
+        {
+          "text": "BATTLE OVER作战结束全员无伤！",
+          "animation": "personal-result-in",
+          "pointerEvents": "none",
+          "round": 1,
+          "feedback": {
+            "active": 0,
+            "budget": 4,
+            "counts": {
+              "deploy": 2,
+              "move": 1,
+              "retreat": 1,
+              "skill": 1
+            },
+            "error": null
+          }
+        }
+      ],
+      "viewport": [
+        1710,
+        914
+      ],
+      "dpr": 2,
+      "rendererKind": "engine",
+      "board3d": {
+        "on": false,
+        "error": null,
+        "recovering": false,
+        "losses": 0
+      },
+      "performance": [
+        {
+          "label": "static-before",
+          "durationMs": 4009.300000011921,
+          "samples": 240,
+          "fps": 60,
+          "frameP95Ms": 17.599999999976717,
+          "cpuP50Ms": 0.29,
+          "renderP50Ms": 0.84,
+          "before": {
+            "fps": 60.1,
+            "frameMs": 16.63,
+            "cpuMs": 0.28,
+            "renderMs": 0.72,
+            "mode": "prep",
+            "units": 1,
+            "impostor": 0,
+            "impostorAtlas": {
+              "pages": 0,
+              "slots": 0,
+              "drawn": 0,
+              "full": 0
+            },
+            "boardArt": false,
+            "board3d": {
+              "on": false,
+              "error": null,
+              "recovering": false,
+              "losses": 0
+            },
+            "pen": 4,
+            "penHidden": false,
+            "prepField": null,
+            "lod": 0,
+            "culled": 0,
+            "particles": 0,
+            "projectiles": 0,
+            "numbers": 0,
+            "rings": 0,
+            "auras": 0,
+            "locks": 0,
+            "flames": 0,
+            "promotions": 0,
+            "officialFx": {
+              "tier": "off",
+              "available": false,
+              "effects": 0,
+              "pending": 0,
+              "particles": 0,
+              "reused": 0,
+              "systems": 0,
+              "dropped": 0,
+              "draws": 0,
+              "programs": 0,
+              "textures": 0,
+              "texMB": 0
+            },
+            "spine": {
+              "size": 4,
+              "ready": 0,
+              "loading": 0,
+              "failed": 4,
+              "refs": 0,
+              "holds": 0,
+              "weight": 0,
+              "idleWeight": 0,
+              "active": 0,
+              "queued": 0,
+              "unloading": 0
+            },
+            "renderT": null,
+            "rate": 2,
+            "buffered": 0,
+            "camera": {
+              "tx": 5.17,
+              "ty": 9.096848603756385,
+              "tz": 0,
+              "tilt": 30,
+              "dist": 13.313697207512769,
+              "scale": 94.30867783159759,
+              "cx": 855,
+              "cy": 457
+            },
+            "combatFeedback": {
+              "active": 0,
+              "budget": 0,
+              "counts": {
+                "deploy": 2,
+                "move": 1,
+                "retreat": 1,
+                "skill": 1
+              },
+              "error": null
+            },
+            "environment": {
+              "profile": "water",
+              "active": false,
+              "tier": "high",
+              "meshes": 0,
+              "budget": 0,
+              "clock": 83.65389999997672,
+              "official": false,
+              "extraTextures": 0,
+              "extraContexts": 0,
+              "error": null
+            },
+            "viewport": [
+              1710,
+              914
+            ],
+            "dpr": 2,
+            "visibility": "visible",
+            "focused": true,
+            "rendererKind": "engine",
+            "heapBytes": 66869219,
+            "pixiTextures": 13,
+            "pixiGeometries": 34,
+            "gpuBytes": null,
+            "gpuUtilization": null,
+            "matchPhase": "PREP"
+          },
+          "after": {
+            "fps": 60,
+            "frameMs": 16.68,
+            "cpuMs": 0.3,
+            "renderMs": 0.93,
+            "mode": "prep",
+            "units": 1,
+            "impostor": 0,
+            "impostorAtlas": {
+              "pages": 0,
+              "slots": 0,
+              "drawn": 0,
+              "full": 0
+            },
+            "boardArt": false,
+            "board3d": {
+              "on": false,
+              "error": null,
+              "recovering": false,
+              "losses": 0
+            },
+            "pen": 4,
+            "penHidden": false,
+            "prepField": null,
+            "lod": 0,
+            "culled": 0,
+            "particles": 0,
+            "projectiles": 0,
+            "numbers": 0,
+            "rings": 0,
+            "auras": 0,
+            "locks": 0,
+            "flames": 0,
+            "promotions": 0,
+            "officialFx": {
+              "tier": "off",
+              "available": false,
+              "effects": 0,
+              "pending": 0,
+              "particles": 0,
+              "reused": 0,
+              "systems": 0,
+              "dropped": 0,
+              "draws": 0,
+              "programs": 0,
+              "textures": 0,
+              "texMB": 0
+            },
+            "spine": {
+              "size": 4,
+              "ready": 0,
+              "loading": 0,
+              "failed": 4,
+              "refs": 0,
+              "holds": 0,
+              "weight": 0,
+              "idleWeight": 0,
+              "active": 0,
+              "queued": 0,
+              "unloading": 0
+            },
+            "renderT": null,
+            "rate": 2,
+            "buffered": 0,
+            "camera": {
+              "tx": 5.17,
+              "ty": 9.096848603756385,
+              "tz": 0,
+              "tilt": 30,
+              "dist": 13.313697207512769,
+              "scale": 94.30867783159759,
+              "cx": 855,
+              "cy": 457
+            },
+            "combatFeedback": {
+              "active": 0,
+              "budget": 0,
+              "counts": {
+                "deploy": 2,
+                "move": 1,
+                "retreat": 1,
+                "skill": 1
+              },
+              "error": null
+            },
+            "environment": {
+              "profile": "water",
+              "active": false,
+              "tier": "high",
+              "meshes": 0,
+              "budget": 0,
+              "clock": 83.65389999997672,
+              "official": false,
+              "extraTextures": 0,
+              "extraContexts": 0,
+              "error": null
+            },
+            "viewport": [
+              1710,
+              914
+            ],
+            "dpr": 2,
+            "visibility": "visible",
+            "focused": true,
+            "rendererKind": "engine",
+            "heapBytes": 57097791,
+            "pixiTextures": 13,
+            "pixiGeometries": 34,
+            "gpuBytes": null,
+            "gpuUtilization": null,
+            "matchPhase": "PREP"
+          }
+        },
+        {
+          "label": "animated",
+          "durationMs": 4018.300000011921,
+          "samples": 241,
+          "fps": 59.98755444928438,
+          "frameP95Ms": 17.599999999976717,
+          "cpuP50Ms": 0.29,
+          "renderP50Ms": 0.86,
+          "before": {
+            "fps": 59.8,
+            "frameMs": 16.72,
+            "cpuMs": 0.3,
+            "renderMs": 0.87,
+            "mode": "prep",
+            "units": 1,
+            "impostor": 0,
+            "impostorAtlas": {
+              "pages": 0,
+              "slots": 0,
+              "drawn": 0,
+              "full": 0
+            },
+            "boardArt": false,
+            "board3d": {
+              "on": false,
+              "error": null,
+              "recovering": false,
+              "losses": 0
+            },
+            "pen": 4,
+            "penHidden": false,
+            "prepField": null,
+            "lod": 0,
+            "culled": 0,
+            "particles": 0,
+            "projectiles": 0,
+            "numbers": 0,
+            "rings": 0,
+            "auras": 0,
+            "locks": 0,
+            "flames": 0,
+            "promotions": 0,
+            "officialFx": {
+              "tier": "off",
+              "available": false,
+              "effects": 0,
+              "pending": 0,
+              "particles": 0,
+              "reused": 0,
+              "systems": 0,
+              "dropped": 0,
+              "draws": 0,
+              "programs": 0,
+              "textures": 0,
+              "texMB": 0
+            },
+            "spine": {
+              "size": 4,
+              "ready": 0,
+              "loading": 0,
+              "failed": 4,
+              "refs": 0,
+              "holds": 0,
+              "weight": 0,
+              "idleWeight": 0,
+              "active": 0,
+              "queued": 0,
+              "unloading": 0
+            },
+            "renderT": null,
+            "rate": 2,
+            "buffered": 0,
+            "camera": {
+              "tx": 5.17,
+              "ty": 9.096848603756385,
+              "tz": 0,
+              "tilt": 30,
+              "dist": 13.313697207512769,
+              "scale": 94.30867783159759,
+              "cx": 855,
+              "cy": 457
+            },
+            "combatFeedback": {
+              "active": 0,
+              "budget": 4,
+              "counts": {
+                "deploy": 2,
+                "move": 1,
+                "retreat": 1,
+                "skill": 1
+              },
+              "error": null
+            },
+            "environment": {
+              "profile": "water",
+              "active": true,
+              "tier": "high",
+              "meshes": 6,
+              "budget": 24,
+              "clock": 84.65389999997669,
+              "official": false,
+              "extraTextures": 0,
+              "extraContexts": 0,
+              "error": null
+            },
+            "viewport": [
+              1710,
+              914
+            ],
+            "dpr": 2,
+            "visibility": "visible",
+            "focused": true,
+            "rendererKind": "engine",
+            "heapBytes": 66434056,
+            "pixiTextures": 13,
+            "pixiGeometries": 34,
+            "gpuBytes": null,
+            "gpuUtilization": null,
+            "matchPhase": "PREP"
+          },
+          "after": {
+            "fps": 60,
+            "frameMs": 16.68,
+            "cpuMs": 0.26,
+            "renderMs": 0.88,
+            "mode": "prep",
+            "units": 1,
+            "impostor": 0,
+            "impostorAtlas": {
+              "pages": 0,
+              "slots": 0,
+              "drawn": 0,
+              "full": 0
+            },
+            "boardArt": false,
+            "board3d": {
+              "on": false,
+              "error": null,
+              "recovering": false,
+              "losses": 0
+            },
+            "pen": 4,
+            "penHidden": false,
+            "prepField": null,
+            "lod": 0,
+            "culled": 0,
+            "particles": 0,
+            "projectiles": 0,
+            "numbers": 0,
+            "rings": 0,
+            "auras": 0,
+            "locks": 0,
+            "flames": 0,
+            "promotions": 0,
+            "officialFx": {
+              "tier": "off",
+              "available": false,
+              "effects": 0,
+              "pending": 0,
+              "particles": 0,
+              "reused": 0,
+              "systems": 0,
+              "dropped": 0,
+              "draws": 0,
+              "programs": 0,
+              "textures": 0,
+              "texMB": 0
+            },
+            "spine": {
+              "size": 4,
+              "ready": 0,
+              "loading": 0,
+              "failed": 4,
+              "refs": 0,
+              "holds": 0,
+              "weight": 0,
+              "idleWeight": 0,
+              "active": 0,
+              "queued": 0,
+              "unloading": 0
+            },
+            "renderT": null,
+            "rate": 2,
+            "buffered": 0,
+            "camera": {
+              "tx": 5.17,
+              "ty": 9.096848603756385,
+              "tz": 0,
+              "tilt": 30,
+              "dist": 13.313697207512769,
+              "scale": 94.30867783159759,
+              "cx": 855,
+              "cy": 457
+            },
+            "combatFeedback": {
+              "active": 0,
+              "budget": 4,
+              "counts": {
+                "deploy": 2,
+                "move": 1,
+                "retreat": 1,
+                "skill": 1
+              },
+              "error": null
+            },
+            "environment": {
+              "profile": "water",
+              "active": true,
+              "tier": "high",
+              "meshes": 6,
+              "budget": 24,
+              "clock": 88.68709999996456,
+              "official": false,
+              "extraTextures": 0,
+              "extraContexts": 0,
+              "error": null
+            },
+            "viewport": [
+              1710,
+              914
+            ],
+            "dpr": 2,
+            "visibility": "visible",
+            "focused": true,
+            "rendererKind": "engine",
+            "heapBytes": 57009652,
+            "pixiTextures": 13,
+            "pixiGeometries": 34,
+            "gpuBytes": null,
+            "gpuUtilization": null,
+            "matchPhase": "PREP"
+          }
+        },
+        {
+          "label": "static-after",
+          "durationMs": 4008.300000011921,
+          "samples": 240,
+          "fps": 60.01500375093774,
+          "frameP95Ms": 17.600000000034925,
+          "cpuP50Ms": 0.28,
+          "renderP50Ms": 0.85,
+          "before": {
+            "fps": 59.9,
+            "frameMs": 16.68,
+            "cpuMs": 0.3,
+            "renderMs": 0.86,
+            "mode": "prep",
+            "units": 1,
+            "impostor": 0,
+            "impostorAtlas": {
+              "pages": 0,
+              "slots": 0,
+              "drawn": 0,
+              "full": 0
+            },
+            "boardArt": false,
+            "board3d": {
+              "on": false,
+              "error": null,
+              "recovering": false,
+              "losses": 0
+            },
+            "pen": 4,
+            "penHidden": false,
+            "prepField": null,
+            "lod": 0,
+            "culled": 0,
+            "particles": 0,
+            "projectiles": 0,
+            "numbers": 0,
+            "rings": 0,
+            "auras": 0,
+            "locks": 0,
+            "flames": 0,
+            "promotions": 0,
+            "officialFx": {
+              "tier": "off",
+              "available": false,
+              "effects": 0,
+              "pending": 0,
+              "particles": 0,
+              "reused": 0,
+              "systems": 0,
+              "dropped": 0,
+              "draws": 0,
+              "programs": 0,
+              "textures": 0,
+              "texMB": 0
+            },
+            "spine": {
+              "size": 4,
+              "ready": 0,
+              "loading": 0,
+              "failed": 4,
+              "refs": 0,
+              "holds": 0,
+              "weight": 0,
+              "idleWeight": 0,
+              "active": 0,
+              "queued": 0,
+              "unloading": 0
+            },
+            "renderT": null,
+            "rate": 2,
+            "buffered": 0,
+            "camera": {
+              "tx": 5.17,
+              "ty": 9.096848603756385,
+              "tz": 0,
+              "tilt": 30,
+              "dist": 13.313697207512769,
+              "scale": 94.30867783159759,
+              "cx": 855,
+              "cy": 457
+            },
+            "combatFeedback": {
+              "active": 0,
+              "budget": 0,
+              "counts": {
+                "deploy": 2,
+                "move": 1,
+                "retreat": 1,
+                "skill": 1
+              },
+              "error": null
+            },
+            "environment": {
+              "profile": "water",
+              "active": false,
+              "tier": "high",
+              "meshes": 0,
+              "budget": 0,
+              "clock": 88.68709999996456,
+              "official": false,
+              "extraTextures": 0,
+              "extraContexts": 0,
+              "error": null
+            },
+            "viewport": [
+              1710,
+              914
+            ],
+            "dpr": 2,
+            "visibility": "visible",
+            "focused": true,
+            "rendererKind": "engine",
+            "heapBytes": 65108852,
+            "pixiTextures": 11,
+            "pixiGeometries": 34,
+            "gpuBytes": null,
+            "gpuUtilization": null,
+            "matchPhase": "PREP"
+          },
+          "after": {
+            "fps": 60.3,
+            "frameMs": 16.58,
+            "cpuMs": 0.31,
+            "renderMs": 0.94,
+            "mode": "prep",
+            "units": 1,
+            "impostor": 0,
+            "impostorAtlas": {
+              "pages": 0,
+              "slots": 0,
+              "drawn": 0,
+              "full": 0
+            },
+            "boardArt": false,
+            "board3d": {
+              "on": false,
+              "error": null,
+              "recovering": false,
+              "losses": 0
+            },
+            "pen": 4,
+            "penHidden": false,
+            "prepField": null,
+            "lod": 0,
+            "culled": 0,
+            "particles": 0,
+            "projectiles": 0,
+            "numbers": 0,
+            "rings": 0,
+            "auras": 0,
+            "locks": 0,
+            "flames": 0,
+            "promotions": 0,
+            "officialFx": {
+              "tier": "off",
+              "available": false,
+              "effects": 0,
+              "pending": 0,
+              "particles": 0,
+              "reused": 0,
+              "systems": 0,
+              "dropped": 0,
+              "draws": 0,
+              "programs": 0,
+              "textures": 0,
+              "texMB": 0
+            },
+            "spine": {
+              "size": 4,
+              "ready": 0,
+              "loading": 0,
+              "failed": 4,
+              "refs": 0,
+              "holds": 0,
+              "weight": 0,
+              "idleWeight": 0,
+              "active": 0,
+              "queued": 0,
+              "unloading": 0
+            },
+            "renderT": null,
+            "rate": 2,
+            "buffered": 0,
+            "camera": {
+              "tx": 5.17,
+              "ty": 9.096848603756385,
+              "tz": 0,
+              "tilt": 30,
+              "dist": 13.313697207512769,
+              "scale": 94.30867783159759,
+              "cx": 855,
+              "cy": 457
+            },
+            "combatFeedback": {
+              "active": 0,
+              "budget": 0,
+              "counts": {
+                "deploy": 2,
+                "move": 1,
+                "retreat": 1,
+                "skill": 1
+              },
+              "error": null
+            },
+            "environment": {
+              "profile": "water",
+              "active": false,
+              "tier": "high",
+              "meshes": 0,
+              "budget": 0,
+              "clock": 88.68709999996456,
+              "official": false,
+              "extraTextures": 0,
+              "extraContexts": 0,
+              "error": null
+            },
+            "viewport": [
+              1710,
+              914
+            ],
+            "dpr": 2,
+            "visibility": "visible",
+            "focused": true,
+            "rendererKind": "engine",
+            "heapBytes": 54789932,
+            "pixiTextures": 11,
+            "pixiGeometries": 34,
+            "gpuBytes": null,
+            "gpuUtilization": null,
+            "matchPhase": "PREP"
+          }
+        }
+      ],
+      "historicalHarnessErrors": [
+        "Error: Performance sample suspended\n    at http://127.0.0.1:4183/__v13-probe.mjs:79:74"
+      ],
+      "acceptedPerformance": true
+    },
+    "safari": {
+      "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Safari/605.1.15",
+      "round": 2,
+      "feedback": {
+        "active": 0,
+        "budget": 4,
+        "counts": {
+          "deploy": 2,
+          "move": 2,
+          "retreat": 1,
+          "skill": 1
+        },
+        "error": null
+      },
+      "actions": [
+        {
+          "action": "deploy",
+          "stats": {
+            "active": 1,
+            "budget": 4,
+            "counts": {
+              "deploy": 2,
+              "move": 0,
+              "retreat": 1,
+              "skill": 0
+            },
+            "error": null
+          }
+        },
+        {
+          "action": "move",
+          "stats": {
+            "active": 1,
+            "budget": 4,
+            "counts": {
+              "deploy": 2,
+              "move": 1,
+              "retreat": 1,
+              "skill": 0
+            },
+            "error": null
+          }
+        },
+        {
+          "action": "move",
+          "stats": {
+            "active": 0,
+            "budget": 0,
+            "counts": {
+              "deploy": 2,
+              "move": 1,
+              "retreat": 1,
+              "skill": 0
+            },
+            "error": null
+          }
+        },
+        {
+          "action": "inspect",
+          "stats": {
+            "active": 0,
+            "budget": 4,
+            "counts": {
+              "deploy": 2,
+              "move": 1,
+              "retreat": 1,
+              "skill": 1
+            },
+            "error": null
+          }
+        },
+        {
+          "action": "move",
+          "stats": {
+            "active": 0,
+            "budget": 0,
+            "counts": {
+              "deploy": 2,
+              "move": 1,
+              "retreat": 1,
+              "skill": 1
+            },
+            "error": null
+          }
+        },
+        {
+          "action": "move",
+          "stats": {
+            "active": 1,
+            "budget": 2,
+            "counts": {
+              "deploy": 2,
+              "move": 2,
+              "retreat": 1,
+              "skill": 1
+            },
+            "error": null
+          }
+        },
+        {
+          "action": "inspect",
+          "stats": {
+            "active": 0,
+            "budget": 4,
+            "counts": {
+              "deploy": 2,
+              "move": 2,
+              "retreat": 1,
+              "skill": 1
+            },
+            "error": null
+          }
+        }
+      ],
+      "settlement": [
+        {
+          "text": "BATTLE OVER作战结束全员无伤！",
+          "animation": "personal-result-in",
+          "pointerEvents": "none",
+          "round": 1,
+          "feedback": {
+            "active": 0,
+            "budget": 4,
+            "counts": {
+              "deploy": 2,
+              "move": 1,
+              "retreat": 1,
+              "skill": 1
+            },
+            "error": null
+          }
+        }
+      ],
+      "viewport": [
+        1710,
+        949
+      ],
+      "dpr": 2,
+      "rendererKind": "engine",
+      "board3d": {
+        "on": false,
+        "error": null,
+        "recovering": false,
+        "losses": 0
+      },
+      "performance": [
+        {
+          "label": "static-before",
+          "durationMs": 4009.9999999999854,
+          "samples": 240,
+          "fps": 59.985003749062734,
+          "frameP95Ms": 17,
+          "cpuP50Ms": 0.26,
+          "renderP50Ms": 0.72,
+          "before": {
+            "fps": 60.1,
+            "frameMs": 16.63,
+            "cpuMs": 0.07,
+            "renderMs": 0.33,
+            "mode": "prep",
+            "units": 1,
+            "impostor": 0,
+            "impostorAtlas": {
+              "pages": 0,
+              "slots": 0,
+              "drawn": 0,
+              "full": 0
+            },
+            "boardArt": false,
+            "board3d": {
+              "on": false,
+              "error": null,
+              "recovering": false,
+              "losses": 0
+            },
+            "pen": 4,
+            "penHidden": false,
+            "prepField": null,
+            "lod": 0,
+            "culled": 0,
+            "particles": 0,
+            "projectiles": 0,
+            "numbers": 0,
+            "rings": 0,
+            "auras": 0,
+            "locks": 0,
+            "flames": 0,
+            "promotions": 0,
+            "officialFx": {
+              "tier": "off",
+              "available": false,
+              "effects": 0,
+              "pending": 0,
+              "particles": 0,
+              "reused": 0,
+              "systems": 0,
+              "dropped": 0,
+              "draws": 0,
+              "programs": 0,
+              "textures": 0,
+              "texMB": 0
+            },
+            "spine": {
+              "size": 4,
+              "ready": 0,
+              "loading": 0,
+              "failed": 4,
+              "refs": 0,
+              "holds": 0,
+              "weight": 0,
+              "idleWeight": 0,
+              "active": 0,
+              "queued": 0,
+              "unloading": 0
+            },
+            "renderT": null,
+            "rate": 2,
+            "buffered": 0,
+            "camera": {
+              "tx": 5.17,
+              "ty": 9.096848603756383,
+              "tz": 0,
+              "tilt": 30,
+              "dist": 13.313697207512769,
+              "scale": 97.92006046191042,
+              "cx": 855,
+              "cy": 474.5
+            },
+            "combatFeedback": {
+              "active": 0,
+              "budget": 0,
+              "counts": {
+                "deploy": 2,
+                "move": 1,
+                "retreat": 1,
+                "skill": 1
+              },
+              "error": null
+            },
+            "environment": {
+              "profile": "water",
+              "active": false,
+              "tier": "high",
+              "meshes": 0,
+              "budget": 0,
+              "clock": 99.60100000000035,
+              "official": false,
+              "extraTextures": 0,
+              "extraContexts": 0,
+              "error": null
+            },
+            "viewport": [
+              1710,
+              949
+            ],
+            "dpr": 2,
+            "visibility": "visible",
+            "focused": true,
+            "rendererKind": "engine",
+            "heapBytes": null,
+            "pixiTextures": 16,
+            "pixiGeometries": 34,
+            "gpuBytes": null,
+            "gpuUtilization": null,
+            "matchPhase": "PREP"
+          },
+          "after": {
+            "fps": 59.9,
+            "frameMs": 16.71,
+            "cpuMs": 0.16,
+            "renderMs": 0.69,
+            "mode": "prep",
+            "units": 1,
+            "impostor": 0,
+            "impostorAtlas": {
+              "pages": 0,
+              "slots": 0,
+              "drawn": 0,
+              "full": 0
+            },
+            "boardArt": false,
+            "board3d": {
+              "on": false,
+              "error": null,
+              "recovering": false,
+              "losses": 0
+            },
+            "pen": 4,
+            "penHidden": false,
+            "prepField": null,
+            "lod": 0,
+            "culled": 0,
+            "particles": 0,
+            "projectiles": 0,
+            "numbers": 0,
+            "rings": 0,
+            "auras": 0,
+            "locks": 0,
+            "flames": 0,
+            "promotions": 0,
+            "officialFx": {
+              "tier": "off",
+              "available": false,
+              "effects": 0,
+              "pending": 0,
+              "particles": 0,
+              "reused": 0,
+              "systems": 0,
+              "dropped": 0,
+              "draws": 0,
+              "programs": 0,
+              "textures": 0,
+              "texMB": 0
+            },
+            "spine": {
+              "size": 4,
+              "ready": 0,
+              "loading": 0,
+              "failed": 4,
+              "refs": 0,
+              "holds": 0,
+              "weight": 0,
+              "idleWeight": 0,
+              "active": 0,
+              "queued": 0,
+              "unloading": 0
+            },
+            "renderT": null,
+            "rate": 2,
+            "buffered": 0,
+            "camera": {
+              "tx": 5.17,
+              "ty": 9.096848603756383,
+              "tz": 0,
+              "tilt": 30,
+              "dist": 13.313697207512769,
+              "scale": 97.92006046191042,
+              "cx": 855,
+              "cy": 474.5
+            },
+            "combatFeedback": {
+              "active": 0,
+              "budget": 0,
+              "counts": {
+                "deploy": 2,
+                "move": 1,
+                "retreat": 1,
+                "skill": 1
+              },
+              "error": null
+            },
+            "environment": {
+              "profile": "water",
+              "active": false,
+              "tier": "high",
+              "meshes": 0,
+              "budget": 0,
+              "clock": 99.60100000000035,
+              "official": false,
+              "extraTextures": 0,
+              "extraContexts": 0,
+              "error": null
+            },
+            "viewport": [
+              1710,
+              949
+            ],
+            "dpr": 2,
+            "visibility": "visible",
+            "focused": true,
+            "rendererKind": "engine",
+            "heapBytes": null,
+            "pixiTextures": 16,
+            "pixiGeometries": 34,
+            "gpuBytes": null,
+            "gpuUtilization": null,
+            "matchPhase": "PREP"
+          }
+        },
+        {
+          "label": "animated",
+          "durationMs": 4008,
+          "samples": 240,
+          "fps": 60,
+          "frameP95Ms": 17,
+          "cpuP50Ms": 0.26,
+          "renderP50Ms": 0.77,
+          "before": {
+            "fps": 59.9,
+            "frameMs": 16.7,
+            "cpuMs": 0.2,
+            "renderMs": 0.7,
+            "mode": "prep",
+            "units": 1,
+            "impostor": 0,
+            "impostorAtlas": {
+              "pages": 0,
+              "slots": 0,
+              "drawn": 0,
+              "full": 0
+            },
+            "boardArt": false,
+            "board3d": {
+              "on": false,
+              "error": null,
+              "recovering": false,
+              "losses": 0
+            },
+            "pen": 4,
+            "penHidden": false,
+            "prepField": null,
+            "lod": 0,
+            "culled": 0,
+            "particles": 0,
+            "projectiles": 0,
+            "numbers": 0,
+            "rings": 0,
+            "auras": 0,
+            "locks": 0,
+            "flames": 0,
+            "promotions": 0,
+            "officialFx": {
+              "tier": "off",
+              "available": false,
+              "effects": 0,
+              "pending": 0,
+              "particles": 0,
+              "reused": 0,
+              "systems": 0,
+              "dropped": 0,
+              "draws": 0,
+              "programs": 0,
+              "textures": 0,
+              "texMB": 0
+            },
+            "spine": {
+              "size": 4,
+              "ready": 0,
+              "loading": 0,
+              "failed": 4,
+              "refs": 0,
+              "holds": 0,
+              "weight": 0,
+              "idleWeight": 0,
+              "active": 0,
+              "queued": 0,
+              "unloading": 0
+            },
+            "renderT": null,
+            "rate": 2,
+            "buffered": 0,
+            "camera": {
+              "tx": 5.17,
+              "ty": 9.096848603756383,
+              "tz": 0,
+              "tilt": 30,
+              "dist": 13.313697207512769,
+              "scale": 97.92006046191042,
+              "cx": 855,
+              "cy": 474.5
+            },
+            "combatFeedback": {
+              "active": 0,
+              "budget": 4,
+              "counts": {
+                "deploy": 2,
+                "move": 1,
+                "retreat": 1,
+                "skill": 1
+              },
+              "error": null
+            },
+            "environment": {
+              "profile": "water",
+              "active": true,
+              "tier": "high",
+              "meshes": 6,
+              "budget": 24,
+              "clock": 100.60100000000033,
+              "official": false,
+              "extraTextures": 0,
+              "extraContexts": 0,
+              "error": null
+            },
+            "viewport": [
+              1710,
+              949
+            ],
+            "dpr": 2,
+            "visibility": "visible",
+            "focused": true,
+            "rendererKind": "engine",
+            "heapBytes": null,
+            "pixiTextures": 16,
+            "pixiGeometries": 34,
+            "gpuBytes": null,
+            "gpuUtilization": null,
+            "matchPhase": "PREP"
+          },
+          "after": {
+            "fps": 60.1,
+            "frameMs": 16.64,
+            "cpuMs": 0.26,
+            "renderMs": 0.59,
+            "mode": "prep",
+            "units": 1,
+            "impostor": 0,
+            "impostorAtlas": {
+              "pages": 0,
+              "slots": 0,
+              "drawn": 0,
+              "full": 0
+            },
+            "boardArt": false,
+            "board3d": {
+              "on": false,
+              "error": null,
+              "recovering": false,
+              "losses": 0
+            },
+            "pen": 4,
+            "penHidden": false,
+            "prepField": null,
+            "lod": 0,
+            "culled": 0,
+            "particles": 0,
+            "projectiles": 0,
+            "numbers": 0,
+            "rings": 0,
+            "auras": 0,
+            "locks": 0,
+            "flames": 0,
+            "promotions": 0,
+            "officialFx": {
+              "tier": "off",
+              "available": false,
+              "effects": 0,
+              "pending": 0,
+              "particles": 0,
+              "reused": 0,
+              "systems": 0,
+              "dropped": 0,
+              "draws": 0,
+              "programs": 0,
+              "textures": 0,
+              "texMB": 0
+            },
+            "spine": {
+              "size": 4,
+              "ready": 0,
+              "loading": 0,
+              "failed": 4,
+              "refs": 0,
+              "holds": 0,
+              "weight": 0,
+              "idleWeight": 0,
+              "active": 0,
+              "queued": 0,
+              "unloading": 0
+            },
+            "renderT": null,
+            "rate": 2,
+            "buffered": 0,
+            "camera": {
+              "tx": 5.17,
+              "ty": 9.096848603756383,
+              "tz": 0,
+              "tilt": 30,
+              "dist": 13.313697207512769,
+              "scale": 97.92006046191042,
+              "cx": 855,
+              "cy": 474.5
+            },
+            "combatFeedback": {
+              "active": 0,
+              "budget": 4,
+              "counts": {
+                "deploy": 2,
+                "move": 1,
+                "retreat": 1,
+                "skill": 1
+              },
+              "error": null
+            },
+            "environment": {
+              "profile": "water",
+              "active": true,
+              "tier": "high",
+              "meshes": 6,
+              "budget": 24,
+              "clock": 104.61700000000026,
+              "official": false,
+              "extraTextures": 0,
+              "extraContexts": 0,
+              "error": null
+            },
+            "viewport": [
+              1710,
+              949
+            ],
+            "dpr": 2,
+            "visibility": "visible",
+            "focused": true,
+            "rendererKind": "engine",
+            "heapBytes": null,
+            "pixiTextures": 16,
+            "pixiGeometries": 34,
+            "gpuBytes": null,
+            "gpuUtilization": null,
+            "matchPhase": "PREP"
+          }
+        },
+        {
+          "label": "static-after",
+          "durationMs": 4008.000000000029,
+          "samples": 240,
+          "fps": 60,
+          "frameP95Ms": 17,
+          "cpuP50Ms": 0.25,
+          "renderP50Ms": 0.69,
+          "before": {
+            "fps": 60.1,
+            "frameMs": 16.64,
+            "cpuMs": 0.14,
+            "renderMs": 0.57,
+            "mode": "prep",
+            "units": 1,
+            "impostor": 0,
+            "impostorAtlas": {
+              "pages": 0,
+              "slots": 0,
+              "drawn": 0,
+              "full": 0
+            },
+            "boardArt": false,
+            "board3d": {
+              "on": false,
+              "error": null,
+              "recovering": false,
+              "losses": 0
+            },
+            "pen": 4,
+            "penHidden": false,
+            "prepField": null,
+            "lod": 0,
+            "culled": 0,
+            "particles": 0,
+            "projectiles": 0,
+            "numbers": 0,
+            "rings": 0,
+            "auras": 0,
+            "locks": 0,
+            "flames": 0,
+            "promotions": 0,
+            "officialFx": {
+              "tier": "off",
+              "available": false,
+              "effects": 0,
+              "pending": 0,
+              "particles": 0,
+              "reused": 0,
+              "systems": 0,
+              "dropped": 0,
+              "draws": 0,
+              "programs": 0,
+              "textures": 0,
+              "texMB": 0
+            },
+            "spine": {
+              "size": 4,
+              "ready": 0,
+              "loading": 0,
+              "failed": 4,
+              "refs": 0,
+              "holds": 0,
+              "weight": 0,
+              "idleWeight": 0,
+              "active": 0,
+              "queued": 0,
+              "unloading": 0
+            },
+            "renderT": null,
+            "rate": 2,
+            "buffered": 0,
+            "camera": {
+              "tx": 5.17,
+              "ty": 9.096848603756383,
+              "tz": 0,
+              "tilt": 30,
+              "dist": 13.313697207512769,
+              "scale": 97.92006046191042,
+              "cx": 855,
+              "cy": 474.5
+            },
+            "combatFeedback": {
+              "active": 0,
+              "budget": 0,
+              "counts": {
+                "deploy": 2,
+                "move": 1,
+                "retreat": 1,
+                "skill": 1
+              },
+              "error": null
+            },
+            "environment": {
+              "profile": "water",
+              "active": false,
+              "tier": "high",
+              "meshes": 0,
+              "budget": 0,
+              "clock": 104.61700000000026,
+              "official": false,
+              "extraTextures": 0,
+              "extraContexts": 0,
+              "error": null
+            },
+            "viewport": [
+              1710,
+              949
+            ],
+            "dpr": 2,
+            "visibility": "visible",
+            "focused": true,
+            "rendererKind": "engine",
+            "heapBytes": null,
+            "pixiTextures": 16,
+            "pixiGeometries": 34,
+            "gpuBytes": null,
+            "gpuUtilization": null,
+            "matchPhase": "PREP"
+          },
+          "after": {
+            "fps": 59.9,
+            "frameMs": 16.68,
+            "cpuMs": 0.32,
+            "renderMs": 0.75,
+            "mode": "prep",
+            "units": 1,
+            "impostor": 0,
+            "impostorAtlas": {
+              "pages": 0,
+              "slots": 0,
+              "drawn": 0,
+              "full": 0
+            },
+            "boardArt": false,
+            "board3d": {
+              "on": false,
+              "error": null,
+              "recovering": false,
+              "losses": 0
+            },
+            "pen": 4,
+            "penHidden": false,
+            "prepField": null,
+            "lod": 0,
+            "culled": 0,
+            "particles": 0,
+            "projectiles": 0,
+            "numbers": 0,
+            "rings": 0,
+            "auras": 0,
+            "locks": 0,
+            "flames": 0,
+            "promotions": 0,
+            "officialFx": {
+              "tier": "off",
+              "available": false,
+              "effects": 0,
+              "pending": 0,
+              "particles": 0,
+              "reused": 0,
+              "systems": 0,
+              "dropped": 0,
+              "draws": 0,
+              "programs": 0,
+              "textures": 0,
+              "texMB": 0
+            },
+            "spine": {
+              "size": 4,
+              "ready": 0,
+              "loading": 0,
+              "failed": 4,
+              "refs": 0,
+              "holds": 0,
+              "weight": 0,
+              "idleWeight": 0,
+              "active": 0,
+              "queued": 0,
+              "unloading": 0
+            },
+            "renderT": null,
+            "rate": 2,
+            "buffered": 0,
+            "camera": {
+              "tx": 5.17,
+              "ty": 9.096848603756383,
+              "tz": 0,
+              "tilt": 30,
+              "dist": 13.313697207512769,
+              "scale": 97.92006046191042,
+              "cx": 855,
+              "cy": 474.5
+            },
+            "combatFeedback": {
+              "active": 0,
+              "budget": 0,
+              "counts": {
+                "deploy": 2,
+                "move": 1,
+                "retreat": 1,
+                "skill": 1
+              },
+              "error": null
+            },
+            "environment": {
+              "profile": "water",
+              "active": false,
+              "tier": "high",
+              "meshes": 0,
+              "budget": 0,
+              "clock": 104.61700000000026,
+              "official": false,
+              "extraTextures": 0,
+              "extraContexts": 0,
+              "error": null
+            },
+            "viewport": [
+              1710,
+              949
+            ],
+            "dpr": 2,
+            "visibility": "visible",
+            "focused": true,
+            "rendererKind": "engine",
+            "heapBytes": null,
+            "pixiTextures": 16,
+            "pixiGeometries": 34,
+            "gpuBytes": null,
+            "gpuUtilization": null,
+            "matchPhase": "PREP"
+          }
+        }
+      ],
+      "historicalHarnessErrors": [],
+      "acceptedPerformance": true
+    }
+  }
+}

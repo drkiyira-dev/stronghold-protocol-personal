@@ -1,0 +1,23 @@
+/* Reuse the original selection and result components, including their timing,
+   pointer transparency, colours and text. No extra overlay or input delay. */
+.gm .uframe__corner { stroke: var(--mint-300, #9ff0dc); }
+.gm .uframe__dia { animation: personal-selection-in 180ms ease-out; }
+@keyframes personal-selection-in {
+  from { opacity: .3; transform: scale(.94); }
+  to { opacity: 1; transform: scale(1); }
+}
+.gm .rdialog__box { animation: personal-result-in 220ms ease-out both; }
+.gm .rdialog.is-leaving .rdialog__box { animation: personal-result-out 200ms ease-in both; }
+/* Keep the result immediately readable instead of a second title wipe/sweep. */
+.gm .rdialog :is(.rdialog__row, .rdialog__micro, .rdialog__sub) { animation: none; }
+.gm .rdialog__row::after { animation: none; display: none; }
+@keyframes personal-result-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@keyframes personal-result-out { to { opacity: 0; transform: translateY(-4px); } }
+html:is([data-menu-motion="off"], [data-menu-quality="low"]) .gm :is(.uframe__dia, .rdialog__box, .pbanner__band),
+html:is([data-menu-motion="off"], [data-menu-quality="low"]) .gm .pbanner * {
+  animation: none !important; transition: none !important;
+}
+html[data-menu-paused="true"] .gm :is(.uframe__dia, .rdialog__box, .pbanner__band) { animation-play-state: paused !important; }
+@media (prefers-reduced-motion: reduce) {
+  .gm :is(.uframe__dia, .rdialog__box, .pbanner__band), .gm .pbanner * { animation: none !important; transition: none !important; }
+}

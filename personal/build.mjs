@@ -14,6 +14,7 @@ import {vendor,VENDOR_FILES} from '../upstream/tools/vendor.mjs';
 import {writeArtifactManifest} from './artifact-integrity.mjs';
 import {VISUAL_ADAPTERS,VISUAL_EN} from './visuals-build.mjs';
 import {BATTLEFIELD_ADAPTERS,BATTLEFIELD_TRANSLATIONS} from './battlefield-build.mjs';
+import {COMBAT_ADAPTERS} from './combat-feedback-build.mjs';
 const identity=await buildIdentity();
 await verifyNoUntrackedEngineFiles();
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -40,7 +41,7 @@ for(const [file,adapt]of [['js/audio.js',adaptAudio],['js/ui/gameLogic/settings.
 for(const [file,adapt]of [['js/assetPack.js',adaptSceneImport],['js/render/board3d/load.js',adaptSceneTiles],['js/render/boardArt.js',adaptSceneTiles]]){
   const target=path.join(dist,file);await writeFile(target,adapt(await readFile(target,'utf8')));
 }
-for(const [file,adapt] of [...VISUAL_ADAPTERS,...BATTLEFIELD_ADAPTERS]) {
+for(const [file,adapt] of [...VISUAL_ADAPTERS,...BATTLEFIELD_ADAPTERS,...COMBAT_ADAPTERS]) {
   const target=path.join(dist,file);await writeFile(target,adapt(await readFile(target,'utf8')));
 }
 const visualEnglish=path.join(dist,'i18n/en.json');
@@ -89,8 +90,8 @@ await mkdir(path.join(dist,'personal'),{recursive:true});
 const importCatalog=JSON.parse(await readFile(path.join(root,'personal/scene-import-catalog.json'),'utf8'));
 await writeFile(path.join(dist,'personal/scene-import.json'),JSON.stringify(importCatalog.manifest));
 await writeFile(path.join(dist,'personal/build-info.json'),JSON.stringify(identity));
-for (const name of ['local-client.mjs','personal.css','skeleton-codec.mjs','spine-urls.mjs','visual-policy.mjs','visual-state.mjs','visuals.mjs','battlefield-policy.mjs','battlefield-atmosphere.mjs']) await cp(path.join(root,'personal',name),path.join(dist,'personal',name));
-await writeFile(path.join(dist,'personal/personal.css'),await readFile(path.join(root,'personal/personal.css'),'utf8')+'\n'+await readFile(path.join(root,'personal/visuals.css'),'utf8'));
+for (const name of ['local-client.mjs','personal.css','skeleton-codec.mjs','spine-urls.mjs','visual-policy.mjs','visual-state.mjs','visuals.mjs','battlefield-policy.mjs','battlefield-atmosphere.mjs','combat-feedback.mjs']) await cp(path.join(root,'personal',name),path.join(dist,'personal',name));
+await writeFile(path.join(dist,'personal/personal.css'),await readFile(path.join(root,'personal/personal.css'),'utf8')+'\n'+await readFile(path.join(root,'personal/visuals.css'),'utf8')+'\n'+await readFile(path.join(root,'personal/combat-feedback.css'),'utf8'));
 // Upstream's local-only model validator must recognize the externally hosted assets too.
 const assetsFile=path.join(dist,'js/assets.js');
 let assetsCode=await readFile(assetsFile,'utf8');

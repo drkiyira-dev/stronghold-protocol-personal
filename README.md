@@ -51,7 +51,7 @@ Production deployment requires the maintainer's **explicit approval**, separatel
 
 ## Enhanced development preview
 
-**Visual settings:** the v12 title and lobby use layered light, upstream particles and high-quality pointer parallax. **Settings → Environmental motion** switches Animated/Static; the existing Low/Medium/High quality controls the budget and system reduced motion takes precedence. The [v13 phase 1 preview](docs/V13-BATTLEFIELD-VISUALS.md) extends this same setting to existing Exhaust Grilles and Tidal Control battlefields. It does not automatically publish or replace the Public v12 Site. The [v12 design record](docs/V12-MENU-VISUALS.md) remains available.
+**Visual settings:** the v12 title and lobby use layered light, upstream particles and high-quality pointer parallax. **Settings → Environmental motion** switches Animated/Static; the existing Low/Medium/High quality controls the budget and system reduced motion takes precedence. [v13 phase 1](docs/V13-BATTLEFIELD-VISUALS.md) extends this same setting to existing Exhaust Grilles and Tidal Control battlefields. The [phase 2 development preview](docs/V13-COMBAT-FEEDBACK.md) adds confirmed deployment/move/retreat cues, selection feedback, procedural skill emphasis and a compact settlement transition using upstream components. Battle rules and save formats remain unchanged. Development builds do not automatically replace the Public v13 Site. The [v12 design record](docs/V12-MENU-VISUALS.md) remains available.
 
 Open **「战术终端」** in the game:
 
