@@ -49,7 +49,12 @@ for (const id of ['retreat', 'deploy', 'move', 'inspect']) panel.querySelector('
       if (!moved) throw Error('No legal target');
     }
     // Wait for the actual presentation to consume the committed snapshot.
-    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    await new Promise(resolve => {
+      let frame;
+      const done = () => { cancelAnimationFrame(frame); clearTimeout(timeout); resolve(); };
+      const timeout = setTimeout(done, 250);
+      frame = requestAnimationFrame(() => { frame = requestAnimationFrame(done); });
+    });
     records.push({ action: id, stats: stats() });
   } catch (error) { records.push({ action: id, error: String(error) }); }
   finally { e.target.disabled = false; await publish(); }
