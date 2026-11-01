@@ -46,7 +46,7 @@ async function publish() {
   panel.querySelector('pre').textContent = display;
 }
 async function prepare() {
-  report.phase = 'preparing'; updateSettings({ muted: true, quality: 'high' }); setMenuMotion(true);
+  report.phase = 'preparing'; updateSettings({ quality: 'high' }); setMenuMotion(true);
   await net.request('room.create', { mode: 'solo', difficulty: 'HARD' });
   await net.request('room.start'); await until(() => store.get().match.public?.phase === 'INFO_CHECK');
   await net.request('g.infoReady'); await until(() => store.get().match.public?.phase === 'BAND_DRAFT');

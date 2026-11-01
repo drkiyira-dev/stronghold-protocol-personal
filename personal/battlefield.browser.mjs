@@ -20,10 +20,15 @@ try {
     await page.getByPlaceholder(/输入你的代号/).fill('V13 QA');
     assert.equal(await page.evaluate(async () => (await import('/js/audio.js')).audio.volumes.muted), true, 'preview must already be muted before Start');
     await page.getByRole('button', { name: '开始', exact: true }).click();
+    // A tester may deliberately enable audio after the silent startup. Preparing
+    // a match must not override that choice. Playwright's output stays muted.
+    await page.evaluate(async () => (await import('/js/ui/settings.js')).updateSettings({ muted: false }));
     await page.locator('#v13-prepare').click();
     await page.waitForFunction(() => /"phase": "(ready|failed)"/.test(document.querySelector('#v13-status').textContent), {}, { timeout: 90000 });
     const result = () => JSON.parse(app.reports.at(-1) ? JSON.stringify(app.reports.at(-1)) : '{}');
     assert.equal(result().phase, 'ready', JSON.stringify(result()));
+    assert.equal(await page.evaluate(async () => (await import('/js/audio.js')).audio.volumes.muted), false, 'preparing must preserve deliberate unmute');
+    await page.evaluate(async () => (await import('/js/ui/settings.js')).updateSettings({ muted: true }));
     const env = () => page.evaluate(() => __SP_VIEW__.raw.stats().environment);
     const meshState = () => page.evaluate(() => {
       const root = __SP_VIEW__.raw.debug.app.stage.children.flatMap(c => c.children || []).flatMap(c => c.children || [])
