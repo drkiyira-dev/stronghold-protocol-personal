@@ -1,0 +1,158 @@
+{
+  "runtime": "84d007d",
+  "qaRevision": "1a9e1f2",
+  "system": "macOS 26.6 / Apple M5 / 24 GiB",
+  "browser": "Safari 26.6 (native)",
+  "method": "1 s warmup + ~4 s per state; visible regular Safari tab; external operator art loaded; no 3D scene import; serial sampling",
+  "limitations": "Earlier hidden-window attempts discarded. No JS heap, temperature, GPU utilization or VRAM measurements. Short samples only.",
+  "maps": [
+    {
+      "stage": "act2autochess_m03",
+      "startedAt": "2026-11-01T07:54:32.151Z",
+      "round": 2,
+      "errors": [],
+      "samples": [
+        {
+          "label": "static-before",
+          "durationMs": 4010,
+          "samples": 240,
+          "fps": 60,
+          "frameP95Ms": 17,
+          "cpuP50Ms": 1.29,
+          "renderP50Ms": 0.87,
+          "viewport": [
+            1710,
+            949
+          ],
+          "dpr": 2,
+          "visibilityBefore": "visible",
+          "visibilityAfter": "visible",
+          "heapBytes": null,
+          "pixiTextures": 17,
+          "pixiGeometries": 34,
+          "quads": 0,
+          "gpuBytes": null,
+          "gpuUtilization": null
+        },
+        {
+          "label": "animated",
+          "durationMs": 4006,
+          "samples": 240,
+          "fps": 60,
+          "frameP95Ms": 17,
+          "cpuP50Ms": 1.28,
+          "renderP50Ms": 0.85,
+          "viewport": [
+            1710,
+            949
+          ],
+          "dpr": 2,
+          "visibilityBefore": "visible",
+          "visibilityAfter": "visible",
+          "heapBytes": null,
+          "pixiTextures": 17,
+          "pixiGeometries": 34,
+          "quads": 2,
+          "gpuBytes": null,
+          "gpuUtilization": null
+        },
+        {
+          "label": "static-after",
+          "durationMs": 4008.0000000000146,
+          "samples": 240,
+          "fps": 60,
+          "frameP95Ms": 17,
+          "cpuP50Ms": 1.45,
+          "renderP50Ms": 0.85,
+          "viewport": [
+            1710,
+            949
+          ],
+          "dpr": 2,
+          "visibilityBefore": "visible",
+          "visibilityAfter": "visible",
+          "heapBytes": null,
+          "pixiTextures": 17,
+          "pixiGeometries": 34,
+          "quads": 0,
+          "gpuBytes": null,
+          "gpuUtilization": null
+        }
+      ]
+    },
+    {
+      "stage": "act2autochess_m04",
+      "startedAt": "2026-11-01T07:57:02.447Z",
+      "round": 2,
+      "errors": [],
+      "samples": [
+        {
+          "label": "static-before",
+          "durationMs": 4009,
+          "samples": 240,
+          "fps": 60,
+          "frameP95Ms": 18,
+          "cpuP50Ms": 1.21,
+          "renderP50Ms": 0.79,
+          "viewport": [
+            1710,
+            949
+          ],
+          "dpr": 2,
+          "visibilityBefore": "visible",
+          "visibilityAfter": "visible",
+          "heapBytes": null,
+          "pixiTextures": 17,
+          "pixiGeometries": 32,
+          "quads": 0,
+          "gpuBytes": null,
+          "gpuUtilization": null
+        },
+        {
+          "label": "animated",
+          "durationMs": 4006.0000000000073,
+          "samples": 240,
+          "fps": 60,
+          "frameP95Ms": 18,
+          "cpuP50Ms": 1.41,
+          "renderP50Ms": 0.74,
+          "viewport": [
+            1710,
+            949
+          ],
+          "dpr": 2,
+          "visibilityBefore": "visible",
+          "visibilityAfter": "visible",
+          "heapBytes": null,
+          "pixiTextures": 17,
+          "pixiGeometries": 32,
+          "quads": 6,
+          "gpuBytes": null,
+          "gpuUtilization": null
+        },
+        {
+          "label": "static-after",
+          "durationMs": 4007,
+          "samples": 240,
+          "fps": 60,
+          "frameP95Ms": 17,
+          "cpuP50Ms": 1.31,
+          "renderP50Ms": 0.79,
+          "viewport": [
+            1710,
+            949
+          ],
+          "dpr": 2,
+          "visibilityBefore": "visible",
+          "visibilityAfter": "visible",
+          "heapBytes": null,
+          "pixiTextures": 17,
+          "pixiGeometries": 32,
+          "quads": 0,
+          "gpuBytes": null,
+          "gpuUtilization": null
+        }
+      ]
+    }
+  ]
+}

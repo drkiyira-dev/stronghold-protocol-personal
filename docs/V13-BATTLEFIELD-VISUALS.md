@@ -43,7 +43,7 @@ node personal/battlefield-preview.mjs
 
 Open `http://127.0.0.1:4183/?seed=5` (vents) or `?seed=3` (water). Use a dedicated test browser profile: this **localhost-only QA harness** selects a fixed-seed challenge in that origin's storage. Enter a callsign, Start, then use **LOCAL V13 QA → 准备真实对局**. The probe buys and deploys through normal worker messages. Its quality/motion buttons use the real shared settings. “战斗至 R2” runs the actual simulation through settlement; “测量静态/动态/静态” collects three short samples. Close the preview with Ctrl-C.
 
-The preview is muted synchronously before client initialization, including the first Start gesture. This affects only the dedicated QA origin, preserves other audio preferences and does not change production audio defaults. Keep the native browser window visible during measurements: hidden-window samples are invalid.
+The preview is muted synchronously before client initialization, including the first Start gesture. You can then enable audio in Settings; preparing a match preserves that manual choice. This affects only the dedicated QA origin, preserves other audio preferences and does not change production audio defaults. Keep the native browser window visible during measurements: hidden-window samples are invalid.
 
 The preview is a plain static host plus a bounded report sink, with no room server or asset proxy. QA modules and the seeded initialization script are excluded from `dist/` and the release archive. Run tests **serially**:
 
