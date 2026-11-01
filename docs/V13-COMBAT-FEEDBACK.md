@@ -30,7 +30,7 @@ Tested on 2026-11-01: macOS 26.6, Apple M5 / 24 GiB; Node 26.7.0; Chrome 156.0.8
 | Check | Result / scope |
 | --- | --- |
 | Build and static artifact integrity | Passed; 864 files. The clean-checkout test also verifies regenerated dependencies and deliberate missing-install failures. |
-| Personal unit regressions | 125 cases covered: initial complete run had 121/123 pass and two system-Git/Xcode-license failures; both passed with bundled Git. The two subsequent cue-slot / suspended-RAF cases and their affected suite passed separately. No system license was accepted or changed. |
+| Personal unit regressions | Initial complete run had 121/123 pass and two system-Git/Xcode-license failures; both passed with bundled Git. The subsequent cue-slot / suspended-RAF cases and their affected suite passed separately; CI on `d3979a3` passed all 125. A detached-result observer regression was then added (126 cases total). No system license was accepted or changed. |
 | Full automated browser command | All 11 serial suites passed. Includes save/restore and run identity, replay/coach, kits, branding, audio, map/scene fallback, menu/environment motion, WebGL loss and no-WebGL play. The final cue-slot fix was rebuilt and its 7-case unit suite plus focused combat browser suite rerun successfully. |
 | Focused real Chrome renderer | Original selection/retreat button, confirmed deploy/move, rejected command, Static/reduced motion, genuine Texas skill, terrain highlight, actual result dialog, R2 PREP and teardown passed. [Machine-readable evidence](evidence/v13-phase2-automated.json). |
 | Native Chrome | Selected via original tile picking; used original retreat button, redeployed/moved through normal worker requests, disabled/enabled motion, observed a genuine ally skill and result transition, reached R2 PREP. |
@@ -58,6 +58,8 @@ Each visible R2 PREP sample lasts approximately 4 seconds, after a 1-second sett
 | Native Safari | 59.99 / 17.00 ms | 60.00 / 17.00 ms | 60.00 / 17.00 ms |
 
 The first Chrome performance attempt was suspended while its window was hidden and is excluded. After the maintainer brought the window forward, all three samples reported visible/focused state. The QA inspector was fixed to finish its wait even when RAF is suspended; its regression deliberately suspends RAF and verifies that the report retains the actual zero budget. Gameplay did not require a visibility workaround.
+
+The initial Linux CI run passed the first ten browser suites, then the combat test read an empty animation style from the transient settlement element across separate protocol calls. The assertion now consumes the existing observer's actual insertion-time styles, which remain available after the dialog detaches. A detached-DOM fixture verifies retention and deduplication. The production code, settlement duration and native acceptance build are unchanged by this test fix; final CI results are linked from the PR.
 
 System memory-free observations ranged from 46% to 57% during this task. Temperature, GPU memory/utilization and Safari JS heap were not available; they are **unknown**, not zero. No claim of a measured CPU temperature or long-duration thermal stability is made.
 

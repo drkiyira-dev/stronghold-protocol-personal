@@ -78,8 +78,6 @@ try {
   'the actual skill activation reaches the upstream terrain highlight renderer');
   await shot('skill');
   await page.locator('.rdialog').waitFor({ timeout: 90000 });
-  assert.equal(await page.locator('.rdialog').evaluate(e => getComputedStyle(e).pointerEvents), 'none');
-  assert.equal(await page.locator('.rdialog__box').evaluate(e => getComputedStyle(e).animationName), 'personal-result-in');
   await shot('settlement');
   await page.waitForFunction(() => /"phase": "(complete|failed)"/.test(document.querySelector('#v13-status').textContent), {}, { timeout: 90000 });
   await page.locator('#cf-inspect').click();
@@ -88,6 +86,11 @@ try {
   });
   evidence.final = app.reports.findLast(r => r.phase === 'combat-feedback');
   assert.equal(evidence.final.round, 2); assert.equal(evidence.final.results.length, 1);
+  // The original short-lived dialog can detach between remote protocol calls
+  // on a slow runner. Assert its real insertion-time styles from the existing
+  // observer, without pausing or extending the game's settlement lifecycle.
+  assert.equal(evidence.final.results[0].pointerEvents, 'none');
+  assert.equal(evidence.final.results[0].animation, 'personal-result-in');
   assert.ok(evidence.final.stats.counts.skill > 0, 'original simulation emitted and presented an ally skill');
   assert.equal(evidence.final.stats.error, null); assert.deepEqual(errors, []);
   await page.getByRole('button', { name: '离开', exact: true }).click();
