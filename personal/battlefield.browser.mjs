@@ -80,15 +80,29 @@ try {
     await page.waitForFunction(() => __SP_VIEW__.raw.stats().environment.meshes > 0);
     // Exercise the actual Pixi context-loss path, without creating another GPU context.
     const lossSupported = await page.evaluate(() => {
-      window.__qaLoss = __SP_VIEW__.raw.debug.app.renderer.gl.getExtension('WEBGL_lose_context');
-      if (!__qaLoss) return false; __qaLoss.loseContext(); return true;
+      const view = __SP_VIEW__.raw, app = view.debug.app, gl = app.renderer.gl;
+      const loss = gl.getExtension('WEBGL_lose_context');
+      if (!loss) return false;
+      window.__qaContextCycle = { lost: null, restored: false };
+      // Registered after the controller: capture its synchronous release inside
+      // the real event. Pixi schedules automatic restore at timeout 0, so a
+      // later RAF/host poll can miss the entire zero-geometry interval.
+      app.view.addEventListener('webglcontextlost', () => {
+        __qaContextCycle.lost = { contextLost: gl.isContextLost(), environment: view.stats().environment };
+      }, { once: true });
+      app.view.addEventListener('webglcontextrestored', () => { __qaContextCycle.restored = true; }, { once: true });
+      loss.loseContext(); return true;
     });
     if (lossSupported) {
-      await page.waitForFunction(() => __SP_VIEW__.raw.stats().environment.meshes === 0);
-      await page.waitForTimeout(100); await page.evaluate(() => __qaLoss.restoreContext());
-      try { await page.waitForFunction(() => __SP_VIEW__.raw.stats().environment.meshes > 0, {}, { timeout: 10000 }); }
-      catch (error) { console.error('Context restore:', await env(), errors); throw error; }
-      await page.evaluate(() => { delete window.__qaLoss; });
+      await page.waitForFunction(() => __qaContextCycle.lost, {}, { polling: 50 });
+      const lost = await page.evaluate(() => __qaContextCycle.lost);
+      assert.equal(lost.contextLost, true, 'capture actual WebGL loss, not a synthetic event');
+      assert.equal(lost.environment.meshes, 0, 'release geometry synchronously on loss');
+      assert.equal(lost.environment.active, false);
+      // Let the existing Pixi recovery run; do not race it with another restore.
+      try { await page.waitForFunction(() => __qaContextCycle.restored && __SP_VIEW__.raw.stats().environment.meshes > 0, {}, { timeout: 10000, polling: 50 }); }
+      catch (error) { console.error('Context restore:', await page.evaluate(() => __qaContextCycle), await env(), errors); throw error; }
+      await page.evaluate(() => { delete window.__qaContextCycle; });
     }
     // No alternate geometry: original picking still returns the same board tile.
     assert.ok(await page.evaluate(() => { const v = __SP_VIEW__.raw, p = v.tileScreen(10, 6); return p && v.debug.pick.groundTile(p.x, p.y); }));
