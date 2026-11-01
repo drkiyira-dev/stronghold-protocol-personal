@@ -10,7 +10,7 @@
     "check:artifact": "node personal/artifact-integrity.mjs --archive",
     "test": "node --test --test-concurrency=1 personal/*.test.mjs",
     "server": "node --env-file-if-exists=.env personal/host.mjs",
-    "test:browser": "node personal/reliability.browser.mjs && node personal/enhanced.browser.mjs && node personal/kit-loader.browser.mjs && node personal/branding.browser.mjs && node personal/audio.browser.mjs && node personal/maps.browser.mjs && node personal/scenes.browser.mjs && node personal/static-scenes.browser.mjs && node personal/visuals.browser.mjs"
+    "test:browser": "node personal/reliability.browser.mjs && node personal/enhanced.browser.mjs && node personal/kit-loader.browser.mjs && node personal/branding.browser.mjs && node personal/audio.browser.mjs && node personal/maps.browser.mjs && node personal/scenes.browser.mjs && node personal/static-scenes.browser.mjs && node personal/visuals.browser.mjs && node personal/battlefield.browser.mjs"
   },
   "devDependencies": {
     "esbuild": "^0.25.0",

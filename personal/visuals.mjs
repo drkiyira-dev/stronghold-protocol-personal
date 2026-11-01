@@ -8,17 +8,17 @@ import { menuVisuals, setMenuMotion, useMenuPolicy } from './visual-state.mjs';
 
 export function VisualSettings() {
   const s = useStore(x => x, Object.is, menuVisuals);
-  return html`<section class="menu-visual-settings" aria-label=${t('菜单动态效果')}>
+  return html`<section class="menu-visual-settings" aria-label=${t('动态环境效果')}>
     <div class="set-row">
-      <span class="set-row__label">${t('菜单动态效果')}<${MicroLabel}>MENU MOTION<//></span>
-      <div class="set-seg" role="radiogroup" aria-label=${t('菜单动态效果')}>
+      <span class="set-row__label">${t('动态环境效果')}<${MicroLabel}>VISUAL MOTION<//></span>
+      <div class="set-seg" role="radiogroup" aria-label=${t('动态环境效果')}>
         ${[[true, '动态'], [false, '静态']].map(([value, label]) => html`<button type="button" role="radio"
           aria-checked=${String(s.motion === value)} class=${s.motion === value ? 'is-on' : ''}
           data-menu-motion-choice=${String(value)} onClick=${() => setMenuMotion(value)}>${t(label)}</button>`)}
       </div>
     </div>
-    <p class="set-hint">${t('首页和大厅跟随下方画面质量；低档静态、中档少量粒子、高档增加视差。不影响战斗规则。')}</p>
-    ${s.reduced ? html`<p class="set-hint" role="status">${t('系统已开启减少动态效果，当前使用静态背景。')}</p>` : null}
+    <p class="set-hint">${t('沿用画面质量控制首页、大厅与战场环境。低档或静态关闭非必要环境动画；技能、伤害与战斗规则不变。')}</p>
+    ${s.reduced ? html`<p class="set-hint" role="status">${t('系统已开启减少动态效果，当前暂停非必要环境动画。')}</p>` : null}
     ${!s.saved ? html`<p class="set-hint" role="status">${t('浏览器未能保存此设置，本次页面仍然生效。')}</p>` : null}
   </section>`;
 }
