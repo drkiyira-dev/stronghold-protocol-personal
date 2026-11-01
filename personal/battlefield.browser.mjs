@@ -5,7 +5,8 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
 import { startBattlefieldPreview } from './battlefield-preview.mjs';
 
-const app = await startBattlefieldPreview(), results = [];
+// Deterministically expose UI/report races instead of relying on runner speed.
+const app = await startBattlefieldPreview({ reportDelayMs: 150 }), results = [];
 let browser;
 await mkdir('.cache/verification', { recursive: true });
 try {

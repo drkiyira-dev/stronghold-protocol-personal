@@ -13,7 +13,7 @@ localStorage.setItem('sp.pref.settings', JSON.stringify({...prefs, muted:true}))
 const seed = new URL(location).searchParams.get('seed') === '5' ? 5 : 3;
 localStorage.setItem('stronghold.personal.challenge', JSON.stringify({kind:'stronghold-personal-challenge',version:1,id:'v13-qa-'+seed,name:'LOCAL V13 QA',description:'Unmodified HARD map pool with a fixed seed.',seed,difficulty:'HARD',rules:{maxDeploy:10,noRefresh:false,noEquipment:false,bannedOperators:[]}}));`;
 
-export async function startBattlefieldPreview({ port = 0 } = {}) {
+export async function startBattlefieldPreview({ port = 0, reportDelayMs = 0 } = {}) {
   const root = resolve('dist'), reports = [];
   const html = (await readFile(root + '/index.html', 'utf8')).replace('</head>', '<script src="/__v13-init.js"></script></head>')
     .replace('</body>', '<script type="module" src="/__v13-probe.mjs"></script></body>');
@@ -23,7 +23,11 @@ export async function startBattlefieldPreview({ port = 0 } = {}) {
       const url = new URL(req.url, 'http://localhost');
       if (url.pathname === '/__v13-result' && req.method === 'POST') {
         let body = ''; for await (const chunk of req) { body += chunk; if (body.length > 300000) { res.writeHead(413).end(); return; } }
-        const report = JSON.parse(body); reports.push(report);
+        const report = JSON.parse(body);
+        // Regression fixture: the UI must not announce a phase before this
+        // receiving side has accepted its evidence, even on a slow CI runner.
+        if (reportDelayMs > 0) await new Promise(r => setTimeout(r, reportDelayMs));
+        reports.push(report);
         await mkdir('.cache/verification', { recursive: true });
         const browser = report.ua?.includes('Chrome') ? 'chrome' : 'safari';
         await writeFile(`.cache/verification/v13-${browser}-${report.seed}.json`, JSON.stringify(report, null, 2));

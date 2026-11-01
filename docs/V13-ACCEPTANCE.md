@@ -24,7 +24,7 @@ Native Chrome used a 1710 × 916 CSS-pixel viewport at DPR 2, with existing exte
 | Unit and local-service tests | 117 cases passed across full run and targeted retries | 115 passed in the final full local run. Two Git-dependent tests hit the host's Xcode-license gate; both passed with the already-installed fallback Git. No license or system setting was changed. |
 | Build and distribution integrity | Passed | `npm run build`; `npm run check:dist`: 863 files. |
 | Final release archive | Passed | 865 files including hosting config. macOS AppleDouble metadata was rejected on the first archive; repacking with `COPYFILE_DISABLE=1` passed. Local artifact only; no publication. |
-| Existing browser regression suites | Passed before the final indexed-mesh fix | Save/restore, replay/coach, kit loader, branding, audio, maps, scene import/fallback and v12 menu visuals. Final CI must validate the complete final branch. |
+| Existing browser regression suites | Passed locally and on Linux CI at `57fee4e` | Save/restore, replay/coach, kit loader, branding, audio, maps, scene import/fallback and v12 menu visuals. The initial CI then caught the new QA report-ordering race described below; final CI must validate its fix. |
 | Battlefield browser regression after indexed-mesh fix | Passed | Both original maps, actual nonempty rendered pixels and moving projected vertices, Low/Medium/High/Static, reduced motion, hidden page, real WebGL loss/restoration, six toggle cycles, original picking, purchase/deployment, R1 → R2 and field teardown. |
 | Startup mute browser regression | Passed | The final battlefield rerun passed both maps and no-WebGL settlement; the real audio manager is asserted muted before Start. |
 | No-WebGL fallback | Passed | Normal purchase/deployment, real combat and settlement to R2 through the upstream DOM field. |
@@ -57,6 +57,7 @@ These short samples show no observed frame-rate drop on this machine. They do no
 - The initial projected meshes had changing vertices but no indexed triangles, so they did not visibly draw. Explicit UV/index buffers fix this; the browser test now checks actual nonempty extracted pixels, and comparison screenshots were regenerated.
 - Medium steam initially spent its budget on hidden fields. The controller now budgets the focused original vent coordinates; a regression uses hidden and visible vent fixtures.
 - QA initially muted only after entering preparation. Preview initialization now persists mute synchronously before client modules run. Its regression preserves other preferences and tolerates corrupt preference JSON.
+- Linux CI exposed a QA race: the page displayed `measured` before its final report reached the receiving process, which still read `measuring`. Completion is now displayed only after the receiver acknowledges that report. The browser suite deliberately delays report acceptance by 150 ms to exercise this ordering; no game runtime change is needed.
 
 ## Review, rollback and rights
 

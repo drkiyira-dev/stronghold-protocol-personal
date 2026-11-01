@@ -36,10 +36,14 @@ function snapshot() {
 async function publish() {
   report.current = snapshot();
   const { phase, stage, round, errors } = report;
-  panel.querySelector('pre').textContent = JSON.stringify({ phase, stage, round,
+  const display = JSON.stringify({ phase, stage, round,
     environment: report.current.environment, errors,
     perf: report.perf.map(p => ({ label: p.label, fps: Math.round(p.fps * 10) / 10, frameP95Ms: p.frameP95Ms })) }, null, 2);
-  await fetch('/__v13-result', { method: 'POST', body: JSON.stringify(report) });
+  const response = await fetch('/__v13-result', { method: 'POST', body: JSON.stringify(report) });
+  if (!response.ok) throw Error('QA report rejected: ' + response.status);
+  // UI completion is the harness's synchronization point. Publish it only
+  // after the receiver has acknowledged this exact report, not before fetch.
+  panel.querySelector('pre').textContent = display;
 }
 async function prepare() {
   report.phase = 'preparing'; updateSettings({ muted: true, quality: 'high' }); setMenuMotion(true);
