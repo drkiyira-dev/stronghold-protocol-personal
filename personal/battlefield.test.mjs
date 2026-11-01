@@ -40,7 +40,10 @@ function fixture() {
     destroy() { this.parent?.children.splice(this.parent.children.indexOf(this), 1); }
   }
   class Mesh extends Container {
-    constructor(texture, vertices) { super(); this.texture = texture; this.vertices = vertices; live.add(this); }
+    constructor(texture, vertices, uv, index) {
+      super(); this.texture = texture; this.vertices = vertices;
+      assert.equal(uv.length, 8); assert.deepEqual([...index], [0, 1, 2, 0, 2, 3]); live.add(this);
+    }
     destroy(options) { assert.equal(options.texture, false); assert.equal(options.baseTexture, false); live.delete(this); super.destroy(); }
   }
   const tiles = { stage: stages.act2autochess_m04, grid: parseStage(stages.act2autochess_m04), animSprites: [] };

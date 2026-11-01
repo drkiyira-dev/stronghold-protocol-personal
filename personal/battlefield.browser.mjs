@@ -30,6 +30,15 @@ try {
     await page.waitForFunction(() => __SP_VIEW__?.raw.stats().environment.meshes > 0);
     await page.waitForTimeout(2500); // Let the original PREP banner/camera transition finish.
     const high = await env(); assert.ok(high.meshes <= 24); assert.equal(high.error, null);
+    const rendered = await page.evaluate(() => {
+      const app = __SP_VIEW__.raw.debug.app;
+      const root = app.stage.children.flatMap(c => c.children || []).flatMap(c => c.children || []).find(c => c.label === 'personal-battlefield-atmosphere');
+      // Pixi's extractor disposes its temporary render target. Test actual GPU
+      // output: changing CPU vertices alone is not proof of visible animation.
+      const pixels = app.renderer.extract.pixels(root);
+      return { bytes: pixels.length, nonempty: pixels.some(value => value !== 0) };
+    });
+    assert.ok(rendered.bytes > 0 && rendered.nonempty, 'projected atmosphere must draw visible pixels');
     const moved = await meshState(); await page.waitForTimeout(200); assert.notDeepEqual(await meshState(), moved);
     const shot = suffix => page.screenshot({ path: `.cache/verification/v13-${seed}-${suffix}.jpg`, type: 'jpeg', quality: 85,
       style: 'aside:has(#v13-prepare){visibility:hidden}' });
@@ -94,7 +103,7 @@ try {
     await page.getByRole('button', { name: '放弃模拟', exact: true }).click();
     await page.waitForFunction(() => !globalThis.__SP_VIEW__);
     assert.equal(await page.evaluate(() => __qaReleasedRoot.destroyed), true);
-    results.push({ ...final, high, contextLoss: lossSupported ? 'passed' : 'unsupported', teardown: true, lifecycleToggles: 6, errors });
+    results.push({ ...final, high, rendered, contextLoss: lossSupported ? 'passed' : 'unsupported', teardown: true, lifecycleToggles: 6, errors });
     console.log(JSON.stringify({ seed, stage: result().stage, meshes: high.meshes, round: result().round, errors }));
     await context.close();
   }

@@ -54,7 +54,10 @@ export class BattlefieldAtmosphere {
           // A projected quad, using Pixi's own mesh: ripples stay on the water
           // tile through camera flights instead of sliding across units or HUD.
           const vertices = new Float32Array(8);
-          const mesh = new this.P.SimpleMesh(tex[point.kind === 'water' ? 'ring' : 'soft'], vertices);
+          // SimpleMesh does not supply default UV/index buffers. Explicit
+          // triangles are required for these projected vertices to draw pixels.
+          const mesh = new this.P.SimpleMesh(tex[point.kind === 'water' ? 'ring' : 'soft'], vertices,
+            new Float32Array([0, 0, 1, 0, 1, 1, 0, 1]), new Uint16Array([0, 1, 2, 0, 2, 3]));
           mesh.eventMode = 'none'; mesh.tint = point.kind === 'water' ? 0x94e7ed : 0x8bb9bd;
           mesh.blendMode = this.P.BLEND_MODES.ADD;
           this.root.addChild(mesh); this.meshes.push({ mesh, vertices, point, phase: i * 0.61803398875 % 1 });

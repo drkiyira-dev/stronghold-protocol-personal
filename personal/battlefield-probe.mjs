@@ -34,7 +34,10 @@ function snapshot() {
 }
 async function publish() {
   report.current = snapshot();
-  panel.querySelector('pre').textContent = JSON.stringify(report, null, 2);
+  const { phase, stage, round, errors } = report;
+  panel.querySelector('pre').textContent = JSON.stringify({ phase, stage, round,
+    environment: report.current.environment, errors,
+    perf: report.perf.map(p => ({ label: p.label, fps: Math.round(p.fps * 10) / 10, frameP95Ms: p.frameP95Ms })) }, null, 2);
   await fetch('/__v13-result', { method: 'POST', body: JSON.stringify(report) });
 }
 async function prepare() {
@@ -95,7 +98,12 @@ for (const [id, action] of [['prepare', prepare], ['fight', fight], ['perf', per
   panel.querySelector('#v13-' + id).onclick = async e => {
     e.target.disabled = true;
     try { await action(); } catch (error) { report.errors.push(error.stack || String(error)); report.phase = 'failed'; }
-    finally { e.target.disabled = false; await publish(); }
+    finally {
+      // Settings reach the field through Preact; report the resulting frame,
+      // not the previous tier captured synchronously inside the button event.
+      await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+      e.target.disabled = false; await publish();
+    }
   };
 }
 await publish();
