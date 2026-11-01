@@ -51,7 +51,7 @@ Production deployment requires the maintainer's **explicit approval**, separatel
 
 ## Enhanced development preview
 
-**Menu visual preview (v12 phase 1):** the title and default lobby gain layered light, upstream ambient particles and high-quality pointer parallax. In **Settings → Menu motion**, choose Animated or Static; the existing Low/Medium/High quality controls the budget. System reduced motion takes precedence. See the [preview guide and visual comparison](docs/V12-MENU-VISUALS.md). This development preview does not publish or replace the v11 Site.
+**Visual settings:** the v12 title and lobby use layered light, upstream particles and high-quality pointer parallax. **Settings → Environmental motion** switches Animated/Static; the existing Low/Medium/High quality controls the budget and system reduced motion takes precedence. The [v13 phase 1 preview](docs/V13-BATTLEFIELD-VISUALS.md) extends this same setting to existing Exhaust Grilles and Tidal Control battlefields. It does not automatically publish or replace the Public v12 Site. The [v12 design record](docs/V12-MENU-VISUALS.md) remains available.
 
 Open **「战术终端」** in the game:
 

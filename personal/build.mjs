@@ -13,6 +13,7 @@ import {publishLicenses} from './licenses-build.mjs';
 import {vendor,VENDOR_FILES} from '../upstream/tools/vendor.mjs';
 import {writeArtifactManifest} from './artifact-integrity.mjs';
 import {VISUAL_ADAPTERS,VISUAL_EN} from './visuals-build.mjs';
+import {BATTLEFIELD_ADAPTERS,BATTLEFIELD_TRANSLATIONS} from './battlefield-build.mjs';
 const identity=await buildIdentity();
 await verifyNoUntrackedEngineFiles();
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -39,11 +40,15 @@ for(const [file,adapt]of [['js/audio.js',adaptAudio],['js/ui/gameLogic/settings.
 for(const [file,adapt]of [['js/assetPack.js',adaptSceneImport],['js/render/board3d/load.js',adaptSceneTiles],['js/render/boardArt.js',adaptSceneTiles]]){
   const target=path.join(dist,file);await writeFile(target,adapt(await readFile(target,'utf8')));
 }
-for(const [file,adapt] of VISUAL_ADAPTERS) {
+for(const [file,adapt] of [...VISUAL_ADAPTERS,...BATTLEFIELD_ADAPTERS]) {
   const target=path.join(dist,file);await writeFile(target,adapt(await readFile(target,'utf8')));
 }
 const visualEnglish=path.join(dist,'i18n/en.json');
 await writeFile(visualEnglish,JSON.stringify({...JSON.parse(await readFile(visualEnglish,'utf8')),...VISUAL_EN}));
+for (const [lang,labels] of Object.entries(BATTLEFIELD_TRANSLATIONS)) {
+  const file=path.join(dist,'i18n',lang+'.json');
+  await writeFile(file,JSON.stringify({...JSON.parse(await readFile(file,'utf8')),...labels}));
+}
 const importUI=path.join(dist,'js/ui/assetImport.js');
 await writeFile(importUI,replaceContract(await readFile(importUI,'utf8'),'读取自己的素材包，美术不占服务器流量。','本机导入场景素材，建议使用普通窗口；完成后刷新。','scene import hint'));
 for(const [lang,labels]of Object.entries(AUDIO_LABELS)) {
@@ -84,7 +89,7 @@ await mkdir(path.join(dist,'personal'),{recursive:true});
 const importCatalog=JSON.parse(await readFile(path.join(root,'personal/scene-import-catalog.json'),'utf8'));
 await writeFile(path.join(dist,'personal/scene-import.json'),JSON.stringify(importCatalog.manifest));
 await writeFile(path.join(dist,'personal/build-info.json'),JSON.stringify(identity));
-for (const name of ['local-client.mjs','personal.css','skeleton-codec.mjs','spine-urls.mjs','visual-policy.mjs','visual-state.mjs','visuals.mjs']) await cp(path.join(root,'personal',name),path.join(dist,'personal',name));
+for (const name of ['local-client.mjs','personal.css','skeleton-codec.mjs','spine-urls.mjs','visual-policy.mjs','visual-state.mjs','visuals.mjs','battlefield-policy.mjs','battlefield-atmosphere.mjs']) await cp(path.join(root,'personal',name),path.join(dist,'personal',name));
 await writeFile(path.join(dist,'personal/personal.css'),await readFile(path.join(root,'personal/personal.css'),'utf8')+'\n'+await readFile(path.join(root,'personal/visuals.css'),'utf8'));
 // Upstream's local-only model validator must recognize the externally hosted assets too.
 const assetsFile=path.join(dist,'js/assets.js');

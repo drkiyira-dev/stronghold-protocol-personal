@@ -38,6 +38,9 @@ export const VISUAL_ADAPTERS = [
   ['js/main.js', adaptVisualRuntime], ['js/ui/lobbyMedia.js', adaptVisualMedia],
 ];
 export const VISUAL_EN = {
+  '动态环境效果': 'Environmental motion',
+  '沿用画面质量控制首页、大厅与战场环境。低档或静态关闭非必要环境动画；技能、伤害与战斗规则不变。': 'Quality controls menu and battlefield environments. Low or Static disables nonessential environmental animation. Skills, damage and battle rules are unchanged.',
+  '系统已开启减少动态效果，当前暂停非必要环境动画。': 'Your system requests reduced motion. Nonessential environmental animation is paused.',
   '菜单动态效果': 'Menu motion', '动态': 'Animated', '静态': 'Static',
   '首页和大厅跟随下方画面质量；低档静态、中档少量粒子、高档增加视差。不影响战斗规则。': 'Menu backgrounds follow quality: low is static, medium adds a few particles, high adds parallax. Battle rules are unchanged.',
   '系统已开启减少动态效果，当前使用静态背景。': 'Your system requests reduced motion. The background is static.',

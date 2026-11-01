@@ -1,4 +1,4 @@
-// Menu presentation only. Never stored in a match/checkpoint or sent to the engine.
+// Shared presentation preference. Never stored in a match/checkpoint or sent to the engine.
 export const VISUAL_PREF_KEY = 'sp.pref.personal.visuals.v1';
 export function readVisualPreference(storage) {
   try {

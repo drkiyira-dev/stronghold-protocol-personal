@@ -1,0 +1,145 @@
+{
+  "runtime": "84d007d",
+  "system": "macOS 26.6 / Apple M5 / 24 GiB",
+  "browser": "Chrome 156.0.8078.47",
+  "method": "1 s warmup + ~4 s per state; native window; external operator art loaded; no 3D scene import; serial sampling",
+  "limitations": "Main-isolate heap only; short samples; no temperature, GPU utilization or VRAM measurements.",
+  "maps": [
+    {
+      "stage": "act2autochess_m03",
+      "startedAt": "2026-11-01T06:44:50.330Z",
+      "round": 2,
+      "errors": [],
+      "samples": [
+        {
+          "label": "static-before",
+          "durationMs": 4012.399999976158,
+          "samples": 240,
+          "fps": 60.03001500750375,
+          "frameP95Ms": 18.39999999999418,
+          "cpuP50Ms": 1.47,
+          "renderP50Ms": 1.17,
+          "viewport": [
+            1710,
+            916
+          ],
+          "dpr": 2,
+          "heapBytes": 64136591,
+          "pixiTextures": 14,
+          "pixiGeometries": 32,
+          "quads": 0,
+          "gpuBytes": null,
+          "gpuUtilization": null
+        },
+        {
+          "label": "animated",
+          "durationMs": 4009.800000011921,
+          "samples": 240,
+          "fps": 60.01800540162066,
+          "frameP95Ms": 18.19999999999709,
+          "cpuP50Ms": 1.35,
+          "renderP50Ms": 1.13,
+          "viewport": [
+            1710,
+            916
+          ],
+          "dpr": 2,
+          "heapBytes": 71405183,
+          "pixiTextures": 14,
+          "pixiGeometries": 32,
+          "quads": 2,
+          "gpuBytes": null,
+          "gpuUtilization": null
+        },
+        {
+          "label": "static-after",
+          "durationMs": 4007.9000000059605,
+          "samples": 240,
+          "fps": 60.01200240047992,
+          "frameP95Ms": 17.5,
+          "cpuP50Ms": 1.27,
+          "renderP50Ms": 1.05,
+          "viewport": [
+            1710,
+            916
+          ],
+          "dpr": 2,
+          "heapBytes": 54622866,
+          "pixiTextures": 14,
+          "pixiGeometries": 32,
+          "quads": 0,
+          "gpuBytes": null,
+          "gpuUtilization": null
+        }
+      ]
+    },
+    {
+      "stage": "act2autochess_m04",
+      "startedAt": "2026-11-01T06:47:56.690Z",
+      "round": 2,
+      "errors": [],
+      "samples": [
+        {
+          "label": "static-before",
+          "durationMs": 4009,
+          "samples": 240,
+          "fps": 60.01500375093774,
+          "frameP95Ms": 17.60000000000582,
+          "cpuP50Ms": 1.16,
+          "renderP50Ms": 1.14,
+          "viewport": [
+            1710,
+            916
+          ],
+          "dpr": 2,
+          "heapBytes": 66002307,
+          "pixiTextures": 14,
+          "pixiGeometries": 33,
+          "quads": 0,
+          "gpuBytes": null,
+          "gpuUtilization": null
+        },
+        {
+          "label": "animated",
+          "durationMs": 4009.7000000178814,
+          "samples": 240,
+          "fps": 60.01500375093774,
+          "frameP95Ms": 17.60000000000582,
+          "cpuP50Ms": 1.16,
+          "renderP50Ms": 1.16,
+          "viewport": [
+            1710,
+            916
+          ],
+          "dpr": 2,
+          "heapBytes": 61512108,
+          "pixiTextures": 14,
+          "pixiGeometries": 33,
+          "quads": 6,
+          "gpuBytes": null,
+          "gpuUtilization": null
+        },
+        {
+          "label": "static-after",
+          "durationMs": 4010.5999999940395,
+          "samples": 240,
+          "fps": 60,
+          "frameP95Ms": 17.60000000000582,
+          "cpuP50Ms": 1.19,
+          "renderP50Ms": 1.12,
+          "viewport": [
+            1710,
+            916
+          ],
+          "dpr": 2,
+          "heapBytes": 65328269,
+          "pixiTextures": 14,
+          "pixiGeometries": 33,
+          "quads": 0,
+          "gpuBytes": null,
+          "gpuUtilization": null
+        }
+      ]
+    }
+  ]
+}
