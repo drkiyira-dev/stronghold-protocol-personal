@@ -66,6 +66,11 @@ try {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   assert.equal(await page.locator('.uframe__dia').evaluate(e => getComputedStyle(e).animationName), 'none');
   await page.emulateMedia({ reducedMotion: 'no-preference' });
+  // Keep the operator's ground tile visible in short-lived skill evidence.
+  const qaPanel = page.locator('aside:has(#v13-prepare)');
+  await qaPanel.evaluate(e => e.style.pointerEvents = 'none');
+  await page.locator('.dpanel').getByRole('button', { name: '关闭', exact: true }).click();
+  await qaPanel.evaluate(e => e.style.pointerEvents = '');
   await page.locator('#v13-fight').click();
   await page.waitForFunction(() => __SP_VIEW__.raw.stats().combatFeedback.counts.skill > 0);
   assert.ok(await page.evaluate(() => [...__SP_VIEW__.raw.debug.tiles.highlights.entries()]
