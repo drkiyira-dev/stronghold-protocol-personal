@@ -5,12 +5,18 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+// Runs synchronously before the client modules: preview startup and the first
+// Start gesture must be silent, not just the later preparation helper.
+export const PREVIEW_INIT = `let prefs = {};
+try { prefs = JSON.parse(localStorage.getItem('sp.pref.settings') || '{}') || {}; } catch {}
+localStorage.setItem('sp.pref.settings', JSON.stringify({...prefs, muted:true}));
+const seed = new URL(location).searchParams.get('seed') === '5' ? 5 : 3;
+localStorage.setItem('stronghold.personal.challenge', JSON.stringify({kind:'stronghold-personal-challenge',version:1,id:'v13-qa-'+seed,name:'LOCAL V13 QA',description:'Unmodified HARD map pool with a fixed seed.',seed,difficulty:'HARD',rules:{maxDeploy:10,noRefresh:false,noEquipment:false,bannedOperators:[]}}));`;
+
 export async function startBattlefieldPreview({ port = 0 } = {}) {
   const root = resolve('dist'), reports = [];
   const html = (await readFile(root + '/index.html', 'utf8')).replace('</head>', '<script src="/__v13-init.js"></script></head>')
     .replace('</body>', '<script type="module" src="/__v13-probe.mjs"></script></body>');
-  const init = `const seed = new URL(location).searchParams.get('seed') === '5' ? 5 : 3;
-localStorage.setItem('stronghold.personal.challenge', JSON.stringify({kind:'stronghold-personal-challenge',version:1,id:'v13-qa-'+seed,name:'LOCAL V13 QA',description:'Unmodified HARD map pool with a fixed seed.',seed,difficulty:'HARD',rules:{maxDeploy:10,noRefresh:false,noEquipment:false,bannedOperators:[]}}));`;
   const mime = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.json': 'application/json', '.css': 'text/css', '.svg': 'image/svg+xml', '.png': 'image/png', '.wasm': 'application/wasm' };
   const server = createServer(async (req, res) => {
     try {
@@ -26,7 +32,7 @@ localStorage.setItem('stronghold.personal.challenge', JSON.stringify({kind:'stro
       if (!['GET', 'HEAD'].includes(req.method)) { res.writeHead(405).end(); return; }
       let body, type;
       if (url.pathname === '/') { body = html; type = 'text/html'; }
-      else if (url.pathname === '/__v13-init.js') { body = init; type = 'text/javascript'; }
+      else if (url.pathname === '/__v13-init.js') { body = PREVIEW_INIT; type = 'text/javascript'; }
       else if (url.pathname === '/__v13-probe.mjs') { body = await readFile('personal/battlefield-probe.mjs'); type = 'text/javascript'; }
       else {
         const file = resolve(root, '.' + decodeURIComponent(url.pathname));

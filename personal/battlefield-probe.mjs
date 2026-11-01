@@ -27,6 +27,7 @@ const view = () => globalThis.__SP_VIEW__?.raw;
 function snapshot() {
   const v = view(), renderer = v?.debug?.app?.renderer;
   return { ...(v?.stats?.() || {}), viewport: [innerWidth, innerHeight], dpr: devicePixelRatio,
+    visibility: document.visibilityState, focused: document.hasFocus(), rendererKind: globalThis.__SP_VIEW__?.kind ?? null,
     heapBytes: performance.memory?.usedJSHeapSize ?? null,
     pixiTextures: renderer?.texture?.managedTextures?.length ?? null,
     pixiGeometries: renderer?.geometry?.managedGeometries ? Object.keys(renderer.geometry.managedGeometries).length : null,
@@ -101,7 +102,12 @@ for (const [id, action] of [['prepare', prepare], ['fight', fight], ['perf', per
     finally {
       // Settings reach the field through Preact; report the resulting frame,
       // not the previous tier captured synchronously inside the button event.
-      await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+      await new Promise(resolve => {
+        let frame;
+        const finish = () => { cancelAnimationFrame(frame); clearTimeout(timeout); resolve(); };
+        const timeout = setTimeout(finish, 250);
+        frame = requestAnimationFrame(() => { frame = requestAnimationFrame(finish); });
+      });
       e.target.disabled = false; await publish();
     }
   };

@@ -16,7 +16,9 @@ try {
     await context.route('**/*', route => new URL(route.request().url()).origin === app.url ? route.continue() : route.abort());
     const page = await context.newPage(), errors = []; page.on('pageerror', e => errors.push(e.message)); page.setDefaultTimeout(30000);
     await page.goto(app.url + '/?seed=' + seed);
-    await page.getByPlaceholder(/输入你的代号/).fill('V13 QA'); await page.getByRole('button', { name: '开始', exact: true }).click();
+    await page.getByPlaceholder(/输入你的代号/).fill('V13 QA');
+    assert.equal(await page.evaluate(async () => (await import('/js/audio.js')).audio.volumes.muted), true, 'preview must already be muted before Start');
+    await page.getByRole('button', { name: '开始', exact: true }).click();
     await page.locator('#v13-prepare').click();
     await page.waitForFunction(() => /"phase": "(ready|failed)"/.test(document.querySelector('#v13-status').textContent), {}, { timeout: 90000 });
     const result = () => JSON.parse(app.reports.at(-1) ? JSON.stringify(app.reports.at(-1)) : '{}');
