@@ -1,0 +1,469 @@
+{
+  "records": 1,
+  "entries": [
+    {
+      "file": "stages",
+      "id": "stage_x_rainfall_defense_yard",
+      "value": {
+        "name": "雨夜防线",
+        "rows": [
+          "aaaaaaaaaa#aaaaaaaaaa",
+          "#####################",
+          "#####################",
+          "#####################",
+          "#####################",
+          "#####################",
+          "XXXXXXXXXXXXXXXXXXXXX",
+          "aaaaaaaaaa###########",
+          "#####################",
+          "##ErrrhrrrSrrrhrrrE##",
+          "###hrhhrhh#hhrhhrh###",
+          "###hrrrrhh#hhrrrrh###",
+          "####rhhrrrSrrrhhr####",
+          "XXXXXXXXXXXXXXXXXXXXX",
+          "#######fffffff#######",
+          "#######Sffffff#######",
+          "#######fffffff#######",
+          "#######fffffff#######",
+          "#######Sffffff#######"
+        ],
+        "tiles": {
+          "#": {
+            "tileKey": "tile_forbidden",
+            "height": "HIGH",
+            "buildable": "NONE",
+            "passable": "FLY_ONLY",
+            "groundPassable": false,
+            "flyPassable": true,
+            "special": null,
+            "bb": {}
+          },
+          "X": {
+            "tileKey": "tile_forbidden",
+            "height": "HIGH",
+            "buildable": "NONE",
+            "passable": "NONE",
+            "groundPassable": false,
+            "flyPassable": false,
+            "special": null,
+            "bb": {}
+          },
+          "a": {
+            "tileKey": "tile_achand",
+            "height": "HIGH",
+            "buildable": "ALL",
+            "passable": "FLY_ONLY",
+            "groundPassable": false,
+            "flyPassable": true,
+            "special": null,
+            "bb": {}
+          },
+          "r": {
+            "tileKey": "tile_road",
+            "height": "LOW",
+            "buildable": "ALL",
+            "passable": "ALL",
+            "groundPassable": true,
+            "flyPassable": true,
+            "special": null,
+            "bb": {}
+          },
+          "h": {
+            "tileKey": "tile_wall",
+            "height": "HIGH",
+            "buildable": "RANGED",
+            "passable": "FLY_ONLY",
+            "groundPassable": false,
+            "flyPassable": true,
+            "special": null,
+            "bb": {}
+          },
+          "E": {
+            "tileKey": "tile_end",
+            "height": "LOW",
+            "buildable": "NONE",
+            "passable": "ALL",
+            "groundPassable": true,
+            "flyPassable": true,
+            "special": null,
+            "bb": {}
+          },
+          "S": {
+            "tileKey": "tile_start",
+            "height": "LOW",
+            "buildable": "NONE",
+            "passable": "ALL",
+            "groundPassable": true,
+            "flyPassable": true,
+            "special": null,
+            "bb": {}
+          },
+          "f": {
+            "tileKey": "tile_floor",
+            "height": "LOW",
+            "buildable": "NONE",
+            "passable": "ALL",
+            "groundPassable": true,
+            "flyPassable": true,
+            "special": null,
+            "bb": {}
+          }
+        },
+        "modes": [
+          "mode_x_rainfall_defense_patrol"
+        ],
+        "options": {
+          "originalStage": {
+            "format": "stronghold-original-stage",
+            "version": 1,
+            "id": "rainfall-defense",
+            "name": {
+              "zh": "雨夜防线",
+              "en": "Rainfall Defense"
+            },
+            "release": "0.1.0",
+            "seed": 20261102,
+            "modeId": "mode_x_rainfall_defense_patrol",
+            "stageId": "stage_x_rainfall_defense_yard",
+            "compatibleVersions": [
+              "act2autochess"
+            ],
+            "rounds": 3,
+            "maxLeaks": 4,
+            "savePolicy": "disabled",
+            "environment": {
+              "kind": "rain",
+              "tint": "#86bacb",
+              "maxParticles": 24
+            },
+            "description": {
+              "zh": "守住夜间工业设施。两条进攻路线在中部汇流，可选择前沿分守或纵深集中。完成三轮进攻且累计漏敌不超过 4；生命耗尽或漏敌超过 4 即失败。",
+              "en": "Hold the industrial perimeter at night. Split your frontline or defend the shared junction. Complete three assaults with at most 4 total leaks; exceeding 4 leaks or losing all HP is defeat."
+            }
+          }
+        }
+      }
+    },
+    {
+      "file": "waves",
+      "id": "wave_x_rainfall_defense_1",
+      "value": {
+        "kind": "normal",
+        "solo": true,
+        "maxPlayTime": 65,
+        "dp": {
+          "init": 10,
+          "perSec": 1,
+          "max": 99
+        },
+        "characterLimit": 8,
+        "moveMultiplier": 0.5,
+        "bgm": "bat_kazimierz2_2",
+        "routes": [
+          {
+            "motion": "WALK",
+            "start": [
+              9,
+              10
+            ],
+            "end": [
+              9,
+              2
+            ],
+            "checkpoints": [
+              [
+                11,
+                7
+              ],
+              [
+                11,
+                4
+              ]
+            ]
+          },
+          {
+            "motion": "WALK",
+            "start": [
+              12,
+              10
+            ],
+            "end": [
+              9,
+              2
+            ],
+            "checkpoints": [
+              [
+                12,
+                7
+              ],
+              [
+                11,
+                4
+              ]
+            ]
+          }
+        ],
+        "spawns": [
+          {
+            "time": 3,
+            "key": "enemy_1007_slime",
+            "count": 4,
+            "interval": 4,
+            "routeIndex": 0
+          },
+          {
+            "time": 7,
+            "key": "enemy_1007_slime",
+            "count": 4,
+            "interval": 4,
+            "routeIndex": 1
+          }
+        ]
+      }
+    },
+    {
+      "file": "waves",
+      "id": "wave_x_rainfall_defense_2",
+      "value": {
+        "kind": "normal",
+        "solo": true,
+        "maxPlayTime": 65,
+        "dp": {
+          "init": 10,
+          "perSec": 1,
+          "max": 99
+        },
+        "characterLimit": 8,
+        "moveMultiplier": 0.5,
+        "bgm": "bat_kazimierz2_2",
+        "routes": [
+          {
+            "motion": "WALK",
+            "start": [
+              9,
+              10
+            ],
+            "end": [
+              9,
+              2
+            ],
+            "checkpoints": [
+              [
+                11,
+                7
+              ],
+              [
+                11,
+                4
+              ]
+            ]
+          },
+          {
+            "motion": "WALK",
+            "start": [
+              12,
+              10
+            ],
+            "end": [
+              9,
+              2
+            ],
+            "checkpoints": [
+              [
+                12,
+                7
+              ],
+              [
+                11,
+                4
+              ]
+            ]
+          }
+        ],
+        "spawns": [
+          {
+            "time": 2,
+            "key": "enemy_1007_slime",
+            "count": 4,
+            "interval": 3,
+            "routeIndex": 0
+          },
+          {
+            "time": 6,
+            "key": "enemy_1007_slime",
+            "count": 4,
+            "interval": 3,
+            "routeIndex": 1
+          },
+          {
+            "time": 18,
+            "key": "enemy_1000_gopro_2",
+            "count": 2,
+            "interval": 5,
+            "routeIndex": 0
+          },
+          {
+            "time": 21,
+            "key": "enemy_1000_gopro_2",
+            "count": 2,
+            "interval": 5,
+            "routeIndex": 1
+          }
+        ]
+      }
+    },
+    {
+      "file": "waves",
+      "id": "wave_x_rainfall_defense_3",
+      "value": {
+        "kind": "normal",
+        "solo": true,
+        "maxPlayTime": 65,
+        "dp": {
+          "init": 10,
+          "perSec": 1,
+          "max": 99
+        },
+        "characterLimit": 8,
+        "moveMultiplier": 0.5,
+        "bgm": "bat_kazimierz2_2",
+        "routes": [
+          {
+            "motion": "WALK",
+            "start": [
+              9,
+              10
+            ],
+            "end": [
+              9,
+              2
+            ],
+            "checkpoints": [
+              [
+                11,
+                7
+              ],
+              [
+                11,
+                4
+              ]
+            ]
+          },
+          {
+            "motion": "WALK",
+            "start": [
+              12,
+              10
+            ],
+            "end": [
+              9,
+              2
+            ],
+            "checkpoints": [
+              [
+                12,
+                7
+              ],
+              [
+                11,
+                4
+              ]
+            ]
+          }
+        ],
+        "spawns": [
+          {
+            "time": 2,
+            "key": "enemy_1000_gopro_2",
+            "count": 4,
+            "interval": 4,
+            "routeIndex": 0
+          },
+          {
+            "time": 5,
+            "key": "enemy_1000_gopro_2",
+            "count": 4,
+            "interval": 4,
+            "routeIndex": 1
+          },
+          {
+            "time": 22,
+            "key": "enemy_1007_slime",
+            "count": 5,
+            "interval": 2,
+            "routeIndex": 1
+          },
+          {
+            "time": 24,
+            "key": "enemy_1006_shield",
+            "count": 1,
+            "interval": 1,
+            "routeIndex": 0
+          }
+        ]
+      }
+    },
+    {
+      "file": "modes",
+      "id": "mode_x_rainfall_defense_patrol",
+      "base": "mode_single_funny",
+      "set": {
+        "name": "雨夜防线 · 非官方原创关卡",
+        "code": "RD-01",
+        "desc": "三轮双入口防守；累计漏敌不得超过 4。原创关卡不计入标准战绩。",
+        "effectDescList": [
+          "非官方原创关卡",
+          "独立布局 / 固定种子 / 三轮进攻",
+          "本关禁用休整恢复；标准存档保留"
+        ],
+        "stages": [
+          "stage_x_rainfall_defense_yard"
+        ],
+        "lastRound": 3,
+        "bossRound": 4,
+        "hiddenRound": null,
+        "rounds": {
+          "1": {
+            "template": "wave_x_rainfall_defense_1",
+            "bossTemplates": null,
+            "combatTimeLimit": 65,
+            "levelMaxPlayTime": 65,
+            "prepTime": null,
+            "prepTimeData": 300,
+            "isSpPrepare": false,
+            "isBoss": false,
+            "isHidden": false,
+            "bossOvertimeAfter": null
+          },
+          "2": {
+            "template": "wave_x_rainfall_defense_2",
+            "bossTemplates": null,
+            "combatTimeLimit": 65,
+            "levelMaxPlayTime": 65,
+            "prepTime": null,
+            "prepTimeData": 300,
+            "isSpPrepare": false,
+            "isBoss": false,
+            "isHidden": false,
+            "bossOvertimeAfter": null
+          },
+          "3": {
+            "template": "wave_x_rainfall_defense_3",
+            "bossTemplates": null,
+            "combatTimeLimit": 65,
+            "levelMaxPlayTime": 65,
+            "prepTime": null,
+            "prepTimeData": 300,
+            "isSpPrepare": false,
+            "isBoss": false,
+            "isHidden": false,
+            "bossOvertimeAfter": null
+          }
+        },
+        "spRounds": [],
+        "bossWeights": {},
+        "hiddenBossWeights": {}
+      }
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-import { battlefieldPolicy, environmentTiles } from './battlefield-policy.mjs';
+import { battlefieldPolicy, environmentTiles, BATTLEFIELD_PROFILES } from './battlefield-policy.mjs';
 
 /** Optional presentation on the EXISTING Pixi layer, camera and ticker.
  * Borrow upstream fxAtlas textures; no requests, render targets, filters,
@@ -28,6 +28,8 @@ export class BattlefieldAtmosphere {
     const p = battlefieldPolicy(this.preferences.get(), this.settings().quality,
       { ended: this.ended, available: this.available(), official: this.official });
     this.active = p.active; this.budget = this.error ? 0 : p.extras; this.tier = p.tier;
+    const cap = this.tiles.stage?.options?.originalStage?.environment?.maxParticles;
+    if (Number.isInteger(cap) && cap >= 0) this.budget = Math.min(this.budget, cap);
     if (!this.budget) this.clear();
     // Upstream smoke remains the ONLY steam emitter. Low/static does not leave
     // a frozen opaque puff above a deployment tile. Water retains its base tile.
@@ -58,7 +60,9 @@ export class BattlefieldAtmosphere {
           // triangles are required for these projected vertices to draw pixels.
           const mesh = new this.P.SimpleMesh(tex[point.kind === 'water' ? 'ring' : 'soft'], vertices,
             new Float32Array([0, 0, 1, 0, 1, 1, 0, 1]), new Uint16Array([0, 1, 2, 0, 2, 3]));
-          mesh.eventMode = 'none'; mesh.tint = point.kind === 'water' ? 0x94e7ed : 0x8bb9bd;
+          const tint = this.stage.options?.originalStage?.environment?.tint;
+          const rainTint = /^#[0-9a-f]{6}$/i.test(tint || '') ? Number.parseInt(tint.slice(1), 16) : 0x9bbdce;
+          mesh.eventMode = 'none'; mesh.tint = point.kind === 'lamp' ? 0x5ce5d2 : point.kind === 'rain' ? rainTint : point.kind === 'water' ? 0x94e7ed : 0x8bb9bd;
           mesh.blendMode = this.P.BLEND_MODES.ADD;
           this.root.addChild(mesh); this.meshes.push({ mesh, vertices, point, phase: i * 0.61803398875 % 1 });
         }
@@ -70,14 +74,26 @@ export class BattlefieldAtmosphere {
     if (this.destroyed || this.error || !cam) return;
     try {
       for (const { mesh, vertices, point: p, phase } of this.meshes) {
-        const k = (this.clock * (p.kind === 'water' ? 0.22 : 0.12) + phase) % 1;
-        const radius = p.kind === 'water' ? 0.08 + 0.37 * k : 0.44;
+        const k = (this.clock * (p.kind === 'rain' ? 0.85 : p.kind === 'water' ? 0.22 : 0.12) + phase) % 1;
+        if (p.kind === 'rain') {
+          const z = p.z + (1 - k) * 1.7;
+          const corners = [[-0.012,0.28],[0.012,0.28],[0.012,0],[-0.012,0]];
+          for (let i = 0; i < 4; i++) {
+            const q = cam.project(p.col + k * 0.3 + corners[i][0], p.row + k * 0.15, z + corners[i][1]);
+            vertices[i * 2] = q.x; vertices[i * 2 + 1] = q.y;
+          }
+          mesh.alpha = 0.28 * Math.sin(k * Math.PI);
+          continue;
+        }
+        const radius = p.kind === 'mist' ? 1.2 : p.kind === 'lamp' ? 0.12 : p.kind === 'water' ? 0.08 + 0.37 * k : 0.44;
         const corners = [[-1, -1], [1, -1], [1, 1], [-1, 1]];
         for (let i = 0; i < 4; i++) {
           const q = cam.project(p.col + corners[i][0] * radius, p.row + corners[i][1] * radius, p.z);
           vertices[i * 2] = q.x; vertices[i * 2 + 1] = q.y;
         }
-        mesh.alpha = p.kind === 'water' ? 0.26 * Math.sin(k * Math.PI) : 0.12 + 0.07 * Math.sin(k * Math.PI * 2);
+        mesh.alpha = p.kind === 'mist' ? 0.04 + 0.02 * Math.sin(k * Math.PI * 2)
+          : p.kind === 'lamp' ? 0.35 + 0.12 * Math.sin(k * Math.PI * 2)
+            : p.kind === 'water' ? 0.26 * Math.sin(k * Math.PI) : 0.12 + 0.07 * Math.sin(k * Math.PI * 2);
       }
       // Enhance upstream's existing steam in-place, without a second emitter.
       // No global weather overlay: only actual smog tiles on this mapped stage.
@@ -105,7 +121,7 @@ export class BattlefieldAtmosphere {
     // Rendering is optional. A failed effect must not skip the engine's frame.
   }
   stats() {
-    return { profile: this.profile?.[0]?.kind || null, active: this.active, tier: this.tier,
+    return { profile: BATTLEFIELD_PROFILES[this.stage?.id]?.kind || null, active: this.active, tier: this.tier,
       meshes: this.meshes.length, budget: this.budget, clock: this.clock, official: this.official,
       extraTextures: 0, extraContexts: 0, error: this.error };
   }

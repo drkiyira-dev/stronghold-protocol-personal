@@ -104,3 +104,22 @@ test('generated renderer seams match pinned upstream and fail closed on incompat
     assert.notEqual(adapt(source), source); assert.throws(() => adapt(''), /changed/);
   }
 });
+
+
+test('original-stage rain shares the bounded lifecycle, configurable tint and quality settings',async()=>{
+  const records=JSON.parse(await readFile(new URL('./stages/rainfall-defense/content.json',import.meta.url)));
+  const record=records.entries.find(e=>e.file==='stages'),stage={...record.value,id:record.id};
+  const f=fixture(),a=f.atmosphere;f.tiles.stage=stage;f.tiles.grid=parseStage(stage);
+  a.step(.1);assert.ok(f.live.size<=24);assert.equal(a.stats().profile,'rain');
+  const rain=a.meshes.filter(m=>m.point.kind==='rain');assert.ok(rain.length>0);
+  assert.ok(rain.every(m=>m.mesh.eventMode==='none'&&m.mesh.tint===0x86bacb));
+  a.draw({project(x,y,z){return {x:x*20+z,y:y*10-z*20};}});
+  assert.ok(a.meshes.every(m=>Array.from(m.vertices).every(Number.isFinite)));
+  const first=Array.from(rain[0].vertices);a.step(.1);a.draw({project(x,y,z){return {x:x*20+z,y:y*10-z*20};}});
+  assert.notDeepEqual(Array.from(rain[0].vertices),first);
+  f.setQuality('medium');a.step(.1);assert.equal(f.live.size,8);assert.ok(a.meshes.some(m=>m.point.kind==='rain'));
+  f.preference({motion:false});assert.equal(f.live.size,0);
+  f.preference({motion:true});a.step(.1);f.lose();assert.equal(f.live.size,0);
+  a.destroy();assert.equal(f.listeners.size,0);
+  stage.options.originalStage.environment.kind='none';assert.deepEqual(environmentTiles(stage,parseStage(stage)),[]);
+});

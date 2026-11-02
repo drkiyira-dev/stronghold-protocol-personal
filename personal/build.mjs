@@ -15,6 +15,8 @@ import {writeArtifactManifest} from './artifact-integrity.mjs';
 import {VISUAL_ADAPTERS,VISUAL_EN} from './visuals-build.mjs';
 import {BATTLEFIELD_ADAPTERS,BATTLEFIELD_TRANSLATIONS} from './battlefield-build.mjs';
 import {COMBAT_ADAPTERS} from './combat-feedback-build.mjs';
+import {buildCustomStage} from './custom-stage-build.mjs';
+import {CUSTOM_STAGE_ADAPTERS} from './custom-stage-adapters.mjs';
 const identity=await buildIdentity();
 await verifyNoUntrackedEngineFiles();
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -81,6 +83,11 @@ for(const [file,anchor]of [
   await writeFile(target,replaceContract(await readFile(target,'utf8'),anchor,
     anchor+'<personal-terminal-slot></personal-terminal-slot>','terminal toolbar: '+file));
 }
+for(const [file,prefix,changes] of CUSTOM_STAGE_ADAPTERS){
+  const target=path.join(dist,file);let code=await readFile(target,'utf8');
+  for(const [before,after] of changes)code=replaceContract(code,before,after,'original-stage presentation: '+file);
+  await writeFile(target,prefix+code);
+}
 // Safari can evaluate concurrent dynamic kit imports before tier4's const helpers.
 // Initialize that shared dependency first; keep every upstream kit and rule intact.
 const kitsFile=path.join(dist,'sim/content/kits/index.js');
@@ -90,7 +97,7 @@ await mkdir(path.join(dist,'personal'),{recursive:true});
 const importCatalog=JSON.parse(await readFile(path.join(root,'personal/scene-import-catalog.json'),'utf8'));
 await writeFile(path.join(dist,'personal/scene-import.json'),JSON.stringify(importCatalog.manifest));
 await writeFile(path.join(dist,'personal/build-info.json'),JSON.stringify(identity));
-for (const name of ['local-client.mjs','personal.css','skeleton-codec.mjs','spine-urls.mjs','visual-policy.mjs','visual-state.mjs','visuals.mjs','battlefield-policy.mjs','battlefield-atmosphere.mjs','combat-feedback.mjs']) await cp(path.join(root,'personal',name),path.join(dist,'personal',name));
+for (const name of ['local-client.mjs','personal.css','skeleton-codec.mjs','spine-urls.mjs','visual-policy.mjs','visual-state.mjs','visuals.mjs','battlefield-policy.mjs','battlefield-atmosphere.mjs','combat-feedback.mjs','custom-stage-ui.mjs']) await cp(path.join(root,'personal',name),path.join(dist,'personal',name));
 await writeFile(path.join(dist,'personal/personal.css'),await readFile(path.join(root,'personal/personal.css'),'utf8')+'\n'+await readFile(path.join(root,'personal/visuals.css'),'utf8')+'\n'+await readFile(path.join(root,'personal/combat-feedback.css'),'utf8'));
 // Upstream's local-only model validator must recognize the externally hosted assets too.
 const assetsFile=path.join(dist,'js/assets.js');
@@ -112,6 +119,7 @@ await mkdir(path.join(dist,'packs'),{recursive:true});
 execFileSync(process.execPath,[path.join(root,'upstream/tools/packs.mjs'),'index'],{cwd:path.join(root,'upstream'),stdio:'inherit'});
 await cp(path.join(root,'upstream/packs/index.json'),path.join(dist,'packs/index.json'));
 await import('./external-assets-build.mjs');
+await buildCustomStage(dist);
 await import('./build-worker.mjs');
 // Content names prevent an older open tab from reusing an outdated engine.
 for (const name of await readdir(path.join(dist,'personal'))) if (/^local-(server|client)-[a-f0-9]{12}\.(js|mjs)$/.test(name)) await rm(path.join(dist,'personal',name));
