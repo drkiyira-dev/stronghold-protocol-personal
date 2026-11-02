@@ -1,0 +1,33 @@
+{
+  "manifest": 2,
+  "id": "rainfall-defense",
+  "name": {
+    "en": "Rainfall Defense",
+    "zh": "雨夜防线"
+  },
+  "description": {
+    "en": "Unofficial original stage. A branching industrial perimeter with three assaults.",
+    "zh": "非官方原创关卡：工业设施双入口、汇流防线与三轮进攻。"
+  },
+  "version": "0.1.0",
+  "app": ">=0.3.3 <0.4.0",
+  "api": 1,
+  "class": "content",
+  "scope": [
+    "room"
+  ],
+  "sourceLang": "zh",
+  "license": "GPL-3.0-or-later",
+  "authors": [
+    "Dr.Kiriya"
+  ],
+  "credits": [
+    "Built with OpenAI Codex; based on sganggs/Stronghold-Protocol."
+  ],
+  "permissions": [
+    "data.add"
+  ],
+  "data": [
+    "content.json"
+  ]
+}

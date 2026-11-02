@@ -1,3 +1,4 @@
+import {isOriginalStageRecord} from './custom-stage.mjs';
 import {newRunId} from './run-identity.mjs';
 import {installExternalAssets} from './external-assets.mjs';
 import {installSceneImports} from './scene-imports.mjs';
@@ -32,6 +33,7 @@ const replays=createReplayStore(globalThis.indexedDB);
 let checkpoint=vault.active(),compatibility=null,saveError=vault.warning(),recordError='',challenge=null;
 let worker,ready=false,currentSocket=null,fatal=null,resume,saveStatus,toolkit,restoring=false,challengePending=null;
 let preparation=null,attemptId=newRunId();
+let originalStage=null, stageRunId=null, stageLeaks=0, stagePending=null;
 let roomRecovery=null;
 async function recoveryRequest(body){
   const url=new URL(connection.url);url.protocol=url.protocol==='wss:'?'https:':'http:';url.pathname='/api/personal/recovery';
@@ -56,15 +58,18 @@ function updatePersonalUI(){
   resume.textContent=restoring?'正在恢复…':`继续上次休整 · 第 ${checkpoint?.round || 1} 回合`;
   resume.title=compatible?.reason || '';
   saveStatus.hidden=route!=='game';
-  saveStatus.textContent=connection.mode==='remote'?(roomRecovery?.message || '服务器联机 · 本地休整存档不适用'):saveError || (checkpoint?`休整存档 R${checkpoint.round} · 事务保护`:'等待首次休整存档');
+  saveStatus.textContent=originalStage ? (/^en/i.test(getLang())
+    ? `Unofficial · Rainfall Defense · ${stageLeaks}/${originalStage.maxLeaks} leaks · Stage saves disabled; standard save retained`
+    : `非官方原创 · 雨夜防线 · 累计漏敌 ${stageLeaks}/${originalStage.maxLeaks} · 本关不存档，标准存档保留`)
+    : connection.mode==='remote'?(roomRecovery?.message || '服务器联机 · 本地休整存档不适用'):saveError || (checkpoint?`休整存档 R${checkpoint.round} · 事务保护`:'等待首次休整存档');
 }
 function capturePreparation(text){
-  try{const m=JSON.parse(text),s=store.get(),p=s.match.private;if(m.t==='g.ready'&&m.ready!==false&&p)preparation={funds:p.funds,deployed:p.deployCount,cap:Math.min(p.deployCap,challenge?.rules.maxDeploy ?? Infinity),bench:(p.hand||[]).filter(x=>x?.kind==='chess').length};}catch{}
+  try{const m=JSON.parse(text),s=store.get(),p=s.match.private;if(m.t==='g.ready'&&m.ready!==false&&p)preparation={funds:p.funds,deployed:p.deployCount,cap:Math.min(p.deployCap,(originalStage ? Infinity : challenge?.rules.maxDeploy) ?? Infinity),bench:(p.hand||[]).filter(x=>x?.kind==='chess').length};}catch{}
 }
 const recorder=createRecorder({save:r=>replays.put(r),onError:e=>{recordError=`复盘未保存：${e.message}`;toolkit?.notify(recordError);},context:()=>{
-  const s=store.get(),m=s.match.public;return {attemptId,round:m?.round,selfId:s.me.playerId,preparation,challenge,
-    engineHash:connection.mode==='local'?buildInfo.engineHash:roomRecovery?.engineHash,dataHash:connection.mode==='local'?buildInfo.dataHash:roomRecovery?.dataHash,runId:connection.mode==='local'?checkpoint?.runId:roomRecovery?.runId,
-    scenario:{mode:m?.modeId,difficulty:m?.difficulty,stageId:m?.stageId},title:`${challenge?challenge.name+' · ':''}第 ${m?.round || 1} 回合`};
+  const s=store.get(),m=s.match.public;return {attemptId,round:m?.round,selfId:s.me.playerId,preparation,challenge:originalStage ? null : challenge,
+    engineHash:connection.mode==='local'?buildInfo.engineHash:roomRecovery?.engineHash,dataHash:originalStage?.cs || (connection.mode==='local'?buildInfo.dataHash:roomRecovery?.dataHash),runId:connection.mode==='local'?(stageRunId || checkpoint?.runId):roomRecovery?.runId,
+    scenario:{mode:m?.modeId,difficulty:m?.difficulty,stageId:m?.stageId,...(originalStage ? {originalStage:originalStage.id,version:originalStage.release} : {})},title:`${originalStage ? '雨夜防线 · 非官方原创 · ' : challenge?challenge.name+' · ':''}第 ${m?.round || 1} 回合`};
 }});
 net.on('b.start',m=>recorder.start(m));
 net.on('status',s=>{if(s.status!=='online')recorder.gap(null,'disconnect');});
@@ -74,6 +79,19 @@ function engine(){
   if(worker)return worker;
   worker=new Worker('/personal/local-server.js',{type:'module',name:'stronghold-personal-engine'});
   worker.onmessage=({data})=>{
+    if(data.t==='local.stage-set'){
+      if(stagePending?.id!==data.requestId)return;
+      originalStage=data.stage;stageLeaks=0;stageRunId=null;
+      if(stagePending?.id===data.requestId){stagePending.resolve();stagePending=null;}
+      updatePersonalUI();return;
+    }
+    if(data.t==='local.stage-error'){
+      if(stagePending?.id===data.requestId){stagePending.reject(new Error(data.message));stagePending=null;}
+      return;
+    }
+    if(data.t==='local.stage-run'){originalStage=data.stage;stageRunId=data.runId;stageLeaks=0;updatePersonalUI();return;}
+    if(data.t==='local.stage-progress'){stageLeaks=data.leaks;updatePersonalUI();return;}
+    if(data.t==='local.stage-cleared'){originalStage=null;stageRunId=null;stageLeaks=0;updatePersonalUI();return;}
     if(data.t==='local.ready'){
       ready=true;compatibility=data.compatibility;
       const preferred=stagedRestore() || checkpoint;
@@ -147,6 +165,22 @@ async function resumeCheckpoint(value=checkpoint){
 resume.onclick=()=>{resumeCheckpoint().catch(()=>{});};
 let importedHistory=false;
 toolkit=mountToolkit({vault,replays,connection,vaultWrite,compatibility:()=>compatibility,challenge:()=>challenge,
+  originalStage:()=>originalStage,
+  async startOriginalStage(){
+    assertLobby();
+    if(selectRoute(store.get())!=='lobby')throw new Error('请先输入代号并进入大厅 / Enter the lobby first');
+    if(connection.mode!=='local'||!ready)throw new Error('需要已就绪的本地单人引擎 / Local single-player engine required');
+    if(stagePending)throw new Error('关卡正在加载 / Stage is loading');
+    const id=newRunId();
+    try {
+    await new Promise((resolve,reject)=>{
+      const timer=setTimeout(()=>{if(stagePending?.id===id){stagePending=null;reject(new Error('关卡加载超时，请重试 / Stage load timed out'));}},65000);
+      stagePending={id,resolve:()=>{clearTimeout(timer);resolve();},reject:e=>{clearTimeout(timer);reject(e);}};
+      worker.postMessage({t:'local.stage',id:'rainfall-defense',requestId:id});
+    });
+    await net.request('room.create',{mode:'solo',difficulty:'FUNNY'});
+    } catch(error) {worker.postMessage({t:'local.stage-cancel',requestId:id});throw error;}
+  },
   resumeButton:resume,aboutHTML:about.innerHTML.replace(/<button>.*<\/button>/,''),getLang,onLangChange,
   capabilities:()=>terminalCapabilities({mode:connection.mode,online:store.get().connection.status==='online',persistence:roomRecovery,phase:store.get().match.public?.phase}),
   async acceptRecovery(){if(!roomRecovery?.checkpoint)throw new Error('没有可确认的服务器检查点');return recoveryRequest({action:'accept',epoch:roomRecovery.epoch,revision:roomRecovery.checkpoint.revision});},
@@ -155,9 +189,9 @@ toolkit=mountToolkit({vault,replays,connection,vaultWrite,compatibility:()=>comp
   async restore(id){assertLobby();if(connection.mode!=='local')throw new Error('请先切回本地单人模式');const value=vault.list().find(s=>s.id===id)?.snapshot;if(!value)throw new Error('存档不存在');const c=saveCompatibility(value,compatibility);if(!c.ok)throw new Error(c.reason);if(store.get().me.playerId!==value.options.seats[0].playerId){sessionStorage.setItem('stronghold.personal.restore',id);location.reload();return;}await resumeCheckpoint(value);},
   async setChallenge(value){assertLobby();if(connection.mode!=='local')throw new Error('挑战工坊当前用于本地单人模式');if(!ready)throw new Error('请等待本地引擎就绪');return new Promise((resolve,reject)=>{challengePending={resolve,reject};worker.postMessage({t:'local.challenge',challenge:value});});},
   assertCanSwitch:assertLobby,
-  async pauseCombat(){const m=store.get().match.public;if(connection.mode==='local'&&m&&isCombatPhase(m.phase)&&!m.paused){const lease={runId:checkpoint?.runId,round:m.round,phase:m.phase};await net.request('g.pause',{on:true});return lease;}return null;},
-  resumeCombat(lease){const m=store.get().match.public;if(connection.mode==='local'&&m&&m.round===lease.round&&m.phase===lease.phase&&checkpoint?.runId===lease.runId&&m.paused)return net.request('g.pause',{on:false});},
-  async importHistory(){if(importedHistory)return;const existing=new Set((await replays.list()).map(r=>r.id));for(const r of loadStats().records.slice(-15)){const id=`legacy-${r.id}`;if(existing.has(id))continue;const row=selfRowOf(r),s=row?.stats || {};await replays.put({format:REPLAY_KIND,version:1,id,at:r.t || Date.now(),round:r.roundsPassed || 1,seed:r.seed,kind:'match-summary',title:`旧版整局汇总 · ${r.roundsPassed || 0} 回合`,summaryOnly:true,partial:false,frames:[],events:[],units:{},names:{},result:null,summary:{damage:s.dmgDealt ?? s.damageDealt,healing:s.healingDone ?? s.healing,deaths:s.deaths,leaks:s.leaks}});}importedHistory=true;},
+  async pauseCombat(){const m=store.get().match.public;if(connection.mode==='local'&&m&&isCombatPhase(m.phase)&&!m.paused){const lease={runId:stageRunId || checkpoint?.runId,round:m.round,phase:m.phase};await net.request('g.pause',{on:true});return lease;}return null;},
+  resumeCombat(lease){const m=store.get().match.public;if(connection.mode==='local'&&m&&m.round===lease.round&&m.phase===lease.phase&&(stageRunId || checkpoint?.runId)===lease.runId&&m.paused)return net.request('g.pause',{on:false});},
+  async importHistory(){if(importedHistory)return;const existing=new Set((await replays.list()).map(r=>r.id));for(const r of loadStats().records.slice(-15)){if(isOriginalStageRecord(r))continue;const id=`legacy-${r.id}`;if(existing.has(id))continue;const row=selfRowOf(r),s=row?.stats || {};await replays.put({format:REPLAY_KIND,version:1,id,at:r.t || Date.now(),round:r.roundsPassed || 1,seed:r.seed,kind:'match-summary',title:`旧版整局汇总 · ${r.roundsPassed || 0} 回合`,summaryOnly:true,partial:false,frames:[],events:[],units:{},names:{},result:null,summary:{damage:s.dmgDealt ?? s.damageDealt,healing:s.healingDone ?? s.healing,deaths:s.deaths,leaks:s.leaks}});}importedHistory=true;},
 });
 let autoRestoreStarted=false;
 store.subscribe(()=>{const route=selectRoute(store.get());badge.classList.toggle('in-match',route==='game');updatePersonalUI();if(route==='lobby'&&ready&&!autoRestoreStarted&&sessionStorage.getItem('stronghold.personal.restore')){autoRestoreStarted=true;const value=stagedRestore();resumeCheckpoint(value || null).catch(e=>{saveError=e.message;updatePersonalUI();}).finally(()=>sessionStorage.removeItem('stronghold.personal.restore'));}});

@@ -10,6 +10,7 @@ import { Match } from '../upstream/server/match/Match.js';
 import { captureCheckpoint, restoreCheckpoint, validateCheckpoint, checkpointCompatibility } from './checkpoint.mjs';
 import {validateChallenge,challengeViolation} from './challenges.mjs';
 import {checkpointRunId, newRunId} from './run-identity.mjs';
+import {loadOriginalStage, ORIGINAL_STAGE_ID, installStageObjective, stageResult} from './custom-stage.mjs';
 
 const DATA_FILES = [
   'config', 'chess', 'bonds', 'garrisons', 'items', 'bands', 'effects', 'choices',
@@ -20,18 +21,21 @@ const MULTIPLAYER_ONLY = new Set([
   'room.takeover', 'room.matchmake', 'room.matchmaking',
 ]);
 
-export async function createLocalServer({ emit, fetchData, data: suppliedData, now = Date.now } = {}) {
+export async function createLocalServer({ emit, fetchData, data: suppliedData, now = Date.now, loadStage = loadOriginalStage, content: suppliedContent = null, fetchIdentity } = {}) {
   if (typeof emit !== 'function') throw new TypeError('createLocalServer requires emit(message).');
   const data = suppliedData || Object.fromEntries(await Promise.all(DATA_FILES.map(async file => {
     const value = await fetchData(file);
     if (!value || typeof value !== 'object') throw new Error(`数据文件不可用：${file}.json`);
     return [file, value];
   })));
+  const content = suppliedContent || await fetchIdentity?.() || null;
+  if (content && !/^[a-f0-9]{64}$/.test(content.cs || '')) throw new Error('Invalid base content identity');
   setData(data);
   setSimData(data);
   const registry = new SessionRegistry({ now });
   let preferredIdentity = null, restoring = null, saveQueued = false, lastSaved = '', stopped = false;
   let challenge = null;
+  let originalStage = null, stageLoading = false, stageRequest = null, stageCreating = false;
   const createSession = registry.create.bind(registry);
   registry.create = name => {
     const session = createSession(name);
@@ -45,7 +49,18 @@ export async function createLocalServer({ emit, fetchData, data: suppliedData, n
   const log = { info() {}, debug() {}, warn: (...args) => console.warn(...args), error: (...args) => console.error(...args) };
   class LocalMatch {
     constructor(options) {
-      if (!restoring) {const match=new Match({...options,...(challenge?{seed:challenge.seed,difficulty:challenge.difficulty}:{})});match.personalChallenge=challenge;match.personalRunId=newRunId();return match;}
+      if (!restoring) {
+        const selected = originalStage?.descriptor;
+        setSimData(options.data);
+        const match=new Match({...options,...(selected ? {seed:selected.seed} : challenge?{seed:challenge.seed,difficulty:challenge.difficulty}:{})});
+        match.personalChallenge=selected ? null : challenge;
+        match.personalRunId=newRunId();
+        if (selected) {
+          installStageObjective(match, selected, progress => emit({t:'local.stage-progress', ...progress}));
+          emit({t:'local.stage-run', stage:selected, runId:match.personalRunId});
+        }
+        return match;
+      }
       const snapshot = { ...restoring, runId:checkpointRunId(restoring), options: { ...restoring.options, roomCode: options.roomCode } };
       const match = restoreCheckpoint(snapshot, {
         data, now, log, send: options.send, broadcast: options.broadcast, onEnd: options.onEnd,
@@ -57,7 +72,8 @@ export async function createLocalServer({ emit, fetchData, data: suppliedData, n
       return match;
     }
   }
-  const lobby = new Lobby({ registry, MatchClass: LocalMatch, getData: () => data, now, log, options: { maxRooms: 2 } });
+  const lobby = new Lobby({ registry, MatchClass: LocalMatch, getData: () => data, now, log, content,
+    plugins: {dataOf: cs => cs === originalStage?.descriptor.cs ? originalStage.data : null}, options: { maxRooms: 2 } });
   function saveSoon() {
     if (saveQueued || stopped) return;
     saveQueued = true;
@@ -66,6 +82,7 @@ export async function createLocalServer({ emit, fetchData, data: suppliedData, n
       if (stopped) return;
       const match = [...lobby.rooms.values()].find(room => room.match)?.match;
       if (!match || match.phase !== 'PREP' || match.order[0]?.ready || match._prepEndQueued) return;
+      if (match.personalStage) return; // Never overwrite the existing standard checkpoint.
       try {
         const snapshot = captureCheckpoint(match);
         const signature = JSON.stringify([snapshot.runId,snapshot.state]);
@@ -82,6 +99,7 @@ export async function createLocalServer({ emit, fetchData, data: suppliedData, n
       session = [...registry.byPlayerId.values()][0];
       if (!session || session.playerId !== snapshot.options.seats[0].playerId) throw new Error('存档身份不匹配，请重新打开页面。');
       if (lobby.roomOf(session)?.match) throw new Error('请先离开当前模拟。');
+      originalStage = null; setSimData(data); emit({t:'local.stage-cleared'});
       const created = lobby.create(session, { mode: 'solo', difficulty: snapshot.options.difficulty });
       if (!created.ok) throw new Error(created.detail || created.error);
       createdRoom=lobby.roomOf(session);
@@ -97,6 +115,13 @@ export async function createLocalServer({ emit, fetchData, data: suppliedData, n
     } catch (error) {if(createdRoom&&lobby.roomOf(session)===createdRoom)lobby.leave(session);emit({ t: 'local.restore-error',requestId,message: error.message }); }
     finally { restoring = null; }
   }
+  function finishStageDeparture(result) {
+    if (result?.ok && originalStage) {
+      originalStage = null; setSimData(data);
+      emit({t:'local.stage-cleared'});
+    }
+    return result;
+  }
   const handler = {
     onHello: (...args) => lobby.onHello(...args),
     onDisconnect: (...args) => lobby.onDisconnect(...args),
@@ -109,6 +134,23 @@ export async function createLocalServer({ emit, fetchData, data: suppliedData, n
       return lobby.routeGame(session,message);
     },
     onMessage(session, message) {
+      if (stageLoading && message.t === 'room.create') return {error:'BAD_MSG',detail:'原创关卡仍在加载，请稍候'};
+      if (originalStage && ['room.setDifficulty','room.setMode','room.proposeVersion','room.setPlugins','room.rerollSetup'].includes(message.t)) return {error:'BAD_MSG',detail:'原创关卡使用独立固定配置；离开房间后可返回标准模式'};
+      if (originalStage && message.t === 'room.create') {
+        if (message.mode !== 'solo') return {error:'BAD_MSG',detail:'原创关卡仅支持本地单人'};
+        let result;
+        stageCreating = true;
+        try {result = lobby.onMessage(session, {...message, difficulty:'FUNNY', version:'act2autochess'});}
+        finally {stageCreating = false;}
+        const room = lobby.roomOf(session), d = originalStage.descriptor;
+        if (result?.ok && room && !room.match) {
+          room.content = Object.freeze({cs:d.cs, vanilla:false, plugins:[d.plugin], modeId:d.modeId,
+            modes:[{id:d.modeId,type:'SINGLE',difficulty:'FUNNY',name:d.name.zh}]});
+          room.personalStage = d;
+          lobby.broadcastState(room);
+        }
+        return result;
+      }
       if(challenge&&message.t==='room.create')message={...message,difficulty:challenge.difficulty};
       if(challenge&&message.t==='room.setDifficulty')return {error:'BAD_MSG',detail:'请在挑战工坊中设置挑战难度'};
       const match=lobby.roomOf(session)?.match;
@@ -117,7 +159,10 @@ export async function createLocalServer({ emit, fetchData, data: suppliedData, n
       if (MULTIPLAYER_ONLY.has(message.t) || (message.t === 'room.create' && message.mode !== 'solo') || (message.t === 'room.setMode' && message.mode !== 'solo')) {
         return { error: 'BAD_MSG', detail: '个人站点仅支持独立模拟，不提供联机房间。' };
       }
-      return lobby.onMessage(session, message);
+      const result = lobby.onMessage(session, message);
+      // The abandon button sends g.leave first; the next room.leave is already
+      // NOT_IN_ROOM. Custom-content queues can also return an async answer.
+      return ['g.leave','room.leave'].includes(message.t) ? Promise.resolve(result).then(finishStageDeparture) : result;
     },
   };
   const network = new Network({ registry, handler, now, log, options: { maxConnections: 1, maxOnline: 1, helloTimeoutMs: 120000 } });
@@ -127,12 +172,15 @@ export async function createLocalServer({ emit, fetchData, data: suppliedData, n
       readyState: 1, bufferedAmount: 0,
       on(type, listener) { if (!listeners.has(type)) listeners.set(type, []); listeners.get(type).push(listener); },
       send(raw) {
-        const message = JSON.parse(raw);
+        let message = JSON.parse(raw);
+        if (stageCreating && message.t === 'room.state') return;
         const activeMatch=[...lobby.rooms.values()].find(room=>room.match)?.match;
+        const activeStage = activeMatch?.personalStage || [...lobby.rooms.values()].find(room=>room.personalStage)?.personalStage;
+        if (activeStage) message = stageResult(message, activeStage);
         const activeChallenge=activeMatch?.personalChallenge;
         if(message.t==='m.result' && activeChallenge){message.test=true;message.personalChallenge=activeChallenge;}
         emit(message);
-        if (message.t === 'm.result') { lastSaved = ''; emit({ t: 'local.clear-checkpoint',runId:activeMatch?.personalRunId,restoreRequestId:activeMatch?.personalRestoreRequestId }); }
+        if (message.t === 'm.result' && !activeStage) { lastSaved = ''; emit({ t: 'local.clear-checkpoint',runId:activeMatch?.personalRunId,restoreRequestId:activeMatch?.personalRestoreRequestId }); }
         saveSoon();
       },
       ping() { for (const fn of listeners.get('pong') || []) fn(); },
@@ -157,8 +205,31 @@ export async function createLocalServer({ emit, fetchData, data: suppliedData, n
         return;
       }
       if (message.t === 'local.restore') { restore(message.snapshot,message.requestId); return; }
+      if (message.t === 'local.stage-cancel') {
+        if (message.requestId === stageRequest && !lobby.rooms.size) {
+          stageRequest = null; originalStage = null; stageLoading = false;
+          emit({t:'local.stage-cleared'});
+        }
+        return;
+      }
+      if (message.t === 'local.stage') {
+        if (stageLoading || [...lobby.rooms.values()].some(r => r.seats.some(Boolean))) {
+          emit({t:'local.stage-error',message:'请先离开当前房间',requestId:message.requestId}); return;
+        }
+        if (message.id !== ORIGINAL_STAGE_ID) { emit({t:'local.stage-error',message:'未知原创关卡',requestId:message.requestId}); return; }
+        stageLoading = true;
+        stageRequest = message.requestId;
+        Promise.resolve().then(() => loadStage()).then(value => {
+          if (stopped || stageRequest !== message.requestId) return;
+          originalStage = value;
+          emit({t:'local.stage-set',stage:value.descriptor,requestId:message.requestId});
+        }).catch(error => {if(stageRequest === message.requestId) emit({t:'local.stage-error',message:error.message,requestId:message.requestId});})
+          .finally(() => {if(stageRequest === message.requestId) stageLoading = false;});
+        return;
+      }
       if (message.t === 'local.challenge') {
         try {
+          if (stageLoading || originalStage) throw new Error('请先离开原创关卡房间');
           if([...lobby.rooms.values()].some(r=>r.match))throw new Error('请先离开当前对局再切换挑战');
           challenge=message.challenge ? validateChallenge(message.challenge,data.chess) : null;
           emit({t:'local.challenge-set',challenge});
@@ -206,6 +277,11 @@ if (typeof self !== 'undefined' && typeof WorkerGlobalScope !== 'undefined' && s
   };
   createLocalServer({
     emit: message => self.postMessage(message),
+    fetchIdentity: async () => {
+      const response = await fetch('/personal/content-identity.json');
+      if (!response.ok) throw new Error('Base content identity unavailable');
+      return response.json();
+    },
     fetchData: async file => {
       const response = await fetch(`/data/${file}.json`);
       if (!response.ok) throw new Error(`读取 ${file}.json 失败（${response.status}）`);

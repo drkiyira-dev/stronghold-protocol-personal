@@ -12,6 +12,7 @@ export const REQUIRED_FILES=[
   ...VENDOR_FILES.map(([,name])=>'vendor/'+name),
   'index.html','sw.js','data/assets.json','data/local-assets.json',
   'personal/build-info.json','personal/external-assets.json','personal/scene-import.json',
+  'personal/content-identity.json','personal/stages/rainfall-defense.json','personal/custom-stage-ui.mjs',
   'LICENSE','NOTICE.md','THIRD-PARTY-NOTICES.md','upstream/LICENSE',
   'upstream/NOTICE.md','upstream/THIRD-PARTY-NOTICES.md','licenses/README.md',
 ];

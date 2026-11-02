@@ -16,7 +16,7 @@ export async function buildIdentity({read=path=>readFile(new URL(path,root)),loc
     rows.push([path,actual]);
   }
   const group=prefix=>hash(JSON.stringify(rows.filter(([p])=>prefix.some(s=>p.startsWith(s)))));
-  const adapters=['checkpoint.mjs','room-checkpoint.mjs','local-server.mjs','room-recovery.mjs','challenges.mjs','build-worker.mjs',
+  const adapters=['checkpoint.mjs','room-checkpoint.mjs','local-server.mjs','room-recovery.mjs','challenges.mjs','custom-stage.mjs','build-worker.mjs',
     ...(await readdir(new URL('personal/shims/',root))).filter(p=>p.endsWith('.mjs')).map(p=>'shims/'+p)].sort();
   const adapterHash=hash(JSON.stringify(await Promise.all(adapters.map(async p=>[p,hash(await read('personal/'+p))]))));
   const upstreamEngineHash=group(['upstream/server/','upstream/shared/']);
