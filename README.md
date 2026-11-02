@@ -83,6 +83,10 @@ See **[setup, saves, coach, challenges and Mods](docs/PERSONAL.md)** ([中文](d
 - `personal/examples/`: importable challenge packages and a data-only Mod example.
 - `dist/`: generated output, not committed. Historical asset-cache scripts are optional maintenance tools and are no longer required by the build.
 
+## Original-stage development preview
+
+**[Rainfall Defense — 雨夜防线](docs/V15-RAINFALL-DEFENSE.md)** is an unofficial three-assault challenge, reached through Tactical terminal → Challenges. It reuses upstream content plugins, pathfinding and combat; the standard map pool is unchanged. Custom saves are disabled and standard checkpoints are retained. This branch does not deploy or change the Public v14 site. See the [acceptance record](docs/V15-ACCEPTANCE.md) for measured coverage and remaining checks.
+
 ## Verification
 
 ```sh

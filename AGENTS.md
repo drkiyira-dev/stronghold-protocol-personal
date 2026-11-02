@@ -13,3 +13,9 @@ Only add it when Codex actually contributed to the committed changes. Do not add
 Before committing, check the author identity with `git var GIT_AUTHOR_IDENT`. This repository's maintainer identity is `drkiyira-dev <289399102+drkiyira-dev@users.noreply.github.com>`. Use repository-local configuration; do not change the user's global identity.
 
 Keep the English README primary and maintain its Chinese companion. Document PREP-only saves, self-hosted multiplayer requirements, and the distinction between local rule analysis and optional model advice accurately. See CONTRIBUTING.md for verified attribution references.
+
+## Local acceptance resource limits
+
+- Inventory browser windows before starting a test. Keep at most **four** browser windows open; prefer one test window and reuse it. Close only task-owned QA windows. If the limit cannot be met without interrupting the maintainer's windows, do not open another window.
+- Run local tests serially. Do not overlap native browser play, headless browser suites, builds or engine simulations. Stop rendering or close task-owned test pages when finished.
+- Monitor CPU and memory using available read-only system metrics. Pause testing when resource pressure or thermal throttling appears. If a counter is unavailable, state that limitation; never invent temperature or utilization figures.

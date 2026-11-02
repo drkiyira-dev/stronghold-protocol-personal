@@ -1,0 +1,468 @@
+{
+  "kind": "automated-browser",
+  "manualAcceptance": false,
+  "externalAssets": "blocked",
+  "checks": [
+    "Abandon button clears original-stage selection and restores standard mode without changing the save",
+    "UI entry, data-only content handshake and accurate three-assault briefing",
+    "Low quality and static mode remove optional environment geometry",
+    "Three real browser battles, victory, zero leaks, preserved standard save, replay/coach provenance and unofficial statistics isolation",
+    "Empty defence loses, reload retains only the original standard save, standard nine-round mode remains available"
+  ],
+  "before": {
+    "fps": 60.8,
+    "frameMs": 16.46,
+    "cpuMs": 0.69,
+    "renderMs": 0.62,
+    "mode": "prep",
+    "units": 2,
+    "impostor": 0,
+    "impostorAtlas": {
+      "pages": 0,
+      "slots": 0,
+      "drawn": 0,
+      "full": 0
+    },
+    "boardArt": false,
+    "board3d": {
+      "on": false,
+      "error": null,
+      "recovering": false,
+      "losses": 0
+    },
+    "pen": 8,
+    "penHidden": false,
+    "prepField": null,
+    "lod": 0,
+    "culled": 0,
+    "particles": 21,
+    "projectiles": 0,
+    "numbers": 0,
+    "rings": 3,
+    "auras": 0,
+    "locks": 0,
+    "flames": 0,
+    "promotions": 0,
+    "officialFx": {
+      "tier": "off",
+      "available": false,
+      "effects": 0,
+      "pending": 0,
+      "particles": 0,
+      "reused": 0,
+      "systems": 0,
+      "dropped": 0,
+      "draws": 0,
+      "programs": 0,
+      "textures": 0,
+      "texMB": 0
+    },
+    "spine": {
+      "size": 3,
+      "ready": 0,
+      "loading": 0,
+      "failed": 3,
+      "refs": 0,
+      "holds": 0,
+      "weight": 0,
+      "idleWeight": 0,
+      "active": 0,
+      "queued": 0,
+      "unloading": 0
+    },
+    "renderT": null,
+    "rate": 2,
+    "buffered": 0,
+    "camera": {
+      "tx": 5.17,
+      "ty": 9.169042188333368,
+      "tz": 0,
+      "tilt": 30,
+      "dist": 14.39141771000007,
+      "scale": 85.90987098480753,
+      "cx": 720,
+      "cy": 450
+    },
+    "combatFeedback": {
+      "active": 2,
+      "budget": 4,
+      "counts": {
+        "deploy": 2,
+        "move": 0,
+        "retreat": 0,
+        "skill": 0
+      },
+      "error": null
+    },
+    "environment": {
+      "profile": "rain",
+      "active": true,
+      "tier": "high",
+      "meshes": 22,
+      "budget": 24,
+      "clock": 4.435000000000003,
+      "official": false,
+      "extraTextures": 0,
+      "extraContexts": 0,
+      "error": null
+    }
+  },
+  "performance": {
+    "viewport": "1440x900 DPR 1",
+    "kind": "headless Chrome, preparation only",
+    "high": {
+      "samples": 120,
+      "fps": 60.00249999999995,
+      "frameMs": 16.66658333333335,
+      "optionalMeshes": 22,
+      "mainHeapBytes": 73117834
+    },
+    "static": {
+      "samples": 120,
+      "fps": 60.004999999999924,
+      "frameMs": 16.665500000000023,
+      "optionalMeshes": 0,
+      "mainHeapBytes": 90192686
+    }
+  },
+  "victory": {
+    "victory": true,
+    "roundsPassed": 3,
+    "hiddenReached": false,
+    "hiddenCleared": false,
+    "reason": "victory",
+    "teamLp": null,
+    "modeId": "mode_x_rainfall_defense_patrol",
+    "difficulty": "FUNNY",
+    "stageId": "stage_x_rainfall_defense_yard",
+    "bossId": null,
+    "hiddenBossId": null,
+    "seed": 20261102,
+    "durationMs": 78188,
+    "players": [
+      {
+        "playerId": "p_8ecda1d0e3",
+        "seat": 0,
+        "name": "V15Auto",
+        "isBot": false,
+        "left": false,
+        "alive": true,
+        "victory": true,
+        "roundsPassed": 3,
+        "creditedKills": 34,
+        "eliminatedRound": null,
+        "lp": 45,
+        "bandId": "band_sarkazb",
+        "lineup": [
+          {
+            "id": "chess_char_1_03_a",
+            "golden": false,
+            "tier": 1,
+            "row": 11,
+            "col": 3,
+            "items": []
+          },
+          {
+            "id": "chess_char_1_12_a",
+            "golden": false,
+            "tier": 1,
+            "row": 11,
+            "col": 4,
+            "items": []
+          },
+          {
+            "id": "chess_char_1_01_a",
+            "golden": false,
+            "tier": 1,
+            "row": 10,
+            "col": 5,
+            "items": []
+          },
+          {
+            "id": "chess_char_1_13_b",
+            "golden": true,
+            "tier": 1,
+            "row": 10,
+            "col": 6,
+            "items": []
+          },
+          {
+            "id": "chess_char_1_07_a",
+            "golden": false,
+            "tier": 1,
+            "row": 9,
+            "col": 6,
+            "items": []
+          }
+        ],
+        "bonds": [
+          {
+            "bondId": "sargonShip",
+            "count": 1,
+            "active": false,
+            "tier": 0,
+            "layers": 2
+          },
+          {
+            "bondId": "yanShip",
+            "count": 1,
+            "active": false,
+            "tier": 0,
+            "layers": 1
+          }
+        ],
+        "stats": {
+          "dmgDealt": 28463,
+          "kills": 34,
+          "leaks": 0,
+          "gold": 14,
+          "refreshes": 0,
+          "merges": 1,
+          "itemsEquipped": 0,
+          "bossDamage": 0,
+          "activatedLayers": 0,
+          "lpLost": 0,
+          "perfectRounds": 3
+        },
+        "title": {
+          "id": "comment_3",
+          "name": "坚若磐石",
+          "picId": "comment_icon_3",
+          "text": "目标生命值损失最少"
+        },
+        "trophies": 0,
+        "reward": 0
+      }
+    ],
+    "playerId": "p_8ecda1d0e3",
+    "personalStage": {
+      "format": "stronghold-original-stage",
+      "version": 1,
+      "id": "rainfall-defense",
+      "name": {
+        "zh": "雨夜防线",
+        "en": "Rainfall Defense"
+      },
+      "release": "0.1.0",
+      "seed": 20261102,
+      "modeId": "mode_x_rainfall_defense_patrol",
+      "stageId": "stage_x_rainfall_defense_yard",
+      "compatibleVersions": [
+        "act2autochess"
+      ],
+      "rounds": 3,
+      "maxLeaks": 4,
+      "savePolicy": "disabled",
+      "environment": {
+        "kind": "rain",
+        "tint": "#86bacb",
+        "maxParticles": 24
+      },
+      "description": {
+        "zh": "守住夜间工业设施。两条进攻路线在中部汇流，可选择前沿分守或纵深集中。完成三轮进攻且累计漏敌不超过 4；生命耗尽或漏敌超过 4 即失败。",
+        "en": "Hold the industrial perimeter at night. Split your frontline or defend the shared junction. Complete three assaults with at most 4 total leaks; exceeding 4 leaks or losing all HP is defeat."
+      },
+      "cs": "66dac2f2b235a321210a903c710c468f87a69c6a6fa44519ad6c6e0454b2489f",
+      "plugin": {
+        "id": "rainfall-defense",
+        "version": "0.1.0",
+        "class": "content",
+        "hash": "52571b83420d93cd323b56f70dfad8da75bdef1f184a2474c7ba1f4304a9172d",
+        "unofficial": true
+      }
+    }
+  },
+  "replays": [
+    {
+      "round": 1,
+      "provenance": {
+        "source": "client-simulator",
+        "engineHash": "6ba30593d66feac4bbdc5325faee889a5f016e74ac41015d9095458d805f5aba",
+        "dataHash": "66dac2f2b235a321210a903c710c468f87a69c6a6fa44519ad6c6e0454b2489f",
+        "cs": "66dac2f2b235a321210a903c710c468f87a69c6a6fa44519ad6c6e0454b2489f",
+        "runId": "run_e3efc76f21b4085b3087d6c649eb3547",
+        "scenario": {
+          "mode": "mode_x_rainfall_defense_patrol",
+          "difficulty": "FUNNY",
+          "stageId": "stage_x_rainfall_defense_yard",
+          "originalStage": "rainfall-defense",
+          "version": "0.1.0"
+        }
+      },
+      "frames": 27,
+      "events": 12,
+      "quality": {
+        "version": 1,
+        "resultReceived": true,
+        "truncated": false,
+        "gaps": [],
+        "dropped": {
+          "frames": 0,
+          "events": 0,
+          "frameUnits": 0,
+          "unitMetadata": 0
+        }
+      },
+      "damage": 3300,
+      "leaks": 0
+    },
+    {
+      "round": 3,
+      "provenance": {
+        "source": "client-simulator",
+        "engineHash": "6ba30593d66feac4bbdc5325faee889a5f016e74ac41015d9095458d805f5aba",
+        "dataHash": "66dac2f2b235a321210a903c710c468f87a69c6a6fa44519ad6c6e0454b2489f",
+        "cs": "66dac2f2b235a321210a903c710c468f87a69c6a6fa44519ad6c6e0454b2489f",
+        "runId": "run_e3efc76f21b4085b3087d6c649eb3547",
+        "scenario": {
+          "mode": "mode_x_rainfall_defense_patrol",
+          "difficulty": "FUNNY",
+          "stageId": "stage_x_rainfall_defense_yard",
+          "originalStage": "rainfall-defense",
+          "version": "0.1.0"
+        }
+      },
+      "frames": 42,
+      "events": 23,
+      "quality": {
+        "version": 1,
+        "resultReceived": true,
+        "truncated": false,
+        "gaps": [],
+        "dropped": {
+          "frames": 0,
+          "events": 0,
+          "frameUnits": 0,
+          "unitMetadata": 0
+        }
+      },
+      "damage": 16763,
+      "leaks": 0
+    },
+    {
+      "round": 2,
+      "provenance": {
+        "source": "client-simulator",
+        "engineHash": "6ba30593d66feac4bbdc5325faee889a5f016e74ac41015d9095458d805f5aba",
+        "dataHash": "66dac2f2b235a321210a903c710c468f87a69c6a6fa44519ad6c6e0454b2489f",
+        "cs": "66dac2f2b235a321210a903c710c468f87a69c6a6fa44519ad6c6e0454b2489f",
+        "runId": "run_e3efc76f21b4085b3087d6c649eb3547",
+        "scenario": {
+          "mode": "mode_x_rainfall_defense_patrol",
+          "difficulty": "FUNNY",
+          "stageId": "stage_x_rainfall_defense_yard",
+          "originalStage": "rainfall-defense",
+          "version": "0.1.0"
+        }
+      },
+      "frames": 31,
+      "events": 19,
+      "quality": {
+        "version": 1,
+        "resultReceived": true,
+        "truncated": false,
+        "gaps": [],
+        "dropped": {
+          "frames": 0,
+          "events": 0,
+          "frameUnits": 0,
+          "unitMetadata": 0
+        }
+      },
+      "damage": 8400,
+      "leaks": 0
+    }
+  ],
+  "defeat": {
+    "victory": false,
+    "roundsPassed": 0,
+    "hiddenReached": false,
+    "hiddenCleared": false,
+    "reason": "defeat",
+    "teamLp": null,
+    "modeId": "mode_x_rainfall_defense_patrol",
+    "difficulty": "FUNNY",
+    "stageId": "stage_x_rainfall_defense_yard",
+    "bossId": null,
+    "hiddenBossId": null,
+    "seed": 20261102,
+    "durationMs": 30438,
+    "players": [
+      {
+        "playerId": "p_8ecda1d0e3",
+        "seat": 0,
+        "name": "V15Auto",
+        "isBot": false,
+        "left": false,
+        "alive": true,
+        "victory": false,
+        "roundsPassed": 0,
+        "creditedKills": 0,
+        "eliminatedRound": null,
+        "lp": 37,
+        "bandId": "band_sarkazb",
+        "lineup": [],
+        "bonds": [],
+        "stats": {
+          "dmgDealt": 0,
+          "kills": 0,
+          "leaks": 8,
+          "gold": 0,
+          "refreshes": 0,
+          "merges": 0,
+          "itemsEquipped": 0,
+          "bossDamage": 0,
+          "activatedLayers": 0,
+          "lpLost": 8,
+          "perfectRounds": 0
+        },
+        "title": {
+          "id": "comment_3",
+          "name": "坚若磐石",
+          "picId": "comment_icon_3",
+          "text": "目标生命值损失最少"
+        },
+        "trophies": 0,
+        "reward": 0
+      }
+    ],
+    "playerId": "p_8ecda1d0e3",
+    "personalStage": {
+      "format": "stronghold-original-stage",
+      "version": 1,
+      "id": "rainfall-defense",
+      "name": {
+        "zh": "雨夜防线",
+        "en": "Rainfall Defense"
+      },
+      "release": "0.1.0",
+      "seed": 20261102,
+      "modeId": "mode_x_rainfall_defense_patrol",
+      "stageId": "stage_x_rainfall_defense_yard",
+      "compatibleVersions": [
+        "act2autochess"
+      ],
+      "rounds": 3,
+      "maxLeaks": 4,
+      "savePolicy": "disabled",
+      "environment": {
+        "kind": "rain",
+        "tint": "#86bacb",
+        "maxParticles": 24
+      },
+      "description": {
+        "zh": "守住夜间工业设施。两条进攻路线在中部汇流，可选择前沿分守或纵深集中。完成三轮进攻且累计漏敌不超过 4；生命耗尽或漏敌超过 4 即失败。",
+        "en": "Hold the industrial perimeter at night. Split your frontline or defend the shared junction. Complete three assaults with at most 4 total leaks; exceeding 4 leaks or losing all HP is defeat."
+      },
+      "cs": "66dac2f2b235a321210a903c710c468f87a69c6a6fa44519ad6c6e0454b2489f",
+      "plugin": {
+        "id": "rainfall-defense",
+        "version": "0.1.0",
+        "class": "content",
+        "hash": "52571b83420d93cd323b56f70dfad8da75bdef1f184a2474c7ba1f4304a9172d",
+        "unofficial": true
+      }
+    }
+  },
+  "pageErrors": []
+}

@@ -83,6 +83,10 @@ npm run server
 - `personal/examples/`：可导入的挑战配置与纯数据 Mod 示例。
 - `dist/`：生成结果，不提交 Git；旧素材缓存脚本仅作为可选维护工具保留，构建不再要求执行。
 
+## 原创关卡开发预览
+
+**[雨夜防线 / Rainfall Defense](docs/V15-RAINFALL-DEFENSE.zh-CN.md)** 是三轮制的非官方原创挑战，从「战术终端 → 自定义挑战」进入。复用上游插件、寻路和战斗；标准地图池不变。本关禁用存档，原版休整检查点保留。本分支不部署、不改变 Public v14 站点；实际覆盖与待验项目见[验收记录](docs/V15-ACCEPTANCE.md)。
+
 ## 验证
 
 ```sh
