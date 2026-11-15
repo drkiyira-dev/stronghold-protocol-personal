@@ -2,6 +2,8 @@
 
 Status: reviewable prototype; local verification completed on **2026-11-02**. **Not approved for deployment**. Public Sites v14 is unchanged.
 
+Later verification: [2026-11-15 native Safari follow-up and loading fix](V15-SAFARI-FOLLOWUP.md) ([中文](V15-SAFARI-FOLLOWUP.zh-CN.md)). The dated report below is preserved as historical evidence.
+
 Base main: `2818c1329a4dd6e9e6165d2ea976440d85b78b8f`. Branch: `feat/v15-custom-stage`. Tests and browser interaction are Codex-assisted engineering acceptance, not community/player acceptance.
 
 Implementation commit: `fbc4c4053ceb1f3e883d2cbfef38bc2388f5fbe9` (the tested code; the subsequent documentation commit adds this report, evidence and the window-limit policy).

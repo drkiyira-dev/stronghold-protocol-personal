@@ -3,6 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readFile } from 'node:fs/promises';
 import {replaceContract} from './build-identity.mjs';
+import {checkedContentPlugin} from './checked-content-build.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const shims = path.join(here, 'shims');
@@ -39,6 +40,6 @@ const result = await build({
   format: 'esm', platform: 'browser', target: 'es2022', minify: false, sourcemap: false,
   define: { 'process.env': '{}', 'process.versions.node': 'undefined' },
   banner: { js: 'globalThis.setImmediate ||= (fn, ...args) => setTimeout(fn, 0, ...args);\nvar Buffer = { byteLength: value => new TextEncoder().encode(String(value)).byteLength };' },
-  plugins: [aliases], metafile: true, legalComments: 'inline',
+  plugins: [checkedContentPlugin, aliases], metafile: true, legalComments: 'inline',
 });
 console.log(JSON.stringify({ outfile, bytes: result.metafile.outputs[Object.keys(result.metafile.outputs)[0]].bytes, modules: Object.keys(result.metafile.inputs).length }));
