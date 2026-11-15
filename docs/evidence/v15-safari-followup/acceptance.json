@@ -1,0 +1,532 @@
+{
+  "date": "2026-11-15",
+  "kind": "native-Safari-WebDriver-engineering-acceptance",
+  "manualPlayerAcceptance": false,
+  "baseCommit": "50359b9c65e9cb92ab54622aaa749d7940aa6263",
+  "implementationCommit": "8e39f3464bbb2a01b659ad941ade9f6c6b6c54cb",
+  "browser": "Safari 26.6 (21624.4.5.11.5)",
+  "os": "macOS 26.6 (25G72)",
+  "viewport": {
+    "width": 1280,
+    "height": 848,
+    "dpr": 2
+  },
+  "quality": "low",
+  "motion": false,
+  "muted": true,
+  "externalAssets": "intentionally blocked by local QA CSP",
+  "input": {
+    "navigation": "native trusted keyboard Enter",
+    "purchaseAndDeployment": "normal net.request g.buy/g.move, no state/result fabrication",
+    "nativeMouseDrag": "unverified; WebDriver mouse events not delivered"
+  },
+  "baseBuild": {
+    "brief": {
+      "text": "BRIEFING\n雨夜防线 RD-01\n守住夜间工业设施。两条进攻路线在中部汇流，可选择前沿分守或纵深集中。完成三轮进攻且累计漏敌不超过 4；生命耗尽或漏敌超过 4 即失败。\n\n非官方原创关卡 · 固定种子 20261102\n守过 3 轮，累计漏敌不超过 4 且生命未耗尽。\n本关不存档，标准存档保留；不发放原版奖励。\n共 3 回合\n独立模拟中休整期与机变阶段不限时\n",
+      "hidden": false
+    },
+    "deployment": {
+      "phase": "PREP",
+      "stage": "stage_x_rainfall_defense_yard",
+      "stats": {
+        "prepField": null,
+        "locks": 0,
+        "lod": 0,
+        "culled": 0,
+        "renderT": null,
+        "impostor": 0,
+        "projectiles": 0,
+        "pen": 8,
+        "numbers": 0,
+        "fps": 57.3,
+        "frameMs": 17.44,
+        "rings": 2,
+        "renderMs": 1.26,
+        "officialFx": {
+          "draws": 0,
+          "particles": 0,
+          "programs": 0,
+          "effects": 0,
+          "tier": "off",
+          "pending": 0,
+          "textures": 0,
+          "systems": 0,
+          "dropped": 0,
+          "available": false,
+          "reused": 0,
+          "texMB": 0
+        },
+        "particles": 8,
+        "auras": 0,
+        "units": 2,
+        "cpuMs": 0.39,
+        "promotions": 0,
+        "spine": {
+          "failed": 3,
+          "weight": 0,
+          "active": 0,
+          "queued": 0,
+          "idleWeight": 0,
+          "loading": 0,
+          "size": 3,
+          "refs": 0,
+          "holds": 0,
+          "unloading": 0,
+          "ready": 0
+        },
+        "impostorAtlas": {
+          "slots": 0,
+          "pages": 0,
+          "full": 0,
+          "drawn": 0
+        },
+        "flames": 0,
+        "buffered": 0,
+        "camera": {
+          "tz": 0,
+          "dist": 15.03805001149245,
+          "tx": 5.17,
+          "cy": 424,
+          "ty": 9.212358339079557,
+          "tilt": 30,
+          "cx": 640,
+          "scale": 77.46552411772079
+        },
+        "environment": {
+          "active": false,
+          "meshes": 0,
+          "budget": 0,
+          "official": false,
+          "extraTextures": 0,
+          "extraContexts": 0,
+          "tier": "low",
+          "profile": "rain",
+          "clock": 0,
+          "error": null
+        },
+        "boardArt": false,
+        "rate": 2,
+        "penHidden": false,
+        "combatFeedback": {
+          "active": 0,
+          "counts": {
+            "retreat": 0,
+            "skill": 0,
+            "deploy": 0,
+            "move": 0
+          },
+          "budget": 0,
+          "error": null
+        },
+        "mode": "prep",
+        "board3d": {
+          "losses": 0,
+          "recovering": false,
+          "on": false,
+          "error": null
+        }
+      },
+      "round": 1,
+      "save": "非官方原创 · 雨夜防线 · 累计漏敌 0/4 · 本关不存档，标准存档保留",
+      "board": [
+        {
+          "golden": false,
+          "uid": 2,
+          "row": 10,
+          "id": "chess_char_1_01_a",
+          "col": 5,
+          "count": 1,
+          "tier": 1,
+          "ownerUid": null,
+          "kind": "chess",
+          "dir": "RIGHT",
+          "items": []
+        },
+        {
+          "golden": false,
+          "uid": 1,
+          "row": 10,
+          "id": "chess_char_1_13_a",
+          "col": 6,
+          "count": 1,
+          "tier": 1,
+          "ownerUid": null,
+          "kind": "chess",
+          "dir": "RIGHT",
+          "items": []
+        }
+      ]
+    },
+    "battle": {
+      "phase": "COMBAT",
+      "battle": {
+        "speed": 2,
+        "paused": false,
+        "fieldId": "n:p_363155831b",
+        "members": [
+          "p_363155831b"
+        ],
+        "authoritative": true,
+        "bondLayers": {},
+        "battleId": "c29ke-1.1.1.n:p_363155831b",
+        "watch": false,
+        "done": false,
+        "own": true,
+        "uniteLeft": null,
+        "kind": "normal",
+        "loading": false,
+        "leaks": {
+          "n:p_363155831b": 0
+        }
+      },
+      "round": 1,
+      "stats": {
+        "prepField": null,
+        "locks": 0,
+        "lod": 0,
+        "culled": 0,
+        "renderT": 8.065023003905262,
+        "impostor": 0,
+        "projectiles": 0,
+        "pen": 0,
+        "numbers": 0,
+        "fps": 60.1,
+        "frameMs": 16.65,
+        "rings": 0,
+        "renderMs": 0.44,
+        "officialFx": {
+          "draws": 0,
+          "particles": 0,
+          "programs": 0,
+          "effects": 0,
+          "tier": "off",
+          "pending": 0,
+          "textures": 0,
+          "systems": 0,
+          "dropped": 0,
+          "available": false,
+          "reused": 0,
+          "texMB": 0
+        },
+        "particles": 2,
+        "auras": 0,
+        "units": 4,
+        "cpuMs": 0.78,
+        "promotions": 0,
+        "spine": {
+          "failed": 3,
+          "weight": 0,
+          "active": 0,
+          "queued": 0,
+          "idleWeight": 0,
+          "loading": 0,
+          "size": 3,
+          "refs": 0,
+          "holds": 1,
+          "unloading": 0,
+          "ready": 0
+        },
+        "impostorAtlas": {
+          "slots": 0,
+          "pages": 0,
+          "full": 0,
+          "drawn": 0
+        },
+        "flames": 0,
+        "buffered": 152,
+        "camera": {
+          "tz": 0,
+          "dist": 11.377649304830223,
+          "tx": 6,
+          "cy": 424,
+          "ty": 11.042157985748442,
+          "tilt": 30,
+          "cx": 640,
+          "scale": 102.38761932609442
+        },
+        "environment": {
+          "active": false,
+          "meshes": 0,
+          "budget": 0,
+          "official": false,
+          "extraTextures": 0,
+          "extraContexts": 0,
+          "tier": "low",
+          "profile": "rain",
+          "clock": 0,
+          "error": null
+        },
+        "boardArt": false,
+        "rate": 2.00003891230308,
+        "penHidden": true,
+        "combatFeedback": {
+          "active": 0,
+          "counts": {
+            "retreat": 0,
+            "skill": 0,
+            "deploy": 0,
+            "move": 0
+          },
+          "budget": 0,
+          "error": null
+        },
+        "mode": "battle",
+        "board3d": {
+          "losses": 0,
+          "recovering": false,
+          "on": false,
+          "error": null
+        }
+      }
+    },
+    "nextPreparation": {
+      "phase": "PREP",
+      "life": 45,
+      "status": "非官方原创 · 雨夜防线 · 累计漏敌 0/4 · 本关不存档，标准存档保留",
+      "round": 2,
+      "board": [
+        {
+          "golden": false,
+          "uid": 2,
+          "row": 10,
+          "id": "chess_char_1_01_a",
+          "col": 5,
+          "count": 1,
+          "tier": 1,
+          "ownerUid": null,
+          "kind": "chess",
+          "dir": "RIGHT",
+          "items": []
+        },
+        {
+          "golden": false,
+          "uid": 1,
+          "row": 10,
+          "id": "chess_char_1_13_a",
+          "col": 6,
+          "count": 1,
+          "tier": 1,
+          "ownerUid": null,
+          "kind": "chess",
+          "dir": "RIGHT",
+          "items": []
+        }
+      ]
+    },
+    "replay": [
+      {
+        "round": 1,
+        "provenance": {
+          "runId": "run_9637985b183081626e14fb59bd07b3fb",
+          "scenario": {
+            "difficulty": "FUNNY",
+            "originalStage": "rainfall-defense",
+            "stageId": "stage_x_rainfall_defense_yard",
+            "mode": "mode_x_rainfall_defense_patrol",
+            "version": "0.1.0"
+          },
+          "source": "client-simulator",
+          "dataHash": "66dac2f2b235a321210a903c710c468f87a69c6a6fa44519ad6c6e0454b2489f",
+          "engineHash": "6ba30593d66feac4bbdc5325faee889a5f016e74ac41015d9095458d805f5aba",
+          "cs": "66dac2f2b235a321210a903c710c468f87a69c6a6fa44519ad6c6e0454b2489f"
+        },
+        "frames": 27,
+        "events": 12,
+        "quality": {
+          "gaps": [],
+          "version": 1,
+          "resultReceived": true,
+          "truncated": false,
+          "dropped": {
+            "frameUnits": 0,
+            "unitMetadata": 0,
+            "events": 0,
+            "frames": 0
+          }
+        },
+        "totals": {
+          "damage": 3300,
+          "healing": 0,
+          "deaths": 0,
+          "leaks": 0
+        }
+      }
+    ],
+    "standardVaultUnchangedAfterStage": true,
+    "standardBefore": {
+      "round": 1,
+      "phase": "PREP",
+      "stageId": "act1autochess_m01",
+      "life": 25,
+      "player": "QA15Safari",
+      "hand": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "golden": false,
+          "uid": 1,
+          "id": "chess_char_1_10_a",
+          "count": 1,
+          "tier": 1,
+          "ownerUid": null,
+          "kind": "chess",
+          "items": []
+        }
+      ],
+      "funds": 2,
+      "board": []
+    },
+    "standardRestored": {
+      "round": 1,
+      "phase": "PREP",
+      "stageId": "act1autochess_m01",
+      "life": 25,
+      "player": "QA15Safari",
+      "hand": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "golden": false,
+          "uid": 1,
+          "id": "chess_char_1_10_a",
+          "count": 1,
+          "tier": 1,
+          "ownerUid": null,
+          "kind": "chess",
+          "items": []
+        }
+      ],
+      "funds": 2,
+      "board": []
+    },
+    "standardRunIdBefore": "run_c9dec0f1d110015c773cd0c22d692ea1",
+    "standardRunIdAfter": "run_c9dec0f1d110015c773cd0c22d692ea1"
+  },
+  "patchedBuild": {
+    "standardRestored": {
+      "round": 1,
+      "phase": "PREP",
+      "stageId": "act1autochess_m01",
+      "life": 25,
+      "player": "QA15Safari",
+      "hand": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "golden": false,
+          "uid": 1,
+          "id": "chess_char_1_10_a",
+          "count": 1,
+          "tier": 1,
+          "ownerUid": null,
+          "kind": "chess",
+          "items": []
+        }
+      ],
+      "funds": 2,
+      "board": []
+    },
+    "stageLoading": {
+      "brief": "BRIEFING\n雨夜防线 RD-01\n守住夜间工业设施。两条进攻路线在中部汇流，可选择前沿分守或纵深集中。完成三轮进攻且累计漏敌不超过 4；生命耗尽或漏敌超过 4 即失败。\n\n非官方原创关卡 · 固定种子 20261102\n守过 3 轮，累计漏敌不超过 4 且生命未耗尽。\n本关不存档，标准存档保留；不发放原版奖励。\n共 3 回合\n独立模拟中休整期与机变阶段不限时\n",
+      "room": {
+        "plugins": [
+          {
+            "version": "0.1.0",
+            "id": "rainfall-defense",
+            "hash": "52571b83420d93cd323b56f70dfad8da75bdef1f184a2474c7ba1f4304a9172d",
+            "class": "content",
+            "unofficial": true
+          }
+        ],
+        "modes": [
+          {
+            "difficulty": "FUNNY",
+            "id": "mode_x_rainfall_defense_patrol",
+            "type": "SINGLE",
+            "name": "雨夜防线"
+          }
+        ],
+        "cs": "66dac2f2b235a321210a903c710c468f87a69c6a6fa44519ad6c6e0454b2489f",
+        "vanilla": false,
+        "modeId": "mode_x_rainfall_defense_patrol"
+      },
+      "hidden": false
+    },
+    "injectedHttp": [
+      {
+        "at": 1794731022226,
+        "status": 503
+      },
+      {
+        "at": 1794731022836,
+        "status": 200
+      }
+    ],
+    "retryElapsedMs": 610,
+    "fullBattleRepeated": false,
+    "renderedBattleRetested": false
+  },
+  "localChecks": {
+    "loader": 15,
+    "stageHost": 4,
+    "identityCheckpointRestore": 13,
+    "build": "passed",
+    "artifactFiles": 873
+  },
+  "limitations": [
+    "Public URL TLS handshake failed before game; online acceptance not passed",
+    "External portrait/Spine/audio endpoints not verified",
+    "No native drag, full campaign, Chrome rerun or mobile acceptance in this follow-up",
+    "Short renderer samples are not a performance benchmark"
+  ],
+  "systemSamples": [
+    {
+      "at": "17:19:35 JST",
+      "cpuIdlePercent": 73.69,
+      "physicalUsed": "22G",
+      "compressed": "4435M",
+      "memoryPressureFreePercent": 67
+    },
+    {
+      "at": "17:24:04 JST",
+      "cpuIdlePercent": 75.22,
+      "physicalUsed": "20G",
+      "compressed": "4431M",
+      "memoryPressureFreePercent": 67
+    }
+  ],
+  "thermal": "pmset: no recorded thermal or performance warning; temperature and GPU memory unavailable",
+  "cleanup": "Owned Safari session and QA services closed",
+  "production": "Public Sites v15 unchanged; no merge or deployment",
+  "screenshots": {
+    "native-battle.png": "922247575ebb0cae8efc8ca91e2f84ff2bb2721942453ee3486937ec6bb3e5cb",
+    "patched-stage.png": "df66b4b97ae143bbce19e9cede197366b37fa0464c3d4f3e5053d9d8be208d65",
+    "patched-standard-restored.png": "ab6034b727c81de89781e67ced9d236a05eb227345e00b9c4485cb2f8fa3880e"
+  },
+  "screenshotsScope": {
+    "native-battle.png": "Base v15, real first-assault combat visible",
+    "patched-stage.png": "Rebuilt branch, stage handshake succeeded; captured during strategy transition, not a settled battlefield",
+    "patched-standard-restored.png": "Rebuilt branch, matching PREP state; captured during loading-field transition, not a completed map rendering check"
+  }
+}
