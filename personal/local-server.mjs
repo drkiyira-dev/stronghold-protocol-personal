@@ -10,7 +10,9 @@ import { Match } from '../upstream/server/match/Match.js';
 import { captureCheckpoint, restoreCheckpoint, validateCheckpoint, checkpointCompatibility } from './checkpoint.mjs';
 import {validateChallenge,challengeViolation} from './challenges.mjs';
 import {checkpointRunId, newRunId} from './run-identity.mjs';
-import {loadOriginalStage, ORIGINAL_STAGE_ID, installStageObjective, stageResult} from './custom-stage.mjs';
+import {ORIGINAL_STAGE_ID, installStageObjective, stageResult} from './custom-stage.mjs';
+import {loadOriginalStage} from './custom-stage-loader.mjs';
+export {loadOriginalStage};
 
 const DATA_FILES = [
   'config', 'chess', 'bonds', 'garrisons', 'items', 'bands', 'effects', 'choices',
@@ -35,7 +37,7 @@ export async function createLocalServer({ emit, fetchData, data: suppliedData, n
   const registry = new SessionRegistry({ now });
   let preferredIdentity = null, restoring = null, saveQueued = false, lastSaved = '', stopped = false;
   let challenge = null;
-  let originalStage = null, stageLoading = false, stageRequest = null, stageCreating = false;
+  let originalStage = null, stageLoading = false, stageRequest = null, stageCreating = false, stageAbort = null;
   const createSession = registry.create.bind(registry);
   registry.create = name => {
     const session = createSession(name);
@@ -208,6 +210,7 @@ export async function createLocalServer({ emit, fetchData, data: suppliedData, n
       if (message.t === 'local.stage-cancel') {
         if (message.requestId === stageRequest && !lobby.rooms.size) {
           stageRequest = null; originalStage = null; stageLoading = false;
+          stageAbort?.abort(); stageAbort = null;
           emit({t:'local.stage-cleared'});
         }
         return;
@@ -219,12 +222,13 @@ export async function createLocalServer({ emit, fetchData, data: suppliedData, n
         if (message.id !== ORIGINAL_STAGE_ID) { emit({t:'local.stage-error',message:'未知原创关卡',requestId:message.requestId}); return; }
         stageLoading = true;
         stageRequest = message.requestId;
-        Promise.resolve().then(() => loadStage()).then(value => {
+        const loading = stageAbort = new AbortController();
+        Promise.resolve().then(() => loadStage(undefined,{signal:loading.signal})).then(value => {
           if (stopped || stageRequest !== message.requestId) return;
           originalStage = value;
           emit({t:'local.stage-set',stage:value.descriptor,requestId:message.requestId});
         }).catch(error => {if(stageRequest === message.requestId) emit({t:'local.stage-error',message:error.message,requestId:message.requestId});})
-          .finally(() => {if(stageRequest === message.requestId) stageLoading = false;});
+          .finally(() => {if(stageRequest === message.requestId) {stageLoading = false;stageAbort = null;}});
         return;
       }
       if (message.t === 'local.challenge') {
@@ -247,6 +251,7 @@ export async function createLocalServer({ emit, fetchData, data: suppliedData, n
     dispose() {
       if (stopped) return;
       stopped = true;
+      stageRequest = null; stageAbort?.abort(); stageAbort = null;
       for (const room of lobby.rooms.values()) room.match?.dispose();
       network.close();
       for (const timer of lobby.graceTimers.values()) clearTimeout(timer);

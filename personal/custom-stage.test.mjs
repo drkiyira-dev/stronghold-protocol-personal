@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {loadOriginalStage,validateStageDescriptor,isOriginalStageRecord} from './custom-stage.mjs';
-import {createLocalServer} from '../dist/personal/local-server.js';
+import {validateStageDescriptor,isOriginalStageRecord} from './custom-stage.mjs';
+import {createLocalServer,loadOriginalStage} from '../dist/personal/local-server.js';
 import {StateReceiver,STATE_DELTA_VERSION} from '../upstream/shared/stateDelta.js';
 import {createBattleFromSpec,compactResult,battleProgress} from '../upstream/server/sim/spec.js';
 import {DataSource} from '../upstream/server/sim/simdata.js';
@@ -40,10 +40,10 @@ test('both routes and each checkpoint are reachable using the actual upstream Gr
   assert.ok(terrain.deployTiles.normal.melee.length>5);assert.ok(terrain.deployTiles.normal.rangedOnly.length>5);
 });
 test('content load fails closed on missing resources, corruption, or unsupported metadata',async()=>{
-  await assert.rejects(loadOriginalStage(async()=>new Response('',{status:404})),/unavailable/);
+  await assert.rejects(loadOriginalStage(async()=>new Response('',{status:404})),/HTTP 404/);
   await assert.rejects(loadOriginalStage(async url=>{
     const r=await fetcher(url);return url.includes('/data/stages.json')?new Response((await r.text())+' '):r;
-  }),/checksum/);
+  }),/bytes|hash/);
   await assert.rejects(loadOriginalStage(async url=>{
     const r=await fetcher(url);if(url.endsWith('rainfall-defense.json')){const value=await r.json();return Response.json({...value,maxLeaks:5});}return r;
   }),/metadata checksum/);
@@ -126,16 +126,31 @@ test('real upstream simulation completes every assault reproducibly; empty defen
 
 
 test('cancelled or unknown stage loads cannot install content',async()=>{
-  const frames=[];let release;
-  const server=await createLocalServer({data:original,emit:m=>frames.push(m),loadStage:()=>new Promise(r=>{release=r;})});
+  const frames=[];let release,signal;
+  const server=await createLocalServer({data:original,emit:m=>frames.push(m),loadStage:(_,options)=>{signal=options.signal;return new Promise(r=>{release=r;});}});
   const tick=()=>new Promise(r=>setImmediate(r));
   try{
     server.receive({t:'local.stage',id:d.id,requestId:'cancel-me'});await tick();
     assert.equal(typeof release,'function');server.receive({t:'local.stage-cancel',requestId:'cancel-me'});
+    assert.equal(signal.aborted,true,'cancel stops the active loader, not only its eventual result');
     release(stage);await tick();await tick();
     assert.ok(frames.some(m=>m.t==='local.stage-cleared'));assert.equal(frames.some(m=>m.t==='local.stage-set'),false);
     server.receive({t:'local.stage',id:'unknown',requestId:'bad'});assert.ok(frames.some(m=>m.t==='local.stage-error'&&m.requestId==='bad'));
   }finally{server.dispose();}
+});
+
+test('disposing the host cancels a pending original-stage load without a late error',async()=>{
+  const frames=[];let signal;
+  const server=await createLocalServer({data:original,emit:m=>frames.push(m),loadStage:(_,options)=>new Promise((resolve,reject)=>{
+    signal=options.signal;signal.addEventListener('abort',()=>reject(signal.reason),{once:true});
+  })});
+  try {
+    server.receive({t:'local.stage',id:d.id,requestId:'dispose-me'});
+    await new Promise(r=>setImmediate(r));server.dispose();
+    await new Promise(r=>setImmediate(r));
+    assert.equal(signal.aborted,true);
+    assert.equal(frames.some(m=>m.t==='local.stage-set'||m.t==='local.stage-error'),false);
+  } finally {server.dispose();}
 });
 
 

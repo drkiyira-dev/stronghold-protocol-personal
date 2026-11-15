@@ -1,6 +1,3 @@
-import {contentHashOf, canonicalJson} from '../upstream/shared/plugins/identity.js';
-import {sha256Hex} from '../upstream/shared/sha256.js';
-
 export const ORIGINAL_STAGE_ID = 'rainfall-defense';
 export function validateStageDescriptor(stage) {
   const namespace = typeof stage?.id === 'string' ? stage.id.replaceAll('-', '_') : '';
@@ -13,44 +10,6 @@ export function validateStageDescriptor(stage) {
       stage.savePolicy !== 'disabled' || !stage.name?.zh || !stage.name?.en ||
       JSON.stringify(stage.compatibleVersions) !== '["act2autochess"]') throw new Error('Unsupported original-stage configuration');
   return stage;
-}
-
-/** Static equivalent of the upstream checked content routes, for the local host.
- * The page and battle Worker use upstream loadContentSet/contentFor unchanged.
- */
-export async function loadOriginalStage(fetcher = fetch) {
-  const abort = new AbortController(), timer = setTimeout(() => abort.abort(), 60000);
-  try {
-  const read = async (url, pin) => {
-    const response = await fetcher(url, {signal:abort.signal});
-    if (!response.ok) throw new Error(`Original-stage resource unavailable: ${url} (${response.status})`);
-    const text = await response.text();
-    if (pin && (new TextEncoder().encode(text).length !== pin.bytes || sha256Hex(text) !== pin.sha256)) throw new Error('Original-stage resource checksum mismatch');
-    return JSON.parse(text);
-  };
-  const descriptor = validateStageDescriptor(await read('/personal/stages/rainfall-defense.json'));
-  if (descriptor.id !== ORIGINAL_STAGE_ID) throw new Error('Unknown bundled original stage');
-  if (!/^[a-f0-9]{64}$/.test(descriptor.cs)) throw new Error('Original-stage content identity missing');
-  const prefix = `/cs/${descriptor.cs.slice(0, 16)}/`;
-  const index = await read(prefix + 'index.json');
-  if (index.cs !== descriptor.cs || index.vanilla !== false || index.scripts || index.execution) throw new Error('Only the bundled data-only stage is supported');
-  const hashes = section => Object.fromEntries(Object.entries(section || {}).map(([name, f]) => [name, f.sha256]));
-  const i18n = hashes(index.i18n);
-  if (contentHashOf({app:index.app, sim:index.sim, data:hashes(index.data), plugins:index.plugins, settings:index.settings,
-    ...(Object.keys(i18n).length ? {i18n} : {}), ...(index.rules ? {rules:index.rules} : {})}) !== descriptor.cs) throw new Error('Original-stage manifest checksum mismatch');
-  const data = {};
-  // Intentionally serial; keep download/parse pressure low on this local worker.
-  for (const [name, pin] of Object.entries(index.data)) {
-    if (!(pin.url.startsWith('/data/') || pin.url.startsWith(prefix)) || pin.url.includes('..')) throw new Error('Original-stage resource outside its content set');
-    data[name] = await read(pin.url, pin);
-  }
-  // Goals and seed are content, too: they live in the namespaced stage record
-  // and therefore participate in the upstream content hash and replay identity.
-  const pinned = validateStageDescriptor(data.stages?.[descriptor.stageId]?.options?.originalStage);
-  const {cs, plugin, ...advertised} = descriptor;
-  if (canonicalJson(pinned) !== canonicalJson(advertised)) throw new Error('Original-stage metadata checksum mismatch');
-  return {descriptor, data};
-  } finally {clearTimeout(timer);}
 }
 
 /** The upstream normal-wave loop has no finite non-Boss completion policy.
